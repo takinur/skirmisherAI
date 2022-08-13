@@ -10,11 +10,11 @@ const useAuth=()=>{
   }
 }
 
-const ProtectedRoutes=(props:any) =>{
+const LoggedRoutes=(props:any) =>{
 
   const auth=useAuth()
 
-  return auth ? <Outlet/> : <Navigate to="/login"/>
+  return auth ? <Navigate to="/login"/> : <Outlet/>
 }
 
-export default ProtectedRoutes;
+export default LoggedRoutes;

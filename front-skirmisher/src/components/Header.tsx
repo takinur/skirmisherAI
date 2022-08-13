@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 export const Header = () => {
+
+  let name = useContext(AuthContext);
+  console.log(name);
+
   return (
     <>
       <ul>
@@ -15,6 +20,7 @@ export const Header = () => {
           <NavLink to="/about"> About </NavLink>
         </li>
       </ul>
+      {/* <h1> hello {name}</h1> */}
     </>
   );
 };
