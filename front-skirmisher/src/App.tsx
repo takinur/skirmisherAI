@@ -1,18 +1,35 @@
-import react from "react";
+import react, { useState } from "react";
 import "./index.css";
-import ReactDOM from "react-dom/client";
 import { Routes, Route } from "react-router-dom";
+import ProtectedRoute from "./utils/ProtectedRoute";
+
 import { HomePage } from "./pages/HomePage";
 import { LoginPage } from "./pages/LoginPage";
 import { Header } from "./components/Header";
+import { AboutPage } from "./pages/About";
 
 function App() {
   return (
     <>
       <Header />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route index element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
+
+        {/* ProtectedRoutes */}
+        {/* <Route path="/about" element={<ProtectedRoute />}>
+          <Route path="/about" element={<AboutPage />} />
+        </Route> */}
+        <Route
+          path="/about"
+          element={
+            <ProtectedRoute>
+              <AboutPage />{" "}
+            </ProtectedRoute>
+          }
+        />
+
+        <Route path="*" element={<p>There's nothing here: 404!</p>} />
       </Routes>
     </>
   );
