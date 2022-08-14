@@ -2,8 +2,9 @@ type DateTime = string;
 export type Nullable<T> = T | null;
 
 export interface Iuser {
-  id: number;
-  name: string;
+  username: string;
+  password: string;
+  // loginUser : () => void;
 }
 export interface Iuser2 {
   id: number;
@@ -19,8 +20,9 @@ export interface Iuser2 {
 }
 
 export interface IAuthContext {
-    auth: Iuser;
-    setAuth: (auth: Iuser) => void;
+  user : Iuser[];
+  loginUser : (user: Iuser) => void;
+  // logoutUser : () => void;
 }
 
 export interface Role {
