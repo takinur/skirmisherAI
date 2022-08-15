@@ -37,6 +37,7 @@ const login = async (userData) => {
 //Logout user
 const logout = () => {
     localStorage.removeItem("user");
+    //TODO:Redirect to Home Page
 }
 
 const authService = {
