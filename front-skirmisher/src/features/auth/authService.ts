@@ -6,8 +6,15 @@ const config = {
       'Content-Type': 'application/json',
     },
   }
+
+//Interface for Auth Service
+interface IAuthService {
+    username: string;
+    password: string;
+} //TODO: Change later
+
 // Register user
-const register = async (userData) => {
+const register = async (userData : IAuthService) => {
 
     const response = await axios.post("/user/register", userData, config);
 
@@ -18,7 +25,7 @@ const register = async (userData) => {
     return response.data;
 }
 // Login user
-const login = async (userData) => {
+const login = async (userData : IAuthService) => {
 
     const customUser = {
         username: 'takinur',
