@@ -3,7 +3,7 @@ import {
   getUserDetails,
   registerUser,
   userLogin,
-} from "../__helpers/userActions";
+} from "../_helpers/userActions";
 
 //initialize userToken from local storage if it exists
 const userToken = localStorage.getItem("userToken")
