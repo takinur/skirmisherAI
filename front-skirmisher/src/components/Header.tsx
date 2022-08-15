@@ -1,39 +1,61 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
-import { NavLink } from "react-router-dom";
-import { getUserDetails } from '../__helpers/userActions'
+import { NavLink, useNavigate } from "react-router-dom";
+import { logout, reset } from '../features/auth/authSlice'
 
 export const Header = () => {
 
-  const {userInfo, userToken } = useSelector((state) => state.user)
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  //Automatically authenticate user on page load if token is present
-  useEffect(() => {
-    if (userToken) {
-      dispatch(getUserDetails())
-    }
-  } , [dispatch, userToken])
+  const { user } = useSelector((state) => state.auth)
+  
+  const onLogout = () => {
+    dispatch(logout())
+    dispatch(reset())
+    navigate('/')
+  }
+
+  // //Automatically authenticate user on page load if token is present
+  // useEffect(() => {
+  //   if (userToken) {
+  //     dispatch(getUserDetails())
+  //   }
+  // } , [dispatch, userToken])
+
+//  let  userInfo = {
+//     name: 'John Doe',
+//     email: 'wat@mail'
+//   }
 
   return (
-    <>
-    <span> { userInfo ?  `Logged in as ${userInfo.email}` : "You're not logged in"}</span>
-      <div>
-        {userInfo ? ( <button> Logout</button>) : ( <NavLink to="/login">Login</NavLink>)}
+   <header className='header'>
+      <div className='logo'>
+        <NavLink to='/'>GoalSetter</NavLink>
       </div>
       <ul>
-        <li>
-          <NavLink to="/"> Home </NavLink>
-        </li>
-        <li>
-          <NavLink to="/login"> Login </NavLink>
-        </li>
-        <li>
-          <NavLink to="/about"> About </NavLink>
-        </li>
+        {user ? (
+          <li>
+            <button className='btn' onClick={onLogout}>
+               Logout
+            </button>
+          </li>
+        ) : (
+          <>
+            <li>
+              <NavLink to='/login'>
+                 Login
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to='/register'>
+                 Register
+              </NavLink>
+            </li>
+          </>
+        )}
       </ul>
-      {/* <h1> hello {name}</h1> */}
-    </>
+    </header>
   );
 };
 

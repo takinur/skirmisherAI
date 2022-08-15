@@ -2,15 +2,16 @@ import react, { useState } from "react";
 import "./index.css";
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./utils/ProtectedRoute";
-import { AuthContextProvider } from "./context/AuthContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 import { HomePage } from "./pages/HomePage";
-import { LoginPage } from "./pages/LoginPage";
+import Login from "./pages/Login";
 import { Header } from "./components/Header";
 import { AboutPage } from "./pages/About";
-
-import { LoginScreen } from "./pages/LoginScree";
+import Register from "./pages/Register";
+// import { LoginScreen } from "./pages/LoginScree";
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
       <Header />
       <Routes>
         <Route index element={<HomePage />} />
-        <Route path="/login" element={<LoginScreen />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
         {/* ProtectedRoutes */}
         {/* <Route path="/about" element={<ProtectedRoute />}>
@@ -35,6 +37,7 @@ function App() {
 
         <Route path="*" element={<p>There's nothing here: 404!</p>} />
       </Routes>
+      <ToastContainer />
     </>
   );
 }
