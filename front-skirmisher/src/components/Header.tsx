@@ -1,14 +1,26 @@
-import React, { useContext } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import { getUserDetails } from '../__helpers/userActions'
 
 export const Header = () => {
 
-  let name = useContext(AuthContext);
-  console.log(name);
+  const {userInfo, userToken } = useSelector((state) => state.user)
+  const dispatch = useDispatch()
+
+  //Automatically authenticate user on page load if token is present
+  useEffect(() => {
+    if (userToken) {
+      dispatch(getUserDetails())
+    }
+  } , [dispatch, userToken])
 
   return (
     <>
+    <span> { userInfo ?  `Logged in as ${userInfo.email}` : "You're not logged in"}</span>
+      <div>
+        {userInfo ? ( <button> Logout</button>) : ( <NavLink to="/login">Login</NavLink>)}
+      </div>
       <ul>
         <li>
           <NavLink to="/"> Home </NavLink>
