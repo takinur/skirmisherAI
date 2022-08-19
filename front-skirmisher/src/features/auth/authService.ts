@@ -1,4 +1,5 @@
 import axios from "axios";
+// import { IAuthContext } from '../types'
 
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL
 const config = {
@@ -8,13 +9,29 @@ const config = {
   }
 
 //Interface for Auth Service
-interface IAuthService {
-    username: string;
-    password: string;
-} //TODO: Change later
+type DateTime = string;
+export type Nullable<T> = T | null;
+export interface Iuser {
+    id: number;
+    name: string;
+    email: string;
+    current_team_id: Nullable<number>;
+    profile_photo_path: Nullable<string>;
+    profile_photo_url: string;
+    two_factor_enabled: boolean;
+    email_verified_at: Nullable<DateTime>;
+    created_at: DateTime;
+    updated_at: DateTime;
+  }
+  
+  export interface IAuthContext {
+    user : Iuser[];
+    loginUser : (user: Iuser) => void;
+    // logoutUser : () => void;
+  }
 
 // Register user
-const register = async (userData : IAuthService) => {
+const register = async (userData : IAuthContext) => {
 
     const response = await axios.post("/user/register", userData, config);
 
@@ -25,7 +42,7 @@ const register = async (userData : IAuthService) => {
     return response.data;
 }
 // Login user
-const login = async (userData : IAuthService) => {
+const login = async (userData : IAuthContext) => {
 
     const customUser = {
         username: 'takinur',
