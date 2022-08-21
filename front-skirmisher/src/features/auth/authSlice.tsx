@@ -1,11 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
+import jwtDecode from "jwt-decode";
 
 //Get user from local storage if it exists
-const user = JSON.parse(localStorage.getItem("user"));
+// const user = localStorage.getItem("user");
 
 const initialState = {
-  user: user ? user : null,
+  user: {},
+  authToken: localStorage.getItem("authToken") || null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -85,7 +87,7 @@ export const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.user = action.payload;
+        state.user = jwtDecode(action.payload.access);
       })
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;

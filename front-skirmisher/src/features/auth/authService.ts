@@ -1,4 +1,6 @@
 import axios from "axios";
+import jwtDecode from "jwt-decode";
+
 // import { IAuthContext } from '../types'
 
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL
@@ -52,7 +54,8 @@ const login = async (userData : IAuthContext) => {
     const response = await axios.post("/auth/login/", customUser, config);
 
     if(response.data){
-        localStorage.setItem("user", JSON.stringify(response.data));
+        console.log(jwtDecode(response.data.access));
+        localStorage.setItem("authToken", JSON.stringify(response.data));
     }
     
     return response.data;
@@ -60,7 +63,7 @@ const login = async (userData : IAuthContext) => {
 
 //Logout user
 const logout = () => {
-    localStorage.removeItem("user");
+    localStorage.removeItem("authToken");
     //TODO:Redirect to Home Page
 }
 
