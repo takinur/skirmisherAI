@@ -41,7 +41,7 @@ export const Header = () => {
             <button className="btn" onClick={onLogout}>
               Logout
             </button>
-            <p>Your are logged to the system. { user.username } </p>
+            <p>Your are logged to the system. { user ? user.username : 'NOPE' } </p>
           </li>
         ) : (
           <>

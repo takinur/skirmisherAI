@@ -1,14 +1,7 @@
-import axios from "axios";
-import jwtDecode from "jwt-decode";
+import { axiosInstance } from '../../_helpers/axiosInstance';
 
 // import { IAuthContext } from '../types'
 
-axios.defaults.baseURL = import.meta.env.VITE_BASE_URL
-const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  }
 
 //Interface for Auth Service
 type DateTime = string;
@@ -35,7 +28,8 @@ export interface Iuser {
 // Register user
 const register = async (userData : IAuthContext) => {
 
-    const response = await axios.post("/user/register", userData, config);
+    // const response = await axios.post("/user/register", userData, config);
+    const response = await axiosInstance.post("/user/register", userData);
 
     if(response.data){
         localStorage.setItem("user", JSON.stringify(response.data));
@@ -51,7 +45,7 @@ const login = async (userData : IAuthContext) => {
         password: 'root'
     }
 
-    const response = await axios.post("/auth/login/", customUser, config);
+    const response = await axiosInstance.post("/auth/login/", customUser);
 
     if(response.data){
         // console.log(jwtDecode(response.data.access));
