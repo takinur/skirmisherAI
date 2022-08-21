@@ -3,11 +3,11 @@ import authService from "./authService";
 import jwtDecode from "jwt-decode";
 
 //Get user from local storage if it exists
-// const user = localStorage.getItem("user");
+const authToken = localStorage.getItem("authToken");
 
 const initialState = {
-  user: {},
-  authToken: localStorage.getItem("authToken") || null,
+  user: null,
+  authToken,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -32,26 +32,21 @@ export const register = createAsyncThunk(
   }
 );
 // Login user
-export const login = createAsyncThunk(
-  "auth/login",
-  async (user, thunkAPI) => {
-    try {
-      return await authService.login(user);
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      return thunkAPI.rejectWithValue(message);
-    }
+export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
+  try {
+    return await authService.login(user);
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return thunkAPI.rejectWithValue(message);
   }
-);
+});
 
 //Logout
 export const logout = createAsyncThunk("auth/logout", async () => {
-    await authService.logout();
+  await authService.logout();
 });
 
 export const authSlice = createSlice({
@@ -87,6 +82,7 @@ export const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
+        state.authToken = action.payload;
         state.user = jwtDecode(action.payload.access);
       })
       .addCase(login.rejected, (state, action) => {
@@ -94,9 +90,12 @@ export const authSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         state.user = null;
+        state.authToken = null;
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
+        state.authToken = null;
+        state.isError = false;
       });
   },
 });

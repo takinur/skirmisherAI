@@ -1,20 +1,22 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
-import { logout, reset } from '../features/auth/authSlice'
+import { logout, reset } from "../features/auth/authSlice";
 
 export const Header = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  // const { user } = useSelector((state) => state.auth)
+  const { user, authToken } = useSelector((state) => state.auth);
 
-  const { user } = useSelector((state) => state.auth)
-  
+  console.log(authToken, user);
+
   const onLogout = () => {
-    dispatch(logout())
-    dispatch(reset())
-    navigate('/')
-  }
+    dispatch(logout());
+    dispatch(reset());
+    navigate("/");
+  };
 
   // //Automatically authenticate user on page load if token is present
   // useEffect(() => {
@@ -23,34 +25,31 @@ export const Header = () => {
   //   }
   // } , [dispatch, userToken])
 
-//  let  userInfo = {
-//     name: 'John Doe',
-//     email: 'wat@mail'
-//   }
+  //  let  userInfo = {
+  //     name: 'John Doe',
+  //     email: 'wat@mail'
+  //   }
 
   return (
-   <header className='header'>
-      <div className='logo'>
-        <NavLink to='/'>GoalSetter</NavLink>
+    <header className="header">
+      <div className="logo">
+        Here we go again
       </div>
       <ul>
-        {user ? (
+        {authToken ? (
           <li>
-            <button className='btn' onClick={onLogout}>
-               Logout
+            <button className="btn" onClick={onLogout}>
+              Logout
             </button>
+            <p>Your are logged to the system. { user.username } </p>
           </li>
         ) : (
           <>
             <li>
-              <NavLink to='/login'>
-                 Login
-              </NavLink>
+              <NavLink to="/login">Login</NavLink>
             </li>
             <li>
-              <NavLink to='/register'>
-                 Register
-              </NavLink>
+              <NavLink to="/register">Register</NavLink>
             </li>
           </>
         )}
@@ -58,4 +57,3 @@ export const Header = () => {
     </header>
   );
 };
-
