@@ -22,7 +22,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
     
     
-
+# Documentation URL
 @api_view(['GET'])
 def getRoutes(request):
     routes = [

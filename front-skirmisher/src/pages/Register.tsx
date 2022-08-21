@@ -35,7 +35,7 @@ function Register() {
     dispatch(reset())
   }, [user, isError, isSuccess, message, navigate, dispatch])
 
-  const onChange = (e) => {
+  const onChange = (e : React.ChangeEvent) => {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
