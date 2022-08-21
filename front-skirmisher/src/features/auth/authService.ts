@@ -54,7 +54,7 @@ const login = async (userData : IAuthContext) => {
     const response = await axios.post("/auth/login/", customUser, config);
 
     if(response.data){
-        console.log(jwtDecode(response.data.access));
+        // console.log(jwtDecode(response.data.access));
         localStorage.setItem("authToken", JSON.stringify(response.data));
     }
     
