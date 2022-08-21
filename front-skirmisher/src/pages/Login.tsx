@@ -21,6 +21,10 @@ function Login() {
     (state) => state.auth
   )
 
+  console.log(user, isLoading, isError, isSuccess, message)
+
+  //Redirect to home if user is logged in
+
   useEffect(() => {
     if (isError) {
       toast.error(message)
