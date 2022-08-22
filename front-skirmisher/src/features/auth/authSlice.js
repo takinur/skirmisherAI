@@ -2,13 +2,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
 import jwtDecode from "jwt-decode";
 
-
 // initialize userToken from local storage
-const authToken = localStorage.getItem('authToken')
-  ? localStorage.getItem('authToken')
-  : null
+const authToken = localStorage.getItem("authToken")
+  ? localStorage.getItem("authToken")
+  : null;
 
-
+// const userInfo = authToken ? jwtDecode(authToken) : null;
 
 const initialState = {
   user: null,
@@ -33,7 +32,6 @@ export const register = createAsyncThunk(
         error.message ||
         error.toString();
 
-      
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -51,8 +49,28 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
   }
 });
 
+//User info
+export const getUserDetails = createAsyncThunk(
+  "auth/getUserDetails",
+  async (arg, { getState, thunkAPI }) => {
+    try {
+      // get user data from store
+      const { auth } = getState();
+      return await authService.getUserDetails(auth.authToken);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 //Logout
-export const logout = createAsyncThunk("auth/logout", async ()  => {
+export const logout = createAsyncThunk("auth/logout", async () => {
   await authService.logout();
 });
 
@@ -103,6 +121,16 @@ export const authSlice = createSlice({
         state.user = null;
         state.authToken = null;
         state.isError = false;
+      })
+      .addCase(getUserDetails.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getUserDetails.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = jwtDecode(action.payload.access); //TODO: Change decode here
+      })
+      .addCase(getUserDetails.rejected, (state, action) => {
+        state.isLoading = false;
       });
   },
 });
