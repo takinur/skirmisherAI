@@ -1,10 +1,8 @@
 import { axiosInstance } from "../../_helpers/axiosInstance";
 
-// import { IAuthContext } from '../types'
-
 
 // Register user
-const register = async (userData: any) => {
+const register = async (userData) => {
   // const response = await axios.post("/user/register", userData, config);
   const response = await axiosInstance.post("/user/register", userData);
 
@@ -15,7 +13,7 @@ const register = async (userData: any) => {
   return response.data;
 };
 // Login user
-const login = async (userData: any) => {
+const login = async (userData) => {
   const customUser = {
     username: "takinur",
     password: "root",

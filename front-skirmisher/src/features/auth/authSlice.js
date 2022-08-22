@@ -1,32 +1,18 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
 import jwtDecode from "jwt-decode";
 
 
 // initialize userToken from local storage
-const authTOken = localStorage.getItem('authToken')
+const authToken = localStorage.getItem('authToken')
   ? localStorage.getItem('authToken')
   : null
 
-export interface iUser{
-  username: string;
-  email: string;
-  id: number;
-}
-export interface iAuthContext {
-  authToken: string | null;
-  user?: iUser[] | null;
-  isLoading: boolean;
-  isError: boolean;
-  isSuccess : boolean;
-  message : string;
-
-}
 
 
-const initialState : iAuthContext = {
+const initialState = {
   user: null,
-  authToken : null,
+  authToken,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -36,7 +22,7 @@ const initialState : iAuthContext = {
 // Register user
 export const register = createAsyncThunk(
   "auth/register",
-  async (user : any, thunkAPI) => {
+  async (user, thunkAPI) => {
     try {
       return await authService.register(user);
     } catch (error) {
@@ -53,7 +39,7 @@ export const register = createAsyncThunk(
   }
 );
 // Login user
-export const login = createAsyncThunk("auth/login", async (user: any, thunkAPI) => {
+export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
   try {
     return await authService.login(user);
   } catch (error) {
@@ -94,7 +80,7 @@ export const authSlice = createSlice({
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.payload as string;
+        state.message = action.payload;
         state.user = null;
       })
       .addCase(login.pending, (state) => {
@@ -106,7 +92,7 @@ export const authSlice = createSlice({
         state.authToken = action.payload;
         state.user = jwtDecode(action.payload.access);
       })
-      .addCase(login.rejected, (state, action: PayloadAction<any>) => {
+      .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
