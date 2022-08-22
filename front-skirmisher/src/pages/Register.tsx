@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 // import { FaUser } from 'react-icons/fa'
 import { register, reset } from '../features/auth/authSlice'
 // import Spinner from '../components/Spinner'
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -17,9 +17,9 @@ function Register() {
   const { name, email, password, password2 } = formData
 
   const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
+  const { user, isLoading, isError, isSuccess, message } = useAppSelector(
     (state) => state.auth
   )
 
@@ -35,14 +35,14 @@ function Register() {
     dispatch(reset())
   }, [user, isError, isSuccess, message, navigate, dispatch])
 
-  const onChange = (e : React.ChangeEvent) => {
+  const onChange = (e : any) => {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }))
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: any) => {
     e.preventDefault()
 
     if (password !== password2) {
