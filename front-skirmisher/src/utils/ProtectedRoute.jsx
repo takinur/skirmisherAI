@@ -10,7 +10,7 @@ const useAuth=()=>{
   }
 }
 
-const ProtectedRoutes=(props:any) =>{
+const ProtectedRoutes=(props) =>{
 
   const auth=useAuth()
 

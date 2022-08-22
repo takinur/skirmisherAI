@@ -10,7 +10,7 @@ const useAuth=()=>{
   }
 }
 
-const LoggedRoutes=(props:any) =>{
+const LoggedRoutes=(props) =>{
 
   const auth=useAuth()
 

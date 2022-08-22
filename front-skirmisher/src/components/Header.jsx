@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { logout, reset } from "../features/auth/authSlice";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-
+import { useDispatch, useSelector } from "react-redux";
 export const Header = () => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   // const { user } = useSelector((state) => state.auth)
-  const { user, authToken } = useAppSelector((state : any) => state.auth);
+  const { user, authToken } = useSelector((state) => state.auth);
 
   console.log(authToken, user);
 
