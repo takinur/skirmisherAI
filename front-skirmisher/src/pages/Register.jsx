@@ -1,29 +1,27 @@
 import { useState, useEffect } from 'react'
-import { FaSignInAlt } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
-import { login, reset } from '../features/auth/authSlice'
+// import { FaUser } from 'react-icons/fa'
+import { register, reset } from '../features/auth/authSlice'
 // import Spinner from '../components/Spinner'
-import { useAppDispatch, useAppSelector } from "../app/hooks";
 
-function Login() {
+function Register() {
   const [formData, setFormData] = useState({
+    name: '',
     email: '',
     password: '',
+    password2: '',
   })
 
-  const { email, password } = formData
+  const { name, email, password, password2 } = formData
 
   const navigate = useNavigate()
-  const dispatch = useAppDispatch()
+  const dispatch = useDispatch()
 
-  const { user, isLoading, isError, isSuccess, message } = useAppSelector(
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   )
-
-  console.log(user, isLoading, isError, isSuccess, message)
-
-  //Redirect to home if user is logged in
 
   useEffect(() => {
     if (isError) {
@@ -37,39 +35,56 @@ function Login() {
     dispatch(reset())
   }, [user, isError, isSuccess, message, navigate, dispatch])
 
-  const onChange = (e : any) => {
+  const onChange = (e ) => {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }))
   }
 
-  const onSubmit = (e : any) => {
+  const onSubmit = (e) => {
     e.preventDefault()
 
-    const userData = {
-      email,
-      password,
-    }
+    if (password !== password2) {
+      toast.error('Passwords do not match')
+    } else {
+      const userData = {
+        name,
+        email,
+        password,
+      }
 
-    dispatch(login(userData))
+      dispatch(register(userData))
+    }
   }
 
   if (isLoading) {
-    return <h1>Loading...</h1>
+    // return <Spinner />
+    return <h1> Loading.....</h1>
   }
 
   return (
     <>
       <section className='heading'>
         <h1>
-          <FaSignInAlt />
+          ICON-FA-USER Register
         </h1>
-        <p>Login and start setting goals</p>
+        <p>Please create an account</p>
       </section>
 
       <section className='form'>
         <form onSubmit={onSubmit}>
+          <div className='form-group'>
+            <input
+              type='text'
+              className='form-control'
+              id='name'
+              name='name'
+              value={name}
+              placeholder='Enter your name'
+              onChange={onChange}
+            />
+          </div>
           <div className='form-group'>
             <input
               type='email'
@@ -92,7 +107,17 @@ function Login() {
               onChange={onChange}
             />
           </div>
-
+          <div className='form-group'>
+            <input
+              type='password'
+              className='form-control'
+              id='password2'
+              name='password2'
+              value={password2}
+              placeholder='Confirm password'
+              onChange={onChange}
+            />
+          </div>
           <div className='form-group'>
             <button type='submit' className='btn btn-block'>
               Submit
@@ -104,4 +129,4 @@ function Login() {
   )
 }
 
-export default Login
+export default Register
