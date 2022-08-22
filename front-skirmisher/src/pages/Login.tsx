@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-// import { FaSignInAlt } from 'react-icons/fa'
+import { FaSignInAlt } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { login, reset } from '../features/auth/authSlice'
@@ -63,7 +63,7 @@ function Login() {
     <>
       <section className='heading'>
         <h1>
-          ICON Login
+          <FaSignInAlt />
         </h1>
         <p>Login and start setting goals</p>
       </section>

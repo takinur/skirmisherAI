@@ -13,7 +13,7 @@ export const Header = () => {
   console.log(authToken, user);
 
   const onLogout = () => {
-    dispatch(logout(user));
+    dispatch(logout());
     dispatch(reset());
     navigate("/");
   };
