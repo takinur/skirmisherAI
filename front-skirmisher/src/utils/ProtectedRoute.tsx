@@ -2,7 +2,7 @@ import { Navigate, Outlet } from "react-router-dom";
 
 //TODO: AUTHENTICATION
 const useAuth=()=>{
-  const authToken =localStorage.getItem('authToken')
+  const authToken = localStorage.getItem('authToken')
   if(authToken){
     return true
   } else {
