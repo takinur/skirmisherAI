@@ -2,6 +2,9 @@ import React, { useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { logout, reset } from "../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { DatePicker } from "antd";
+import "antd/dist/antd.css";
+
 export const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -31,9 +34,10 @@ export const Header = () => {
 
   return (
     <header className="header">
-      <div className="logo">
+      <div className="text-red-400 text-lg">
         Here we go again
       </div>
+      <DatePicker />
       <ul>
         {authToken ? (
           <li>
