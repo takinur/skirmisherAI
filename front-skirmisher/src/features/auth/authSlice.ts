@@ -3,8 +3,10 @@ import authService from "./authService";
 import jwtDecode from "jwt-decode";
 
 
-//Get user from local storage if it exists
-// const authToken = localStorage.getItem("authToken");
+// initialize userToken from local storage
+const authTOken = localStorage.getItem('authToken')
+  ? localStorage.getItem('authToken')
+  : null
 
 export interface iUser{
   username: string;
@@ -64,8 +66,8 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
 });
 
 //Logout
-export const logout = createAsyncThunk("auth/logout", async () => {
-  await authService.logout();
+export const logout = createAsyncThunk("auth/logout", async (dispatch : any)  => {
+  await authService.logout('auth/logout');
 });
 
 export const authSlice = createSlice({

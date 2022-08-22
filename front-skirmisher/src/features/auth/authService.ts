@@ -32,7 +32,7 @@ const login = async (userData: any) => {
 };
 
 //Logout user
-const logout = () => {
+const logout = (dispatch: any) => {
   localStorage.removeItem("authToken");
   //TODO:Redirect to Home Page
 };

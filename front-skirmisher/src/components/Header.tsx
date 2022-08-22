@@ -1,19 +1,19 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { logout, reset } from "../features/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 
 export const Header = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   // const { user } = useSelector((state) => state.auth)
-  const { user, authToken } = useSelector((state : any) => state.auth);
+  const { user, authToken } = useAppSelector((state : any) => state.auth);
 
   console.log(authToken, user);
 
   const onLogout = () => {
-    dispatch(logout());
+    dispatch(logout(user));
     dispatch(reset());
     navigate("/");
   };
