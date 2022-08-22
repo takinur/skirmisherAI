@@ -36,7 +36,7 @@ const initialState : iAuthContext = {
 // Register user
 export const register = createAsyncThunk(
   "auth/register",
-  async (user, thunkAPI) => {
+  async (user : any, thunkAPI) => {
     try {
       return await authService.register(user);
     } catch (error) {
@@ -53,7 +53,7 @@ export const register = createAsyncThunk(
   }
 );
 // Login user
-export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
+export const login = createAsyncThunk("auth/login", async (user: any, thunkAPI) => {
   try {
     return await authService.login(user);
   } catch (error) {
@@ -66,8 +66,8 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
 });
 
 //Logout
-export const logout = createAsyncThunk("auth/logout", async (dispatch : any)  => {
-  await authService.logout('auth/logout');
+export const logout = createAsyncThunk("auth/logout", async ()  => {
+  await authService.logout();
 });
 
 export const authSlice = createSlice({
