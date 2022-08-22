@@ -1,13 +1,30 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import authService from "./authService";
 import jwtDecode from "jwt-decode";
 
-//Get user from local storage if it exists
-const authToken = localStorage.getItem("authToken");
 
-const initialState = {
+//Get user from local storage if it exists
+// const authToken = localStorage.getItem("authToken");
+
+export interface iUser{
+  username: string;
+  email: string;
+  id: number;
+}
+export interface iAuthContext {
+  authToken: string | null;
+  user?: iUser[] | null;
+  isLoading: boolean;
+  isError: boolean;
+  isSuccess : boolean;
+  message : string;
+
+}
+
+
+const initialState : iAuthContext = {
   user: null,
-  authToken,
+  authToken : null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -27,6 +44,8 @@ export const register = createAsyncThunk(
           error.response.data.message) ||
         error.message ||
         error.toString();
+
+      
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -73,7 +92,7 @@ export const authSlice = createSlice({
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.payload;
+        state.message = action.payload as string;
         state.user = null;
       })
       .addCase(login.pending, (state) => {
@@ -85,7 +104,7 @@ export const authSlice = createSlice({
         state.authToken = action.payload;
         state.user = jwtDecode(action.payload.access);
       })
-      .addCase(login.rejected, (state, action) => {
+      .addCase(login.rejected, (state, action: PayloadAction<any>) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

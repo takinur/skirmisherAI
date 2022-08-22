@@ -8,7 +8,7 @@ export const Header = () => {
   const dispatch = useDispatch();
 
   // const { user } = useSelector((state) => state.auth)
-  const { user, authToken } = useSelector((state) => state.auth);
+  const { user, authToken } = useSelector((state : any) => state.auth);
 
   console.log(authToken, user);
 
