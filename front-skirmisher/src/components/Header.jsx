@@ -9,30 +9,21 @@ export const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // const { user } = useSelector((state) => state.auth)
   const { user, authToken } = useSelector((state) => state.auth);
 
-  // console.log(authToken, user);
-
+  
   const onLogout = () => {
     dispatch(logout());
     dispatch(reset());
     navigate("/");
   };
 
-  useEffect(() => {
-    if(authToken){
-      // console.log(authToken)
-      dispatch(getUserDetails())
-    }
-  }, [authToken, dispatch])
-
-  // //Automatically authenticate user on page load if token is present
   // useEffect(() => {
-  //   if (userToken) {
+  //   if(authToken){
+  //     // console.log(authToken)
   //     dispatch(getUserDetails())
   //   }
-  // } , [dispatch, userToken])
+  // }, [authToken, dispatch])
 
   return (
     <header className="header">
