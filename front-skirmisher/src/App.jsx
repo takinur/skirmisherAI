@@ -7,10 +7,10 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 import { HomePage } from "./pages/HomePage";
-import Login from "./pages/Login";
+import Login from "./pages/Auth/Login";
 import { Header } from "./components/Header";
 import { AboutPage } from "./pages/About";
-import Register from "./pages/Register";
+import Register from "./pages/Auth/Register";
 // import { LoginScreen } from "./pages/LoginScree";
 
 function App() {
