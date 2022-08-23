@@ -12,6 +12,7 @@ urlpatterns = [
     path('', views.getRoutes, name='getRoutes'),
     
     path('auth/register/', RegisterView.as_view()),
+    path('auth/user/', RetriveUserView.as_view()),
     
     path('auth/login/', MyTokenObtainPairView.as_view()),
     path('auth/token/refresh/', TokenRefreshView.as_view()),
