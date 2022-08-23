@@ -7,10 +7,10 @@ const authToken = localStorage.getItem("authToken")
   ? localStorage.getItem("authToken")
   : null;
 
-// const userInfo = authToken ? jwtDecode(authToken) : null;
+const userInfo = authToken ? jwtDecode(authToken) : null;
 
 const initialState = {
-  user: null,
+  user: userInfo,
   authToken,
   isError: false,
   isSuccess: false,
