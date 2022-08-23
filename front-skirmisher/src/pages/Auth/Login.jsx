@@ -2,14 +2,14 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { login, reset } from "../features/auth/authSlice";
+import { login, reset } from "../../features/auth/authSlice";
 import { FaSignInAlt } from "react-icons/fa";
-import Input from "../components/Input";
-import Label from "../components/Label";
+import Input from "../../components/Input";
+import Label from "../../components/Label";
 import classNames from "classnames";
-import AuthenticationCard from "../components/AuthenticationCard";
-import ButtonDefault from "../components/ButtonDefault";
-import Checkbox from "../components/Checkbox";
+import AuthenticationCard from "../../components/AuthenticationCard";
+import ButtonDefault from "../../components/ButtonDefault";
+import Checkbox from "../../components/Checkbox";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -29,7 +29,6 @@ export default function Login() {
   // console.log(user, isLoading, isError, isSuccess, message);
 
   //Redirect to home if user is logged in
-
   useEffect(() => {
     if (isError) {
       toast.error(message);
