@@ -32,6 +32,9 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         
         return user
+    
+
+        
 
 class UserAccount(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(max_length=255)
