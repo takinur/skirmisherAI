@@ -2,7 +2,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import permissions, status
 from rest_framework.views import APIView
-from rest_framework.authtoken.models import Token
+from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 
 from .serializers import UserCreateSerializer, MyTokenObtainPairSerializer
 
@@ -41,9 +41,12 @@ class RegisterView(APIView):
         
         
         user = serializer.create(serializer.validated_data)
-        user = UserCreateSerializer(user)
+        # user = UserCreateSerializer(user)
         
-        return Response(user.data , status=status.HTTP_201_CREATED)
+        tokenref = RefreshToken.for_user(user)
+        tokenacc = AccessToken.for_user(user)
+        
+        return Response({"access": str(tokenacc), "refresh": str(tokenref)} , status=status.HTTP_201_CREATED)
     
 class RetriveUserView(APIView):
     permission_classes = [permissions.IsAuthenticated]
