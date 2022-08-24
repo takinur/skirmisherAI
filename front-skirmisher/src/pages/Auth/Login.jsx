@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { login, reset } from "../../features/auth/authSlice";
@@ -45,13 +45,10 @@ export default function Login() {
 
   return (
     <>
-      <section className="heading">
-        <h1>
-          <FaSignInAlt />
-        </h1>
-        <p>Login and start setting goals</p>
-      </section>
       <AuthenticationCard>
+      <div className="text-center">
+          <h2 className="text-3xl">Login <FaSignInAlt /></h2>
+        </div>
         <form onSubmit={handleSubmit(submitForm)}>
           <div>
             <Label htmlFor="email">Email</Label>
@@ -88,12 +85,10 @@ export default function Login() {
               <span className="ml-2 text-sm text-gray-600">Remember me</span>
             </label>
             <div className="flex items-center justify-end">
-              <a
-                href="/"
-                className="underline text-sm text-gray-600 hover:text-gray-900"
+              <Link to='/register' className="underline text-sm text-gray-600 hover:text-gray-900"
               >
                 Need an account?
-              </a>
+              </Link>
 
               <ButtonDefault
                 className={classNames("ml-4", { "opacity-25": isLoading })}
