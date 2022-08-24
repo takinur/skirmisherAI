@@ -35,7 +35,7 @@ function App() {
           }
         />
 
-        <Route path="*" element={<p>There's nothing here: 404!</p>} />
+        <Route path="*" element={<p className="text-red-400 text-7xl">There's nothing here: 404!</p>} />
       </Routes>
       <ToastContainer />
     </>

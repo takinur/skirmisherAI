@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { register as authRegister, reset } from "../../features/auth/authSlice";
@@ -52,6 +52,9 @@ export default function Register() {
         <p>Login and start setting goals</p>
       </section>
       <AuthenticationCard>
+        <div className="text-center">
+          <h2 className="text-3xl">Register</h2>
+        </div>
         <form onSubmit={handleSubmit(submitForm)}>
           <div className="mt-4">
             <Label htmlFor="name">Full Name</Label>
@@ -97,12 +100,11 @@ export default function Register() {
               <span className="ml-2 text-sm text-gray-600">I agree to Terms and Conditions</span>
             </label>
             <div className="flex items-center justify-end">
-              <a
-                href="/"
+              <Link to='/login'
                 className="underline text-sm text-gray-600 hover:text-gray-900"
               >
                 Already have an account?
-              </a>
+              </Link>
 
               <ButtonDefault
                 className={classNames("ml-4", { "opacity-25": isLoading })}
