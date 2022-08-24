@@ -10,7 +10,7 @@ const authToken = localStorage.getItem("authToken")
 const userInfo = authToken ? jwtDecode(authToken) : null;
 
 const initialState = {
-  user: userInfo,
+  user: '',
   authToken,
   isError: false,
   isSuccess: false,
@@ -21,18 +21,17 @@ const initialState = {
 // Register user
 export const register = createAsyncThunk(
   "auth/register",
-  async (user, thunkAPI) => {
+  async (user, {rejectWithValue}) => {
     try {
       return await authService.register(user);
     } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-
-      return thunkAPI.rejectWithValue(message);
+      // console.log(error); TODO: Handle error in UI
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data.email[0]);
+      }
+      else{
+        return rejectWithValue(error.message || "Something went wrong");
+      }
     }
   }
 );

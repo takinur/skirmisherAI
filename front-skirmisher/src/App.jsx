@@ -1,4 +1,4 @@
-import react, { useState } from "react";
+import react from "react";
 import "./index.css";
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./utils/ProtectedRoute";
