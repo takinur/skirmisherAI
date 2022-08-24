@@ -1,13 +1,14 @@
 import { axiosInstance } from "../../_helpers/axiosInstance";
+import  axios  from "axios";
+// import { useAxios } from "../../_helpers/useAxios";
 
 // Register user
 const register = async (userData) => {
   const response = await axiosInstance.post("/auth/register/", userData);
 
-  // if (response.data) {
-  //   localStorage.setItem("user", JSON.stringify(response.data));
-  // }
-  console.log(response.data)
+  if (response.data) {
+    localStorage.setItem("authToken", JSON.stringify(response.data));
+  }
   //TODO: Store auth token in local storage
 
   return response.data;
@@ -15,7 +16,6 @@ const register = async (userData) => {
 // Login user
 const login = async (userData) => {
   const response = await axiosInstance.post("/auth/login/", userData);
-  console.log(response);
   if (response.data) {
     localStorage.setItem("authToken", JSON.stringify(response.data));
   }
@@ -25,19 +25,20 @@ const login = async (userData) => {
 
 //Get user info
 const getUserDetails = async (token) => {
-  // configure authorization header with user's token
+  //Get user info by token ~ Initial Auth Token
+  let parsedToken = JSON.parse(token)
   const config = {
+    baseURL: import.meta.env.VITE_BASE_URL, 
     headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-  // const { data } = await axios.get(`/api/user/profile`, config);
-  // const response = await axiosInstance.post("/auth/login/", customUser);
-  const data = {
-    access : 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjYxMTkwODQ5LCJpYXQiOjE2NjExOTA1NDksImp0aSI6Ijg5NjZjYTg3NzBkZDQ5ZmNhNWJiYzc1MmI4YWM1OTE1IiwidXNlcl9pZCI6MSwidXNlcm5hbWUiOiJ0YWtpbnVyIn0.BcFQc__BPwUuMb_qwE6KK6nG03mWM7C1QRSjU-P8_EE'
+      Authorization: `Bearer ${parsedToken.access}`,
+      'Content-Type': 'application/json',
+    }
   }
-  return data;
-  // return response.data;
+  const response = await axios.get("/auth/user/", config);
+
+  // const response = await axiosInstance.get("/auth/user/");
+  console.log("response", response);
+  return response.data;
 };
 
 //Logout user
