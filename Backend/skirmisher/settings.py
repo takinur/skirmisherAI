@@ -127,9 +127,17 @@ WSGI_APPLICATION = 'skirmisher.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
+    'default':{
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'skirmisherdb',
+        'USER': 'wraith',
+        'PASSWORD': 'strongpass',
+        'HOST': 'localhost',
+        'PORT': '5432',          
     }
 }
 
@@ -179,3 +187,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True
 AUTH_USER_MODEL = 'base.UserAccount'
 # APPEND_SLASH = False
+ALLOWED_HOSTS = ['*']
