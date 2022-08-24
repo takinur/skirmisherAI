@@ -2,11 +2,13 @@ import { axiosInstance } from "../../_helpers/axiosInstance";
 
 // Register user
 const register = async (userData) => {
-  const response = await axiosInstance.post("/user/register", userData);
+  const response = await axiosInstance.post("/auth/register/", userData);
 
-  if (response.data) {
-    localStorage.setItem("user", JSON.stringify(response.data));
-  }
+  // if (response.data) {
+  //   localStorage.setItem("user", JSON.stringify(response.data));
+  // }
+  console.log(response.data)
+  //TODO: Store auth token in local storage
 
   return response.data;
 };

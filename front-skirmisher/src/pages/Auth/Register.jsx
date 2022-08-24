@@ -1,132 +1,119 @@
-import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { toast } from 'react-toastify'
-// import { FaUser } from 'react-icons/fa'
-import { register, reset } from '../../features/auth/authSlice'
-// import Spinner from '../components/Spinner'
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { register as authRegister, reset } from "../../features/auth/authSlice";
+import { FaSignInAlt } from "react-icons/fa";
+import { useForm } from "react-hook-form";
+import Input from "../../components/Input";
+import Label from "../../components/Label";
+import classNames from "classnames";
+import AuthenticationCard from "../../components/AuthenticationCard";
+import ButtonDefault from "../../components/ButtonDefault";
+import Checkbox from "../../components/Checkbox";
 
-function Register() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    password2: '',
-  })
+export default function Register() {
 
-  const { name, email, password, password2 } = formData
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const { register, handleSubmit } = useForm();
+
+  const submitForm = (data) => {
+    dispatch(authRegister(data));
+  }
 
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
-  )
+  );
 
+  // console.log(user, isLoading, isError, isSuccess, message);
+
+  //Redirect Registered user to Login
   useEffect(() => {
     if (isError) {
-      toast.error(message)
+      toast.error(message);
     }
 
     if (isSuccess || user) {
-      navigate('/')
+      navigate("/login");
     }
 
-    dispatch(reset())
-  }, [user, isError, isSuccess, message, navigate, dispatch])
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
-  const onChange = (e ) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }))
-  }
-
-  const onSubmit = (e) => {
-    e.preventDefault()
-
-    if (password !== password2) {
-      toast.error('Passwords do not match')
-    } else {
-      const userData = {
-        name,
-        email,
-        password,
-      }
-
-      dispatch(register(userData))
-    }
-  }
-
-  if (isLoading) {
-    // return <Spinner />
-    return <h1> Loading.....</h1>
-  }
 
   return (
     <>
-      <section className='heading'>
+      <section className="heading">
         <h1>
-          ICON-FA-USER Register
+          <FaSignInAlt />
         </h1>
-        <p>Please create an account</p>
+        <p>Login and start setting goals</p>
       </section>
+      <AuthenticationCard>
+        <form onSubmit={handleSubmit(submitForm)}>
+          <div className="mt-4">
+            <Label htmlFor="name">Full Name</Label>
+            <Input
+              id="name"
+              type="text"
+              className="mt-1 block w-full"
+              {...register('name')}
+              required
+            />
+          </div>
+          <div className="mt-4">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              className="mt-1 block w-full"
+              {...register('email')}
+              required
+            />
+          </div>
 
-      <section className='form'>
-        <form onSubmit={onSubmit}>
-          <div className='form-group'>
-            <input
-              type='text'
-              className='form-control'
-              id='name'
-              name='name'
-              value={name}
-              placeholder='Enter your name'
-              onChange={onChange}
+          <div className="mt-4">
+            <Label htmlFor="password">Password</Label>
+            <Input
+              id="password"
+              type="password"
+              className="mt-1 block w-full"
+              {...register('password')}
+              required
+              autoComplete="current-password"
             />
           </div>
-          <div className='form-group'>
-            <input
-              type='email'
-              className='form-control'
-              id='email'
-              name='email'
-              value={email}
-              placeholder='Enter your email'
-              onChange={onChange}
-            />
-          </div>
-          <div className='form-group'>
-            <input
-              type='password'
-              className='form-control'
-              id='password'
-              name='password'
-              value={password}
-              placeholder='Enter password'
-              onChange={onChange}
-            />
-          </div>
-          <div className='form-group'>
-            <input
-              type='password'
-              className='form-control'
-              id='password2'
-              name='password2'
-              value={password2}
-              placeholder='Confirm password'
-              onChange={onChange}
-            />
-          </div>
-          <div className='form-group'>
-            <button type='submit' className='btn btn-block'>
-              Submit
-            </button>
+          <div className="mt-4">
+            <label className="flex items-center">
+              <Checkbox
+                name="remember"
+                // checked={form.data.remember === "on"}
+                // onChange={(e) =>
+                //   form.setData("remember", e.currentTarget.checked ? "on" : "")
+                // }
+              />
+              <span className="ml-2 text-sm text-gray-600">I agree to Terms and Conditions</span>
+            </label>
+            <div className="flex items-center justify-end">
+              <a
+                href="/"
+                className="underline text-sm text-gray-600 hover:text-gray-900"
+              >
+                Already have an account?
+              </a>
+
+              <ButtonDefault
+                className={classNames("ml-4", { "opacity-25": isLoading })}
+                disabled={isLoading}
+              >
+                Sign UP
+              </ButtonDefault>
+            </div>
           </div>
         </form>
-      </section>
+      </AuthenticationCard>
     </>
-  )
+  );
 }
-
-export default Register

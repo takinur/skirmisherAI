@@ -11,12 +11,10 @@ class UserCreateSerializer(serializers.ModelSerializer):
        
     # Validate password and return Hashed password
     def valilidate(self, data):
-        password = data['password']
         try :
-            validate_password(password)
+            validate_password(data['password'])
         except serializers.ValidationError as e:
-            raise serializers.ValidationError({'password': e.messages})
-        
+            raise serializers.ValidationError({'password': e.messages})     
         
         return data
        
