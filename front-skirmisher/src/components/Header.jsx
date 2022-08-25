@@ -22,14 +22,31 @@ export const Header = () => {
   //   if(authToken){
   //     // console.log(authToken)
   //     dispatch(getUserDetails())
+
+  // const getUserInfo = async () => {
+  //   const response = await API.get("auth/user/");
+  //   if (response.status === 200) {
+  //     setUserInfo(response.data);
+  //   }
+  // };
+  // console.log(userInfo);
+  // useEffect(() => {
+  //   getUserInfo();
+  // } , []);
+
+//  console.log(authToken);
+  // useEffect(() => {
+  //   if(authToken){
+  //     dispatch(getUserDetails())
+  //     // getUserInfo();
+
   //   }
   // }, [authToken, dispatch])
 
   return (
     <header className="header">
-      <div className="text-red-400 text-lg">
-        Here we go again
-      </div>
+
+
       <DatePicker />
       <ul>
         {authToken ? (
@@ -37,7 +54,10 @@ export const Header = () => {
             <button className="btn" onClick={onLogout}>
               Logout
             </button>
-            <p>Your are logged to the system. { user ? user.username : 'NOPE' } </p>
+
+            <p>
+            {user ? `Logged in as ${user.email}` : "You're not logged in"}
+            </p>
           </li>
         ) : (
           <>

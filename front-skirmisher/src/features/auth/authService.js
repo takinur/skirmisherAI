@@ -1,4 +1,6 @@
 import { axiosInstance } from "../../_helpers/axiosInstance";
+import axios from "axios";
+// import { useAxios } from "../../_helpers/useAxios";
 
 // Register user
 const register = async (userData) => {
@@ -9,6 +11,7 @@ const register = async (userData) => {
   // }
   console.log(response.data)
   //TODO: Store auth token in local storage
+  console.log("response", response);
 
   return response.data;
 };
@@ -25,19 +28,18 @@ const login = async (userData) => {
 
 //Get user info
 const getUserDetails = async (token) => {
-  // configure authorization header with user's token
+  //Get user info by token ~ Initial Auth Token
+  let parsedToken = JSON.parse(token);
   const config = {
+    baseURL: import.meta.env.VITE_BASE_URL,
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${parsedToken.access}`,
+      "Content-Type": "application/json",
     },
   };
-  // const { data } = await axios.get(`/api/user/profile`, config);
-  // const response = await axiosInstance.post("/auth/login/", customUser);
-  const data = {
-    access : 'REDACTED.JWT.TOKEN'
-  }
-  return data;
-  // return response.data;
+  const response = await axios.get("/auth/user/", config);
+
+  return response.data;
 };
 
 //Logout user
