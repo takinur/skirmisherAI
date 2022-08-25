@@ -2,55 +2,39 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import jwtDecode from "jwt-decode";
 import dayjs from "dayjs";
+import { axiosInstance } from "./axiosInstance";
 
-const baseURLEndpoint = import.meta.env.VITE_BASE_URL; //Import from ENV
+export const useAxios = () => {
+  const authToken = useSelector((state) => state.auth.authToken);
+  axiosInstance.interceptors.request.use(async (config) => {
+    if (!authToken) return config;
 
-const useAxios = () => {
-  let { authToken } = useSelector((state) => state.auth);
-  let authTokens = authToken;
-  // if (authToken) {
-  //   authTokens = JSON.parse(authToken)
-  // }
-//   const authTokens = JSON.parse(authToken);
-
-//   console.log("authTokens", authTokens.access);
-  const axiosInstanceAuth = axios.create({
-    baseURL: baseURLEndpoint,
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${authTokens?.access}`,
-    },
+    config.headers.Authorization = `Bearer ${authToken.access}`;
+    return config;
+    
   });
 
-  axiosInstanceAuth.interceptors.request.use(
-    async (config) => {
-      if (!authTokens) return config;
-
-      const user = jwtDecode(authToken);
-    //   console.log("user", user);
+  axiosInstance.interceptors.response.use(async (response) => {
+    if (response.status === 401) {
+      const user = jwtDecode(JSON.stringify(authToken));
       const isExpired = dayjs.unix(user.exp).diff(dayjs()) < 1;
 
-      if (!isExpired) return config;
-    //   console.log("the ref token", authTokens.refresh);
-        const response = await axios.post(
-          `${baseURLEndpoint}auth/token/refresh/`,
-          {
-            refresh: authTokens.refresh,
-          }
-        );
-          console.log("response", response);
-        localStorage.setItem("authToken", JSON.stringify(response.data));
+      if (!isExpired) return response;
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}auth/token/refresh/`,
+        {
+          refresh: authToken.refresh,
+        }
+      );
+      localStorage.setItem("authToken", JSON.stringify(response.data));
 
-        config.headers.Authorization = `Bearer ${response.data.access}`;
+      config.headers.Authorization = `Bearer ${response.data.access}`;
 
-      return config;
-    },
-    (error) => {
-      console.log("error", error);
-      return Promise.reject(error);
+      return response;
     }
-  );
-  return axiosInstanceAuth;
+    return response;
+  }), (error) => {
+    return Promise.reject(error);
+  }
+  return axiosInstance;
 };
-
-export default useAxios;
