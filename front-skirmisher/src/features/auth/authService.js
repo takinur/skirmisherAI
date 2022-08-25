@@ -1,6 +1,4 @@
-import axios from "axios";
 import { axiosInstance } from "../../_helpers/axiosInstance";
-import  { useAxios } from "../../_helpers/useAxios";
 
 // Register user
 const register = async (userData) => {
@@ -24,16 +22,9 @@ const login = async (userData) => {
 
 //Get user info
 const getUserDetails = async (token) => {
-  //INITIAL Axios Request with token
-  const config = {
-    baseURL: import.meta.env.VITE_BASE_URL,
-    headers: {
-      Authorization: `Bearer ${token.access}`,
-      "Content-Type": "application/json",
-    },
-  };
-  const response = await axios.get("/auth/user/", config);
-  console.log("response", response);
+  //Modify Axios Header for Auth requests
+  axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token.access}`;
+  const response = await axiosInstance.get("/auth/user/");
   if(!response.data){
     localStorage.removeItem("authToken");
   }
