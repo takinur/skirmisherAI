@@ -1,13 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
-import jwtDecode from "jwt-decode";
+
 
 // initialize userToken from local storage
 const authToken = localStorage.getItem("authToken")
-  ? localStorage.getItem("authToken")
+  ? JSON.parse(localStorage.getItem("authToken"))
   : null;
-
-const userInfo = authToken ? jwtDecode(authToken) : null;
 
 const initialState = {
   user: '',
@@ -18,6 +16,7 @@ const initialState = {
   message: "",
 };
 
+console.log("initialState", initialState);
 // Register user
 export const register = createAsyncThunk(
   "auth/register",
@@ -64,6 +63,7 @@ export const getUserDetails = createAsyncThunk(
       // get user data from store
       const { auth } = getState();
       return await authService.getUserDetails(auth.authToken);
+
     } catch (error) {
       const message =
         (error.response &&
@@ -78,7 +78,7 @@ export const getUserDetails = createAsyncThunk(
 
 //Logout
 export const logout = createAsyncThunk("auth/logout", async () => {
-  await authService.logout();
+  return await authService.logout();
 });
 
 export const authSlice = createSlice({
@@ -97,10 +97,12 @@ export const authSlice = createSlice({
       .addCase(register.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(register.fulfilled, (state, action) => {
+      .addCase(register.fulfilled, (state, {payload}) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.user = action.payload;
+        // state.user = action.payload;
+        state.authToken = payload;
+        console.log("action.payload", payload);
       })
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false;
@@ -134,10 +136,14 @@ export const authSlice = createSlice({
       })
       .addCase(getUserDetails.fulfilled, (state, action) => {
         state.isLoading = false;
+
         state.user = jwtDecode(action.payload.access); //TODO: Change decode here
       })
       .addCase(getUserDetails.rejected, (state, action) => {
         state.isLoading = false;
+        // state.user = null;
+        // state.authToken = null;
+        // localStorage.removeItem("authToken");
       });
   },
 });
