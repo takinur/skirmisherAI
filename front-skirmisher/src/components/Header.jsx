@@ -1,16 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { logout, reset, getUserDetails } from "../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { DatePicker } from "antd";
 import "antd/dist/antd.css";
+import { useAxios } from "../_helpers/useAxios";
 
 export const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const API = useAxios();
   const { user, authToken } = useSelector((state) => state.auth);
 
+  const [userDetails, setUserDetails] = useState({});
   
   const onLogout = () => {
     dispatch(logout());
@@ -18,30 +20,26 @@ export const Header = () => {
     navigate("/");
   };
 
-  // useEffect(() => {
-  //   if(authToken){
-  //     // console.log(authToken)
-  //     dispatch(getUserDetails())
 
   // const getUserInfo = async () => {
   //   const response = await API.get("auth/user/");
   //   if (response.status === 200) {
-  //     setUserInfo(response.data);
+  //     setUserDetails(response.data);
   //   }
   // };
-  // console.log(userInfo);
+  // // console.log(userDetails);
   // useEffect(() => {
   //   getUserInfo();
   // } , []);
 
 //  console.log(authToken);
-  // useEffect(() => {
-  //   if(authToken){
-  //     dispatch(getUserDetails())
-  //     // getUserInfo();
+  useEffect(() => {
+    if(authToken){
+      dispatch(getUserDetails())
+      // getUserInfo();
 
-  //   }
-  // }, [authToken, dispatch])
+    }
+  }, [authToken, dispatch])
 
   return (
     <header className="header">
