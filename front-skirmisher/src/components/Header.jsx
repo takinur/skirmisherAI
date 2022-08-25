@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { logout, reset, getUserDetails } from "../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { DatePicker } from "antd";
-import "antd/dist/antd.css";
+// import { DatePicker } from "antd";
+// import "antd/dist/antd.css";
 import { useAxios } from "../_helpers/useAxios";
 
 export const Header = () => {
@@ -13,13 +13,12 @@ export const Header = () => {
   const { user, authToken } = useSelector((state) => state.auth);
 
   const [userDetails, setUserDetails] = useState({});
-  
+
   const onLogout = () => {
     dispatch(logout());
     dispatch(reset());
     navigate("/");
   };
-
 
   // const getUserInfo = async () => {
   //   const response = await API.get("auth/user/");
@@ -32,20 +31,16 @@ export const Header = () => {
   //   getUserInfo();
   // } , []);
 
-//  console.log(authToken);
+  //  console.log(authToken);
   useEffect(() => {
-    if(authToken){
-      dispatch(getUserDetails())
+    if (authToken) {
+      dispatch(getUserDetails());
       // getUserInfo();
-
     }
-  }, [authToken, dispatch])
+  }, [authToken, dispatch]);
 
   return (
     <header className="header">
-
-
-      <DatePicker />
       <ul>
         {authToken ? (
           <li>
@@ -54,7 +49,7 @@ export const Header = () => {
             </button>
 
             <p>
-            {user ? `Logged in as ${user.email}` : "You're not logged in"}
+              {user ? `Logged in as ${user.email}` : "You're not logged in"}
             </p>
           </li>
         ) : (
@@ -67,6 +62,9 @@ export const Header = () => {
             </li>
           </>
         )}
+        <li>
+          <NavLink to="/about">About</NavLink>
+        </li>
       </ul>
     </header>
   );

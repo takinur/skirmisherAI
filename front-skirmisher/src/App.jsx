@@ -23,9 +23,9 @@ function App() {
         <Route path="/register" element={<Register />} />
 
         {/* ProtectedRoutes */}
-        {/* <Route path="/about" element={<ProtectedRoute />}>
+        <Route path="/about" element={<ProtectedRoute />}>
           <Route path="/about" element={<AboutPage />} />
-        </Route> */}
+        </Route>
         <Route
           path="/about"
           element={
