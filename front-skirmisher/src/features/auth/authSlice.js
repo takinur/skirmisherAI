@@ -42,7 +42,7 @@ export const login = createAsyncThunk(
     try {
       return await authService.login(user);
     } catch (error) {
-      // console.log(error);
+      console.log(error);
       //Return error message if any
       const message =
         (error.response && error.response.data &&
@@ -59,10 +59,10 @@ export const login = createAsyncThunk(
 //User info
 export const getUserDetails = createAsyncThunk(
   "auth/getUserDetails",
-  async (arg, {getState, rejectWithValue}) => {
+  async (arg, { getState, thunkAPI }) => {
     try {
-      const { auth } = getState()
       // get user data from store
+      const { auth } = getState();
       return await authService.getUserDetails(auth.authToken);
     } catch (error) {
       const message =
@@ -71,8 +71,7 @@ export const getUserDetails = createAsyncThunk(
           error.response.data.message) ||
         error.message ||
         error.toString();
-
-      return rejectWithValue(message);
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -101,8 +100,7 @@ export const authSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.authToken = action.payload;
-        // state.user = action.payload;
+        state.user = action.payload;
       })
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false;
@@ -117,7 +115,7 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.authToken = action.payload;
-        // state.user = jwtDecode(action.payload.access);
+        state.user = jwtDecode(action.payload.access);
       })
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
@@ -136,11 +134,10 @@ export const authSlice = createSlice({
       })
       .addCase(getUserDetails.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload; //TODO: Change decode here
+        state.user = jwtDecode(action.payload.access); //TODO: Change decode here
       })
       .addCase(getUserDetails.rejected, (state, action) => {
         state.isLoading = false;
-        state.user = null;
       });
   },
 });
