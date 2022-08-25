@@ -1,14 +1,13 @@
 import { axiosInstance } from "../../_helpers/axiosInstance";
-import  axios  from "axios";
-// import { useAxios } from "../../_helpers/useAxios";
 
 // Register user
 const register = async (userData) => {
   const response = await axiosInstance.post("/auth/register/", userData);
 
-  if (response.data) {
-    localStorage.setItem("authToken", JSON.stringify(response.data));
-  }
+  // if (response.data) {
+  //   localStorage.setItem("user", JSON.stringify(response.data));
+  // }
+  console.log(response.data)
   //TODO: Store auth token in local storage
 
   return response.data;
@@ -16,6 +15,7 @@ const register = async (userData) => {
 // Login user
 const login = async (userData) => {
   const response = await axiosInstance.post("/auth/login/", userData);
+  console.log(response);
   if (response.data) {
     localStorage.setItem("authToken", JSON.stringify(response.data));
   }
@@ -25,20 +25,19 @@ const login = async (userData) => {
 
 //Get user info
 const getUserDetails = async (token) => {
-  //Get user info by token ~ Initial Auth Token
-  let parsedToken = JSON.parse(token)
+  // configure authorization header with user's token
   const config = {
-    baseURL: import.meta.env.VITE_BASE_URL, 
     headers: {
-      Authorization: `Bearer ${parsedToken.access}`,
-      'Content-Type': 'application/json',
-    }
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  // const { data } = await axios.get(`/api/user/profile`, config);
+  // const response = await axiosInstance.post("/auth/login/", customUser);
+  const data = {
+    access : 'REDACTED.JWT.TOKEN'
   }
-  const response = await axios.get("/auth/user/", config);
-
-  // const response = await axiosInstance.get("/auth/user/");
-  console.log("response", response);
-  return response.data;
+  return data;
+  // return response.data;
 };
 
 //Logout user

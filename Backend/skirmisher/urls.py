@@ -18,7 +18,7 @@ from django.urls import path, include
 from django.shortcuts import redirect
 
 urlpatterns = [
-    # path('', lambda r: redirect('base:api.getRoutes')), TODO: Redirect to API DOC
+    # path('', lambda r: redirect('base:api.getRoutes')), TODO: fix this
     path('admin/', admin.site.urls),
     path('api/', include('base.api.urls')),
 ]
