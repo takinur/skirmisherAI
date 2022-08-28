@@ -28,12 +28,17 @@ const getUserDetails = async (token) => {
   if(!response.data){
     localStorage.removeItem("authToken");
   }
+  else{
+    window.sessionStorage.setItem("user", JSON.stringify(response.data));
+  } 
+
   return response.data;
 };
 
 //Logout user
 const logout = () => {
   localStorage.removeItem("authToken");
+  window.sessionStorage.removeItem("user");
   //TODO:Redirect to Home Page
 };
 

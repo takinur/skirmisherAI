@@ -6,9 +6,11 @@ import authService from "./authService";
 const authToken = localStorage.getItem("authToken")
   ? JSON.parse(localStorage.getItem("authToken"))
   : null;
+// initialize user from local storage
+const user = window.sessionStorage.getItem("user") ? JSON.parse(window.sessionStorage.getItem("user")) : null
 
 const initialState = {
-  user: '',
+  user,
   authToken,
   isError: false,
   isSuccess: false,
