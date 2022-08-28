@@ -8,6 +8,8 @@ from .serializers import UserCreateSerializer, MyTokenObtainPairSerializer
 
 from rest_framework_simplejwt.views import TokenObtainPairView
 
+# from ml_facade.ResumeExtractor import resume_result_wrapper # Result from extractor
+
 
 # Token Obtain Pair View
 class MyTokenObtainPairView(TokenObtainPairView):
@@ -56,3 +58,5 @@ class RetriveUserView(APIView):
         user = UserCreateSerializer(user)
         
         return Response(user.data, status=status.HTTP_200_OK)
+    
+    
