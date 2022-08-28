@@ -20,6 +20,9 @@ export default function Register() {
   const { register, handleSubmit } = useForm();
 
   const submitForm = (data) => {
+    //Override data to add roles
+    data.role = 1;
+    console.log(data);
     dispatch(authRegister(data));
   }
 
@@ -88,6 +91,7 @@ export default function Register() {
               autoComplete="current-password"
             />
           </div>
+         
           <div className="mt-4">
             <label className="flex items-center">
               <Checkbox
