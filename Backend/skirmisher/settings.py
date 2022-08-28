@@ -186,6 +186,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 CORS_ALLOW_ALL_ORIGINS = True
-AUTH_USER_MODEL = 'base.UserAccount'
+AUTH_USER_MODEL = 'base.UserAccount' #Authendication model
 # APPEND_SLASH = False
 ALLOWED_HOSTS = ['*']
