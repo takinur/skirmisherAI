@@ -101,27 +101,27 @@ class resumeExtraction(object):
         text = self.__text
         raw_text = self.__text_raw
         # print (raw_text)
-        # self.__details['name'] = self.__extract_name(text)
-        # self.__details['mobile_number'] = self.__extract_mobile_number(text)
-        # self.__details['email'] = self.__extract_email(text)
-        # self.__details['skills'] = self.__extract_skills(text)
+        self.__details['name'] = self.__extract_name(text)
+        self.__details['mobile_number'] = self.__extract_mobile_number(text)
+        self.__details['email'] = self.__extract_email(text)
+        self.__details['skills'] = self.__extract_skills(text)
         self.__details['social_links'] = self.__extract_social_links(text)
-        # IMPORTANT: Text that is essential for further processing
+        # CRUCIAL: Text that is essential for further processing
         # self.__details['text'] = text #TODO:
         raw_entity = self.__extract_entity_sections(raw_text)
-        # try:
-        #     self.__details['experience'] = raw_entity['experience']
-        #     self.__details['education'] = raw_entity['education']
-        #     self.__details['projects'] = raw_entity['projects']
-        #     self.__details['total_experience'] = self.__total_experience_year(
-        #         raw_entity)
-        # except KeyError:
-        #     pass
-        # # if no education section is found, then try to extract education again
-        # if not self.__details['education']:
-        #     self.__details['education'] = self.__extract_education(text)
+        try:
+            self.__details['experience'] = raw_entity['experience']
+            self.__details['education'] = raw_entity['education']
+            self.__details['projects'] = raw_entity['projects']
+            self.__details['total_experience'] = self.__total_experience_year(
+                raw_entity)
+        except KeyError:
+            pass
+        # if no education section is found, then try to extract education again
+        if not self.__details['education']:
+            self.__details['education'] = self.__extract_education(text)
 
-        # return self.__details
+        return self.__details
 
     # FIXME: Name is incorrect for some resumes
     def __extract_name(self, resume_text):
@@ -295,7 +295,8 @@ class resumeExtraction(object):
     def __extract_social_links(self, text):
         regex= r'\b((?:https?://)?(?:(?:www\.)?(?:[\da-z\.-]+)\.(?:[a-z]{2,6})|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|(?:(?:[0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,7}:|(?:[0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,5}(?::[0-9a-fA-F]{1,4}){1,2}|(?:[0-9a-fA-F]{1,4}:){1,4}(?::[0-9a-fA-F]{1,4}){1,3}|(?:[0-9a-fA-F]{1,4}:){1,3}(?::[0-9a-fA-F]{1,4}){1,4}|(?:[0-9a-fA-F]{1,4}:){1,2}(?::[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:(?:(?::[0-9a-fA-F]{1,4}){1,6})|:(?:(?::[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(?::[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(?:ffff(?::0{1,4}){0,1}:){0,1}(?:(?:25[0-5]|(?:2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(?:25[0-5]|(?:2[0-4]|1{0,1}[0-9]){0,1}[0-9])|(?:[0-9a-fA-F]{1,4}:){1,4}:(?:(?:25[0-5]|(?:2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(?:25[0-5]|(?:2[0-4]|1{0,1}[0-9]){0,1}[0-9])))(?::[0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])?(?:/[\w\.-]*)*/?)\b'
         social_links = re.findall(regex, text)
-        print('Social', social_links)
+            
+        # print('Social', social_links)
         return social_links
         
 
@@ -304,7 +305,7 @@ file_url = 'assets/test_resumes/T_001.pdf'
 # file_url = 'assets/test_resumes/abd_r.pdf'
 # file_url = 'assets/test_resumes/T_002.docx'
 # file_url = 'assets/test_resumes/T_003.pdf'
-file_url = 'assets/test_resumes/T_004.pdf'
+# file_url = 'assets/test_resumes/T_004.pdf'
 
 # explicit function to return the text from file
 def resume_result_wrapper(resume):

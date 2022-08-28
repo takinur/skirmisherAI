@@ -21,8 +21,15 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 class UserCreateSerializer(serializers.ModelSerializer):
     class Meta:
        model = User
-       fields = ('id', 'name', 'email', 'password')
+       fields = ('id', 'name', 'email', 'password', 'role')
        extra_kwargs = {'password': {'write_only': True}}
+       
+    # Return role as a string instead of an integer
+    def to_representation(self, instance):
+        data = super().to_representation(instance)            
+        data['role'] = 'Candidate' if data['role'] != 1 else 'Employer'
+        return data
+    
        
     # Validate password and return Hashed password
     def valilidate(self, data):

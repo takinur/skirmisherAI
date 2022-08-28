@@ -1,9 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
-
 class UserManager(BaseUserManager):
-    def create_user(self, name, email, password=None):
+    def create_user(self, name, email, password=None, role=None):
         if not email:
             raise ValueError('Users must have an email address')
         
@@ -13,6 +12,7 @@ class UserManager(BaseUserManager):
         user = self.model(
             name = name,
             email=email,
+            role=role,
         )
 
         user.set_password(password)
@@ -37,11 +37,18 @@ class UserManager(BaseUserManager):
         
 
 class UserAccount(AbstractBaseUser, PermissionsMixin):
+    
+    ROLE_CHOICES = (
+        (1, 'Employer'),
+        (2, 'Candidate'),
+    )
+    
     name = models.CharField(max_length=255)
     email = models.EmailField(max_length=255, unique=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
+    role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, default=1)
     
     objects = UserManager()
     

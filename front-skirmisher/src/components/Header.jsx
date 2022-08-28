@@ -42,7 +42,7 @@ export const Header = () => {
   return (
     <header className="header">
       <ul>
-        {authToken ? (
+        {user ? (
           <li>
             <button className="btn" onClick={onLogout}>
               Logout
