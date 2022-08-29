@@ -30,9 +30,8 @@ class UserCreateSerializer(serializers.ModelSerializer):
         data['role'] = 'Candidate' if data['role'] != 1 else 'Employer'
         return data
     
-       
-    # Validate password and return Hashed password
-    def valilidate(self, data):
+    # Validate password
+    def validate(self, data):
         try :
             validate_password(data['password'])
         except serializers.ValidationError as e:
