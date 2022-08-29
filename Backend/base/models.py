@@ -34,8 +34,6 @@ class UserManager(BaseUserManager):
         return user
     
 
-        
-
 class UserAccount(AbstractBaseUser, PermissionsMixin):
     
     ROLE_CHOICES = (
