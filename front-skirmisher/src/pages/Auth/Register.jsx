@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -11,20 +11,39 @@ import classNames from "classnames";
 import AuthenticationCard from "../../components/AuthenticationCard";
 import ButtonDefault from "../../components/ButtonDefault";
 import Checkbox from "../../components/Checkbox";
+import { RadioGroup } from "@headlessui/react";
+
+const roles = ["startup", "business", "enterprise"];
+const plans = [
+  {
+    name: "Startup",
+    ram: "12GB",
+    cpus: "6 CPUs",
+    disk: "160 GB SSD disk",
+  },
+  {
+    name: "Business",
+    ram: "16GB",
+    cpus: "8 CPUs",
+    disk: "512 GB SSD disk",
+  },
+];
 
 export default function Register() {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { register, handleSubmit } = useForm();
+  const [role, setRole] = useState(roles[0]);
+  const [selected, setSelected] = useState();
 
+  // console.log(selected)
   const submitForm = (data) => {
     //Override data to add roles
     data.role = 1;
     console.log(data);
     dispatch(authRegister(data));
-  }
+  };
 
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
@@ -45,18 +64,87 @@ export default function Register() {
     dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
-
   return (
     <>
-      <section className="heading">
-        <h1>
-          <FaSignInAlt />
-        </h1>
-        <p>Login and start setting goals</p>
+      <div className="w-full px-4 py-16">
+        <div className="mx-auto w-full max-w-md bg-gray-500">
+          <RadioGroup value={selected} onChange={setSelected}>
+            <RadioGroup.Label className="sr-only">Choose Role</RadioGroup.Label>
+            <div className="space-y-2 md:space-y-0 md:space-x-4 md:flex ">
+              {plans.map((plan) => (
+                <RadioGroup.Option
+                  key={plan.name}
+                  value={plan}
+                  className={({ active, checked }) =>
+                    `${
+                      active
+                        ? "ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-sky-300"
+                        : ""
+                    }
+                  ${
+                    checked
+                      ? "bg-sky-900 bg-opacity-75 text-white"
+                      : "bg-white "
+                  }
+                    relative flex cursor-pointer rounded-sm px-5 py-4 shadow-md focus:outline-none h-48`
+                  }
+                >
+                  {({ checked }) => (
+                    <>
+                      <div className="flex w-full items-center justify-between ">
+                        <div className="flex items-center">
+                          <div className="text-sm">
+                            <RadioGroup.Label
+                              as="p"
+                              className={`font-medium  ${
+                                checked ? "text-white" : "text-gray-900"
+                              }`}
+                            >
+                              {plan.name}
+                            </RadioGroup.Label>
+                            <RadioGroup.Description
+                              as="span"
+                              className={`inline ${
+                                checked ? "text-sky-100" : "text-gray-500"
+                              }`}
+                            >
+                              <span>
+                                {plan.ram}/{plan.cpus}
+                              </span>
+                              <span aria-hidden="true">&middot;</span>
+                              <span>{plan.disk}</span>
+                            </RadioGroup.Description>
+                          </div>
+                        </div>
+                        {checked ? (
+                          <div className="shrink-0 text-white">
+                            <CheckIcon className="h-6 w-6" />
+                          </div>
+                        ) : (
+                          <div className="shrink-0 bg-red-600">
+                          <CheckIcon className="h-6 w-6" />
+                        </div>
+                        )}
+                      </div>
+                    </>
+                  )}
+                </RadioGroup.Option>
+              ))}
+            </div>
+          </RadioGroup>
+        </div>
+      </div>
+      <section className="register min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+        <div className="w-full md:max-w-2xl mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+          <h1 className="font-serif text-3xl w-full text-center">
+            Join as a Employer or Job Seeker
+          </h1>
+          HEllo {role}
+        </div>
       </section>
       <AuthenticationCard>
         <div className="text-center">
-          <h2 className="text-3xl">Register</h2>
+          <h2 className="text-3xl">Join as a Employer or </h2>
         </div>
         <form onSubmit={handleSubmit(submitForm)}>
           <div className="mt-4">
@@ -65,7 +153,7 @@ export default function Register() {
               id="name"
               type="text"
               className="mt-1 block w-full"
-              {...register('name')}
+              {...register("name")}
               required
             />
           </div>
@@ -75,7 +163,7 @@ export default function Register() {
               id="email"
               type="email"
               className="mt-1 block w-full"
-              {...register('email')}
+              {...register("email")}
               required
             />
           </div>
@@ -86,12 +174,12 @@ export default function Register() {
               id="password"
               type="password"
               className="mt-1 block w-full"
-              {...register('password')}
+              {...register("password")}
               required
               autoComplete="current-password"
             />
           </div>
-         
+
           <div className="mt-4">
             <label className="flex items-center">
               <Checkbox
@@ -101,10 +189,13 @@ export default function Register() {
                 //   form.setData("remember", e.currentTarget.checked ? "on" : "")
                 // }
               />
-              <span className="ml-2 text-sm text-gray-600">I agree to Terms and Conditions</span>
+              <span className="ml-2 text-sm text-gray-600">
+                I agree to Terms and Conditions
+              </span>
             </label>
             <div className="flex items-center justify-end">
-              <Link to='/login'
+              <Link
+                to="/login"
                 className="underline text-sm text-gray-600 hover:text-gray-900"
               >
                 Already have an account?
@@ -121,5 +212,20 @@ export default function Register() {
         </form>
       </AuthenticationCard>
     </>
+  );
+}
+
+function CheckIcon(props) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" {...props}>
+      <circle cx={12} cy={12} r={12} fill="#fff" opacity="0.2" />
+      <path
+        d="M7 13l3 3 7-7"
+        stroke="#fff"
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
