@@ -2,6 +2,12 @@ import React from "react";
 import { RadioGroup } from "@headlessui/react";
 import classNames from "classnames";
 import ButtonDefault from "./ButtonDefault";
+import { GrClose, GrWorkshop } from "react-icons/gr";
+import {
+  FaChalkboardTeacher,
+  FaFacebookF,
+  FaRegNewspaper,
+} from "react-icons/fa";
 
 export default function AuthRoleSelection({
   selectedRole,
@@ -13,10 +19,10 @@ export default function AuthRoleSelection({
   return (
     <section className="register min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
       <div className="w-full md:max-w-2xl mt-6 px-12 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-        <h1 className="font-serif text-3xl w-full text-center">
+        <h2 className="font-serif text-[#001e00] mt-6 text-3xl w-full text-center">
           Join as a Employer or Job Seeker
-        </h1>
-        <div className="mx-auto sm:flex justify-center w-full my-16 ">
+        </h2>
+        <div className="mx-auto sm:flex justify-center w-full my-10 ">
           <RadioGroup value={selectedRole} onChange={setSelectedRole}>
             <RadioGroup.Label className="sr-only">Choose Role</RadioGroup.Label>
             <div className="space-y-2 md:space-y-0 md:space-x-4 md:flex ">
@@ -34,7 +40,7 @@ export default function AuthRoleSelection({
                     ? "bg-sky-900 bg-opacity-75 text-white"
                     : "bg-gray-200 "
                 }
-                  relative flex cursor-pointer rounded-sm px-5 py-4 shadow-md focus:outline-none h-48 w-80`}
+                  relative flex cursor-pointer rounded-sm px-5 py-4 shadow-md focus:outline-none h-48 w-60`}
                 >
                   {({ checked }) => (
                     <>
@@ -47,24 +53,21 @@ export default function AuthRoleSelection({
                                 checked ? "text-white" : "text-gray-900"
                               }`}
                             >
-                              {role.name}
+                              <span className="w-full flex justify-center h-full">
+                                {role.id === 1 ? (
+                                  <FaChalkboardTeacher className="w-10 h-10" />
+                                ) : (
+                                  <FaRegNewspaper className={`w-10 h-10`} />
+                                )}
+                              </span>
+                              <span className="text-lg mt-5 ml-5">
+                                {role.id === 1 ? "Employer" : "Job Seeker"}
+                              </span>
                             </RadioGroup.Label>
-                            <RadioGroup.Description
-                              as="span"
-                              className={`inline ${
-                                checked ? "text-sky-100" : "text-gray-500"
-                              }`}
-                            >
-                              <span>plan.disk</span>
-                            </RadioGroup.Description>
                           </div>
                         </div>
-                        {checked ? (
+                        {checked && (
                           <div className="shrink-0 text-white">
-                            <CheckIcon className="h-6 w-6" />
-                          </div>
-                        ) : (
-                          <div className="shrink-0 bg-red-600">
                             <CheckIcon className="h-6 w-6" />
                           </div>
                         )}
