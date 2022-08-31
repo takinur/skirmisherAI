@@ -5,13 +5,12 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 import { HomePage } from "./pages/HomePage";
 import Login from "./pages/Auth/Login";
 import { Header } from "./components/Header";
 import { AboutPage } from "./pages/About";
 import Register from "./pages/Auth/Register";
-// import { LoginScreen } from "./pages/LoginScree";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
@@ -23,19 +22,20 @@ function App() {
         <Route path="/register" element={<Register />} />
 
         {/* ProtectedRoutes */}
-        <Route path="/about" element={<ProtectedRoute />}>
+        <Route element={<ProtectedRoute />}>
           <Route path="/about" element={<AboutPage />} />
         </Route>
+        <Route element={<ProtectedRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
+
+
         <Route
-          path="/about"
+          path="*"
           element={
-            <ProtectedRoute>
-              <AboutPage />
-            </ProtectedRoute>
+            <p className="text-red-400 text-7xl">There's nothing here: 404!</p>
           }
         />
-
-        <Route path="*" element={<p className="text-red-400 text-7xl">There's nothing here: 404!</p>} />
       </Routes>
       <ToastContainer />
     </>
