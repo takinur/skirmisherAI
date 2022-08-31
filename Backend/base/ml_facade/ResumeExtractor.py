@@ -107,7 +107,7 @@ class resumeExtraction(object):
         self.__details['skills'] = self.__extract_skills(text)
         self.__details['social_links'] = self.__extract_social_links(text)
         # CRUCIAL: Text that is essential for further processing
-        # self.__details['text'] = text #TODO:
+        # self.__details['text'] = text 
         raw_entity = self.__extract_entity_sections(raw_text)
         try:
             self.__details['experience'] = raw_entity['experience']
@@ -339,7 +339,6 @@ if __name__ == '__main__':
     print_json(jdata)
 
 '''
-TODO:Grab Social media links
 TODO:Extract Text from DOC format
 
 
