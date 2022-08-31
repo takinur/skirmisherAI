@@ -36,14 +36,14 @@ const getUserDetails = async (token) => {
 };
 
 //Logout user
-const logout = () => {
-  localStorage.removeItem("authToken");
-  window.sessionStorage.removeItem("user");
-};
+// const logout = () => {
+//   localStorage.removeItem("authToken");
+//   window.sessionStorage.removeItem("user");
+// };
 
 const authService = {
   register,
-  logout,
+  // logout,
   login,
   getUserDetails,
 };
