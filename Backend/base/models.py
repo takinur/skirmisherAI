@@ -37,8 +37,8 @@ class UserManager(BaseUserManager):
 class UserAccount(AbstractBaseUser, PermissionsMixin):
     
     ROLE_CHOICES = (
-        (1, 'Employer'),
-        (2, 'Candidate'),
+        (1, 'EMPLOYER'),
+        (2, 'CANDIDATE'),
     )
     
     name = models.CharField(max_length=255)
@@ -55,5 +55,11 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     
     def __str__(self):
         return self.email
+    
+class EmployerProfile:
+    org_name = models.CharField(max_length=80, null=True)
+    org_website = models.CharField(max_length=100, null=True)
+    created_at = models.DateTimeField(auto_created=True, blank=True)
+    
     
     

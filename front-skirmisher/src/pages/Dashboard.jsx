@@ -6,17 +6,14 @@ import { EmployerDashboard } from "./Employer/Dashboard";
 const Dashboard = () => {
   const { user } = useSelector((state) => state.auth);
 
-  return (
-    <div className="h-screen bg-green-600">
-      {user.role !== "Candidate" ? (
-        <EmployerDashboard />
-      ) : user.role !== "Employeer" ? (
-        <CandidateDashboard />
-      ) : (
-        <h1>Something went Wrong! Try refreshing the page.</h1>
-      )}
-    </div>
-  );
+  const RoleView = {
+    EMPLOYER: <EmployerDashboard />,
+    CANDIDATE: <CandidateDashboard />,
+  }[user.role] ?? <h1>Something went Wrong! Try refreshing the page.</h1>;
+
+  // const RoleSpecificView = RoleView[role] ?? <h1>Something went Wrong! Try refreshing the page.</h1>
+
+  return <div className="h-screen bg-green-600">{RoleView}</div>;
 };
 
 export default Dashboard;

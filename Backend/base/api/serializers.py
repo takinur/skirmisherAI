@@ -27,7 +27,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
     # Return role as a string instead of an integer
     def to_representation(self, instance):
         data = super().to_representation(instance)            
-        data['role'] = 'Candidate' if data['role'] != 1 else 'Employer'
+        data['role'] = 'CANDIDATE' if data['role'] != 1 else 'EMPLOYER'
         return data
     
     # Validate password
