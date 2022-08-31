@@ -27,8 +27,6 @@ export default function Login() {
     (state) => state.auth
   );
 
-  // console.log(user, isLoading, isError, isSuccess, message);
-
   //Redirect authenticated user to Dashboard
   useEffect(() => {
     if (isError) {
@@ -47,7 +45,7 @@ export default function Login() {
     <>
       <AuthenticationCard>
       <div className="text-center">
-          <h2 className="text-3xl">Login <FaSignInAlt /></h2>
+          <h2 className="text-3xl">Login </h2>
         </div>
         <form onSubmit={handleSubmit(submitForm)}>
           <div>
