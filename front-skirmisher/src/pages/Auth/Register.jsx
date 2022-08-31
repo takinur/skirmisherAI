@@ -127,7 +127,7 @@ function RegisterForm({
   return (
     <>
       <div className="text-center pt-6">
-        <h2 className="text-3xl font-serif">Sign UP to {selectedRole.id === 1 ? 'Hire Talent' : 'Find work' }</h2>
+        <h2 className="text-3xl font-serif">Sign Up to {selectedRole.id === 1 ? 'Hire Talent' : 'Find work' }</h2>
       </div>
       <form onSubmit={handleSubmit(submitForm)}>
         <div className="mt-4">

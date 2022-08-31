@@ -1,9 +1,8 @@
 import { useSelector } from 'react-redux'
 import { NavLink, Outlet } from 'react-router-dom'
 
-const ProtectedRoute = (role) => {
+const ProtectedRoute = () => {
   const { user } = useSelector((state) => state.auth)
-  console.log(role)
   // show unauthorized screen if no user is found in redux store
   if (!user ) {
     return (
@@ -15,11 +14,7 @@ const ProtectedRoute = (role) => {
       </div>
     )
   }
-  //Check user role and show appropriate page
-
-
-
   // returns child route elements
-  // return <Outlet />
+  return <Outlet />
 }
 export default ProtectedRoute
