@@ -1,13 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
 
-
 // initialize userToken from local storage
 const authToken = localStorage.getItem("authToken")
   ? JSON.parse(localStorage.getItem("authToken"))
   : null;
 // initialize user from local storage
-const user = window.sessionStorage.getItem("user") ? JSON.parse(window.sessionStorage.getItem("user")) : null
+const user = window.sessionStorage.getItem("user")
+  ? JSON.parse(window.sessionStorage.getItem("user"))
+  : null;
 
 const initialState = {
   user,
@@ -21,15 +22,22 @@ const initialState = {
 // Register user
 export const register = createAsyncThunk(
   "auth/register",
-  async (user, {rejectWithValue}) => {
+  async (user, { rejectWithValue }) => {
     try {
       return await authService.register(user);
     } catch (error) {
-      // console.log(error); TODO: Handle error in UI
       if (error.response && error.response.data) {
-        return rejectWithValue(error.response.data.email[0]);
-      }
-      else{
+        // Return first error message
+        let err = error.response.data;
+
+        if (err.non_field_errors) {
+          err = err.non_field_errors;
+        } else if (err.email) {
+          err = err.email;
+        }
+
+        return rejectWithValue(err[0]);
+      } else {
         return rejectWithValue(error.message || "Something went wrong");
       }
     }
@@ -45,13 +53,11 @@ export const login = createAsyncThunk(
       console.log(error);
       //Return error message if any
       const message =
-        (error.response && error.response.data &&
-          error.response.data.detail) ||
+        (error.response && error.response.data && error.response.data.detail) ||
         error.message ||
         error.toString();
 
       return rejectWithValue(message);
-   
     }
   }
 );
@@ -64,7 +70,6 @@ export const getUserDetails = createAsyncThunk(
       // get user data from store
       const { auth } = getState();
       return await authService.getUserDetails(auth.authToken);
-
     } catch (error) {
       console.log(error);
       const message =
@@ -99,7 +104,7 @@ export const authSlice = createSlice({
       .addCase(register.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(register.fulfilled, (state, {payload}) => {
+      .addCase(register.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.authToken = payload;
@@ -113,7 +118,7 @@ export const authSlice = createSlice({
       .addCase(login.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(login.fulfilled, (state, {payload}) => {
+      .addCase(login.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.authToken = payload;
@@ -133,12 +138,12 @@ export const authSlice = createSlice({
       .addCase(getUserDetails.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getUserDetails.fulfilled, (state, {payload}) => {
+      .addCase(getUserDetails.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.user = payload; 
+        state.user = payload;
       })
       .addCase(getUserDetails.rejected, (state, action) => {
-        state.isLoading = false;        
+        state.isLoading = false;
       });
   },
 });

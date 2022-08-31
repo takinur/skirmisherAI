@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 
-export default function DangerButton({ children, ...props }) {
+export default function ButtonDanger({ children, ...props }) {
   return (
     <button
       {...props}

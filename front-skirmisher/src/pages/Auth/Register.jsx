@@ -3,15 +3,13 @@ import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { register as authRegister, reset } from "../../features/auth/authSlice";
-import { FaSignInAlt } from "react-icons/fa";
 import { set, useForm } from "react-hook-form";
 import Input from "../../components/Input";
 import Label from "../../components/Label";
 import classNames from "classnames";
-import AuthenticationCard from "../../components/AuthenticationCard";
-import ButtonDefault from "../../components/ButtonDefault";
 import Checkbox from "../../components/Checkbox";
 import AuthRoleSelection from "../../components/AuthRoleSelection";
+import ButtonSecondary from "../../components/ButtonSecondary";
 
 const roles = [
   {
@@ -34,28 +32,27 @@ export default function Register() {
   const [selectedRole, setSelectedRole] = useState(null);
   const [step, setStep] = useState(1);
 
-  console.log(selectedRole, step);
-  const submitForm = (data) => {
-    //Override data to add roles
-    data.role = selectedRole.id;
-    console.log(data);
-    // dispatch(authRegister(data));
-  };
-
+  //State
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
 
-  // console.log(user, isLoading, isError, isSuccess, message);
 
-  //Redirect Registered user to Login
+  const submitForm = (data) => {
+    //Override data to add roles
+    data.role = selectedRole.id;
+    dispatch(authRegister(data));
+  };
+
+ 
+  //Redirect Registered user to Dashboard
   useEffect(() => {
     if (isError) {
       toast.error(message);
     }
 
     if (isSuccess || user) {
-      navigate("/login");
+      navigate("/dashboard");
     }
 
     dispatch(reset());
@@ -100,7 +97,23 @@ export default function Register() {
     }
   };
   //Main return statement
-  return <>{conditionalComponent()}</>;
+  return (
+    <section className="register min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+      <div className="w-full md:max-w-2xl mt-6 px-12 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+        {conditionalComponent()}
+        <div className="flex justify-center mt-4">
+          <p> Already have an account?
+            <Link
+              to="/login"
+              className="ml-1 underline text-sm text-green-600 hover:text-gray-900"
+            >
+              Login
+            </Link>
+          </p>
+        </div>
+      </div>
+    </section>
+  );
 }
 
 function RegisterForm({
@@ -113,99 +126,90 @@ function RegisterForm({
 }) {
   return (
     <>
-      <AuthenticationCard>
-        <div className="text-center">
-          <h2 className="text-3xl">Ara ara {selectedRole.name} </h2>
+      <div className="text-center pt-6">
+        <h2 className="text-3xl font-serif">Sign UP to {selectedRole.id === 1 ? 'Hire Talent' : 'Find work' }</h2>
+      </div>
+      <form onSubmit={handleSubmit(submitForm)}>
+        <div className="mt-4">
+          <Label htmlFor="name">Full Name</Label>
+          <Input
+            id="name"
+            type="text"
+            className="mt-1 block w-full"
+            {...register("name")}
+            required
+          />
         </div>
-        <form onSubmit={handleSubmit(submitForm)}>
-          <div className="mt-4">
-            <Label htmlFor="name">Full Name</Label>
-            <Input
-              id="name"
-              type="text"
-              className="mt-1 block w-full"
-              {...register("name")}
-              required
-            />
-          </div>
-          <div className="mt-4">
-            <Label htmlFor="email">
-              {selectedRole.id === 1 ? "Work Email Address" : "Email Address"}
-            </Label>
-            <Input
-              id="email"
-              type="email"
-              className="mt-1 block w-full"
-              {...register("email")}
-              required
-            />
-          </div>
+        <div className="mt-4">
+          <Label htmlFor="email">
+            {selectedRole.id === 1 ? "Work Email Address" : "Email Address"}
+          </Label>
+          <Input
+            id="email"
+            type="email"
+            className="mt-1 block w-full"
+            {...register("email")}
+            required
+          />
+        </div>
 
-          <div className="mt-4">
-            <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              type="password"
-              className="mt-1 block w-full"
-              {...register("password")}
-              required
-              autoComplete="current-password"
-            />
-          </div>
+        <div className="mt-4">
+          <Label htmlFor="password">Password</Label>
+          <Input
+            id="password"
+            type="password"
+            className="mt-1 block w-full"
+            {...register("password")}
+            required
+            autoComplete="current-password"
+          />
+        </div>
 
-          <div className="mt-4">
-            <Label htmlFor="terms">
-              <div className="flex items-center">
-                <Checkbox
-                  name="terms"
-                  id="terms"
-                  required
-                  // checked={form.data.terms}
-                  // onChange={e => form.setData('terms', e.currentTarget.checked)}
-                />
+        <div className="mt-4">
+          <Label htmlFor="terms">
+            <div className="flex items-center">
+              <Checkbox
+                name="terms"
+                id="terms"
+                required
+                // checked={form.data.terms}
+                // onChange={e => form.setData('terms', e.currentTarget.checked)}
+              />
 
-                <div className="ml-2">
-                  I agree to the
-                  <a
-                    target="_blank"
-                    href="/terms"
-                    className="underline text-sm text-gray-600 hover:text-gray-900 mx-1"
-                  >
-                    Terms of Service
-                  </a>
-                  and
-                  <a
-                    target="_blank"
-                    href="/"
-                    className="underline text-sm text-gray-600 hover:text-gray-900 mx-1"
-                  >
-                    Privacy Policy
-                  </a>
-                </div>
+              <div className="ml-2">
+                I agree to the
+                <a
+                  target="_blank"
+                  href="/terms"
+                  className="underline text-sm text-gray-600 hover:text-gray-900 mx-1"
+                >
+                  Terms of Service
+                </a>
+                and
+                <a
+                  target="_blank"
+                  href="/"
+                  className="underline text-sm text-gray-600 hover:text-gray-900 mx-1"
+                >
+                  Privacy Policy
+                </a>
               </div>
-            </Label>
-          </div>
-          <div className="mt-6">
-            <div className="flex items-center justify-end">
-              <Link
-                to="/login"
-                className="underline text-sm text-gray-600 hover:text-gray-900"
-              >
-                Already have an account?
-              </Link>
-
-              <ButtonDefault
-                className={classNames("ml-4", {
-                  "opacity-25": isLoading,
-                })}
-                disabled={isLoading}
-              >
-                Sign UP
-              </ButtonDefault>
             </div>
+          </Label>
+        </div>
+        <div className="mt-6">
+          <div className="flex items-center justify-center " >
+            <ButtonSecondary
+              className={classNames("ml-4 ", {
+                "opacity-25": isLoading,
+              })}
+              disabled={isLoading}
+            >
+              Create my Account
+            </ButtonSecondary>
           </div>
-        </form>
-      </AuthenticationCard>
+        </div>
+      </form>
     </>
   );
 }
