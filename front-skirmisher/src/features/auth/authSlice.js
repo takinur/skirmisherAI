@@ -83,20 +83,20 @@ export const getUserDetails = createAsyncThunk(
   }
 );
 
-//Logout
-export const logout = createAsyncThunk("auth/logout", async () => {
-  return await authService.logout();
-});
 
 export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    reset: (state) => {
+    logout: (state) => {
       state.isLoading = false;
       state.isSuccess = false;
       state.isError = false;
       state.message = "";
+      state.authToken = null;
+      state.user = null;
+      window.sessionStorage.removeItem('user')
+      localStorage.removeItem('authToken')
     },
   },
   extraReducers: (builder) => {
@@ -130,11 +130,6 @@ export const authSlice = createSlice({
         state.user = null;
         state.authToken = null;
       })
-      .addCase(logout.fulfilled, (state) => {
-        state.user = null;
-        state.authToken = null;
-        state.isError = false;
-      })
       .addCase(getUserDetails.pending, (state) => {
         state.isLoading = true;
       })
@@ -148,5 +143,5 @@ export const authSlice = createSlice({
   },
 });
 
-export const { reset } = authSlice.actions;
+export const { logout } = authSlice.actions;
 export default authSlice.reducer;

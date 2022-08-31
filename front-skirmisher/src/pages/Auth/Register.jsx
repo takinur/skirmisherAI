@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { register as authRegister, reset } from "../../features/auth/authSlice";
-import { set, useForm } from "react-hook-form";
+import { register as authRegister } from "../../features/auth/authSlice";
+import {  useForm } from "react-hook-form";
 import Input from "../../components/Input";
 import Label from "../../components/Label";
 import classNames from "classnames";
@@ -54,9 +54,7 @@ export default function Register() {
     if (isSuccess || user) {
       navigate("/dashboard");
     }
-
-    dispatch(reset());
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+  }, [user, isError, isSuccess, message, navigate]);
 
   //Conditionally Render form
   const conditionalComponent = () => {

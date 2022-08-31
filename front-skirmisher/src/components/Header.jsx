@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { logout, reset, getUserDetails } from "../features/auth/authSlice";
+import { logout, getUserDetails } from "../features/auth/authSlice";
+// import { logout, reset, getUserDetails } from "../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 // import { DatePicker } from "antd";
 // import "antd/dist/antd.css";
@@ -9,14 +10,15 @@ import { useAxios } from "../_helpers/useAxios";
 export const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const API = useAxios();
-  const { user, authToken } = useSelector((state) => state.auth);
 
+  const { user, authToken } = useSelector((state) => state.auth);
   const [userDetails, setUserDetails] = useState({});
+
+  const API = useAxios();
+
 
   const onLogout = () => {
     dispatch(logout());
-    dispatch(reset());
     navigate("/");
   };
 

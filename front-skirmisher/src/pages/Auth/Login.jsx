@@ -2,8 +2,7 @@ import { useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { login, reset } from "../../features/auth/authSlice";
-import { FaSignInAlt } from "react-icons/fa";
+import { login } from "../../features/auth/authSlice";
 import { useForm } from "react-hook-form";
 import Input from "../../components/Input";
 import Label from "../../components/Label";
@@ -37,8 +36,7 @@ export default function Login() {
       navigate("/dashboard");
     }
 
-    dispatch(reset());
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+  }, [user, isError, isSuccess, message, navigate]);
 
 
   return (
