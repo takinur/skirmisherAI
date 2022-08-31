@@ -39,7 +39,6 @@ const getUserDetails = async (token) => {
 const logout = () => {
   localStorage.removeItem("authToken");
   window.sessionStorage.removeItem("user");
-  //TODO:Redirect to Home Page
 };
 
 const authService = {
