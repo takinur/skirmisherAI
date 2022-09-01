@@ -1,3 +1,4 @@
+from typing_extensions import Required
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from django.contrib.auth.password_validation import validate_password
@@ -5,7 +6,8 @@ from rest_framework import serializers
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
-
+# import model from parent folder
+from ..models import EmployerProfile
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -44,3 +46,10 @@ class UserCreateSerializer(serializers.ModelSerializer):
             
         return user
 
+
+class EmployerProfileSerializer(serializers.ModelSerializer):
+    image_url = serializers.ImageField(required=False)
+    class Meta:
+        model = EmployerProfile
+        fields = '__all__'
+        

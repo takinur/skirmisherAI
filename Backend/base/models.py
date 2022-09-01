@@ -1,4 +1,3 @@
-from tkinter import CASCADE
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
@@ -56,26 +55,31 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     
     def __str__(self):
         return self.email
+    
 
+# Explicitly set upload path and filename
+def upload_to(instance, filename):
+    # return 'images/{}/{}'.format(instance.user.id, filename)
+    return 'images/{filename}'.format(filename=filename)
 class EmployerProfile(models.Model):
     org_name        = models.CharField(max_length=80, null=True)
     org_website     = models.CharField(max_length=100, null=True)
     org_description = models.TextField(null=True)
     org_location    = models.CharField(max_length=100, null=True)
     org_size        = models.CharField(max_length=100, null=True)
-    # LOGO
-    created_at = models.DateTimeField(auto_created=True, blank=True)
-    updated_at = models.DateTimeField(auto_create=False, blank=True)
-    user       = models.ForeignKey(UserAccount, on_delete=CASCADE)
+    org_logo        = models.ImageField(upload_to= upload_to, blank=True, null=True)
+    created_at      = models.DateTimeField(auto_now=True, blank=True)
+    updated_at      = models.DateTimeField(auto_now=False, blank=True, null=True)
+    user            = models.ForeignKey(UserAccount, on_delete=models.CASCADE, null=True)
     
     
     def __str__(self) -> str:
         return super().__str__()
     
-class CandidateProfile(models.Model):
-      title    = models.CharField(max_length=80, null=True)
-    # avatar   = models.
-      phone    = models.CharField(max_length=50, null=True)
-      location = models.CharField(max_length=150, null=True)
-    # resume   = models
-      user     = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
+# class CandidateProfile(models.Model):
+#       title    = models.CharField(max_length=80, null=True)
+#     # avatar   = models.
+#       phone    = models.CharField(max_length=50, null=True)
+#       location = models.CharField(max_length=150, null=True)
+#     # resume   = models
+#       user     = models.ForeignKey(UserAccount, on_delete=models.CASCADE)

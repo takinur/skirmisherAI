@@ -3,10 +3,13 @@ from rest_framework.decorators import api_view
 from rest_framework import permissions, status
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
+from rest_framework.parsers import MultiPartParser, FormParser
 
 from .serializers import UserCreateSerializer, MyTokenObtainPairSerializer
-
 from rest_framework_simplejwt.views import TokenObtainPairView
+
+from ..models import EmployerProfile
+from .serializers import EmployerProfileSerializer
 
 # from ml_facade.ResumeExtractor import resume_result_wrapper # Result from extractor
 
@@ -25,6 +28,7 @@ def getRoutes(request):
         '/api/auth/token/verify/',
         '/api/auth/register/',
         '/api/auth/user/',
+        '/api/employer/'
     ]
     
     return Response(routes)
@@ -33,9 +37,6 @@ def getRoutes(request):
 class RegisterView(APIView):    
     def post(self, request):
         data = request.data
-        # name = data['name']
-        # email = data['email']
-        # password = data['password']
         
         serializer = UserCreateSerializer(data=data)
         if not serializer.is_valid():
@@ -60,3 +61,19 @@ class RetriveUserView(APIView):
         return Response(user.data, status=status.HTTP_200_OK)
     
     
+class EmployerProfileView(APIView):
+    # permission_classes = [permissions.IsAuthenticated]
+    # queryset = EmployerProfile.objects.order_by('-created_at')
+    # serializer_class = EmployerProfileSerializer
+    # parser_classes = (MultiPartParser, FormParser)
+    
+    # def perform_create(self, serializer):
+    def post(self, request, *args, **kwargs):
+        # Create profile with given data
+        data = request.data
+        serializer = EmployerProfileSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
