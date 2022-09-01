@@ -43,7 +43,7 @@ export default function Login() {
     <>
       <AuthenticationCard>
       <div className="text-center">
-          <h2 className="text-3xl">Login </h2>
+          <h2 className="text-3xl">Login sensei </h2>
         </div>
         <form onSubmit={handleSubmit(submitForm)}>
           <div>
