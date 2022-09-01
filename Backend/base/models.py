@@ -1,3 +1,4 @@
+from tkinter import CASCADE
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
@@ -10,9 +11,9 @@ class UserManager(BaseUserManager):
         email = email.lower()
         
         user = self.model(
-            name = name,
-            email=email,
-            role=role,
+            name  = name,
+            email = email,
+            role  = role,
         )
 
         user.set_password(password)
@@ -41,12 +42,12 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
         (2, 'CANDIDATE'),
     )
     
-    name = models.CharField(max_length=255)
-    email = models.EmailField(max_length=255, unique=True)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
+    name         = models.CharField(max_length=255)
+    email        = models.EmailField(max_length=255, unique=True)
+    is_active    = models.BooleanField(default=True)
+    is_staff     = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-    role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, default=1)
+    role         = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, default=1)
     
     objects = UserManager()
     
@@ -55,11 +56,26 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     
     def __str__(self):
         return self.email
-    
-class EmployerProfile:
-    org_name = models.CharField(max_length=80, null=True)
-    org_website = models.CharField(max_length=100, null=True)
+
+class EmployerProfile(models.Model):
+    org_name        = models.CharField(max_length=80, null=True)
+    org_website     = models.CharField(max_length=100, null=True)
+    org_description = models.TextField(null=True)
+    org_location    = models.CharField(max_length=100, null=True)
+    org_size        = models.CharField(max_length=100, null=True)
+    # LOGO
     created_at = models.DateTimeField(auto_created=True, blank=True)
+    updated_at = models.DateTimeField(auto_create=False, blank=True)
+    user       = models.ForeignKey(UserAccount, on_delete=CASCADE)
     
     
+    def __str__(self) -> str:
+        return super().__str__()
     
+class CandidateProfile(models.Model):
+      title    = models.CharField(max_length=80, null=True)
+    # avatar   = models.
+      phone    = models.CharField(max_length=50, null=True)
+      location = models.CharField(max_length=150, null=True)
+    # resume   = models
+      user     = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
