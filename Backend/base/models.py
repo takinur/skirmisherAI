@@ -61,6 +61,17 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
 def upload_to(instance, filename):
     # return 'images/{}/{}'.format(instance.user.id, filename)
     return 'images/{filename}'.format(filename=filename)
+
+class Organization(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField(default='', blank=True)
+    logo = models.ImageField(upload_to=upload_to, null=True, blank=True)
+    website = models.URLField(null=True, blank=True)
+    location = models.CharField(max_length=100, default='')
+    
+    def __str__(self):
+        return self.name
+    
 class EmployerProfile(models.Model):
     org_name        = models.CharField(max_length=80, null=True)
     org_website     = models.CharField(max_length=100, null=True)
