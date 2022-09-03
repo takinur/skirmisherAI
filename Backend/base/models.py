@@ -41,12 +41,12 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
         (2, 'CANDIDATE'),
     )
     
-    name         = models.CharField(max_length=255)
-    email        = models.EmailField(max_length=255, unique=True)
-    is_active    = models.BooleanField(default=True)
-    is_staff     = models.BooleanField(default=False)
+    name = models.CharField(max_length=255)
+    email = models.EmailField(max_length=255, unique=True)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-    role         = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, default=1)
+    role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, default=1)
     
     objects = UserManager()
     
@@ -63,34 +63,51 @@ def upload_to(instance, filename):
     return 'images/{filename}'.format(filename=filename)
 
 class Organization(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField(default='', blank=True)
-    logo = models.ImageField(upload_to=upload_to, null=True, blank=True)
-    website = models.URLField(null=True, blank=True)
+    nameb = models.CharField(max_length=80)
+    slogan = models.CharField(max_length=200, blank=True, default='')
+    website = models.URLField(default='', blank=True)
+    phone = models.CharField(max_length=20, blank=True, default='')
     location = models.CharField(max_length=100, default='')
+    about = models.TextField(default='', blank=True)
+    logo = models.ImageField(upload_to=upload_to, default='', blank=True) #FIXME: image upload
+    size = models.CharField(max_length=40, default='', blank=True)
+    created_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
     
     def __str__(self):
         return self.name
     
 class EmployerProfile(models.Model):
-    org_name        = models.CharField(max_length=80, null=True)
-    org_website     = models.CharField(max_length=100, null=True)
-    org_description = models.TextField(null=True)
-    org_location    = models.CharField(max_length=100, null=True)
-    org_size        = models.CharField(max_length=100, null=True)
-    org_logo        = models.ImageField(upload_to= upload_to, blank=True, null=True)
-    created_at      = models.DateTimeField(auto_now=True, blank=True)
-    updated_at      = models.DateTimeField(auto_now=False, blank=True, null=True)
-    user            = models.ForeignKey(UserAccount, on_delete=models.CASCADE, null=True)
+    Organization = models.OneToOneField(Organization, on_delete=models.CASCADE, null=True, blank=True)
+    phone = models.CharField(max_length=20, blank=True, default='')
+    designation = models.CharField(max_length=80, default='')
+    created_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
+    user = models.OneToOneField(UserAccount, on_delete=models.CASCADE)
     
     
     def __str__(self) -> str:
         return super().__str__()
+
+class Resume(models.Model):    
+    file = models.FileField(upload_to=upload_to, default='', blank=True)
     
-# class CandidateProfile(models.Model):
-#       title    = models.CharField(max_length=80, null=True)
-#     # avatar   = models.
-#       phone    = models.CharField(max_length=50, null=True)
-#       location = models.CharField(max_length=150, null=True)
-#     # resume   = models
-#       user     = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
+    text = models.TextField(default='', blank=True)
+    created_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
+    
+    def __str__(self) -> str:
+        return super().__str__()    
+    
+class CandidateProfile(models.Model):
+    designation = models.CharField(max_length=80, null=True)
+    phone = models.CharField(max_length=20, blank=True, default='')
+    location = models.CharField(max_length=100, default='')
+    resume = models.ForeignKey(Resume, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
+    
+    def __str__(self) -> str:
+        return super().name #FIXME: name is not defined probably
+
