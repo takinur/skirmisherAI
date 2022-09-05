@@ -10,3 +10,7 @@ export const axiosInstance = axios.create({
   },
 });
 
+
+export const axiosAuthInstance = axios.create({
+  baseURL: baseURLEndpoint
+});

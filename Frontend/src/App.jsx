@@ -11,6 +11,7 @@ import { Header } from "./components/Header";
 import { AboutPage } from "./pages/About";
 import Register from "./pages/Auth/Register";
 import Dashboard from "./pages/Dashboard";
+import { ContactPage } from "./pages/Contact";
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
         </Route>
-
+        <Route path="/contact" element={<ContactPage />} />
 
         <Route
           path="*"

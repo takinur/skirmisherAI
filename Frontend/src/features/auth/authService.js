@@ -1,4 +1,5 @@
-import { axiosInstance } from "../../_helpers/axiosInstance";
+import { axiosAuthInstance, axiosInstance } from "../../_helpers/axiosInstance";
+import jwtDecode from "jwt-decode";
 
 // Register user
 const register = async (userData) => {
@@ -22,15 +23,19 @@ const login = async (userData) => {
 
 //Get user info
 const getUserDetails = async (token) => {
-  //Modify Axios Header for Auth requests
-  axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token.access}`;
-  const response = await axiosInstance.get("/auth/user/");
+  //Override default axios header
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token.access}`,
+    },
+  };
+  const response = await axiosAuthInstance.get(`auth/user/`, config);
   if(!response.data){
     localStorage.removeItem("authToken");
   }
   else{
     window.sessionStorage.setItem("user", JSON.stringify(response.data));
-  } 
+  }
 
   return response.data;
 };
