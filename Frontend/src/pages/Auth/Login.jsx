@@ -12,7 +12,6 @@ import ButtonDefault from "../../components/ButtonDefault";
 import Checkbox from "../../components/Checkbox";
 
 export default function Login() {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -20,7 +19,7 @@ export default function Login() {
 
   const submitForm = (data) => {
     dispatch(login(data));
-  }
+  };
 
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
@@ -35,15 +34,13 @@ export default function Login() {
     if (isSuccess || user) {
       navigate("/dashboard");
     }
-
   }, [user, isError, isSuccess, message, navigate]);
-
 
   return (
     <>
       <AuthenticationCard>
-      <div className="text-center">
-          <h2 className="text-3xl">Login sensei </h2>
+        <div className="text-center">
+          <h2 className="text-3xl">Login </h2>
         </div>
         <form onSubmit={handleSubmit(submitForm)}>
           <div>
@@ -52,7 +49,7 @@ export default function Login() {
               id="email"
               type="email"
               className="mt-1 block w-full"
-              {...register('email')}
+              {...register("email")}
               required
               autoFocus
             />
@@ -64,7 +61,7 @@ export default function Login() {
               id="password"
               type="password"
               className="mt-1 block w-full"
-              {...register('password')}
+              {...register("password")}
               required
               autoComplete="current-password"
             />
@@ -81,7 +78,9 @@ export default function Login() {
               <span className="ml-2 text-sm text-gray-600">Remember me</span>
             </label>
             <div className="flex items-center justify-end">
-              <Link to='/register' className="underline text-sm text-gray-600 hover:text-gray-900"
+              <Link
+                to="/register"
+                className="underline text-sm text-gray-600 hover:text-gray-900"
               >
                 Need an account?
               </Link>
@@ -95,6 +94,16 @@ export default function Login() {
             </div>
           </div>
         </form>
+        <div className="mt-4">
+          <Link
+            to="/forgot-password"
+            className="underline text-sm text-gray-600 hover:text-gray-900"
+          >
+            Forgotten my password
+          </Link>
+          {/*TODO: same to greenwich update pass <p>Other password stuff</p> */}
+         
+        </div>
       </AuthenticationCard>
     </>
   );
