@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { login } from "../../features/auth/authSlice";
+import { login, reset } from "../../features/auth/authSlice";
 import { useForm } from "react-hook-form";
 import Input from "../../components/Input";
 import Label from "../../components/Label";
@@ -34,7 +34,8 @@ export default function Login() {
     if (isSuccess || user) {
       navigate("/dashboard");
     }
-  }, [user, isError, isSuccess, message, navigate]);
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   return (
     <>
@@ -102,7 +103,6 @@ export default function Login() {
             Forgotten my password
           </Link>
           {/*TODO: same to greenwich update pass <p>Other password stuff</p> */}
-         
         </div>
       </AuthenticationCard>
     </>

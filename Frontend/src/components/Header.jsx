@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { logout, getUserDetails } from "../features/auth/authSlice";
+import { logout, reset, getUserDetails  } from "../features/auth/authSlice";
 // import { logout, reset, getUserDetails } from "../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 // import { DatePicker } from "antd";
@@ -19,6 +19,7 @@ export const Header = () => {
 
   const onLogout = () => {
     dispatch(logout());
+    dispatch(reset());
     navigate("/");
   };
 
