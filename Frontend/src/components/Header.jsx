@@ -38,7 +38,6 @@ export const Header = () => {
   useEffect(() => {
     if (authToken) {
       dispatch(getUserDetails());
-      // getUserInfo();
     }
   }, [authToken, dispatch]);
 
@@ -67,6 +66,9 @@ export const Header = () => {
         )}
         <li>
           <NavLink to="/about">About</NavLink>
+        </li>
+        <li>
+          <NavLink to="/contact">Contact</NavLink>
         </li>
       </ul>
     </header>

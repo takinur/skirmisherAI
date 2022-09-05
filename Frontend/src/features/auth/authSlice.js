@@ -1,5 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
+import jwtDecode from "jwt-decode";
+import { axiosInstance } from "../../_helpers/axiosInstance";
+import axios from "axios";
 
 // initialize userToken from local storage
 const authToken = localStorage.getItem("authToken")
@@ -69,7 +72,8 @@ export const getUserDetails = createAsyncThunk(
     try {
       // get user data from store
       const { auth } = getState();
-      return await authService.getUserDetails(auth.authToken);
+      const data =  await authService.getUserDetails(auth.authToken);      
+      return data
     } catch (error) {
       console.log(error);
       const message =
@@ -97,8 +101,6 @@ export const authSlice = createSlice({
       state.isSuccess = false;
       state.isError = false;
       state.message = "";
-      state.authToken = null;
-      state.user = null;
     },
   },
   extraReducers: (builder) => {
@@ -132,14 +134,14 @@ export const authSlice = createSlice({
         state.user = null;
         state.authToken = null;
       })
-      .addCase(getUserDetails.pending, (state) => {
+      .addCase(getUserDetails.pending, (state, {payload}) => {
         state.isLoading = true;
       })
       .addCase(getUserDetails.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.user = payload;
       })
-      .addCase(getUserDetails.rejected, (state, action) => {
+      .addCase(getUserDetails.rejected, (state) => {
         state.isLoading = false;
       })
       .addCase(logout.fulfilled, (state) => {
