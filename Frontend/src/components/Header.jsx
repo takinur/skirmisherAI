@@ -29,7 +29,7 @@ export const Header = () => {
   //     setUserDetails(response.data);
   //   }
   // };
-  // // console.log(userDetails);
+  // console.log(userDetails);
   // useEffect(() => {
   //   getUserInfo();
   // } , []);

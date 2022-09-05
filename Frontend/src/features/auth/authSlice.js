@@ -1,8 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
-import jwtDecode from "jwt-decode";
-import { axiosInstance } from "../../_helpers/axiosInstance";
-import axios from "axios";
+
 
 // initialize userToken from local storage
 const authToken = localStorage.getItem("authToken")
