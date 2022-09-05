@@ -83,20 +83,22 @@ export const getUserDetails = createAsyncThunk(
   }
 );
 
+//Logout 
+export const logout = createAsyncThunk('auth/logout', async () => {
+  await authService.logout()
+})
 
 export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    logout: (state) => {
+    reset: (state) => {
       state.isLoading = false;
       state.isSuccess = false;
       state.isError = false;
       state.message = "";
       state.authToken = null;
       state.user = null;
-      window.sessionStorage.removeItem('user')
-      localStorage.removeItem('authToken')
     },
   },
   extraReducers: (builder) => {
@@ -109,10 +111,10 @@ export const authSlice = createSlice({
         state.isSuccess = true;
         state.authToken = payload;
       })
-      .addCase(register.rejected, (state, action) => {
+      .addCase(register.rejected, (state, {payload}) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.payload;
+        state.message = payload;
         state.user = null;
       })
       .addCase(login.pending, (state) => {
@@ -139,9 +141,13 @@ export const authSlice = createSlice({
       })
       .addCase(getUserDetails.rejected, (state, action) => {
         state.isLoading = false;
-      });
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.user = null;
+        state.authToken = null;
+      })
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { reset } = authSlice.actions;
 export default authSlice.reducer;
