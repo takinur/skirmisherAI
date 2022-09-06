@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import classNames from "classnames";
+import { NavLink, Link } from "react-router-dom";
 
 export default function Navbar() {
   const [stickyClass, setStickyClass] = useState("relative");
@@ -36,9 +37,9 @@ export default function Navbar() {
         <div className="container px-4 sm:px-8 lg:px-16 xl:px-20 mx-auto">
           <div className="header-wrapper flex items-center justify-between">
             <div className="header-logo w-12">
-              <a href="/">
+              <Link to="/">
                 <img src="" alt="Logo" className="bg-cover" />
-              </a>
+              </Link>
             </div>
             <div className="toggle md:hidden">
               <button>
@@ -58,19 +59,41 @@ export default function Navbar() {
             </div>
             <div className="navbar hidden md:block">
               <ul className="flex space-x-8 font-semibold">
-                <li className="items-center justify-center m-auto text-slate-50 hover:text-slate-300 dark:!text-slate-400 dark:hover:!text-slate-100">
+                <li
+                  className={classNames(
+                    "items-center justify-center m-auto hover:text-slate-300",
+                    atTop ? "text-slate-800" : "text-slate-50"
+                  )}
+                >
+                  <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-green-500 font-bold"
+                        : "b"
+                    }
+                  >
+                    Home
+                  </NavLink>
+                </li>
+                <li
+                  className={classNames(
+                    "items-center justify-center m-auto hover:text-slate-300",
+                    atTop ? "text-slate-800" : "text-slate-50"
+                  )}
+                >
                   <a href="#intro" className="page-scroll text-md">
-                    About
+                    btn
                   </a>
                 </li>
 
                 <li>
-                  <div className="flex items-center justify-center w-full">
-                    TOGGLES
-                  </div>
-                </li>
-                <li>
-                  <button className={classNames("-mt-1 py-2 px-6 text-sm font-semibold rounded-full border-2 border-[#7510F7] shadow-md block hover:text-white md:inline-block hover:bg-[#7510F7]", atTop ? "text-[#7510F7]" : "text-slate-50")}>
+                  <button
+                    className={classNames(
+                      "-mt-1 py-2 px-6 text-sm font-semibold rounded-full border-2 border-[#7510F7] shadow-md block hover:text-white md:inline-block hover:bg-[#7510F7]",
+                      atTop ? "text-[#7510F7]" : "text-slate-50"
+                    )}
+                  >
                     Say Hello
                   </button>
                 </li>
