@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import classNames from "classnames";
 import { NavLink, Link } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
+import { Transition } from "@headlessui/react";
+
+import "./NavBar.css";
 
 export default function Navbar() {
   const [navbar, setNavbar] = useState(false);
@@ -44,16 +47,7 @@ export default function Navbar() {
   ];
 
   const transitionStyles = {
-    
     appear: true,
-    
-
-
-    entering: {
-      opacity: 1,
-      transform: "translateY(0)",
-    },
-    timeout: 500,
   };
 
   return (
@@ -87,59 +81,64 @@ export default function Navbar() {
                   <path d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
               </button>
-              {navbar ? (
-                <CSSTransition {...transitionStyles} className="mobile-navbar z-[999]">
-                  <div name="slide-fade">
-                    <div
-                      className="navbar-wrapper fixed md:hidden top-0 left-0 h-full bg-white dark:bg-slate-900 z-30 w-64 shadow-lg p-5"
-                    >
-                      <div className="close">
-                        <button className="absolute top-0 right-0 mt-4 mr-4">
-                          <svg
-                            className="w-6 h-6 dark:text-white"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokellinejoin="round"
-                            strokeWidth="2"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path d="M6 18L18 6M6 6l12 12"></path>
-                          </svg>
-                        </button>
-                      </div>
-                      <ul className="divide-y">
-                        <li>
-                          <a
-                            href="#intro"
-                            className="my-4 inline-block active font-bold mt-8 dark:text-white"
-                          >
-                            Introduction
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="#projects"
-                            className="my-4 inline-block hover:text-orange-500 dark:text-white"
-                          >
-                            Portfolio
-                          </a>
-                        </li>
-                        <li>
-                          <div className="flex items-center justify-center w-full mt-8"></div>
-                          <div className="flex items-center justify-center w-full mt-6">
-                            <button className="mt-2 py-1 px-6 text-[#7510F7] dark:text-slate-100 dark:border-slate-200 rounded-full border-2 border-[#7510F7] shadow-lg block hover:text-white md:inline-block hover:bg-[#7510F7]">
-                              Say Hello
-                            </button>
-                          </div>
-                        </li>
-                      </ul>
+              <Transition
+                show={navbar}
+                enter="transition-all ease-in-out duration-500"
+                enterFrom="left-80"
+                enterTo="opacity-100"
+                leave="transition-opacity duration-150"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
+              >
+                <div name="slide-fade">
+                  <div className="navbar-wrapper fixed md:hidden top-0 left-0 h-full bg-white dark:bg-slate-900 z-30 w-64 shadow-lg p-5">
+                    <div className="close">
+                      <button
+                        className="absolute top-0 right-0 mt-4 mr-4"
+                        onClick={() => setNavbar(!navbar)}
+                      >
+                        <svg
+                          className="w-6 h-6 dark:text-white"
+                          fill="none"
+                          strokeLinecap="round"
+                          strokellinejoin="round"
+                          strokeWidth="2"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                      </button>
                     </div>
+                    <ul className="divide-y" id="dead">
+                      <li>
+                        <a
+                          href="#intro"
+                          className="my-4 inline-block active font-bold mt-8 dark:text-white"
+                        >
+                          Introduction
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#projects"
+                          className="my-4 inline-block hover:text-orange-500 dark:text-white"
+                        >
+                          Portfolio
+                        </a>
+                      </li>
+                      <li>
+                        <div className="flex items-center justify-center w-full mt-8"></div>
+                        <div className="flex items-center justify-center w-full mt-6">
+                          <button className="mt-2 py-1 px-6 text-[#7510F7] dark:text-slate-100 dark:border-slate-200 rounded-full border-2 border-[#7510F7] shadow-lg block hover:text-white md:inline-block hover:bg-[#7510F7]">
+                            Say Hello
+                          </button>
+                        </div>
+                      </li>
+                    </ul>
                   </div>
-                </CSSTransition>
-              ) : (
-                ""
-              )}
+                </div>
+              </Transition>
             </div>
             <div className="navbar hidden md:block">
               <ul className="flex space-x-8 font-semibold">
