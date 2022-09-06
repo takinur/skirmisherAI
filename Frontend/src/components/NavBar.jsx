@@ -24,6 +24,25 @@ export default function Navbar() {
     }
   };
 
+  const navItems = [
+    {
+      name: "Home",
+      path: "/",
+    },
+    {
+      name: "Feature",
+      path: "/feature",
+    },
+    {
+      name: "About",
+      path: "/about",
+    },
+    {
+      name: "Contact",
+      path: "/contact",
+    },
+  ];
+
   return (
     <>
       <nav
@@ -59,23 +78,25 @@ export default function Navbar() {
             </div>
             <div className="navbar hidden md:block">
               <ul className="flex space-x-8 font-semibold">
-                <li
-                  className={classNames(
-                    "items-center justify-center m-auto hover:text-slate-300",
-                    atTop ? "text-slate-800" : "text-slate-50"
-                  )}
-                >
-                  <NavLink
-                    to="/"
-                    className={({ isActive }) =>
-                      isActive
-                        ? "text-green-500 font-bold"
-                        : "b"
-                    }
+                {navItems.map((item, index) => (
+                  <li
+                   key={index}
+                    className={classNames(
+                      "items-center justify-center m-auto hover:text-slate-300",
+                      atTop ? "text-slate-800" : "text-slate-50"
+                    )}
                   >
-                    Home
-                  </NavLink>
-                </li>
+                    <NavLink
+                      to={item.path}
+                      className={({ isActive }) =>
+                        isActive ? "text-green-500 font-bold" : "b"
+                      }
+                    >
+                      {item.name}
+                    </NavLink>
+                  </li>
+                ))}
+
                 <li
                   className={classNames(
                     "items-center justify-center m-auto hover:text-slate-300",
