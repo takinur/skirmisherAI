@@ -141,6 +141,7 @@ export const authSlice = createSlice({
       })
       .addCase(getUserDetails.rejected, (state) => {
         state.isLoading = false;
+        localStorage.removeItem("authToken");
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
