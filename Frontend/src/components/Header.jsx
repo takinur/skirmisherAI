@@ -73,7 +73,7 @@ export const Header = () => {
     //     </li>
     //   </ul>
     // </header>
-    <header className="header-area ">
+    <header className="header-area">
       <Navbar />
     </header>
   );
