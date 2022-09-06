@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from "react";
 import classNames from "classnames";
 import { NavLink, Link } from "react-router-dom";
-import { CSSTransition } from "react-transition-group";
 import { Transition } from "@headlessui/react";
-
-import "./NavBar.css";
 
 export default function Navbar() {
   const [navbar, setNavbar] = useState(false);
   const [atTop, setAtTop] = useState(false);
-
-  console.log("navbar", navbar);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -46,9 +41,7 @@ export default function Navbar() {
     },
   ];
 
-  const transitionStyles = {
-    appear: true,
-  };
+
 
   return (
     <>
@@ -110,28 +103,26 @@ export default function Navbar() {
                         </svg>
                       </button>
                     </div>
-                    <ul className="divide-y" id="dead">
-                      <li>
-                        <a
-                          href="#intro"
-                          className="my-4 inline-block active font-bold mt-8 dark:text-white"
-                        >
-                          Introduction
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="#projects"
-                          className="my-4 inline-block hover:text-orange-500 dark:text-white"
-                        >
-                          Portfolio
-                        </a>
-                      </li>
+                    <ul className="divide-y">
+                      {navItems.map((item, index) => (
+                        <li key={index}>
+                          <NavLink
+                            to={item.path}
+                            // className={({ isActive }) =>
+                            //   isActive ? "text-green-500 font-bold" : ""
+                            // }
+                            className="my-4 inline-block font-bold mt-8 dark:text-white"
+                            style={({ isActive }) => ({ color: isActive ? "green" : "" })}
+                          >
+                            {item.name}
+                          </NavLink>
+                        </li>
+                      ))}
                       <li>
                         <div className="flex items-center justify-center w-full mt-8"></div>
                         <div className="flex items-center justify-center w-full mt-6">
                           <button className="mt-2 py-1 px-6 text-[#7510F7] dark:text-slate-100 dark:border-slate-200 rounded-full border-2 border-[#7510F7] shadow-lg block hover:text-white md:inline-block hover:bg-[#7510F7]">
-                            Say Hello
+                            Talk to us
                           </button>
                         </div>
                       </li>
