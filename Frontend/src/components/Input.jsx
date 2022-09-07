@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React, { forwardRef } from 'react';
 
-const JetInput = forwardRef((props, ref) => (
+const Input = forwardRef((props, ref) => (
   <input
     {...props}
     ref={ref}
@@ -12,4 +12,4 @@ const JetInput = forwardRef((props, ref) => (
   />
 ));
 
-export default JetInput;
+export default Input;
