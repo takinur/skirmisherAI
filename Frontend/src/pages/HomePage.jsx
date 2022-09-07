@@ -1,9 +1,13 @@
 import React from "react";
+import ScrollToTop from "../components/ScrollToTop";
 
 export const HomePage = () => {
   return (
     <>
-      <h1 className="text-center text-green-600 font-mono text-5xl">HomePage</h1>
+      <ScrollToTop />
+      <h1 className="text-center text-green-600 font-mono text-5xl">
+        HomePage
+      </h1>
       <div className="main">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus orci
         mi, venenatis ac nisl vel, porta consequat augue. In quis nulla odio.
