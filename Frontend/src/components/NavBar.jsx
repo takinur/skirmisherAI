@@ -41,8 +41,6 @@ export default function Navbar() {
     },
   ];
 
-
-
   return (
     <>
       <nav
@@ -53,7 +51,7 @@ export default function Navbar() {
             : "md:py-10"
         )}
       >
-        <div className="container px-4 sm:px-8 lg:px-16 xl:px-20 mx-auto">
+        <div className="container px-4 sm:px-8 lg:px-16 xl:px-20 mx-auto max-w-screen-2xl">
           <div className="header-wrapper flex items-center justify-between">
             <div className="header-logo w-12">
               <Link to="/">
@@ -76,59 +74,55 @@ export default function Navbar() {
               </button>
               <Transition
                 show={navbar}
-                enter="transition-all ease-in-out duration-500"
-                enterFrom="left-80"
-                enterTo="opacity-100"
-                leave="transition-opacity duration-150"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
+                enter="transform transition ease duration-[500ms]"
+                enterFrom="opacity-0 transform -translate-x-full"
+                leaveTo="opacity-0 transform -translate-x-full duration-[600ms]"
+                className="navbar-wrapper fixed md:hidden top-0 left-0 h-full bg-white dark:bg-slate-900 z-30 w-64 shadow-lg p-5"
               >
-                <div name="slide-fade">
-                  <div className="navbar-wrapper fixed md:hidden top-0 left-0 h-full bg-white dark:bg-slate-900 z-30 w-64 shadow-lg p-5">
-                    <div className="close">
-                      <button
-                        className="absolute top-0 right-0 mt-4 mr-4"
-                        onClick={() => setNavbar(!navbar)}
+                <div className="close">
+                  <button
+                    className="absolute top-0 right-0 mt-4 mr-4"
+                    onClick={() => setNavbar(!navbar)}
+                  >
+                    <svg
+                      className="w-6 h-6 dark:text-white"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokellinejoin="round"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                  </button>
+                </div>
+                <ul className="divide-y">
+                  {navItems.map((item, index) => (
+                    <li key={index}>
+                      <NavLink
+                        to={item.path}
+                        // className={({ isActive }) =>
+                        //   isActive ? "text-green-500 font-bold" : ""
+                        // }
+                        className="my-4 inline-block font-bold mt-8 dark:text-white"
+                        style={({ isActive }) => ({
+                          color: isActive ? "green" : "",
+                        })}
                       >
-                        <svg
-                          className="w-6 h-6 dark:text-white"
-                          fill="none"
-                          strokeLinecap="round"
-                          strokellinejoin="round"
-                          strokeWidth="2"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
+                        {item.name}
+                      </NavLink>
+                    </li>
+                  ))}
+                  <li>
+                    <div className="flex items-center justify-center w-full mt-8"></div>
+                    <div className="flex items-center justify-center w-full mt-6">
+                      <button className="mt-2 py-1 px-6 text-[#7510F7] dark:text-slate-100 dark:border-slate-200 rounded-full border-2 border-[#7510F7] shadow-lg block hover:text-white md:inline-block hover:bg-[#7510F7]">
+                        Talk to us
                       </button>
                     </div>
-                    <ul className="divide-y">
-                      {navItems.map((item, index) => (
-                        <li key={index}>
-                          <NavLink
-                            to={item.path}
-                            // className={({ isActive }) =>
-                            //   isActive ? "text-green-500 font-bold" : ""
-                            // }
-                            className="my-4 inline-block font-bold mt-8 dark:text-white"
-                            style={({ isActive }) => ({ color: isActive ? "green" : "" })}
-                          >
-                            {item.name}
-                          </NavLink>
-                        </li>
-                      ))}
-                      <li>
-                        <div className="flex items-center justify-center w-full mt-8"></div>
-                        <div className="flex items-center justify-center w-full mt-6">
-                          <button className="mt-2 py-1 px-6 text-[#7510F7] dark:text-slate-100 dark:border-slate-200 rounded-full border-2 border-[#7510F7] shadow-lg block hover:text-white md:inline-block hover:bg-[#7510F7]">
-                            Talk to us
-                          </button>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+                  </li>
+                </ul>
               </Transition>
             </div>
             <div className="navbar hidden md:block">
