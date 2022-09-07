@@ -39,6 +39,10 @@ export default function Navbar() {
       name: "Contact",
       path: "/contact",
     },
+    {
+      name: "Login",
+      path: "/login",
+    },
   ];
 
   return (
@@ -131,7 +135,7 @@ export default function Navbar() {
                   <li
                     key={index}
                     className={classNames(
-                      "items-center justify-center m-auto hover:text-slate-300",
+                      "items-center justify-center m-auto hover:text-emerald-600",
                       atTop ? "text-slate-800" : "text-slate-50"
                     )}
                   >
@@ -145,27 +149,16 @@ export default function Navbar() {
                     </NavLink>
                   </li>
                 ))}
-
-                <li
-                  className={classNames(
-                    "items-center justify-center m-auto hover:text-slate-300",
-                    atTop ? "text-slate-800" : "text-slate-50"
-                  )}
-                >
-                  <a href="#intro" className="page-scroll text-md">
-                    btn
-                  </a>
-                </li>
-
                 <li>
-                  <button
+                  <Link
+                  to='/signup'
                     className={classNames(
                       "-mt-1 py-2 px-6 text-sm font-semibold rounded-full border-2 border-[#7510F7] shadow-md block hover:text-white md:inline-block hover:bg-[#7510F7]",
                       atTop ? "text-[#7510F7]" : "text-slate-50"
                     )}
                   >
-                    Talk to us
-                  </button>
+                    Sign Up
+                  </Link>
                 </li>
               </ul>
             </div>
