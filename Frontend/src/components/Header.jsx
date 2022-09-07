@@ -74,6 +74,7 @@ export const Header = () => {
     //   </ul>
     // </header>
     <header className="header-area">
+      {/* <Navbar user={user} onLogout={onLogout}  /> Logged in will have diffrent Nav */}
       <Navbar />
     </header>
   );
