@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   FaSearch,
   FaHashtag,
@@ -11,14 +12,14 @@ import {
 import useDarkMode from "../../hooks/useDarkMode";
 
 const TopNavigation = () => {
+  
   return (
     <div className="top-navigation">
-      <FaBars className="ml-4 mr-auto" />
+      <FaBars className="ml-4 mr-auto md:hidden" />
       <HashtagIcon />
       <Title />
-      <ThemeIcon />      
+      <ThemeIcon />
       <BellIcon />
-   
     </div>
   );
 };
