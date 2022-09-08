@@ -1,5 +1,4 @@
 import { axiosAuthInstance, axiosInstance } from "../../hooks/axiosInstance";
-import jwtDecode from "jwt-decode";
 
 // Register user
 const register = async (userData) => {
