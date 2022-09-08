@@ -37,13 +37,13 @@
 
   .title-hashtag {
     @apply text-lg tracking-wider font-semibold text-gray-500 
-    ml-2 my-auto;
+    ml-2 my-auto hidden md:block;
   }
 
   .title-text {
     @apply text-xl text-gray-500 tracking-wider font-semibold text-opacity-80 
     mr-auto ml-2 my-auto 
-    transition duration-300 ease-in-out;
+    transition duration-300 ease-in-out hidden md:block;
   }
 
   .timestamp {

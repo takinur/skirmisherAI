@@ -11,7 +11,7 @@ const ContentContainer = () => {
     >
       <TopNavigation />
       <div className="content-list min-h-screen p-2">
-        <h1 className="text-ceter text-2xl font-bold">Content List</h1>{" "}
+        <h1 className="text-ceter text-2xl font-bold">Content List</h1>
       </div>
     </div>
   );
