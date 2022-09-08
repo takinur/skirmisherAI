@@ -116,9 +116,6 @@ export default function Navbar() {
                     <li key={index}>
                       <NavLink
                         to={item.path}
-                        // className={({ isActive }) =>
-                        //   isActive ? "text-green-500 font-bold" : ""
-                        // }
                         className="my-4 inline-block font-bold mt-8 dark:text-white"
                         style={({ isActive }) => ({
                           color: isActive ? "green" : "",
@@ -129,11 +126,19 @@ export default function Navbar() {
                     </li>
                   ))}
                   <li>
-                    <div className="flex items-center justify-center w-full mt-8"></div>
                     <div className="flex items-center justify-center w-full mt-6">
-                      <button className="mt-2 py-1 px-6 text-[#7510F7] dark:text-slate-100 dark:border-slate-200 rounded-full border-2 border-[#7510F7] shadow-lg block hover:text-white md:inline-block hover:bg-[#7510F7]">
-                        Talk to us
-                      </button>
+                      {user ? (
+                        <Link
+                          to="/dashboard"
+                          className="mt-2 py-1 px-6 text-[#7510F7] dark:text-slate-100 dark:border-slate-200 rounded-full border-2 border-[#7510F7] shadow-lg block hover:text-white md:inline-block hover:bg-[#7510F7]"
+                        >
+                          MY DASHBOARD{" "}
+                        </Link>
+                      ) : (
+                        <button className="mt-2 py-1 px-6 text-[#7510F7] dark:text-slate-100 dark:border-slate-200 rounded-full border-2 border-[#7510F7] shadow-lg block hover:text-white md:inline-block hover:bg-[#7510F7]">
+                          Talk to us
+                        </button>
+                      )}
                     </div>
                   </li>
                 </ul>
