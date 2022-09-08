@@ -22,7 +22,7 @@ const ScrollToTop = () => {
   return (
     <>
       {showTopBtn && (
-        <div onClick={goToTop} className="back-to-ceiling hidden md:block">
+        <div onClick={goToTop} className="back-to-ceiling">
           <span>
             <title>Back to Top</title>
           </span>

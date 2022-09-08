@@ -5,6 +5,7 @@ import {
   FaUserCircle,
   FaMoon,
   FaSun,
+  FaBars,
 } from "react-icons/fa";
 
 import useDarkMode from "../../hooks/useDarkMode";
@@ -12,10 +13,10 @@ import useDarkMode from "../../hooks/useDarkMode";
 const TopNavigation = () => {
   return (
     <div className="top-navigation">
+      <FaBars className="ml-4 mr-auto" />
       <HashtagIcon />
       <Title />
-      <ThemeIcon />
-      
+      <ThemeIcon />      
       <BellIcon />
    
     </div>
