@@ -1,5 +1,6 @@
 import React from "react";
-import GuestLayout from "../components/GuestLayout";
+import GuestLayout from "./Layout/Guest";
+
 import ScrollToTop from "../components/ScrollToTop";
 
 export const HomePage = () => {

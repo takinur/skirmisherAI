@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react"
 import { useSelector, useDispatch } from 'react-redux'
-import { getUserDetails } from "../features/auth/authSlice";
+import { getUserDetails } from "../features/auth/authSlice"
 
 import { Link, Outlet } from 'react-router-dom'
+import Navbar from "../components/NavBar"
 
 
 const ProtectedRoute = () => {
@@ -19,6 +20,7 @@ const ProtectedRoute = () => {
   if (!user ) {
     return (
       <div className='h-screen bg-green-600 text-center'>
+        <Navbar />
         <h1>Unauthorized :(</h1>
         <span>
           <Link to='/login'>Login</Link> to gain access
