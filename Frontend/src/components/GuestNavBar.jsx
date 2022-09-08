@@ -51,7 +51,7 @@ export default function Navbar() {
         className={classNames(
           "navbar h-16 py-4 md:top-0 md:left-0 w-full z-[999] md:fixed opacity-100 md:transition-all duration-300 ease-in-out",
           atTop
-            ? "md:py-4 md:bg-slate-50 dark:bg-slate-800 shadow-2xl"
+            ? "md:py-4 md:bg-slate-50 dark:bg-slate-800 md:shadow-2xl"
             : "md:py-10"
         )}
       >

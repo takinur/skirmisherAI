@@ -16,7 +16,7 @@ import { ContactPage } from "./pages/Contact";
 function App() {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <Routes>
         <Route index element={<HomePage />} />
         <Route path="/login" element={<Login />} />
