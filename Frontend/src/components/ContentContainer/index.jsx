@@ -1,29 +1,39 @@
-import TopNavigation from '../TopNav';
-import { BsPlusCircleFill } from 'react-icons/bs';
+import TopNavigation from "../TopNav";
+import { BsPlusCircleFill } from "react-icons/bs";
 
 const ContentContainer = () => {
   return (
-    <div className='content-container'>
+    <div
+      className="content-container md:pl-64 flex flex-col 
+    bg-gray-300 dark:bg-gray-700
+    m-0 
+    h-full w-full 
+    overflow-hidden"
+    >
       <TopNavigation />
-      <div className='content-list'>
+      <div className="content-list">
         <Post
-          name='Ada'
-          timestamp='one week ago'
+          name="Ada"
+          timestamp="one week ago"
           text={`Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit
           amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur
           adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem
           ipsum dolor sit amet consectetur adipisicing elit.`}
         />
-        <Post name='Leon' timestamp='one week ago' text={`Lorem ipsum dolor. `} />
-        <Post name='Jill' timestamp='5 days ago' text={`Lorem.`} />
         <Post
-          name='Ellie'
-          timestamp='4 days ago'
+          name="Leon"
+          timestamp="one week ago"
+          text={`Lorem ipsum dolor. `}
+        />
+        <Post name="Jill" timestamp="5 days ago" text={`Lorem.`} />
+        <Post
+          name="Ellie"
+          timestamp="4 days ago"
           text={`Lorem ipsum dolor sit amet consectetur adipisicing elit. `}
         />
         <Post
-          name='Chris'
-          timestamp='4 days ago'
+          name="Chris"
+          timestamp="4 days ago"
           text={`Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit
           amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur
           adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem
@@ -33,26 +43,26 @@ const ContentContainer = () => {
           ipsum dolor sit amet consectetur adipisicing elit.`}
         />
         <Post
-          name='Claire'
-          timestamp='2 days ago'
+          name="Claire"
+          timestamp="2 days ago"
           text={`Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit
           amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur
           adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. `}
         />
         <Post
-          name='Albert'
-          timestamp='22 hours ago'
+          name="Albert"
+          timestamp="22 hours ago"
           text={`Lorem ipsum dolor sit amet consectetur adipisicing elit. ☺️ `}
         />
         <Post
-          name='Rebecca'
-          timestamp='3 hours ago'
+          name="Rebecca"
+          timestamp="3 hours ago"
           text={`Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit
           amet consectetur adipisicing elit.`}
         />
         <Post
-          name='H.U.N.K'
-          timestamp='Just now'
+          name="H.U.N.K"
+          timestamp="Just now"
           text={`Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit
           amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur
           adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem
@@ -65,27 +75,34 @@ const ContentContainer = () => {
 };
 
 const BottomBar = () => (
-  <div className='bottom-bar'>
+  <div className="bottom-bar">
     <PlusIcon />
-    <input type='text' placeholder='Enter message...' className='bottom-bar-input' />
+    <input
+      type="text"
+      placeholder="Enter message..."
+      className="bottom-bar-input"
+    />
   </div>
 );
 
 const Post = ({ name, timestamp, text }) => {
-
   const seed = Math.round(Math.random() * 100);
   return (
-    <div className={'post'}>
-      <div className='avatar-wrapper'>
-        <img src={`https://avatars.dicebear.com/api/open-peeps/${seed}.svg`} alt='' className='avatar' />
+    <div className={"post"}>
+      <div className="avatar-wrapper">
+        <img
+          src={`https://avatars.dicebear.com/api/open-peeps/${seed}.svg`}
+          alt=""
+          className="avatar"
+        />
       </div>
 
-      <div className='post-content'>
-        <p className='post-owner'>
+      <div className="post-content">
+        <p className="post-owner">
           {name}
-          <small className='timestamp'>{timestamp}</small>
+          <small className="timestamp">{timestamp}</small>
         </p>
-        <p className='post-text'>{text}</p>
+        <p className="post-text">{text}</p>
       </div>
     </div>
   );
@@ -93,8 +110,8 @@ const Post = ({ name, timestamp, text }) => {
 
 const PlusIcon = () => (
   <BsPlusCircleFill
-    size='22'
-    className='text-green-500 dark:shadow-lg mx-2 dark:text-primary'
+    size="22"
+    className="text-green-500 dark:shadow-lg mx-2 dark:text-primary"
   />
 );
 

@@ -5,7 +5,7 @@ const Layout = ({ children, user }) => {
   console.log(user.name)
   return (
     <>
-    <h1> Look a auth guy here! {user.name}</h1>
+    {/* <h1> Look a auth guy here! {user.name}</h1> */}
       <main>{children}</main>
     </>
   );
