@@ -1,6 +1,6 @@
 import TopNavigation from "../TopNav";
 
-const ContentContainer = () => {
+const ContentContainer = ({children}) => {
   return (
     <div
       className="content-container md:pl-64 flex flex-col 
@@ -10,9 +10,10 @@ const ContentContainer = () => {
     overflow-hidden"
     >
       <TopNavigation />
-      <div className="content-list min-h-screen p-2">
+      <main className="content-list min-h-screen p-2">
         <h1 className="text-ceter text-2xl font-bold">Content List</h1>
-      </div>
+        {children}
+      </main>
     </div>
   );
 };
