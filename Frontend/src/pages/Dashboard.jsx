@@ -1,10 +1,12 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { logout, reset, getUserDetails  } from "../features/auth/authSlice";
+import { logout, reset, getUserDetails } from "../features/auth/authSlice";
 
-import { CandidateDashboard } from "./Candidate/Dashboard";
-import { EmployerDashboard } from "./Employer/Dashboard";
+import { CandidateDashboard } from "./Layout/Candidate/Dashboard";
+import { EmployerDashboard } from "./Layout/Employer/Dashboard";
+
+import Authenticated from "./Layout/Authenticated";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -31,7 +33,7 @@ const Dashboard = () => {
 
   // const RoleSpecificView = RoleView[role] ?? <h1>Something went Wrong! Try refreshing the page.</h1>
 
-  return <div className="h-screen bg-green-600">{RoleView}</div>;
+  return <Authenticated user={user}>{RoleView}</Authenticated>;
 };
 
 export default Dashboard;
