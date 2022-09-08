@@ -13,6 +13,7 @@ import Register from "./pages/Auth/Register";
 import Dashboard from "./pages/Dashboard";
 import { ContactPage } from "./pages/Contact";
 import Footer from "./components/Footer";
+import Logout from "./pages/Auth/Logout";
 
 function App() {
   return (
@@ -30,8 +31,11 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
         </Route>
+        <Route element={<ProtectedRoute />}>
+          <Route path="/logout" element={<Logout />} />
+        </Route>
+        {/* End Protected Routes */}
         <Route path="/contact" element={<ContactPage />} />
-
         <Route
           path="*"
           element={
