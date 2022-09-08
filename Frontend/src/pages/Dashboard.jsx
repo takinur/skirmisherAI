@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset, getUserDetails } from "../features/auth/authSlice";
 
-import { CandidateDashboard } from "./Layout/Candidate/Dashboard";
-import { EmployerDashboard } from "./Layout/Employer/Dashboard";
+import { CandidateDashboard } from "./Layout/Candidate";
+import { EmployerDashboard } from "./Layout/Employer";
 
 import Authenticated from "./Layout/Authenticated";
 

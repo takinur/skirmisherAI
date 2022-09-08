@@ -5,7 +5,7 @@ import { logout, reset, getUserDetails  } from "../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 // import { DatePicker } from "antd";
 // import "antd/dist/antd.css";
-import { useAxios } from "../_helpers/useAxios";
+import { useAxios } from "../hooks/useAxios";
 import Navbar from "./NavBar";
 
 export const Header = () => {
