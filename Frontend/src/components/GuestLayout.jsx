@@ -1,10 +1,10 @@
 import React from "react";
-import GuestNavBar from "./GuestNavBar";
+import NavBar from "./NavBar";
 
 const GuestLayout = ({ children }) => {
   return (
     <>
-      <GuestNavBar />
+      <NavBar />
       <main>{children}</main>
     </>
   );

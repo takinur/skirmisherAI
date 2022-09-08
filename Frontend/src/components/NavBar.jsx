@@ -3,10 +3,24 @@ import classNames from "classnames";
 import { NavLink, Link } from "react-router-dom";
 import { Transition } from "@headlessui/react";
 
+import { getUserDetails } from "../features/auth/authSlice";
+import { useSelector, useDispatch } from "react-redux";
+
 export default function Navbar() {
   const [navbar, setNavbar] = useState(false);
   const [atTop, setAtTop] = useState(false);
 
+  //Auth state
+  const { user, authToken } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (authToken) {
+      dispatch(getUserDetails());
+    }
+  }, [authToken, dispatch]);
+
+  //Scroll
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
 
@@ -39,14 +53,10 @@ export default function Navbar() {
       name: "Contact",
       path: "/contact",
     },
-    {
-      name: "Login",
-      path: "/login",
-    },
   ];
 
   return (
-    <>
+    <header className="header-area">
       <nav
         className={classNames(
           "navbar h-16 py-4 md:top-0 md:left-0 w-full z-[999] md:fixed opacity-100 md:transition-all duration-300 ease-in-out",
@@ -149,22 +159,54 @@ export default function Navbar() {
                     </NavLink>
                   </li>
                 ))}
-                <li>
-                  <Link
-                  to='/signup'
-                    className={classNames(
-                      "-mt-1 py-2 px-6 text-sm font-semibold rounded-full border-2 border-[#7510F7] shadow-md block hover:text-white md:inline-block hover:bg-[#7510F7]",
-                      atTop ? "text-[#7510F7]" : "text-slate-50"
-                    )}
-                  >
-                    Sign Up
-                  </Link>
-                </li>
+
+                {user ? (
+                  <li>
+                    <Link
+                      to="/dashboard"
+                      className={classNames(
+                        "-mt-1 py-2 px-6 text-sm font-semibold rounded-full border-2 border-[#7510F7] shadow-md block hover:text-white md:inline-block hover:bg-[#7510F7]",
+                        atTop ? "text-[#7510F7]" : "text-slate-50"
+                      )}
+                    >
+                      My DASHBOARD
+                    </Link>
+                  </li>
+                ) : (
+                  <>
+                    <li
+                      className={classNames(
+                        "items-center justify-center m-auto hover:text-emerald-600",
+                        atTop ? "text-slate-800" : "text-slate-50"
+                      )}
+                    >
+                      <NavLink
+                        to="/login"
+                        className={({ isActive }) =>
+                          isActive ? "text-green-500 font-bold" : "b"
+                        }
+                      >
+                        Login
+                      </NavLink>
+                    </li>
+                    <li>
+                      <Link
+                        to="/signup"
+                        className={classNames(
+                          "-mt-1 py-2 px-6 text-sm font-semibold rounded-full border-2 border-[#7510F7] shadow-md block hover:text-white md:inline-block hover:bg-[#7510F7]",
+                          atTop ? "text-[#7510F7]" : "text-slate-50"
+                        )}
+                      >
+                        Sign Up
+                      </Link>
+                    </li>
+                  </>
+                )}
               </ul>
             </div>
           </div>
         </div>
       </nav>
-    </>
+    </header>
   );
 }
