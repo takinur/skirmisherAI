@@ -1,9 +1,7 @@
-import React, { useState } from "react";
-import {
-  FaSearch,
+import React from "react";
+import { 
   FaHashtag,
   FaRegBell,
-  FaUserCircle,
   FaMoon,
   FaSun,
   FaBars,
@@ -11,11 +9,11 @@ import {
 
 import useDarkMode from "../../hooks/useDarkMode";
 
-const TopNavigation = () => {
+const TopNavigation = ({toggleNavbar}) => {
   
   return (
     <div className="top-navigation">
-      <FaBars className="ml-4 mr-auto md:hidden" />
+      <FaBars className="ml-4 mr-auto md:hidden dark:text-zinc-100" onClick={toggleNavbar} />
       <HashtagIcon />
       <Title />
       <ThemeIcon />

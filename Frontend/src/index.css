@@ -24,16 +24,12 @@
   }
 
   .top-navigation-icon {
-    @apply text-gray-500
-    mr-3 ml-4
+    @apply text-gray-500    
     transition duration-300 ease-in-out 
-    hover:text-pink-400 
+    hover:text-[#7510F7] 
     cursor-pointer;
   }
 
-  .top-navigation-icon:first {
-    @apply ml-auto mr-4;
-  }
 
   .title-hashtag {
     @apply text-lg tracking-wider font-semibold text-gray-500 
