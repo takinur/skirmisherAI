@@ -25,16 +25,15 @@ export default function Login() {
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
-
   //Redirect authenticated user to Dashboard
   useEffect(() => {
+    if (isSuccess || user) {
+      navigate("/dashboard");
+    }
     if (isError) {
       toast.error(message);
     }
 
-    if (isSuccess || user) {
-      navigate("/dashboard");
-    }
     dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
