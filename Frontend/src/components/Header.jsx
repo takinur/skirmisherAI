@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import { DatePicker } from "antd";
 // import "antd/dist/antd.css";
 import { useAxios } from "../_helpers/useAxios";
-import Navbar from "./NavBar";
+import Navbar from "./GuestNavBar";
 
 export const Header = () => {
   const navigate = useNavigate();

@@ -1,9 +1,10 @@
 import React from "react";
+import GuestLayout from "../components/GuestLayout";
 import ScrollToTop from "../components/ScrollToTop";
 
 export const HomePage = () => {
   return (
-    <>
+    <GuestLayout>
       <ScrollToTop />
       <h1 className="text-center text-green-600 font-mono text-5xl">
         HomePage
@@ -244,6 +245,6 @@ export const HomePage = () => {
         amet, lacinia faucibus diam. Nulla tempor accumsan velit vel viverra.
         Mauris sit amet nulla vel tortor mollis lacinia nec at diam.
       </div>
-    </>
+    </GuestLayout>
   );
 };
