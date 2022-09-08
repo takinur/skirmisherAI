@@ -1,4 +1,4 @@
-import { axiosAuthInstance, axiosInstance } from "../../_helpers/axiosInstance";
+import { axiosAuthInstance, axiosInstance } from "../../hooks/axiosInstance";
 import jwtDecode from "jwt-decode";
 
 // Register user
