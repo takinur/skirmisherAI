@@ -6,6 +6,9 @@ import { Transition } from "@headlessui/react";
 import { getUserDetails } from "../features/auth/authSlice";
 import { useSelector, useDispatch } from "react-redux";
 
+import { FaMoon, FaSun } from "react-icons/fa";
+import useDarkMode from "../hooks/useDarkMode";
+
 export default function Navbar() {
   const [navbar, setNavbar] = useState(false);
   const [atTop, setAtTop] = useState(false);
@@ -59,10 +62,8 @@ export default function Navbar() {
     <header className="header-area">
       <nav
         className={classNames(
-          "navbar h-16 py-4 md:top-0 md:left-0 w-full z-[999] md:fixed opacity-100 md:transition-all duration-300 ease-in-out",
-          atTop
-            ? "md:py-4 md:bg-slate-50 dark:bg-slate-800 md:shadow-2xl"
-            : "md:py-10"
+          "navbar h-16 py-4 dark:bg-slate-800 md:top-0 md:left-0 w-full z-[999] md:fixed opacity-100 md:transition-all duration-300 ease-in-out",
+          atTop ? "md:py-4 md:bg-slate-50  md:shadow-2xl" : "md:py-10"
         )}
       >
         <div className="container px-4 sm:px-8 lg:px-16 xl:px-20 mx-auto max-w-screen-2xl">
@@ -144,6 +145,7 @@ export default function Navbar() {
                 </ul>
               </Transition>
             </div>
+            {/* Desktop Navbar */}
             <div className="navbar hidden md:block">
               <ul className="flex space-x-8 font-semibold">
                 {navItems.map((item, index) => (
@@ -151,7 +153,9 @@ export default function Navbar() {
                     key={index}
                     className={classNames(
                       "items-center justify-center m-auto hover:text-emerald-600",
-                      atTop ? "text-slate-800" : "text-slate-50"
+                      atTop
+                        ? "text-slate-800 dark:text-slate-50"
+                        : "text-slate-50"
                     )}
                   >
                     <NavLink
@@ -164,14 +168,18 @@ export default function Navbar() {
                     </NavLink>
                   </li>
                 ))}
-
+                <li className="mt-2">
+                  <ThemeIcon />
+                </li>
                 {user ? (
                   <li>
                     <Link
                       to="/dashboard"
                       className={classNames(
                         "-mt-1 py-2 px-6 text-sm font-semibold rounded-full border-2 border-[#7510F7] shadow-md block hover:text-white md:inline-block hover:bg-[#7510F7]",
-                        atTop ? "text-[#7510F7]" : "text-slate-50"
+                        atTop
+                          ? "text-[#7510F7] dark:text-slate-50"
+                          : "text-slate-50"
                       )}
                     >
                       My DASHBOARD
@@ -215,3 +223,17 @@ export default function Navbar() {
     </header>
   );
 }
+
+const ThemeIcon = () => {
+  const [darkTheme, setDarkTheme] = useDarkMode();
+  const handleMode = () => setDarkTheme(!darkTheme);
+  return (
+    <span onClick={handleMode}>
+      {darkTheme ? (
+        <FaSun size="22" className="top-navigation-icon" />
+      ) : (
+        <FaMoon size="22" className="top-navigation-icon" />
+      )}
+    </span>
+  );
+};

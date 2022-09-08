@@ -1,21 +1,13 @@
-import { BsPlus, BsFillLightningFill, BsGearFill } from "react-icons/bs";
-import { FaFire, FaPoo } from "react-icons/fa";
+import React from "react";
+import ClassNames from "classnames";
 
-const SideBar = () => {
+const SideBar = ({navbar}) => {
+    console.log('from sidebar' , navbar);
   return (
-    // <div
-    //   className="fixed top-0 left-0 h-screen w-16 flex flex-col
-    //               bg-white dark:bg-gray-900 shadow-lg"
-    // >
-    //   <SideBarIcon icon={<FaFire size="28" />} />
-    //   <Divider />
-    //   <SideBarIcon icon={<BsPlus size="32" />} />
-    //   <SideBarIcon icon={<BsFillLightningFill size="20" />} />
-    //   <SideBarIcon icon={<FaPoo size="20" />} />
-    //   <Divider />
-    //   <SideBarIcon icon={<BsGearFill size="22" />} />
-    // </div>
-    <aside className="z-30 fixed top-0 left-0 flex-shrink-0 min-h-screen hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block">
+    <aside className={ClassNames('z-30 fixed top-0 left-0 flex-shrink-0 min-h-screen w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block'
+    , navbar ? 'block' : 'hidden'
+    )}
+    >
       <div className="py-4 text-gray-500 dark:text-gray-400">
         <a
           className="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200"
@@ -197,9 +189,9 @@ const SideBar = () => {
                 aria-hidden="true"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                 ></path>
               </svg>
             </button>
@@ -221,13 +213,5 @@ const SideBar = () => {
   );
 };
 
-const SideBarIcon = ({ icon, text = "tooltip 💡" }) => (
-  <div className="sidebar-icon group">
-    {icon}
-    <span className="sidebar-tooltip group-hover:scale-100">{text}</span>
-  </div>
-);
-
-const Divider = () => <hr className="sidebar-hr" />;
 
 export default SideBar;
