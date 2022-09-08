@@ -3,13 +3,14 @@ import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { register as authRegister, reset } from "../../features/auth/authSlice";
-import {  useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Input from "../../components/Input";
 import Label from "../../components/Label";
 import classNames from "classnames";
 import Checkbox from "../../components/Checkbox";
 import AuthRoleSelection from "../../components/AuthRoleSelection";
 import ButtonSecondary from "../../components/ButtonSecondary";
+import Header from "./Header";
 
 const roles = [
   {
@@ -37,14 +38,12 @@ export default function Register() {
     (state) => state.auth
   );
 
-
   const submitForm = (data) => {
     //Override data to add roles
     data.role = selectedRole.id;
     dispatch(authRegister(data));
   };
 
- 
   //Redirect Registered user to Dashboard
   useEffect(() => {
     if (isError) {
@@ -97,21 +96,33 @@ export default function Register() {
   };
   //Main return statement
   return (
-    <section className="register min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-      <div className="w-full md:max-w-2xl mt-6 px-12 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-        {conditionalComponent()}
-        <div className="flex justify-center mt-4">
-          <p> Already have an account?
-            <Link
-              to="/login"
-              className="ml-1 underline text-sm text-green-600 hover:text-gray-900"
-            >
-              Login
-            </Link>
-          </p>
+    <>
+      <Header>
+        <Link
+          to="/login"
+          className="-mt-1 py-2 px-6 text-sm font-semibold rounded-full border-2 border-[#7510F7] shadow-md block hover:text-white md:inline-block hover:bg-[#7510F7] text-[#7510F7]"
+        >
+          Sign In
+        </Link>
+      </Header>
+      <section className="register min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+        <div className="w-full md:max-w-2xl mt-6 px-12 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+          {conditionalComponent()}
+          <div className="flex justify-center mt-4">
+            <p>
+              {" "}
+              Already have an account?
+              <Link
+                to="/login"
+                className="ml-1 underline text-sm text-green-600 hover:text-gray-900"
+              >
+                Login
+              </Link>
+            </p>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 
@@ -126,7 +137,9 @@ function RegisterForm({
   return (
     <>
       <div className="text-center pt-6">
-        <h2 className="text-3xl font-serif">Sign Up to {selectedRole.id === 1 ? 'Hire Talent' : 'Find work' }</h2>
+        <h2 className="text-3xl font-serif">
+          Sign Up to {selectedRole.id === 1 ? "Hire Talent" : "Find work"}
+        </h2>
       </div>
       <form onSubmit={handleSubmit(submitForm)}>
         <div className="mt-4">
@@ -197,7 +210,7 @@ function RegisterForm({
           </Label>
         </div>
         <div className="mt-6">
-          <div className="flex items-center justify-center " >
+          <div className="flex items-center justify-center ">
             <ButtonSecondary
               className={classNames("ml-4 ", {
                 "opacity-25": isLoading,

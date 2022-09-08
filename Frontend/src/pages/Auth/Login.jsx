@@ -10,6 +10,7 @@ import classNames from "classnames";
 import AuthenticationCard from "../../components/AuthenticationCard";
 import ButtonDefault from "../../components/ButtonDefault";
 import Checkbox from "../../components/Checkbox";
+import Header from "./Header";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -39,9 +40,17 @@ export default function Login() {
 
   return (
     <>
+      <Header>
+        <Link
+          to="/signup"
+          className="-mt-1 py-2 px-6 text-sm font-semibold rounded-full border-2 border-[#7510F7] shadow-md block hover:text-white md:inline-block hover:bg-[#7510F7] text-[#7510F7]"
+        >
+          Sign Up
+        </Link>
+      </Header>
       <AuthenticationCard>
-        <div className="text-center">
-          <h2 className="text-3xl">Login </h2>
+        <div className="text-center mb-7">
+          <h2 className="text-3xl">Log in to SkirmisherAI</h2>
         </div>
         <form onSubmit={handleSubmit(submitForm)}>
           <div>
