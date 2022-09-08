@@ -1,15 +1,27 @@
-import { useSelector } from 'react-redux'
-import { NavLink, Outlet } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from 'react-redux'
+import { getUserDetails } from "../features/auth/authSlice";
+
+import { Link, Outlet } from 'react-router-dom'
+
 
 const ProtectedRoute = () => {
-  const { user } = useSelector((state) => state.auth)
+  const dispatch = useDispatch();
+
+  const { user, authToken } = useSelector((state) => state.auth);
+  //Automatically authenticate user if token is present
+  useEffect(() => {
+    if (authToken) {
+      dispatch(getUserDetails());
+    }
+  }, [authToken, dispatch]);
   // show unauthorized screen if no user is found in redux store
   if (!user ) {
     return (
       <div className='h-screen bg-green-600 text-center'>
         <h1>Unauthorized :(</h1>
         <span>
-          <NavLink to='/login'>Login</NavLink> to gain access
+          <Link to='/login'>Login</Link> to gain access
         </span>
       </div>
     )
