@@ -4,7 +4,7 @@ export default function AuthenticationCard({
   children,
 }) {
   return (
-    <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+    <div className="md:min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
       <div>
         LOGO
       </div>
