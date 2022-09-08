@@ -6,7 +6,7 @@ import { logout, reset, getUserDetails } from "../features/auth/authSlice";
 import { CandidateDashboard } from "./Layout/Candidate";
 import { EmployerDashboard } from "./Layout/Employer";
 
-import Authenticated from "./Layout/Authenticated";
+import AuthLayout from './Layout/Auth';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ const Dashboard = () => {
 
   // const RoleSpecificView = RoleView[role] ?? <h1>Something went Wrong! Try refreshing the page.</h1>
 
-  return <Authenticated user={user}>{RoleView}</Authenticated>;
+  return <AuthLayout user={user}>{RoleView}</AuthLayout>;
 };
 
 export default Dashboard;
