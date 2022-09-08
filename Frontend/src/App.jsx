@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { HomePage } from "./pages/HomePage";
 import Login from "./pages/Auth/Login";
-import { Header } from "./components/Header";
 import { AboutPage } from "./pages/About";
 import Register from "./pages/Auth/Register";
 import Dashboard from "./pages/Dashboard";
@@ -18,7 +17,6 @@ import Logout from "./pages/Auth/Logout";
 function App() {
   return (
     <>
-      {/* <Header /> */}
       <Routes>
         <Route index element={<HomePage />} />
         <Route path="/login" element={<Login />} />

@@ -28,15 +28,15 @@ const ThemeIcon = () => {
   return (
     <span onClick={handleMode}>
       {darkTheme ? (
-        <FaSun size="24" className="top-navigation-icon" />
+        <FaSun size="24" className="top-navigation-icon mr-4" />
       ) : (
-        <FaMoon size="24" className="top-navigation-icon" />
+        <FaMoon size="24" className="top-navigation-icon mr-4" />
       )}
     </span>
   );
 };
 
-const BellIcon = () => <FaRegBell size="24" className="top-navigation-icon" />;
+const BellIcon = () => <FaRegBell size="24" className="top-navigation-icon mr-4" />;
 
 const HashtagIcon = () => <FaHashtag size="20" className="title-hashtag" />;
 const Title = () => <h5 className="title-text">tailwind-css</h5>;
