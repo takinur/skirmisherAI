@@ -12,6 +12,7 @@ import { AboutPage } from "./pages/About";
 import Register from "./pages/Auth/Register";
 import Dashboard from "./pages/Dashboard";
 import { ContactPage } from "./pages/Contact";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           }
         />
       </Routes>
+      <Footer />
       <ToastContainer />
     </>
   );
