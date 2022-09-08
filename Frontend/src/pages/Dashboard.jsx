@@ -30,9 +30,7 @@ const Dashboard = () => {
     EMPLOYER: <EmployerDashboard />,
     CANDIDATE: <CandidateDashboard />,
   }[user.role] ?? <h1>Something went Wrong! Try refreshing the page.</h1>;
-
-  // const RoleSpecificView = RoleView[role] ?? <h1>Something went Wrong! Try refreshing the page.</h1>
-
+  
   return <AuthLayout user={user}>{RoleView}</AuthLayout>;
 };
 
