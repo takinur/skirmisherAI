@@ -7,6 +7,8 @@ import {
   FaBars,
 } from "react-icons/fa";
 
+import UserMenu from '../UserMenu'
+
 import useDarkMode from "../../hooks/useDarkMode";
 
 const TopNavigation = ({toggleNavbar}) => {
@@ -17,6 +19,7 @@ const TopNavigation = ({toggleNavbar}) => {
       <HashtagIcon />
       <Title />
       <ThemeIcon />
+      <UserMenu />
       <BellIcon />
     </div>
   );
