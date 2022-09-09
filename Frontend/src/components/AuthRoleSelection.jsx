@@ -19,7 +19,7 @@ export default function AuthRoleSelection({
       <div className="mx-auto sm:flex justify-center w-full my-10 ">
         <RadioGroup value={selectedRole} onChange={setSelectedRole}>
           <RadioGroup.Label className="sr-only">Choose Role</RadioGroup.Label>
-          <div className="space-y-2 md:space-y-0 md:space-x-4 md:flex ">
+          <div className="space-y-2 md:space-y-0 md:space-x-4 md:flex">
             {roles.map((role) => (
               <RadioGroup.Option
                 key={role.name}
@@ -34,7 +34,7 @@ export default function AuthRoleSelection({
                     ? "bg-green-600 bg-opacity-75 text-white"
                     : "bg-gray-200 "
                 }
-                  relative flex cursor-pointer rounded-sm px-5 py-4 shadow-md focus:outline-none h-48 w-60`}
+                  relative flex mx-auto cursor-pointer rounded-sm px-5 py-4 shadow-md focus:outline-none h-48 w-60`}
               >
                 {({ checked }) => (
                   <>

@@ -9,10 +9,10 @@ const Layout = ({ children, user }) => {
     setNavbar(!navbar);
   };
 
-  console.log('username from auth layout',user.name);
+  console.log('username from auth layout', user.name);
   return (
     <div className="flex">
-      <SideBar navbar={navbar} />
+      <SideBar navbar={navbar} toggleNavbar={toggleNavbar} />
       <div
         className="content-container md:pl-64 flex flex-col 
     bg-gray-300 dark:bg-gray-700
@@ -21,7 +21,7 @@ const Layout = ({ children, user }) => {
     overflow-hidden"
       >
         <TopNavigation toggleNavbar={toggleNavbar} />
-        <main className="content-list min-h-screen p-2" onClick={toggleNavbar}>
+        <main className="content-list min-h-screen p-2">
           <h1 className="text-ceter text-2xl font-bold">Content List</h1>
           {children}
         </main>
