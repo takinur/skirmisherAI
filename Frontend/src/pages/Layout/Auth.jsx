@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import SideBar from "../../components/Sidebar";
 import TopNavigation from "../../components/TopNav";
 
-const Layout = ({ children, user }) => {
+const Layout = ({ children }) => {
   const [navbar, setNavbar] = useState(false);
 
   const toggleNavbar = () => {
     setNavbar(!navbar);
   };
 
-  console.log('username from auth layout', user.name);
   return (
     <div className="flex">
       <SideBar navbar={navbar} toggleNavbar={toggleNavbar} />

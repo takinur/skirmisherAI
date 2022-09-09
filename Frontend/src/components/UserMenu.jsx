@@ -1,30 +1,36 @@
-import { Popover, Transition } from '@headlessui/react'
-// import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import { FaChevronDown } from 'react-icons/fa'
-import { Fragment } from 'react'
+import { Fragment } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-const solutions = [
-  {
-    name: 'Profile',
-    description: 'View and modify your profile',
-    href: '##',
-    icon: IconOne,
-  },
-  {
-    name: 'Setting',
-    description: 'Change your password and other settings',
-    href: '##',
-    icon: IconTwo,
-  },
-  {
-    name: 'Help',
-    description: 'Get help with using the platform',
-    href: '##',
-    icon: IconThree,
-  },
-]
+import { Popover, Transition } from "@headlessui/react";
+import { FaChevronDown } from "react-icons/fa";
+import { logout, reset } from "../features/auth/authSlice";
 
 export default function UserMenu() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  //TODO: Add a logout button
+  const menuItems = [
+    {
+      name: "Profile",
+      description: "View and modify your profile",
+      href: "##",
+      icon: IconOne,
+    },
+    {
+      name: "Setting",
+      description: "Change your password and other settings",
+      href: "##",
+      icon: IconTwo,
+    },
+    {
+      name: "Help",
+      description: "Get help with using the platform",
+      href: "##",
+      icon: IconThree,
+    },
+  ];
+
   return (
     <div className="max-w-sm px-4">
       <Popover className="relative">
@@ -32,12 +38,14 @@ export default function UserMenu() {
           <>
             <Popover.Button
               className={`
-                ${open ? '' : 'text-opacity-90'}
-                group inline-flex items-center rounded-md bg-green-700 px-3 py-2 text-base font-medium text-white hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75`}
+                ${open ? "" : "text-opacity-90"}
+                group inline-flex items-center rounded-md bg-green-700 px-3 py-2 text-base font-medium text-white hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-200 focus-visible:ring-opacity-75`}
             >
-              <span>{'Paul Steve Panakkal'.split(' ').slice(0, -1).join(' ')}</span>
+              <span>
+                {"Paul Steve Panakkal".split(" ").slice(0, -1).join(" ")}
+              </span>
               <FaChevronDown
-                className={`${open ? '' : 'text-opacity-70'}
+                className={`${open ? "" : "text-opacity-70"}
                   ml-2 h-5 w-5 text-teal-400 transition duration-150 ease-in-out group-hover:text-opacity-80`}
                 aria-hidden="true"
               />
@@ -54,7 +62,7 @@ export default function UserMenu() {
               <Popover.Panel className="absolute left-1/2 z-10 mt-3 w-64 max-w-sm -translate-x-1/2 md:ml-7 md:-translate-x-2/3 transform px-4 sm:px-0 lg:max-w-3xl">
                 <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                   <div className="relative grid gap-8 bg-white p-7 ">
-                    {solutions.map((item) => (
+                    {menuItems.map((item) => (
                       <a
                         key={item.name}
                         href={item.href}
@@ -75,9 +83,7 @@ export default function UserMenu() {
                     ))}
                   </div>
                   <div className="bg-gray-50 p-4">
-                    <button
-                      className="flow-root rounded-md px-2 py-2 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                    >
+                    <button className="flow-root rounded-md px-2 py-2 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50">
                       <span className="flex items-center">
                         <span className="text-sm font-medium text-gray-900">
                           Sign out
@@ -95,7 +101,7 @@ export default function UserMenu() {
         )}
       </Popover>
     </div>
-  )
+  );
 }
 
 function IconOne() {
@@ -128,7 +134,7 @@ function IconOne() {
         strokeWidth="2"
       />
     </svg>
-  )
+  );
 }
 
 function IconTwo() {
@@ -154,7 +160,7 @@ function IconTwo() {
         strokeWidth="2"
       />
     </svg>
-  )
+  );
 }
 
 function IconThree() {
@@ -174,5 +180,5 @@ function IconThree() {
       <rect x="29" y="16" width="2" height="20" fill="#FB923C" />
       <rect x="33" y="12" width="2" height="24" fill="#FB923C" />
     </svg>
-  )
+  );
 }
