@@ -1,20 +1,38 @@
 import React from "react";
 import ClassNames from "classnames";
 
-const SideBar = ({navbar}) => {
-    console.log('from sidebar' , navbar);
+const SideBar = ({ navbar, toggleNavbar }) => {
+  console.log("from sidebar", navbar);
   return (
-    <aside className={ClassNames('z-30 fixed top-0 left-0 flex-shrink-0 min-h-screen w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block'
-    , navbar ? 'block' : 'hidden'
-    )}
+    <aside
+      className={ClassNames(
+        "z-30 fixed top-0 left-0 flex-shrink-0 min-h-screen w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block",
+        navbar ? "block" : "hidden"
+      )}
     >
       <div className="py-4 text-gray-500 dark:text-gray-400">
-        <a
-          className="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200"
-          href="#"
-        >
-          SkirmisherAI
-        </a>
+        <div className="w-full flex justify-between pr-2">
+          <a
+            className="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200"
+            href="#"
+          >
+            SkirmisherAI
+          </a>
+          <svg onClick={toggleNavbar}
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
+            />
+          </svg>
+        </div>
         <ul className="mt-6">
           <li className="relative px-6 py-3">
             <a
@@ -212,6 +230,5 @@ const SideBar = ({navbar}) => {
     </aside>
   );
 };
-
 
 export default SideBar;
