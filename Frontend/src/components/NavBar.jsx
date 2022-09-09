@@ -74,19 +74,12 @@ export default function Navbar() {
               </Link>
             </div>
             <div className="toggle md:hidden">
-              <button onClick={() => setNavbar(!navbar)}>
-                <svg
-                  className="h-6 w-6 fill-current text-black dark:text-white"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-              </button>
+              <div className="wrapper flex">
+                <div className="mr-4 mt-[2px]">
+                  <ThemeIcon />
+                </div>
+                {mobileNav()}
+              </div>
               <Transition
                 show={navbar}
                 enter="transform transition ease duration-[500ms]"
@@ -127,6 +120,17 @@ export default function Navbar() {
                     </li>
                   ))}
                   <li>
+                    <NavLink
+                      to="/login"
+                      className="my-4 inline-block font-bold mt-8 dark:text-white"
+                      style={({ isActive }) => ({
+                        color: isActive ? "green" : "",
+                      })}
+                    >
+                      Login
+                    </NavLink>
+                  </li>
+                  <li>
                     <div className="flex items-center justify-center w-full mt-6">
                       {user ? (
                         <Link
@@ -136,9 +140,12 @@ export default function Navbar() {
                           MY DASHBOARD{" "}
                         </Link>
                       ) : (
-                        <button className="mt-2 py-1 px-6 text-[#7510F7] dark:text-slate-100 dark:border-slate-200 rounded-full border-2 border-[#7510F7] shadow-lg block hover:text-white md:inline-block hover:bg-[#7510F7]">
-                          Talk to us
-                        </button>
+                        <Link
+                          to="signup"
+                          className="mt-2 py-1 px-6 text-[#7510F7] dark:text-slate-100 dark:border-slate-200 rounded-full border-2 border-[#7510F7] shadow-lg block hover:text-white md:inline-block hover:bg-[#7510F7]"
+                        >
+                          Sign Up
+                        </Link>
                       )}
                     </div>
                   </li>
@@ -190,7 +197,9 @@ export default function Navbar() {
                     <li
                       className={classNames(
                         "items-center justify-center m-auto hover:text-emerald-600",
-                        atTop ? "text-slate-800" : "text-slate-50"
+                        atTop
+                          ? "text-slate-800 dark:text-slate-50"
+                          : "text-slate-50"
                       )}
                     >
                       <NavLink
@@ -207,7 +216,9 @@ export default function Navbar() {
                         to="/signup"
                         className={classNames(
                           "-mt-1 py-2 px-6 text-sm font-semibold rounded-full border-2 border-[#7510F7] shadow-md block hover:text-white md:inline-block hover:bg-[#7510F7]",
-                          atTop ? "text-[#7510F7]" : "text-slate-50"
+                          atTop
+                            ? "text-[#7510F7] dark:text-slate-50"
+                            : "text-slate-50"
                         )}
                       >
                         Sign Up
@@ -222,6 +233,41 @@ export default function Navbar() {
       </nav>
     </header>
   );
+
+  function mobileNav() {
+    return (
+      <button onClick={() => setNavbar(!navbar)}>
+        {!navbar ? (
+          <svg
+            className="h-6 w-6 fill-current text-black dark:text-white"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        ) : (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25"
+            />
+          </svg>
+        )}
+      </button>
+    );
+  }
 }
 
 const ThemeIcon = () => {
