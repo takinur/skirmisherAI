@@ -12,14 +12,18 @@ const ProtectedRoute = () => {
   const { user, authToken } = useSelector((state) => state.auth);
   //Automatically authenticate user if token is present
   useEffect(() => {
-    if (authToken) {
+    if (authToken && !user) {
       dispatch(getUserDetails());
     }
   }, [authToken, dispatch]);
+
+  //TODO: Add a loading screen
+
+
   // show unauthorized screen if no user is found in redux store
-  if (!user ) {
+  if (!user) {
     return (
-      <div className='h-screen bg-green-600 text-center'>
+      <div className='h-screen bg-gray-200 text-center'>
         <Navbar />
         <h1>Unauthorized :(</h1>
         <span>
