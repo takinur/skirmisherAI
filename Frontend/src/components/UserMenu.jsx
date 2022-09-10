@@ -9,7 +9,14 @@ import { logout, reset } from "../features/auth/authSlice";
 export default function UserMenu() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   //TODO: Add a logout button
+  const Logout = () => {
+    dispatch(logout());
+    dispatch(reset());
+    navigate("/");
+  };
+
   const menuItems = [
     {
       name: "Profile",
@@ -83,7 +90,7 @@ export default function UserMenu() {
                     ))}
                   </div>
                   <div className="bg-gray-50 p-4">
-                    <button className="flow-root rounded-md px-2 py-2 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50">
+                    <button onClick={Logout} className="flow-root rounded-md px-2 py-2 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50">
                       <span className="flex items-center">
                         <span className="text-sm font-medium text-gray-900">
                           Sign out
