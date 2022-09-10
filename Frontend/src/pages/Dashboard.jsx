@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { CandidateDashboard } from "./Layout/Candidate";
-import { EmployerDashboard } from "./Layout/Employer";
+import { CandidateDashboard } from "./Candidate";
+import { EmployerDashboard } from "./Employer";
 
 import AuthLayout from "./Layout/Auth";
 

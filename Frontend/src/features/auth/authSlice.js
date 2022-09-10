@@ -68,7 +68,8 @@ export const getUserDetails = createAsyncThunk(
   async (arg, { getState, thunkAPI }) => {
     // get user data from store
     const { auth } = getState();
-    if (auth.authToken) {
+    if (auth.authToken && !auth.user) {
+      console.log("authToken", auth.authToken);
       try {
         const data = await authService.getUserDetails(auth.authToken);
         return data;
