@@ -26,7 +26,7 @@ export const EmployerDashboard = () => {
 
   return (
     <div className="h-full">
-      <h2>Hi, i am from dashboard index page.</h2>
+      <h2>Hi, i am from dashboard index page. Designation{empProfile.designation}</h2>
     </div>
   );
 };
