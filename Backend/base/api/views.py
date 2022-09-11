@@ -68,6 +68,28 @@ class EmployerProfileView(APIView):
     # parser_classes = (MultiPartParser, FormParser)
     
     # def perform_create(self, serializer):
+    
+    def get_object(self, user_id):
+        '''
+        Helper method to get object by id
+        '''
+        try:
+            return EmployerProfile.objects.get(user_id=user_id)
+        except EmployerProfile.DoesNotExist:
+            return None
+    
+    # Retrive profile by user id
+    def get(self, request, *args, **kwargs):
+        user_id = kwargs['user_id']
+        profile = self.get_object(user_id)
+        if profile is not None:
+            serializer = EmployerProfileSerializer(profile)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        
+        return Response(status=status.HTTP_400_BAD_REQUEST, data={'message': 'Profile not found'})
+        
+        
+    
     def post(self, request, *args, **kwargs):
         # Create profile with given data
         data = request.data
