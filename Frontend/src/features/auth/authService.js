@@ -1,4 +1,4 @@
-import { axiosAuthInstance, axiosInstance } from "../../hooks/axiosInstance";
+import { axiosAuthInstance, axiosInstance } from "../../api/axiosInstance";
 
 // Register user
 const register = async (userData) => {
