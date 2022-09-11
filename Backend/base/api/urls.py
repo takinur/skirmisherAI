@@ -18,5 +18,5 @@ urlpatterns = [
     path('auth/token/refresh/', TokenRefreshView.as_view()),
     path('auth/token/verify/', TokenVerifyView.as_view()),
     
-    path('employer/', views.EmployerProfileView.as_view()),
+    path('account/employer/', views.EmployerProfileView.as_view()),
 ]

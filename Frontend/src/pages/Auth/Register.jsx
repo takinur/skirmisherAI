@@ -10,7 +10,7 @@ import classNames from "classnames";
 import Checkbox from "../../components/Checkbox";
 import AuthRoleSelection from "../../components/AuthRoleSelection";
 import ButtonSecondary from "../../components/ButtonSecondary";
-import Header from "./Header";
+import Header from "../../components/Header";
 
 const roles = [
   {

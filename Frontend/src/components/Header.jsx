@@ -1,81 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { logout, reset, getUserDetails  } from "../features/auth/authSlice";
-// import { logout, reset, getUserDetails } from "../features/auth/authSlice";
-import { useDispatch, useSelector } from "react-redux";
-// import { DatePicker } from "antd";
-// import "antd/dist/antd.css";
-import { useAxios } from "../hooks/useAxios";
-import Navbar from "./NavBar";
+import React from 'react'
+import { Link } from 'react-router-dom'
 
-export const Header = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const { user, authToken } = useSelector((state) => state.auth);
-  const [userDetails, setUserDetails] = useState({});
-
-  const API = useAxios();
-
-
-  const onLogout = () => {
-    dispatch(logout());
-    dispatch(reset());
-    navigate("/");
-  };
-
-  // const getUserInfo = async () => {
-  //   const response = await API.get("auth/user/");
-  //   if (response.status === 200) {
-  //     setUserDetails(response.data);
-  //   }
-  // };
-  // console.log(userDetails);
-  // useEffect(() => {
-  //   getUserInfo();
-  // } , []);
-
-  //  console.log(authToken);
-  useEffect(() => {
-    if (authToken) {
-      dispatch(getUserDetails());
-    }
-  }, [authToken, dispatch]);
-
+const Header = ({children}) => {
   return (
-    // <header className="header">
-    //   <ul>
-    //     {user ? (
-    //       <li>
-    //         <button className="btn" onClick={onLogout}>
-    //           Logout
-    //         </button>
+    <header className="header-sr">
+        <nav className="navbar h-16 py-4 md:top-0 bg-zinc-50 md:left-0 w-full z-[999] md:fixed opacity-100 md:transition-all duration-300 ease-in-out">
+          <div className="container px-4 sm:px-8 lg:px-16 xl:px-20 mx-auto max-w-screen-2xl">
+            <div className="header-wrapper flex items-center justify-between">
+              <div className="header-logo w-12">
+                <Link to="/">
+                  <img src="" alt="Logo" className="bg-cover" />
+                </Link>
+              </div>
+              <div className="navbar hidden md:block">
+                <ul className="flex space-x-8 font-semibold">
+                  <li>
+                   {children}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+  )
+}
 
-    //         <p>
-    //           {user ? `Logged in as ${user.email}` : "You're not logged in"}
-    //         </p>
-    //       </li>
-    //     ) : (
-    //       <>
-    //         <li>
-    //           <NavLink to="/login">Login</NavLink>
-    //         </li>
-    //         <li>
-    //           <NavLink to="/register">Register</NavLink>
-    //         </li>
-    //       </>
-    //     )}
-    //     <li>
-    //       <NavLink to="/about">About</NavLink>
-    //     </li>
-    //     <li>
-    //       <NavLink to="/contact">Contact</NavLink>
-    //     </li>
-    //   </ul>
-    // </header>
-    <header className="header-area">
-      {/* <Navbar user={user} onLogout={onLogout}  /> Logged in will have diffrent Nav */}
-      <Navbar />
-    </header>
-  );
-};
+export default Header

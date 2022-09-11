@@ -10,7 +10,7 @@ import classNames from "classnames";
 import AuthenticationCard from "../../components/AuthenticationCard";
 import ButtonDefault from "../../components/ButtonDefault";
 import Checkbox from "../../components/Checkbox";
-import Header from "./Header";
+import Header from "../../components/Header";
 
 export default function Login() {
   const navigate = useNavigate();
