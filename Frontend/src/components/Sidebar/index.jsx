@@ -1,5 +1,6 @@
 import React from "react";
 import ClassNames from "classnames";
+import { Link, NavLink } from "react-router-dom";
 
 const SideBar = ({ navbar, toggleNavbar }) => {
   console.log("from sidebar", navbar);
@@ -12,13 +13,14 @@ const SideBar = ({ navbar, toggleNavbar }) => {
     >
       <div className="py-4 text-gray-500 dark:text-gray-400">
         <div className="w-full flex justify-between pr-2">
-          <a
+          <Link
             className="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200"
-            href="#"
+            to={"/"}
           >
             SkirmisherAI
-          </a>
-          <svg onClick={toggleNavbar}
+          </Link>
+          <svg
+            onClick={toggleNavbar}
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -55,15 +57,20 @@ const SideBar = ({ navbar, toggleNavbar }) => {
             </a>
           </li>
           <li className="relative px-6 py-3">
-            <a
-              className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 text-gray-800 dark:text-gray-100"
-              href="/app/forms"
+            <NavLink
+              to="/user/profile"
               aria-current="page"
+              className={({ isActive }) =>
+                isActive
+                  ? "[--child-opacity:1] side-nav-link"
+                  : " side-nav-link"
+              }
             >
               <span
-                className="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
+                className="opacity-[var(--child-opacity,0)] absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
                 aria-hidden="true"
               ></span>
+
               <svg
                 fill="none"
                 strokeLinecap="round"
@@ -76,8 +83,8 @@ const SideBar = ({ navbar, toggleNavbar }) => {
               >
                 <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
               </svg>
-              <span className="ml-4">Forms</span>
-            </a>
+              <span className="ml-4">Profile</span>
+            </NavLink>
           </li>
           <li className="relative px-6 py-3">
             <a

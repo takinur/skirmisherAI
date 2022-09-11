@@ -17,7 +17,7 @@ const TopNavigation = ({...props}) => {
     <div className="top-navigation">
       <FaBars className="ml-4 mr-auto md:hidden dark:text-zinc-100" onClick={props.toggleNavbar} />
       <HashtagIcon />
-      <h5 className="title-text">{props.title}</h5>
+      <h5 className="title-text">{props.title ? props.title : 'Wellcome to Dashboard'}</h5>
       <ThemeIcon />
       <UserMenu />
       <BellIcon />
