@@ -4,6 +4,10 @@ import { Link, NavLink } from "react-router-dom";
 
 const SideBar = ({ navbar, toggleNavbar }) => {
   console.log("from sidebar", navbar);
+  //TODO: Render menu items from a Array of objects
+  //Change icons
+  //Create profile section
+  //Create fancy animation
   return (
     <aside
       className={ClassNames(
@@ -15,7 +19,7 @@ const SideBar = ({ navbar, toggleNavbar }) => {
         <div className="w-full flex justify-between pr-2">
           <Link
             className="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200"
-            to={"/"}
+            to='/dashboard'
           >
             SkirmisherAI
           </Link>
