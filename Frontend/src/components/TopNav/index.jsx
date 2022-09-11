@@ -11,13 +11,13 @@ import UserMenu from '../UserMenu'
 
 import useDarkMode from "../../hooks/useDarkMode";
 
-const TopNavigation = ({toggleNavbar}) => {
+const TopNavigation = ({...props}) => {
   
   return (
     <div className="top-navigation">
-      <FaBars className="ml-4 mr-auto md:hidden dark:text-zinc-100" onClick={toggleNavbar} />
+      <FaBars className="ml-4 mr-auto md:hidden dark:text-zinc-100" onClick={props.toggleNavbar} />
       <HashtagIcon />
-      <Title />
+      <h5 className="title-text">{props.title}</h5>
       <ThemeIcon />
       <UserMenu />
       <BellIcon />
@@ -42,6 +42,5 @@ const ThemeIcon = () => {
 const BellIcon = () => <FaRegBell size="24" className="top-navigation-icon mr-4" />;
 
 const HashtagIcon = () => <FaHashtag size="20" className="title-hashtag" />;
-const Title = () => <h5 className="title-text">tailwind-css</h5>;
 
 export default TopNavigation;

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SideBar from "../../components/Sidebar";
 import TopNavigation from "../../components/TopNav";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, ...props }) => {
   const [navbar, setNavbar] = useState(false);
 
   const toggleNavbar = () => {
@@ -19,9 +19,9 @@ const Layout = ({ children }) => {
     h-full w-full 
     overflow-hidden"
       >
-        <TopNavigation toggleNavbar={toggleNavbar} />
+        <TopNavigation toggleNavbar={toggleNavbar} title={props.title} />
         <main className="content-list min-h-screen p-2">
-          <h1 className="text-ceter text-2xl font-bold">Content List</h1>
+          <h1 className="text-ceter text-2xl font-bold">Content List {props.title}</h1>
           {children}
         </main>
       </div>
