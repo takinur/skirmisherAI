@@ -6,7 +6,7 @@ export const EmployerDashboard = () => {
   const [userDetails, setUserDetails] = useState({});
 
   const getUserInfo = async () => {
-    const response = await API.get("auth/user/");
+    const response = await API.get("account/employer/",{params:id} );
     if (response.status === 200) {
       setUserDetails(response.data);
     }
@@ -19,7 +19,7 @@ export const EmployerDashboard = () => {
   return (
     <div className="h-full">
       check if user info is present
-      {userDetails ? <p>{userDetails.email}</p> : <p>no user info</p>}
+      {userDetails ? <p>{userDetails.phone}</p> : <p>no user info</p>}
     </div>
   );
 };
