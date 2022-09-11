@@ -13,40 +13,35 @@ const SideBar = ({ navbar, toggleNavbar }) => {
       {
         name: "Dashboard",
         link: "/dashboard",
-        icon: IconOne,
+        icon: HomeIcon,
       },
       {
         name: "Setting",
-        description: "Change your password and other settings",
         link: "/user/setting",
-        icon: IconTwo,
+        icon: ListIcon,
       },
       {
         name: "Help",
-        description: "Get help with using the platform",
         link: "/help",
-        icon: IconThree,
+        icon: IconCards,
       },
     ];
   } else if (user.role === "CANDIDATE") {
     MenuItems = [
       {
         name: "Profile",
-        description: "View and modify your profile",
         href: "/user/profile",
-        icon: IconThree,
+        icon: HomeIcon,
       },
       {
         name: "Setting",
-        description: "Change your password and other settings",
         href: "/user/setting",
-        icon: IconTwo,
+        icon: ListIcon,
       },
       {
         name: "Help",
-        description: "Get help with using the platform",
         href: "/help",
-        icon: IconThree,
+        icon: IconCards,
       },
     ];
   }
@@ -293,7 +288,7 @@ const SideBar = ({ navbar, toggleNavbar }) => {
 
 export default SideBar;
 
-function IconOne() {
+function HomeIcon() {
   return (
     <svg
       fill="none"
@@ -310,7 +305,7 @@ function IconOne() {
   );
 }
 
-function IconTwo() {
+function ListIcon() {
   return (
     <svg
       fill="none"
@@ -327,7 +322,7 @@ function IconTwo() {
   );
 }
 
-function IconThree() {
+function IconCards() {
   return (
     <svg
     fill="none"
