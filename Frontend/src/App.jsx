@@ -1,7 +1,7 @@
 import react from "react";
 import "./index.css";
 import { Routes, Route } from "react-router-dom";
-import ProtectedRoute from "./utils/ProtectedRoute";
+import ProtectedRoute from "./hooks/ProtectedRoute";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { useQuery } from "react-query";
 import { useAxios } from "../../hooks/useAxios";
 
 export const EmployerDashboard = () => {
   const API = useAxios();
   const [userDetails, setUserDetails] = useState({});
+
+  const {isLoading, isFetching, error, data, satus } = useQuery();
+
 
   const getUserInfo = async () => {
     const response = await API.get("account/employer/",{params:id} );
