@@ -47,7 +47,9 @@ export const EmployerDashboard = () => {
 
   return (
     <div className="h-full">
-      check if user info is present
+      <h2>
+        Hi, i am from dashboard index page. 
+      </h2>
     </div>
   );
 };

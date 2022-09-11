@@ -21,7 +21,6 @@ const Layout = ({ children, ...props }) => {
       >
         <TopNavigation toggleNavbar={toggleNavbar} title={props.title} />
         <main className="content-list min-h-screen p-2">
-          <h1 className="text-ceter text-2xl font-bold">Content List {props.title}</h1>
           {children}
         </main>
       </div>
