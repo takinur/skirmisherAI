@@ -14,6 +14,8 @@ import { ContactPage } from "./pages/Contact";
 import Footer from "./components/Footer";
 import Logout from "./pages/Auth/Logout";
 
+import UserProfile from "./pages/Auth/UserProfile";
+
 function App() {
   return (
     <>
@@ -25,6 +27,9 @@ function App() {
         {/* ProtectedRoutes */}
         <Route element={<ProtectedRoute />}>
           <Route path="/about" element={<AboutPage />} />
+        </Route>
+        <Route element={<ProtectedRoute />}>
+          <Route path="/user/profile" element={<UserProfile />} />
         </Route>
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
