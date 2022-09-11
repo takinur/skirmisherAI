@@ -2,7 +2,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import jwtDecode from "jwt-decode";
 import dayjs from "dayjs";
-import { axiosInstance } from "./axiosInstance";
+import { axiosInstance } from "../api/axiosInstance";
 
 export const useAxios = () => {
   const authToken = useSelector((state) => state.auth.authToken);
@@ -38,3 +38,4 @@ export const useAxios = () => {
   }
   return axiosInstance;
 };
+
