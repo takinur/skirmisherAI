@@ -19,4 +19,5 @@ urlpatterns = [
     path('auth/token/verify/', TokenVerifyView.as_view()),
     
     path('account/employer/', views.EmployerProfileView.as_view()),
+    path('account/employer/<int:user_id>', views.EmployerProfileView.as_view()),
 ]
