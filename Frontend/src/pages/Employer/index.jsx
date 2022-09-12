@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "react-query";
-import { useAxios } from "../../hooks/useAxios";
+import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 
 export const EmployerDashboard = () => {
-  const API = useAxios();
+  const API = useAxiosPrivate();
   const [userProfile, setUserProfile] = useState("");
   const id = 188; //Hardcoded for now
 
@@ -26,7 +26,9 @@ export const EmployerDashboard = () => {
 
   return (
     <div className="h-full">
-      <h2>Hi, i am from dashboard index page. Designation{empProfile.designation}</h2>
+      <h2>
+        Hi, i am from dashboard index page. Designation{empProfile.designation}
+      </h2>
     </div>
   );
 };
