@@ -46,7 +46,7 @@ const SideBar = ({ navbar, toggleNavbar }) => {
     ];
   }
 
-  console.table(MenuItems);
+  // console.log(MenuItems);
   // console.log("from sidebar", menu);
   //TODO: Render menu items from a Array of objects
   //Change icons
