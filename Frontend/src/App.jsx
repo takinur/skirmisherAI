@@ -13,6 +13,7 @@ import Dashboard from "./pages/Dashboard";
 import { ContactPage } from "./pages/Contact";
 import Footer from "./components/Footer";
 import Logout from "./pages/Auth/Logout";
+import { NotFound } from "./pages/Error";
 
 import UserProfile from "./pages/Auth/UserProfile";
 
@@ -42,7 +43,7 @@ function App() {
         <Route
           path="*"
           element={
-            <p className="text-red-400 text-7xl">There's nothing here: 404!</p>
+            <NotFound />
           }
         />
       </Routes>
