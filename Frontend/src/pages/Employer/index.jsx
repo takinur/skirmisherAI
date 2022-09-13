@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "react-query";
-import dayjs from "dayjs";
 import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
-
+import { Greeting } from "../../components/Greeting";
+import { useSelector } from "react-redux";
 
 export const EmployerDashboard = () => {
   const API = useAxiosPrivate();
+
+  //User from redux store
+  const { user } = useSelector((state) => state.auth);
+
   const id = 188; //Hardcoded for now
 
   const fetchProfile = async () => {
@@ -24,25 +28,10 @@ export const EmployerDashboard = () => {
   // console.log(userProfile , 'USer Profile')
 
   console.log("From dashindex Data:", empProfile);
-  //Greeting message with dayjs
-  const greeting = () => {
-    const hour = dayjs().hour();
-    if (hour >= 0 && hour < 12) {
-      return "Good Morning";
-    } else if (hour >= 12 && hour < 17) {
-      return "Good Afternoon";
-    } else {
-      return "Good Evening";
-    }
-  };
+
   return (
     <div className="h-full">
-      <h2>
-        Hi, i am from dashboard index page. Designation{empProfile.designation}
-      </h2>
-      <h1>
-      {greeting()}
-      </h1>
+      <Greeting props={user} />
     </div>
   );
 };
