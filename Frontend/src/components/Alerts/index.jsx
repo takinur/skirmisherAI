@@ -1,7 +1,7 @@
 import React from "react";
 import {Link } from "react-router-dom";
 
-export const NoAddionalInfo = ({...props}) => {
+export const NoExInfo = ({...props}) => {
   return (
     <Link
     to={props.to}
