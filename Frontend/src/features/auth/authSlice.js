@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
 
-// initialize userToken from local storage
+// initialize userToken from local storage ~ Update state if local storage changes 
 const authToken = localStorage.getItem("authToken")
   ? JSON.parse(localStorage.getItem("authToken"))
   : null;
-// initialize user from local storage
+// initialize user from session storage
 const user = window.sessionStorage.getItem("user")
   ? JSON.parse(window.sessionStorage.getItem("user"))
   : null;
