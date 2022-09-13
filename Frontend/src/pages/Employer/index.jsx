@@ -3,10 +3,11 @@ import { useQuery } from "react-query";
 import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 import { Greeting } from "../../components/Greeting";
 import { useSelector } from "react-redux";
+import { NoAddionalInfo } from "../../components/Alerts";
 
 export const EmployerDashboard = () => {
   const API = useAxiosPrivate();
-
+  const [profile, setProfile] = useState(null);
   //User from redux store
   const { user } = useSelector((state) => state.auth);
 
@@ -25,15 +26,13 @@ export const EmployerDashboard = () => {
     return res.data;
   }
 
-  // if (isLoading) return <div>Loading...</div>;
-  // if (isError) return <div>Error: {error.message}</div>;
 
   console.log("From dashindex Data:", data);
 
   //Conditional rendering
   const renderProfile = () => {
     if (isLoading) return <div>Loading...</div>;
-    if (isError) return <ProfileNotSet />;
+    if (isError) return <NoAddionalInfo to="/emp/info" text='It seems that you have not provided additional details! ' />;
     // if (data) return <Greeting data={data} />;
   };
 
@@ -63,9 +62,9 @@ const ProfileNotSet = () => {
             </svg>
           </span>
         </div>
-        <span>It seems that you have not provided additional details! </span>
+        <span className="text-base">It seems that you have not provided additional details! </span>
       </div>
-      <span>
+      <span className="text-lg font-thin">
         Lets set it now<span>→</span>
       </span>
     </div>
