@@ -1,14 +1,17 @@
 import { useEffect } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { useSelector } from "react-redux";
-import { axiosAuthInstance as axiosPrivate } from "../api/axiosInstance";
+import {
+  axiosAuthInstance as axiosPrivate,
+  axiosInstance as axios,
+} from "../api/axiosInstance";
 import jwtDecode from "jwt-decode";
 import dayjs from "dayjs";
 
 export const useAxiosPrivate = () => {
   //Token from redux store
   const auth = useSelector((state) => state.auth.authToken);
-  const refresh = useRefreshToken(); //Refresh token function from below
+  const refresh = useRefreshToken(auth); //Refresh token function from below
 
   useEffect(() => {
     const requestIntercept = axiosPrivate.interceptors.request.use(
@@ -45,9 +48,7 @@ export const useAxiosPrivate = () => {
   return axiosPrivate;
 };
 
-const useRefreshToken = () => {
-  const auth = useSelector((state) => state.auth.authToken);
-
+const useRefreshToken = (auth) => {
   const refresh = async () => {
     const decoded = jwtDecode(auth.access);
     const isExpired = dayjs.unix(decoded.exp).diff(dayjs()) < 1;
@@ -56,17 +57,13 @@ const useRefreshToken = () => {
       dayjs.unix(decoded.exp).format("DD-MM-YYYY HH:mm:ss")
     );
 
-
     if (isExpired) {
       console.log("Token expired");
-      const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}auth/token/refresh/`,
-        {
-          refresh: auth.refresh,
-        }
-      );
-      console.log("Refreshed token", response.data);
+      const response = await axios.post("auth/token/refresh/", {
+        refresh: auth.refresh,
+      });
       localStorage.setItem("authToken", JSON.stringify(response.data));
+      //Later set new token in redux store
       return response.data.access;
     }
   };
