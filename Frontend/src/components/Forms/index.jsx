@@ -14,30 +14,16 @@ import { toast } from "react-toastify";
 export const EmpProfileForm = (props) => {
   const API = useAxiosPrivate();
 
-  const [companies, setCompanies] = useState([]);
-  const [selectedCompany, setSelectedCompany] = useState([]);
-
-  const fetchCompanies = async () => {
-    const res = await API.get("/company/");
-
-    if (res.status === 200) {
-      setCompanies(res.data);
-    }
-  };
-
-  useEffect(() => {
-    fetchCompanies();
-  }, []);
-
-  const addMutation = useMutation((data) => API.post("/account/employer/", data));
+  const addMutation = useMutation((data) =>
+    API.post("/account/employer/", data)
+  );
 
   //React hook form
   const { register, handleSubmit } = useForm();
-  
+
   const submitForm = (employee) => {
     //Override form data with user id
     employee.user = props.user.id;
-    employee.organization = selectedCompany.id;
     addMutation.mutate(employee);
   };
 
@@ -49,54 +35,102 @@ export const EmpProfileForm = (props) => {
       setTimeout(() => {
         window.location.reload();
       }, 2000);
-    
     }
+    if (addMutation.error) {
+      console.log(addMutation.error.response.data);
+      let err = addMutation.error.response.data;
+      if (err.company_name && err.company_name[0]) {
+        toast.error("Company name is required.");
+      }
+    }
+  }, [addMutation.isSuccess, addMutation.error]);
 
-  }, [addMutation.isSuccess]);
-
-  if(addMutation.error) return <div className="text-red-400 font-bold">Something went Wrong!</div>
   const isLoading = addMutation.isLoading;
-
-  const addNewCompany = () => {
-    companies.push({ id: companies.length + 1, name: "New Company" });
-    console.log({ companies });
-  };
 
   return (
     <div className="flex flex-col sm:justify-center items-center pt-6 sm:pt-0 ">
-      <div className="w-full sm:max-w-lg mt-6 px-6 py-4 bg-gray-200 shadow-md overflow-hidden sm:rounded-lg">
+      <div className="w-full sm:max-w-2xl mt-6 px-6 py-4 bg-gray-200 shadow-md overflow-hidden sm:rounded-lg">
         <div className="text-center mb-7">
-          <h2 className="text-3xl">Finish confirming the details!</h2>
+          <h2 className="text-3xl">Finish confirming some details!</h2>
         </div>
         <form onSubmit={handleSubmit(submitForm)}>
-          <div>
-            <Label htmlFor="designation">Organization / Company</Label>
-            <SelectDropDown
-              selected={selectedCompany}
-              setSelected={setSelectedCompany}
-              items={companies}
-              addNewItem={addNewCompany}
-            />
+          <div className="wrapper md:flex">
+            <div className="mt-4 mr-2 flex-auto">
+              <Label htmlFor="company_name">Company Name</Label>
+              <Input
+                id="company_name"
+                type="text"
+                className="mt-1 block w-full"
+                {...register("company_name")}
+                required
+                autoFocus
+              />
+            </div>
+            <div className="mt-4 flex-auto">
+              <Label htmlFor="website">Website </Label>
+              <Input
+                id="website"
+                type="text"
+                className="mt-1 block w-full"
+                {...register("website")}
+                required
+              />
+            </div>
           </div>
-          <div className="mt-4">
-            <Label htmlFor="designation">Designation</Label>
+          <div className="mt-4 flex-auto">
+            <Label htmlFor="location">Location </Label>
             <Input
-              id="designation"
+              id="location"
               type="text"
               className="mt-1 block w-full"
-              {...register("designation")}
+              {...register("location")}
               required
-              autoFocus
+            />
+          </div>
+          <div className="wrapper md:flex">
+            <div className="mt-4 mr-2 flex-auto">
+              <Label htmlFor="phone">Phone</Label>
+              <Input
+                id="phone"
+                type="text"
+                className="mt-1 block w-full"
+                {...register("phone")}
+                required
+              />
+            </div>
+            <div className="mt-4 flex-auto">
+              <Label htmlFor="phone">Size</Label>
+              <Input
+                id="size"
+                type="text"
+                className="mt-1 block w-full"
+                {...register("size")}
+                required
+              />
+            </div>
+          </div>
+          <div className="mt-4">
+            <Label htmlFor="slogan">
+              Tagline<span className="ml-1">(Optional)</span>
+            </Label>
+            <Input
+              id="slogan"
+              type="text"
+              placeholder="e.g. We are the best"
+              className="mt-1 block w-full"
+              {...register("slogan")}
             />
           </div>
 
           <div className="mt-4">
-            <Label htmlFor="phone">Phone</Label>
+            <Label htmlFor="about">
+              Other Detials<span className="ml-1">(Optional)</span>
+            </Label>
             <Input
-              id="phone"
+              id="about"
               type="text"
               className="mt-1 block w-full"
-              {...register("phone")}
+              {...register("about")}
               required
             />
           </div>
