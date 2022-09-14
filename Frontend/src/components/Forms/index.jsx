@@ -3,7 +3,7 @@ import classNames from "classnames";
 import Label from "../Label";
 import Input from "../Input";
 import ButtonDefault from "../ButtonDefault";
-import { SelectDropDown } from "../SelectDropdown";
+import { SelectListBox } from "../SelectDropdown";
 
 import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 import { useEffect } from "react";
@@ -11,9 +11,20 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { toast } from "react-toastify";
 
+const compSizes = [
+  {name : ' 10 People or Less'},
+  {name : ' 11-50 People'},
+  {name : ' 51-200 People'},
+  {name : ' 201-500 People'},
+  {name : ' 501-1000 People'},
+  {name : ' More than 1000 People'},
+]
+
+
 export const EmpProfileForm = (props) => {
   const API = useAxiosPrivate();
-
+  const [selectedSize, setSelectedSize] = useState(compSizes[0]);
+  console.log("Selected Size:", selectedSize);
   const addMutation = useMutation((data) =>
     API.post("/account/employer/", data)
   );
@@ -24,6 +35,7 @@ export const EmpProfileForm = (props) => {
   const submitForm = (employee) => {
     //Override form data with user id
     employee.user = props.user.id;
+    employee.company_size = selectedSize.name;
     addMutation.mutate(employee);
   };
 
@@ -87,8 +99,8 @@ export const EmpProfileForm = (props) => {
               required
             />
           </div>
-          <div className="wrapper md:flex">
-            <div className="mt-4 mr-2 flex-auto">
+          <div className="wrapper md:grid grid-cols-2">
+            <div className="mt-4 mr-2">
               <Label htmlFor="phone">Phone</Label>
               <Input
                 id="phone"
@@ -98,15 +110,9 @@ export const EmpProfileForm = (props) => {
                 required
               />
             </div>
-            <div className="mt-4 flex-auto">
+            <div className="mt-4 ">
               <Label htmlFor="phone">Size</Label>
-              <Input
-                id="size"
-                type="text"
-                className="mt-1 block w-full"
-                {...register("size")}
-                required
-              />
+              <SelectListBox items={compSizes} selected={selectedSize} setSelected={setSelectedSize}  />
             </div>
           </div>
           <div className="mt-4">
