@@ -24,7 +24,8 @@ const compSizes = [
 export const EmpProfileForm = (props) => {
   const API = useAxiosPrivate();
   const [selectedSize, setSelectedSize] = useState(compSizes[0]);
-  console.log("Selected Size:", selectedSize);
+
+  
   const addMutation = useMutation((data) =>
     API.post("/account/employer/", data)
   );
