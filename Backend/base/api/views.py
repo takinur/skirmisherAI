@@ -8,8 +8,8 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from .serializers import UserCreateSerializer, MyTokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from ..models import EmployerProfile, Organization
-from .serializers import EmployerProfileSerializer, OrganizationSerializer
+from ..models import EmployerProfile
+from .serializers import EmployerProfileSerializer
 
 # from ml_facade.ResumeExtractor import resume_result_wrapper # Result from extractor
 
@@ -100,22 +100,22 @@ class EmployerProfileView(APIView):
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-class OrganizationView(APIView):
-    # permission_classes = [permissions.IsAuthenticated]
+# class OrganizationView(APIView):
+#     # permission_classes = [permissions.IsAuthenticated]
     
-    def get(self, request, *args, **kwargs):
-        # Get all companies
-        companies = Organization.objects.order_by('name')
-        org = OrganizationSerializer(companies, many=True)
-        return Response(org.data, status=status.HTTP_200_OK)
+#     def get(self, request, *args, **kwargs):
+#         # Get all companies
+#         companies = Organization.objects.order_by('name')
+#         org = OrganizationSerializer(companies, many=True)
+#         return Response(org.data, status=status.HTTP_200_OK)
     
     
-    def post(self, request, *args, **kwargs):
-        data = request.data
-        serializer = OrganizationSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+#     def post(self, request, *args, **kwargs):
+#         data = request.data
+#         serializer = OrganizationSerializer(data=data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
         
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         

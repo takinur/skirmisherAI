@@ -62,8 +62,8 @@ def upload_to(instance, filename):
     # return 'images/{}/{}'.format(instance.user.id, filename)
     return 'images/{filename}'.format(filename=filename)
 
-class Organization(models.Model):
-    name = models.CharField(max_length=80)
+class EmployerProfile(models.Model):
+    company_name = models.CharField(max_length=80)
     slogan = models.CharField(max_length=200, blank=True, default='')
     website = models.URLField(default='', blank=True)
     phone = models.CharField(max_length=20, blank=True, default='')
@@ -73,21 +73,11 @@ class Organization(models.Model):
     size = models.CharField(max_length=40, default='', blank=True)
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
-    
-    def __str__(self):
-        return self.name
-    
-class EmployerProfile(models.Model):
-    organization = models.ForeignKey(Organization, on_delete=models.CASCADE, null=True, blank=True)
-    phone = models.CharField(max_length=20, blank=True, default='')
-    designation = models.CharField(max_length=80, default='')
-    created_at = models.DateTimeField(auto_now=True)
-    updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
     user = models.OneToOneField(UserAccount, on_delete=models.CASCADE)
     
-    
-    def __str__(self) -> str:
-        return super().__str__()
+    def __str__(self):
+        return self.company_name
+
 
 
 class Skills(models.Model):
