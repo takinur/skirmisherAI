@@ -7,11 +7,14 @@ import { SelectDropDown } from "../SelectDropdown";
 
 import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useMutation } from "react-query";
 
-export const EmpProfileForm = ({ handleSubmit, submitForm, register, isLoading, selectedCompany, setSelectedCompany }) => {
+export const EmpProfileForm = (props) => {
   const API = useAxiosPrivate();
 
   const [companies, setCompanies] = useState([]);
+  const [selectedCompany, setSelectedCompany] = useState([]);
 
   const fetchCompanies = async () => {
     const res = await API.get("/company/");
@@ -25,8 +28,26 @@ export const EmpProfileForm = ({ handleSubmit, submitForm, register, isLoading, 
     fetchCompanies();
   }, []);
 
+  const addMutation = useMutation((data) => API.post("/account/employer/", data));
 
-  console.log('selected ', selectedCompany);
+  // async function createProfile() {
+  //   const res = await API.post("/account/employer/", data);
+  //   return res.data;
+  // }
+
+  //React hook form
+  const { register, handleSubmit } = useForm();
+  
+  const submitForm = (employee) => {
+    //Override form data with user id
+    employee.user = props.user.id;
+    employee.organization = selectedCompany.id;
+    console.log("Data:", employee);
+    addMutation.mutate(employee);
+  };
+
+  if(addMutation.error) return <div>Something went Wrong!</div>
+  const isLoading = addMutation.isLoading;
 
   const addNewCompany = () => {
     companies.push({ id: companies.length + 1, name: "New Company" });
@@ -42,7 +63,12 @@ export const EmpProfileForm = ({ handleSubmit, submitForm, register, isLoading, 
         <form onSubmit={handleSubmit(submitForm)}>
           <div>
             <Label htmlFor="designation">Organization / Company</Label>
-            <SelectDropDown selected={selectedCompany} setSelected={setSelectedCompany} items={companies} addNewItem={addNewCompany}/>
+            <SelectDropDown
+              selected={selectedCompany}
+              setSelected={setSelectedCompany}
+              items={companies}
+              addNewItem={addNewCompany}
+            />
           </div>
           <div className="mt-4">
             <Label htmlFor="designation">Designation</Label>
