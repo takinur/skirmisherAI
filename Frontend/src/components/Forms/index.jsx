@@ -9,6 +9,7 @@ import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
+import { toast } from "react-toastify";
 
 export const EmpProfileForm = (props) => {
   const API = useAxiosPrivate();
@@ -40,8 +41,20 @@ export const EmpProfileForm = (props) => {
     addMutation.mutate(employee);
   };
 
-  if(addMutation.error) return <div>Something went Wrong!</div>
-  if(addMutation.isSuccess) return <div>Profile Updated!</div>
+  //Navigate to Profile
+  useEffect(() => {
+    if (addMutation.isSuccess) {
+      toast.success("Profile Updated");
+      //reload page after 2 seconds
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    
+    }
+
+  }, [addMutation.isSuccess]);
+
+  if(addMutation.error) return <div className="text-red-400 font-bold">Something went Wrong!</div>
   const isLoading = addMutation.isLoading;
 
   const addNewCompany = () => {
