@@ -48,8 +48,12 @@ class UserCreateSerializer(serializers.ModelSerializer):
 
 
 class EmployerProfileSerializer(serializers.ModelSerializer):
-    image_url = serializers.ImageField(required=False)
+    # image_url = serializers.ImageField(required=False)
     class Meta:
         model = EmployerProfile
         fields = '__all__'
-        
+
+class OrganizationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EmployerProfile
+        fields = ('organization',)
