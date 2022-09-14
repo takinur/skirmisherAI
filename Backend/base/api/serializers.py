@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 # import model from parent folder
-from ..models import EmployerProfile
+from ..models import EmployerProfile, Organization
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -55,5 +55,9 @@ class EmployerProfileSerializer(serializers.ModelSerializer):
 
 class OrganizationSerializer(serializers.ModelSerializer):
     class Meta:
-        model = EmployerProfile
-        fields = ('organization',)
+        model = Organization
+        fields = '__all__' 
+           
+        # Write only fields            
+        extra_kwargs = {'updated_at': {'write_only': True}}
+        
