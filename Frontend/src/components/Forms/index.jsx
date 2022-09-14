@@ -5,30 +5,38 @@ import Input from "../Input";
 import ButtonDefault from "../ButtonDefault";
 import { SelectDropDown } from "../SelectDropdown";
 
-const companies =[
-  {
-    id: 1, name: 'Facebook'
-  },
-  {
-    id: 2, name: 'Google'
-  },
-  {
-    id: 3, name: 'Amazon'
-  },
-  {
-    id: 4, name: 'Microsoft'
-  },
-]
+import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
+import { useEffect } from "react";
 
-export const EmpProfileForm = ({handleSubmit, submitForm, register, isLoading}) => {
-  const [selectedCompany, setSelectedCompany] = useState(companies[0])
+export const EmpProfileForm = ({ handleSubmit, submitForm, register, isLoading }) => {
+  const API = useAxiosPrivate();
 
-  console.log(selectedCompany)
+  const [companies, setCompanies] = useState([]);
+
+  const fetchCompanies = async () => {
+    const res = await API.get("/company/");
+
+    if (res.status === 200) {
+      setCompanies(res.data);
+    }
+  };
+
+  useEffect(() => {
+    fetchCompanies();
+  }, []);
+
+  const [selectedCompany, setSelectedCompany] = useState([]);
+  // console.log(companies[0], 'Companies');
+  // console.log(testcompanies[0], 'Custom');
+
+  console.log('selected ', selectedCompany);
+
+
 
   const addNewCompany = () => {
-    companies.push({id: companies.length + 1, name: 'New Company'})
-    console.log({companies})
-  }
+    companies.push({ id: companies.length + 1, name: "New Company" });
+    console.log({ companies });
+  };
 
   return (
     <div className="flex flex-col sm:justify-center items-center pt-6 sm:pt-0 ">
