@@ -23,7 +23,9 @@ export const Profile = (props) => {
     return res.data;
   }
 
-  if (isLoading) return <div>Loading...</div>;
+  console.log(data)
+
+  if (isLoading) return <Loading />;
   if (isError) return <EmpProfileForm user={props.user} />;
-  if (data) return <div>Profile</div>;
+  if (data) return <div>Profile { data.designation}</div>;
 };
