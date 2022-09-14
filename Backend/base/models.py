@@ -78,7 +78,7 @@ class Organization(models.Model):
         return self.name
     
 class EmployerProfile(models.Model):
-    Organization = models.ForeignKey(Organization, on_delete=models.CASCADE, null=True, blank=True)
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE, null=True, blank=True)
     phone = models.CharField(max_length=20, blank=True, default='')
     designation = models.CharField(max_length=80, default='')
     created_at = models.DateTimeField(auto_now=True)
