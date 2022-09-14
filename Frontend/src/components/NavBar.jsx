@@ -18,7 +18,7 @@ export default function Navbar() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (authToken) {
+    if (authToken && !user) {
       dispatch(getUserDetails());
     }
   }, [authToken, dispatch]);
@@ -38,6 +38,8 @@ export default function Navbar() {
       windowHeight >= 50 ? setAtTop(true) : setAtTop(false);
     }
   };
+
+  console.log(user);
 
   const navItems = [
     {
