@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import AuthLayout from "../Layout/Auth";
 import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
@@ -10,6 +10,8 @@ export default function UserProfile() {
   const { user } = useSelector((state) => state.auth);
 
   const API = useAxiosPrivate();
+
+  const [selectedCompany, setSelectedCompany] = useState([]);
 
   //React query to fetch profile
   const { isLoading, isError, error, data } = useQuery(
@@ -29,6 +31,8 @@ export default function UserProfile() {
   const { register, handleSubmit } = useForm();
 
   const submitForm = (data) => {
+    //Override the company id with the selected company
+    data.organization = selectedCompany.id;
     console.log(data);
   };
 
@@ -40,6 +44,8 @@ export default function UserProfile() {
           submitForm={submitForm}
           register={register}
           isLoading={isLoading}
+          selectedCompany={selectedCompany}
+          setSelectedCompany={setSelectedCompany}
         />
       );
   };

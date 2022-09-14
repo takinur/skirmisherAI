@@ -52,6 +52,7 @@ class EmployerProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = EmployerProfile
         fields = '__all__'
+        extra_kwargs = {'user': {'write_only': True}}
 
 class OrganizationSerializer(serializers.ModelSerializer):
     class Meta:
