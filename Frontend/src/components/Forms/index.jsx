@@ -30,11 +30,6 @@ export const EmpProfileForm = (props) => {
 
   const addMutation = useMutation((data) => API.post("/account/employer/", data));
 
-  // async function createProfile() {
-  //   const res = await API.post("/account/employer/", data);
-  //   return res.data;
-  // }
-
   //React hook form
   const { register, handleSubmit } = useForm();
   
@@ -42,11 +37,11 @@ export const EmpProfileForm = (props) => {
     //Override form data with user id
     employee.user = props.user.id;
     employee.organization = selectedCompany.id;
-    console.log("Data:", employee);
     addMutation.mutate(employee);
   };
 
   if(addMutation.error) return <div>Something went Wrong!</div>
+  if(addMutation.isSuccess) return <div>Profile Updated!</div>
   const isLoading = addMutation.isLoading;
 
   const addNewCompany = () => {
