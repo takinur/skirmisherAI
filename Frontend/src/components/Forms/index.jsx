@@ -8,7 +8,7 @@ import { SelectDropDown } from "../SelectDropdown";
 import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 import { useEffect } from "react";
 
-export const EmpProfileForm = ({ handleSubmit, submitForm, register, isLoading }) => {
+export const EmpProfileForm = ({ handleSubmit, submitForm, register, isLoading, selectedCompany, setSelectedCompany }) => {
   const API = useAxiosPrivate();
 
   const [companies, setCompanies] = useState([]);
@@ -25,13 +25,8 @@ export const EmpProfileForm = ({ handleSubmit, submitForm, register, isLoading }
     fetchCompanies();
   }, []);
 
-  const [selectedCompany, setSelectedCompany] = useState([]);
-  // console.log(companies[0], 'Companies');
-  // console.log(testcompanies[0], 'Custom');
 
   console.log('selected ', selectedCompany);
-
-
 
   const addNewCompany = () => {
     companies.push({ id: companies.length + 1, name: "New Company" });
