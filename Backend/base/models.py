@@ -65,7 +65,7 @@ def upload_to(instance, filename):
 class EmployerProfile(models.Model):
     company_name = models.CharField(max_length=80)
     slogan = models.CharField(max_length=200, blank=True, default='')
-    website = models.URLField(default='', blank=True)
+    website = models.URLField(default='', blank=True,)
     phone = models.CharField(max_length=20, blank=True, default='')
     location = models.CharField(max_length=100, default='')
     about = models.TextField(default='', blank=True)
