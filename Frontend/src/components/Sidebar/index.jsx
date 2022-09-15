@@ -29,18 +29,18 @@ const SideBar = ({ navbar, toggleNavbar }) => {
   } else if (user.role === "CANDIDATE") {
     MenuItems = [
       {
-        name: "Profile",
-        href: "/user/profile",
+        name: "Dashboard",
+        link: "/dashboard",
         icon: HomeIcon,
       },
       {
         name: "Setting",
-        href: "/user/setting",
+        link: "/user/setting",
         icon: ListIcon,
       },
       {
         name: "Help",
-        href: "/help",
+        link: "/help",
         icon: IconCards,
       },
     ];
@@ -50,8 +50,7 @@ const SideBar = ({ navbar, toggleNavbar }) => {
   // console.log("from sidebar", menu);
   //TODO: Render menu items from a Array of objects
   //Change icons
-  //Create profile section
-  //Create fancy animation
+
   return (
     <aside
       className={ClassNames(

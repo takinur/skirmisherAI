@@ -144,10 +144,10 @@ class CandidateProfile(models.Model):
     phone = models.CharField(max_length=20, blank=True, default='')
     location = models.CharField(max_length=100, default='')
     resume = models.ForeignKey(Resume, on_delete=models.CASCADE, null=True, blank=True)
-    user = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
+    user = models.OneToOneField(UserAccount, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
     
     def __str__(self) -> str:
-        return super().name #FIXME: name is not defined probably
+        return super().designation #FIXME: name is not defined probably
 

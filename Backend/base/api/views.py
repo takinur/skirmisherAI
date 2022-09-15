@@ -5,10 +5,10 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 from rest_framework.parsers import MultiPartParser, FormParser
 
-from .serializers import UserCreateSerializer, MyTokenObtainPairSerializer
+from .serializers import CandidateProfileSerializer, UserCreateSerializer, MyTokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from ..models import EmployerProfile
+from ..models import CandidateProfile, EmployerProfile
 from .serializers import EmployerProfileSerializer
 
 # from ml_facade.ResumeExtractor import resume_result_wrapper # Result from extractor
@@ -99,23 +99,41 @@ class EmployerProfileView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class CandidateProfileView(APIView):
+    # permission_classes = [permissions.IsAuthenticated]
+    # queryset = EmployerProfile.objects.order_by('-created_at')
+    # serializer_class = EmployerProfileSerializer
+    # parser_classes = (MultiPartParser, FormParser)
     
-# class OrganizationView(APIView):
-#     # permission_classes = [permissions.IsAuthenticated]
+    # def perform_create(self, serializer):
     
-#     def get(self, request, *args, **kwargs):
-#         # Get all companies
-#         companies = Organization.objects.order_by('name')
-#         org = OrganizationSerializer(companies, many=True)
-#         return Response(org.data, status=status.HTTP_200_OK)
+    def get_object(self, user_id):
+        '''
+        Helper method to get object by id
+        '''
+        try:
+            return CandidateProfile.objects.get(user_id=user_id)
+        except CandidateProfile.DoesNotExist:
+            return None
     
-    
-#     def post(self, request, *args, **kwargs):
-#         data = request.data
-#         serializer = OrganizationSerializer(data=data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+    # Retrive profile by user id
+    def get(self, request, *args, **kwargs):
+        user_id = kwargs['user_id']
+        profile = self.get_object(user_id)
+        if profile is not None:
+            serializer = CandidateProfileSerializer(profile)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_400_BAD_REQUEST, data={'message': 'Sadge, Profile not found'})
         
+        
+    
+    def post(self, request, *args, **kwargs):
+        # Create profile with given data
+        data = request.data
+        serializer = CandidateProfileSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -22,4 +22,7 @@ urlpatterns = [
     # EMP PROFILE
     path('account/employer/', views.EmployerProfileView.as_view()),
     path('account/employer/<int:user_id>', views.EmployerProfileView.as_view()),
+    # Cand PROFILE
+    path('account/candidate/', views.CandidateProfileView.as_view()),
+    path('account/candidate/<int:user_id>', views.CandidateProfileView.as_view()),
 ]
