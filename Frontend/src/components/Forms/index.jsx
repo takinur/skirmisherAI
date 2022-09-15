@@ -50,11 +50,13 @@ export const EmpProfileForm = (props) => {
       }, 2000);
     }
     if (addMutation.error) {
-      console.log(addMutation.error.response.data);
       let err = addMutation.error.response.data;
-      if (err.company_name && err.company_name[0]) {
-        toast.error("Company name is required.");
-      }
+
+      if(err.company_name) toast.error("Company name is required.");
+      if(err.website) toast.error(err.website[0]);
+
+      console.log('Error updating Profile', err);
+      
     }
   }, [addMutation.isSuccess, addMutation.error]);
 
@@ -84,6 +86,7 @@ export const EmpProfileForm = (props) => {
               <Input
                 id="website"
                 type="text"
+                placeholder="https://"
                 className="mt-1 block w-full"
                 {...register("website")}
                 required
