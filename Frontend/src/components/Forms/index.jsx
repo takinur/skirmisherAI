@@ -36,7 +36,7 @@ export const EmpProfileForm = (props) => {
   const submitForm = (employee) => {
     //Override form data with user id
     employee.user = props.user.id;
-    employee.company_size = selectedSize.name;
+    employee.size = selectedSize.name;
     addMutation.mutate(employee);
   };
 
