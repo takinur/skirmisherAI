@@ -140,7 +140,7 @@ class Resume(models.Model):
         return super().__str__()    
     
 class CandidateProfile(models.Model):
-    designation = models.CharField(max_length=80, null=True)
+    designation = models.CharField(max_length=80, blank=True, default='')
     phone = models.CharField(max_length=20, blank=True, default='')
     location = models.CharField(max_length=100, default='')
     resume = models.ForeignKey(Resume, on_delete=models.CASCADE, null=True, blank=True)

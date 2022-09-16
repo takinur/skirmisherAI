@@ -4,7 +4,7 @@ import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 
 import { EmpProfileForm } from "../../components/Forms";
 import { Loading } from "../../components/Loading";
-import { FaBalanceScale, FaBuilding, FaGlobe, FaMapMarkerAlt, FaPhone, FaPhoneAlt, FaUsers } from "react-icons/fa";
+import { FaBuilding, FaGlobe, FaMapMarkerAlt,  FaPhoneAlt, FaUsers } from "react-icons/fa";
 
 export const Profile = (props) => {
   const API = useAxiosPrivate();
