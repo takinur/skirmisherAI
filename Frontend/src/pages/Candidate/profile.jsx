@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 
-import { EmpProfileForm } from "../../components/Forms";
+import { CandProfileForm } from "../../components/Forms";
 import { Loading } from "../../components/Loading";
 import { FaBuilding, FaGlobe, FaMapMarkerAlt,  FaPhoneAlt, FaUsers } from "react-icons/fa";
 
@@ -10,20 +10,20 @@ export const Profile = (props) => {
   const API = useAxiosPrivate();
 
   //React query to fetch profile
-  const { isLoading, isError, data } = useQuery("empProfile", fetchProfile, {
+  const { isLoading, isError, error, data } = useQuery("candProfile", fetchProfile, {
     refetchOnWindowFocus: false,
     retry: 0,
   });
   //Async function to fetch profile
   async function fetchProfile() {
-    const res = await API.get(`/account/employer/${props.user.id}`);
+    const res = await API.get(`/account/candidate/${props.user.id}`);
     return res.data;
   }
 
   console.log(data);
 
   if (isLoading) return <Loading />;
-  if (isError) return <EmpProfileForm user={props.user} />;
+  if (isError && error.request.status === 400) return <CandProfileForm user={props.user} />;
   //Return detailed profile view
   if (data) return DetailedProfileView(data, props.user);
 };
