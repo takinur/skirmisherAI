@@ -55,7 +55,9 @@ class EmployerProfileSerializer(serializers.ModelSerializer):
         extra_kwargs = {'user': {'write_only': True}}
 
 
+
 class CandidateProfileSerializer(serializers.ModelSerializer):
+        
     resume_file = serializers.FileField(
         max_length = None,
         allow_empty_file = False,

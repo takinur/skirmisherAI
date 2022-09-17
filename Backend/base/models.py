@@ -66,7 +66,7 @@ class EmployerProfile(models.Model):
     company_name = models.CharField(max_length=80)
     slogan = models.CharField(max_length=200, blank=True, default='')
     website = models.URLField(default='', blank=True,)
-    phone = models.CharField(max_length=20, blank=True, default='')
+    phone = models.CharField(max_length=20, blank=True, default='') #HACK: Remove me
     location = models.CharField(max_length=100, default='')
     about = models.TextField(default='', blank=True)
     logo = models.ImageField(upload_to=upload_to, default='', blank=True) #FIXME: image upload
@@ -77,6 +77,25 @@ class EmployerProfile(models.Model):
     
     def __str__(self):
         return self.company_name
+
+
+
+# Resume Upload
+def upload_resume_to(instance, filename):
+    return 'resumes/{filename}'.format(filename=filename)
+class CandidateProfile(models.Model):
+    designation = models.CharField(max_length=80, blank=True, default='')
+    phone = models.CharField(max_length=20, blank=True, default='')
+    location = models.CharField(max_length=100, default='')
+    # resume = models.ForeignKey(Resume, on_delete=models.CASCADE, null=True, blank=True)
+    resume_file = models.FileField(upload_to=upload_resume_to, default='', blank=True)
+    user = models.OneToOneField(UserAccount, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
+    
+    def __str__(self) -> str:
+        return super().resume #FIXME: Resume is not defined probably
+
 
 
 
@@ -100,7 +119,7 @@ class Experience(models.Model):
     name = models.CharField(max_length=80)
     details = models.TextField(default='', blank=True)
     range = models.CharField(max_length=100, default='', blank=True)
-    total = models.IntegerField(default=0)
+    total = models.IntegerField(default=0) #Might need to change
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
     
@@ -122,36 +141,24 @@ class Projects(models.Model):
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
         
-# class Resume(models.Model):    
-#     file = models.FileField(upload_to=upload_to, default='', blank=True)
-#     name = models.CharField(max_length=80, default='')
-#     email = models.EmailField(max_length=255, unique=False, blank=True, default='')
-#     phone = models.CharField(max_length=20, blank=True, default='')
-#     skills = models.ForeignKey(Skills, on_delete=models.CASCADE, null=True, blank=True)
-#     education = models.ForeignKey(Education, on_delete=models.CASCADE, null=True, blank=True)
-#     experince = models.ForeignKey(Experience, on_delete=models.CASCADE, null=True, blank=True)
-#     social = models.ForeignKey(Social, on_delete=models.CASCADE, null=True, blank=True)
-#     projects = models.ForeignKey(Projects, on_delete=models.CASCADE, null=True, blank=True)
-#     text = models.TextField(default='', blank=True)
-#     created_at = models.DateTimeField(auto_now=True)
-#     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
+class Resume(models.Model):    
+    CandidateProfile = models.ForeignKey(CandidateProfile, on_delete=models.CASCADE)
     
-#     def __str__(self) -> str:
-#         return super().__str__()    
-
-# Resume Upload
-def upload_resume_to(instance, filename):
-    return 'resumes/{filename}'.format(filename=filename)
-class CandidateProfile(models.Model):
-    designation = models.CharField(max_length=80, blank=True, default='')
+    resume_url = models.CharField(max_length=255, default='', blank=True)
+    name = models.CharField(max_length=80, default='')
+    email = models.EmailField(max_length=255, unique=False, blank=True, default='')
     phone = models.CharField(max_length=20, blank=True, default='')
-    location = models.CharField(max_length=100, default='')
-    # resume = models.ForeignKey(Resume, on_delete=models.CASCADE, null=True, blank=True)
-    resume_file = models.FileField(upload_to=upload_resume_to, default='', blank=True)
-    user = models.OneToOneField(UserAccount, on_delete=models.CASCADE)
+    
+    skills = models.ForeignKey(Skills, on_delete=models.CASCADE, null=True, blank=True)
+    education = models.ForeignKey(Education, on_delete=models.CASCADE, null=True, blank=True)
+    experince = models.ForeignKey(Experience, on_delete=models.CASCADE, null=True, blank=True)
+    social = models.ForeignKey(Social, on_delete=models.CASCADE, null=True, blank=True)
+    projects = models.ForeignKey(Projects, on_delete=models.CASCADE, null=True, blank=True)
+    
+    text = models.TextField(default='', blank=True)
+    
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
     
     def __str__(self) -> str:
-        return super().resume #FIXME: Resume is not defined probably
-
+        return super().__str__()    

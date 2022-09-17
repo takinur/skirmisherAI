@@ -123,6 +123,7 @@ export const CandProfileForm = (props) => {
               onupdatefiles={setFiles}
               allowMultiple={false}
               credits={false}
+              acceptedFileTypes={["pdf"]}
               name="resume"
               labelIdle='Drag & Drop your resume or <span class="filepond--label-action">Browse</span>'
             />
