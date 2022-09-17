@@ -10,6 +10,9 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { toast } from "react-toastify";
 
+import { axiosAuthInstance } from "../../api/axiosInstance";
+import axios from "axios";
+
 // Import FilePond
 import { FilePond } from "react-filepond";
 import "filepond/dist/filepond.min.css";
@@ -35,7 +38,7 @@ export const CandProfileForm = (props) => {
 
   const addMutation = useMutation(
     async (data) =>
-      await API.post("/account/candidate/", data, {
+      await axios.post("http://localhost:8000/api/account/candidate/", data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -49,14 +52,14 @@ export const CandProfileForm = (props) => {
   const submitForm = (data) => {
     data.user = props.user.id;
     data.designation = selectedDesig.name;
-    data.resume = files[0]?.file;
+    data.resume_file = files[0]?.file;
 
-    console.log("uploaded file", files[0]);
+    console.log("uploaded file", files[0].file);
 
     addMutation.mutate(data);
   };
 
-  console.log("server respone", addMutation.data);
+  console.log("server respone", addMutation);
 
   //Navigate to Profile
   useEffect(() => {

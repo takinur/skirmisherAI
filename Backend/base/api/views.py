@@ -102,8 +102,8 @@ class EmployerProfileView(APIView):
 class CandidateProfileView(APIView):
     # permission_classes = [permissions.IsAuthenticated]
     # queryset = EmployerProfile.objects.order_by('-created_at')
-    # serializer_class = EmployerProfileSerializer
-    # parser_classes = (MultiPartParser, FormParser)
+    serializer_class = CandidateProfileSerializer
+    parser_classes = (MultiPartParser, FormParser)
     
     # def perform_create(self, serializer):
     
@@ -131,6 +131,9 @@ class CandidateProfileView(APIView):
     def post(self, request, *args, **kwargs):
         # Create profile with given data
         data = request.data
+        print(data)
+        # resume_file = data.get('resume')
+        # data.
         serializer = CandidateProfileSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
