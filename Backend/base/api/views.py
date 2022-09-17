@@ -10,7 +10,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from .serializers import CandidateProfileSerializer, UserCreateSerializer, MyTokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from ..models import CandidateProfile, EmployerProfile
+from ..models import CandidateProfile, EmployerProfile, Resume
 from .serializers import EmployerProfileSerializer
 
 # Machine Leaning Model from 
@@ -136,16 +136,49 @@ class CandidateProfileView(APIView):
         data = request.data
         serializer = CandidateProfileSerializer(data=data)
         if serializer.is_valid():
-            serializer.save()    
+            # serializer.save()    
             # Remove URL till second slash
-            resume = serializer.data['resume_file'].split('/', 2)[2]
+            # resume = serializer.data['resume_file'].split('/', 2)[2]
+            
+            # For Debugging
+            resume = '/resources/resumes/T_007.pdf'.split('/', 2)[2]
+            
             # TODO:Check for NULL here
             # EH?: Add try catch for extractor class
              # Parser Class for resume file
             extracted_data = ResumeExtractor.resume_result_wrapper(os.path.join(settings.MEDIA_ROOT, resume)) 
             print(extracted_data)
-            # TODO: Save extracted data to database
-            # 
+            # Save extracted data to database
+            # skills = extracted_data['skills']
+            # education = extracted_data['education']
+            try: 
+                if extracted_data['name'] is not None:
+                    name = extracted_data['name']
+                    
+                email = extracted_data['email']
+                
+                phone = extracted_data['phone']
+                if extracted_data['phone'] is None:
+                    phone = '0000000000'
+                total_exp = extracted_data['total_experience']
+                
+            
+                savedData = Resume.objects.create(
+                    # candidate_profile_id=serializer.data['id'],
+                    # resume_url = serializer.data['resume_file'],
+                    # Hardcoded for now
+                    CandidateProfile_id=24,
+                    resume_url = resume,
+                    name = name,
+                    email = email,
+                    phone = phone,
+                    
+                    # education=education,
+                )
+            
+                print(savedData.name)
+            except Exception as e:
+                print('Error', e)
             
             return Response(serializer.data, status=status.HTTP_201_CREATED)
             
