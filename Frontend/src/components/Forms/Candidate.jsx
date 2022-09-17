@@ -4,12 +4,15 @@ import Label from "../Label";
 import Input from "../Input";
 import ButtonDefault from "../ButtonDefault";
 import { SelectListBox } from "../SelectDropdown";
-
 import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { toast } from "react-toastify";
+
+// Import FilePond
+import { FilePond } from "react-filepond";
+import "filepond/dist/filepond.min.css";
 
 const designations = [
   { name: "Student" },
@@ -27,29 +30,33 @@ const designations = [
 
 export const CandProfileForm = (props) => {
   const API = useAxiosPrivate();
+
   const [selectedDesig, setSelectedDesig] = useState(designations[0]);
 
-  const addMutation = useMutation((data) =>
-  console.log('data', data)
-    // API.post("/account/candidate/", data)
+  const addMutation = useMutation(
+    async (data) =>
+      await API.post("/account/candidate/", data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
   );
 
   //React hook form
   const { register, handleSubmit } = useForm();
+  const [files, setFiles] = useState([]); // FilePond state
 
   const submitForm = (data) => {
-    console.log('before form data', data)
-    const formData = new FormData();
-    formData.append("resume", data.resume[0]);
-    formData.append("phone", data.phone);
-    formData.append("designation", selectedDesig.name);
-    formData.append("location", data.location);
-    // data.resume = data.reusme[0]
+    data.user = props.user.id;
+    data.designation = selectedDesig.name;
+    data.resume = files[0]?.file;
 
-    console.log('form data', formData)
+    console.log("uploaded file", files[0]);
 
-    addMutation.mutate(formData);
+    addMutation.mutate(data);
   };
+
+  console.log("server respone", addMutation.data);
 
   //Navigate to Profile
   useEffect(() => {
@@ -111,43 +118,14 @@ export const CandProfileForm = (props) => {
             />
           </div>
           <div className="mt-4">
-            <div className="flex justify-center items-center w-full">
-              <label
-                htmlFor="dropzone-file"
-                className="flex flex-col justify-center items-center w-full h-64 bg-gray-50 rounded-lg border-2 border-gray-300 border-dashed cursor-pointer dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
-              >
-                <div className="flex flex-col justify-center items-center pt-5 pb-6">
-                  <svg
-                    aria-hidden="true"
-                    className="mb-3 w-10 h-10 text-gray-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                    ></path>
-                  </svg>
-                  <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                    <span className="font-semibold">Click to upload</span> or drag
-                    and drop
-                  </p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
-                    SVG, PNG, JPG or GIF (MAX. 800x400px)
-                  </p>
-                </div>
-                <input
-                  {...register("resume")}
-                  id="dropzone-file"
-                  type="file"
-                  className="hidden"
-                />
-              </label>
-            </div>
+            <FilePond
+              files={files}
+              onupdatefiles={setFiles}
+              allowMultiple={false}
+              credits={false}
+              name="resume"
+              labelIdle='Drag & Drop your resume or <span class="filepond--label-action">Browse</span>'
+            />
           </div>
           <div className="mt-4 flex justify-end">
             <ButtonDefault
