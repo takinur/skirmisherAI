@@ -134,18 +134,19 @@ class CandidateProfileView(APIView):
     def post(self, request, *args, **kwargs):
         # Create profile with given data
         data = request.data
-        # resume_file = data.get('resume')
         serializer = CandidateProfileSerializer(data=data)
         if serializer.is_valid():
-            # serializer.save()                      
-            # CRUCIAL: Save the object before using it in the ML model
-            # resume = str(serializer.data.resume_file)
-            resume = '/resources/resumes/T_001.pdf'
-          # Parser Class for resume file
-            extracted_data = ResumeExtractor.resume_result_wrapper(os.path.join(settings.MEDIA_ROOT, str(resume))) #FIXME: Key dosent exist
-            # extracted_data = parser.get_extracted_data()
+            serializer.save()    
+            # Remove URL till second slash
+            resume = serializer.data['resume_file'].split('/', 2)[2]
+            # TODO:Check for NULL here
+            # EH?: Add try catch for extractor class
+             # Parser Class for resume file
+            extracted_data = ResumeExtractor.resume_result_wrapper(os.path.join(settings.MEDIA_ROOT, resume)) 
             print(extracted_data)
+            # TODO: Save extracted data to database
+            # 
             
-            return Response(extracted_data, status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
             
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

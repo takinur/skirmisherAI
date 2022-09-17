@@ -311,9 +311,9 @@ file_url = 'assets/test_resumes/T_001.pdf'
 
 # explicit function to return the text from file
 def resume_result_wrapper(resume):
-    resume_path = os.path.join(os.path.dirname(__file__), resume)
+    # resume_path = os.path.join(os.path.dirname(__file__), resume)
     
-    return resume
+    # return resume
     parsed_result = resumeExtraction(resume).get_extracted_data()
     return parsed_result
 
