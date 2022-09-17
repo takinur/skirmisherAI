@@ -312,8 +312,8 @@ file_url = 'assets/test_resumes/T_001.pdf'
 
 # explicit function to return the text from file
 def resume_result_wrapper(resume):
-    parser = resumeExtraction(resume).get_extracted_data()
-    return parser
+    parsed_result = resumeExtraction(resume).get_extracted_data()
+    return parsed_result
 
 
 # Take Argument from command line and Extract resume

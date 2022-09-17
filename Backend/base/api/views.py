@@ -1,3 +1,5 @@
+import os
+from django.conf import settings
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import permissions, status
@@ -11,7 +13,8 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from ..models import CandidateProfile, EmployerProfile
 from .serializers import EmployerProfileSerializer
 
-# from ml_facade.ResumeExtractor import resume_result_wrapper # Result from extractor
+# Machine Leaning Model from 
+from ..ml_facade import ResumeExtractor
 
 
 # Token Obtain Pair View
@@ -134,7 +137,14 @@ class CandidateProfileView(APIView):
         # resume_file = data.get('resume')
         serializer = CandidateProfileSerializer(data=data)
         if serializer.is_valid():
-            serializer.save()
+            # serializer.save()                      
+            # CRUCIAL: Save the object before using it in the ML model
+          # Parser Class for resume file
+            parser = ResumeExtractor(os.path.join(settings.MEDIA_ROOT, str(serializer.data.resume))) #FIXME: Key dosent exist
+            extracted_data = parser.get_extracted_data()
+            
+            print(extracted_data)
+            
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        
+            
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

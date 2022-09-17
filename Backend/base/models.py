@@ -153,5 +153,5 @@ class CandidateProfile(models.Model):
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
     
     def __str__(self) -> str:
-        return super().resume #FIXME: name is not defined probably
+        return super().resume #FIXME: Resume is not defined probably
 
