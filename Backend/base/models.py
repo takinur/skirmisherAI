@@ -60,7 +60,7 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
 # Explicitly set upload path and filename
 def upload_to(instance, filename):
     # return 'images/{}/{}'.format(instance.user.id, filename)
-    return 'images/{filename}'.format(filename=filename)
+    return 'resources/{filename}'.format(filename=filename)
 
 class EmployerProfile(models.Model):
     company_name = models.CharField(max_length=80)
@@ -122,28 +122,29 @@ class Projects(models.Model):
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
         
-class Resume(models.Model):    
-    file = models.FileField(upload_to=upload_to, default='', blank=True)
-    name = models.CharField(max_length=80, default='')
-    email = models.EmailField(max_length=255, unique=False, blank=True, default='')
-    phone = models.CharField(max_length=20, blank=True, default='')
-    skills = models.ForeignKey(Skills, on_delete=models.CASCADE, null=True, blank=True)
-    education = models.ForeignKey(Education, on_delete=models.CASCADE, null=True, blank=True)
-    experince = models.ForeignKey(Experience, on_delete=models.CASCADE, null=True, blank=True)
-    social = models.ForeignKey(Social, on_delete=models.CASCADE, null=True, blank=True)
-    projects = models.ForeignKey(Projects, on_delete=models.CASCADE, null=True, blank=True)
-    text = models.TextField(default='', blank=True)
-    created_at = models.DateTimeField(auto_now=True)
-    updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
+# class Resume(models.Model):    
+#     file = models.FileField(upload_to=upload_to, default='', blank=True)
+#     name = models.CharField(max_length=80, default='')
+#     email = models.EmailField(max_length=255, unique=False, blank=True, default='')
+#     phone = models.CharField(max_length=20, blank=True, default='')
+#     skills = models.ForeignKey(Skills, on_delete=models.CASCADE, null=True, blank=True)
+#     education = models.ForeignKey(Education, on_delete=models.CASCADE, null=True, blank=True)
+#     experince = models.ForeignKey(Experience, on_delete=models.CASCADE, null=True, blank=True)
+#     social = models.ForeignKey(Social, on_delete=models.CASCADE, null=True, blank=True)
+#     projects = models.ForeignKey(Projects, on_delete=models.CASCADE, null=True, blank=True)
+#     text = models.TextField(default='', blank=True)
+#     created_at = models.DateTimeField(auto_now=True)
+#     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
     
-    def __str__(self) -> str:
-        return super().__str__()    
+#     def __str__(self) -> str:
+#         return super().__str__()    
     
 class CandidateProfile(models.Model):
     designation = models.CharField(max_length=80, blank=True, default='')
     phone = models.CharField(max_length=20, blank=True, default='')
     location = models.CharField(max_length=100, default='')
-    resume = models.ForeignKey(Resume, on_delete=models.CASCADE, null=True, blank=True)
+    # resume = models.ForeignKey(Resume, on_delete=models.CASCADE, null=True, blank=True)
+    resume_file = models.FileField(upload_to=upload_to, default='', blank=True)
     user = models.OneToOneField(UserAccount, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
