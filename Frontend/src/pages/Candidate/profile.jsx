@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 
-import { CandProfileForm } from "../../components/Forms";
+import { CandProfileForm } from "../../components/Forms/Candidate";
 import { Loading } from "../../components/Loading";
 import { FaBuilding, FaGlobe, FaMapMarkerAlt,  FaPhoneAlt, FaUsers } from "react-icons/fa";
 
