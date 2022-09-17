@@ -46,8 +46,7 @@ class resumeExtraction(object):
             'summary',
             'leadership'
         ]
-        # Skills File
-        self.data = pd.read_csv('assets/data/skillsDB.csv')
+        self.data = pd.read_csv(os.path.join(os.path.dirname(__file__), 'skillsDB.csv')) #EH?: SKILLS FILE PATH
         self.SKILLS_DB = list(self.data.columns.values)
         # Natural Language and vocabulary
         self.nlp = spacy.load('en_core_web_sm')
@@ -312,11 +311,24 @@ file_url = 'assets/test_resumes/T_001.pdf'
 
 # explicit function to return the text from file
 def resume_result_wrapper(resume):
+    resume_path = os.path.join(os.path.dirname(__file__), resume)
+    
+    return resume
     parsed_result = resumeExtraction(resume).get_extracted_data()
     return parsed_result
 
 
-# Take Argument from command line and Extract resume
+
+
+'''
+Crucial for Debugging and Testing
+
+---Take Argument from command line and Extract resume
+---python ResumeExtractor.py -f "assets/test_resumes/T_001.pdf"
+
+'''
+
+
 if __name__ == '__main__':
     # Length of arguments
     args_len = len(sys.argv)
@@ -337,9 +349,3 @@ if __name__ == '__main__':
     jdata = json.dumps(data, cls=SetEncoder)
 
     print_json(jdata)
-
-'''
-TODO:Extract Text from DOC format
-
-
-'''
