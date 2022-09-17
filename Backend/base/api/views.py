@@ -131,9 +131,7 @@ class CandidateProfileView(APIView):
     def post(self, request, *args, **kwargs):
         # Create profile with given data
         data = request.data
-        print(data)
         # resume_file = data.get('resume')
-        # data.
         serializer = CandidateProfileSerializer(data=data)
         if serializer.is_valid():
             serializer.save()

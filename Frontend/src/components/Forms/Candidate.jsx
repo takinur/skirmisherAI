@@ -10,8 +10,6 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { toast } from "react-toastify";
 
-import { axiosAuthInstance } from "../../api/axiosInstance";
-import axios from "axios";
 
 // Import FilePond
 import { FilePond } from "react-filepond";
@@ -38,7 +36,7 @@ export const CandProfileForm = (props) => {
 
   const addMutation = useMutation(
     async (data) =>
-      await axios.post("http://localhost:8000/api/account/candidate/", data, {
+      await API.post("http://localhost:8000/api/account/candidate/", data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -54,7 +52,6 @@ export const CandProfileForm = (props) => {
     data.designation = selectedDesig.name;
     data.resume_file = files[0]?.file;
 
-    console.log("uploaded file", files[0].file);
 
     addMutation.mutate(data);
   };

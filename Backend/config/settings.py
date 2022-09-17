@@ -179,9 +179,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 # Actual Directory user files go to
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'mediafiles')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'resources')
 # Url used to access the media
-MEDIA_UR = '/media/'
+MEDIA_URL = '/resources/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
