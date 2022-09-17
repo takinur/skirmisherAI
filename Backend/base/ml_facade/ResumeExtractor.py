@@ -55,7 +55,7 @@ class resumeExtraction(object):
         self.__details = {
             'name': None,
             'email': None,
-            'mobile_number': None,
+            'phone': None,
             'skills': None,
             'education': None,
             'projects': None,
@@ -101,7 +101,7 @@ class resumeExtraction(object):
         raw_text = self.__text_raw
         # print (raw_text)
         self.__details['name'] = self.__extract_name(text)
-        self.__details['mobile_number'] = self.__extract_mobile_number(text)
+        self.__details['phone'] = self.__extract_mobile_number(text)
         self.__details['email'] = self.__extract_email(text)
         self.__details['skills'] = self.__extract_skills(text)
         self.__details['social_links'] = self.__extract_social_links(text)
