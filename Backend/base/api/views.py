@@ -139,12 +139,13 @@ class CandidateProfileView(APIView):
         if serializer.is_valid():
             # serializer.save()                      
             # CRUCIAL: Save the object before using it in the ML model
+            # resume = str(serializer.data.resume_file)
+            resume = '/resources/resumes/T_001.pdf'
           # Parser Class for resume file
-            parser = ResumeExtractor(os.path.join(settings.MEDIA_ROOT, str(serializer.data.resume))) #FIXME: Key dosent exist
-            extracted_data = parser.get_extracted_data()
-            
+            extracted_data = ResumeExtractor.resume_result_wrapper(os.path.join(settings.MEDIA_ROOT, str(resume))) #FIXME: Key dosent exist
+            # extracted_data = parser.get_extracted_data()
             print(extracted_data)
             
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(extracted_data, status=status.HTTP_201_CREATED)
             
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
