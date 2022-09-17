@@ -56,6 +56,11 @@ class EmployerProfileSerializer(serializers.ModelSerializer):
 
 
 class CandidateProfileSerializer(serializers.ModelSerializer):
+    resume_file = serializers.FileField(
+        max_length = None,
+        allow_empty_file = False,
+        # write_only = True
+    )
     class Meta:
         model = CandidateProfile
         fields = '__all__'
