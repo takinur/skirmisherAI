@@ -60,7 +60,7 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
 # Explicitly set upload path and filename
 def upload_to(instance, filename):
     # return 'images/{}/{}'.format(instance.user.id, filename)
-    return 'resources/{filename}'.format(filename=filename)
+    return 'images/{filename}'.format(filename=filename)
 
 class EmployerProfile(models.Model):
     company_name = models.CharField(max_length=80)
@@ -138,17 +138,20 @@ class Projects(models.Model):
     
 #     def __str__(self) -> str:
 #         return super().__str__()    
-    
+
+# Resume Upload
+def upload_resume_to(instance, filename):
+    return 'resumes/{filename}'.format(filename=filename)
 class CandidateProfile(models.Model):
     designation = models.CharField(max_length=80, blank=True, default='')
     phone = models.CharField(max_length=20, blank=True, default='')
     location = models.CharField(max_length=100, default='')
     # resume = models.ForeignKey(Resume, on_delete=models.CASCADE, null=True, blank=True)
-    resume_file = models.FileField(upload_to=upload_to, default='', blank=True)
+    resume_file = models.FileField(upload_to=upload_resume_to, default='', blank=True)
     user = models.OneToOneField(UserAccount, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
     
     def __str__(self) -> str:
-        return super().designation #FIXME: name is not defined probably
+        return super().resume #FIXME: name is not defined probably
 
