@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 # import model from parent folder
-from ..models import CandidateProfile, EmployerProfile
+from ..models import CandidateProfile, EmployerProfile, Skill
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -56,6 +56,11 @@ class EmployerProfileSerializer(serializers.ModelSerializer):
 
 
 
+class SkillSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Skill
+        fields = '__all__'
+        
 class CandidateProfileSerializer(serializers.ModelSerializer):
         
     resume_file = serializers.FileField(

@@ -10,7 +10,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from .serializers import CandidateProfileSerializer, UserCreateSerializer, MyTokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from ..models import CandidateProfile, EmployerProfile, Resume
+from ..models import CandidateProfile, EmployerProfile, Resume, Skill
 from .serializers import EmployerProfileSerializer
 
 # Machine Leaning Model from 
@@ -147,7 +147,6 @@ class CandidateProfileView(APIView):
             # EH?: Add try catch for extractor class
              # Parser Class for resume file
             extracted_data = ResumeExtractor.resume_result_wrapper(os.path.join(settings.MEDIA_ROOT, resume)) 
-            print(extracted_data)
             # Save extracted data to database
             # skills = extracted_data['skills']
             # education = extracted_data['education']
@@ -163,20 +162,29 @@ class CandidateProfileView(APIView):
                 total_exp = extracted_data['total_experience']
                 
             
-                savedData = Resume.objects.create(
-                    # candidate_profile_id=serializer.data['id'],
-                    # resume_url = serializer.data['resume_file'],
-                    # Hardcoded for now
-                    CandidateProfile_id=24,
-                    resume_url = resume,
-                    name = name,
-                    email = email,
-                    phone = phone,
+                # savedData = Resume.objects.create(
+                #     # candidate_profile_id=serializer.data['id'],
+                #     # resume_url = serializer.data['resume_file'],
+                #     # Hardcoded for now
+                #     CandidateProfile_id=24,
+                #     resume_url = resume,
+                #     name = name,
+                #     email = email,
+                #     phone = phone,
                     
-                    # education=education,
-                )
+                #     # education=education,
+                # )
+                
+                # # Save every skill in database
+                # for skill in extracted_data['skills']:
+                #     Skill.objects.create(
+                #         name = skill,
+                #         resume = savedData
+                #         )
             
-                print(savedData.name)
+                # print(savedData.id)
+                # serializer.save()    
+
             except Exception as e:
                 print('Error', e)
             
