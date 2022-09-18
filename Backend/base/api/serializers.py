@@ -58,16 +58,12 @@ class EmployerProfileSerializer(serializers.ModelSerializer):
 class SkillSerializer(serializers.ModelSerializer):
     class Meta:
         model = Skill
-        fields = '__all__'
+        fields = ['id', 'name', 'updated_at']
+        extra_kwargs = {'candidate': {'write_only': True}}
 
 class CandidateProfileSerializer(serializers.ModelSerializer):
     skills = SkillSerializer(many=True, read_only=True)    
         
-    # resume_file = serializers.FileField(
-    #     max_length = None,
-    #     allow_empty_file = False,
-    #     # write_only = True
-    # )
     class Meta:
         model = CandidateProfile
         fields = ['id', 'resume_file', 'phone', 'designation', 'location', 'user', 'skills']
@@ -85,14 +81,13 @@ class CandidateProfileSerializer(serializers.ModelSerializer):
 class FileSerializer(serializers.Serializer):
     file = serializers.FileField(max_length = None,
         allow_empty_file = False,
-        # write_only = True
+        write_only = True
         )
     
     class Meta:
         fields = ['file']    
     
-    def create(self, validated_data):
-        
+    def create(self, validated_data):        
         file = FileUpload.objects.create(**validated_data)
         
         return file
