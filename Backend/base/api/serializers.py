@@ -62,7 +62,7 @@ class SkillSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
 class CandidateProfileSerializer(serializers.ModelSerializer):
-    skills = SkillSerializer(many=True, required=False)    
+    skills = SkillSerializer(many=True, read_only=True)    
         
     resume_file = serializers.FileField(
         max_length = None,
@@ -71,7 +71,7 @@ class CandidateProfileSerializer(serializers.ModelSerializer):
     )
     class Meta:
         model = CandidateProfile
-        fields = '__all__'
+        fields = ['id', 'resume_file', 'phone', 'designation', 'skills']
         extra_kwargs = {'updated_at': {'write_only': True}}
         
 

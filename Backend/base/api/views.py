@@ -115,8 +115,7 @@ class CandidateProfileView(APIView):
         Helper method to get object by id
         '''
         try:
-            # return CandidateProfile.objects.get(user_id=user_id)
-            return CandidateProfile.objects.select_related('skill_id').get(user_id=user_id)
+            return CandidateProfile.objects.get(user_id=user_id)            
         except CandidateProfile.DoesNotExist:
             return None
         # Return profile with skills
