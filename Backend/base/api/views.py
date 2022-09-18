@@ -115,9 +115,12 @@ class CandidateProfileView(APIView):
         Helper method to get object by id
         '''
         try:
-            return CandidateProfile.objects.get(user_id=user_id)
+            # return CandidateProfile.objects.get(user_id=user_id)
+            return CandidateProfile.objects.select_related('skill_id').get(user_id=user_id)
         except CandidateProfile.DoesNotExist:
             return None
+        # Return profile with skills
+        # CandidateProfile.objects.prefetch_related('skills').get(user_id=user_id)
     
     # Retrive profile by user id
     def get(self, request, *args, **kwargs):
@@ -183,10 +186,16 @@ class CandidateProfileView(APIView):
                 #         )
             
                 # print(savedData.id)
+                # ADD skills to Data
+                # data['skills']  = extracted_data['skills']
+                serializer.save(skills= extracted_data['skills'])
+                # data['name'] = extracted_data['name']
+                # # data.push(extracted_data['skills'])
+                # # print(data['name'])
                 # serializer.save()    
 
             except Exception as e:
-                print('Error', e)
+                print(e)
             
             return Response(serializer.data, status=status.HTTP_201_CREATED)
             
