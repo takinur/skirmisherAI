@@ -158,7 +158,7 @@ class Resume(models.Model):
 
 class Skill(models.Model):
     name = models.CharField(max_length=80)
-    candidate = models.ForeignKey(CandidateProfile, on_delete=models.CASCADE)
+    candidate = models.ForeignKey(CandidateProfile, on_delete=models.CASCADE, related_name='skills')
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
     
