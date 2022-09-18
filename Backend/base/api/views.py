@@ -134,26 +134,19 @@ class CandidateProfileView(APIView):
         
     
     def post(self, request, *args, **kwargs):
-        # Create profile with given data
+        # Create profile data from request
         data = request.data
         serializer = CandidateProfileSerializer(data=data)
         if serializer.is_valid():
-            print('SSS', serializer._validated_data)
-            print('Nope', data)
-            # serializer.save()    #Save first to get id
             # Remove URL to second slash
-            resume = serializer.data['resume_file'].split('/', 2)[2]
-            
+            resume = data['resume_file'].split('/', 2)[2]
+            print('Resume URL', resume)
             # For Debugging
             # resume = '/resources/resumes/T_007.pdf'.split('/', 2)[2]
             
-            # TODO:Check for NULL here
-            # EH?: Add try catch for extractor class
              # Parser Class for resume file
             extracted_data = ResumeExtractor.resume_result_wrapper(os.path.join(settings.MEDIA_ROOT, resume)) 
             # Save extracted data to database
-            # skills = extracted_data['skills']
-            # education = extracted_data['education']
             try: 
                 if extracted_data['name'] is not None:
                     name = extracted_data['name']
@@ -165,35 +158,16 @@ class CandidateProfileView(APIView):
                     phone = '0000000000'
                 total_exp = extracted_data['total_experience']
                 
-            
-                # savedData = Resume.objects.create(
-                #     # candidate_profile_id=serializer.data['id'],
-                #     # resume_url = serializer.data['resume_file'],
-                #     # Hardcoded for now
-                #     CandidateProfile_id=24,
-                #     resume_url = resume,
-                #     name = name,
-                #     email = email,
-                #     phone = phone,
-                    
-                #     # education=education,
-                # )
                 
                 # # Save skills in database
-                for skill in extracted_data['skills']:
-                    Skill.objects.create(
-                        name = skill,
-                        candidate = serializer.data['id']
-                        )
+                # for skill in extracted_data['skills']:
+                #     Skill.objects.create(
+                #         name = skill,
+                #         candidate = serializer.data['id']
+                #         )
             
-                # print(savedData.id)
-                # ADD skills to Data
-                # data['skills']  = extracted_data['skills']
                 # serializer.save(skills= extracted_data['skills'])
-                # data['name'] = extracted_data['name']
-                # # data.push(extracted_data['skills'])
-                # # print(data['name'])
-                # serializer.save()    
+  
 
             except Exception as e:
                 print(e)
@@ -204,6 +178,7 @@ class CandidateProfileView(APIView):
     
 
 
+
 class FileUploadView(APIView):
     parser_classes = (MultiPartParser, FormParser)
     
@@ -211,6 +186,6 @@ class FileUploadView(APIView):
         file_serializer = FileSerializer(data=request.data)
         if file_serializer.is_valid():
             file_serializer.save()
-            return Response(file_serializer.data, status=status.HTTP_201_CREATED)
+            return Response(file_serializer.data['file'], status=status.HTTP_201_CREATED)
         else:
             return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
