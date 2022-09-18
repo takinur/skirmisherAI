@@ -94,6 +94,9 @@ class CandidateProfile(models.Model):
     location = models.CharField(max_length=100, default='')
     # resume_file = models.FileField(upload_to=upload_resume_to, default='', blank=True)
     resume_file = models.CharField(max_length=255, default='', blank=True)
+    name = models.CharField(max_length=80, default='', blank=True)
+    email = models.EmailField(max_length=255, unique=False, blank=True, default='')
+    resume_raw_text = models.TextField(default='', blank=True)
     user = models.OneToOneField(UserAccount, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
@@ -105,9 +108,18 @@ class CandidateProfile(models.Model):
 
 
 
+class Skill(models.Model):
+    name = models.CharField(max_length=80)
+    candidate = models.ForeignKey(CandidateProfile, on_delete=models.CASCADE, related_name='skills')
+    created_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
+    
+    def __str__(self):
+        return self.name
     
 class Education(models.Model):
     name = models.CharField(max_length=80)
+    candidate = models.ForeignKey(CandidateProfile, on_delete=models.CASCADE, related_name='educations')
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
     
@@ -116,6 +128,7 @@ class Education(models.Model):
 
 class Experience(models.Model):
     name = models.CharField(max_length=80)
+    candidate = models.ForeignKey(CandidateProfile, on_delete=models.CASCADE, related_name='experinces')
     details = models.TextField(default='', blank=True)
     range = models.CharField(max_length=100, default='', blank=True)
     total = models.IntegerField(default=0) #Might need to change
@@ -127,6 +140,7 @@ class Experience(models.Model):
 
 class Social(models.Model):
     name = models.CharField(max_length=80)
+    candidate = models.ForeignKey(CandidateProfile, on_delete=models.CASCADE, related_name='socials')
     url = models.URLField(default='', blank=True)
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
@@ -136,36 +150,8 @@ class Social(models.Model):
 
 class Project(models.Model):
     details = models.TextField(default='')
-    
+    candidate = models.ForeignKey(CandidateProfile, on_delete=models.CASCADE, related_name='projects')
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
         
-class Resume(models.Model):    
-    CandidateProfile = models.ForeignKey(CandidateProfile, on_delete=models.CASCADE)
-    
-    resume_url = models.CharField(max_length=255, default='', blank=True)
-    name = models.CharField(max_length=80, default='')
-    email = models.EmailField(max_length=255, unique=False, blank=True, default='')
-    phone = models.CharField(max_length=20, blank=True, default='')
-    
-    education = models.ForeignKey(Education, on_delete=models.CASCADE, null=True, blank=True)
-    experince = models.ForeignKey(Experience, on_delete=models.CASCADE, null=True, blank=True)
-    social = models.ForeignKey(Social, on_delete=models.CASCADE, null=True, blank=True)
-    projects = models.ForeignKey(Project, on_delete=models.CASCADE, null=True, blank=True)
-    
-    text = models.TextField(default='', blank=True)
-    
-    created_at = models.DateTimeField(auto_now=True)
-    updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
-    
-    def __str__(self) -> str:
-        return super().__str__()    
 
-class Skill(models.Model):
-    name = models.CharField(max_length=80)
-    candidate = models.ForeignKey(CandidateProfile, on_delete=models.CASCADE, related_name='skills')
-    created_at = models.DateTimeField(auto_now=True)
-    updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
-    
-    def __str__(self):
-        return self.name
