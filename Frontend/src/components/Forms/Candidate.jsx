@@ -36,7 +36,7 @@ export const CandProfileForm = (props) => {
 
   const addMutation = useMutation(
     async (data) =>
-      await API.post("http://localhost:8000/api/account/candidate/", data, {
+      await API.post("/account/candidate/", data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -47,11 +47,26 @@ export const CandProfileForm = (props) => {
   const { register, handleSubmit } = useForm();
   const [files, setFiles] = useState([]); // FilePond state
 
+
   const submitForm = (data) => {
     data.user = props.user.id;
     data.designation = selectedDesig.name;
-    data.resume_file = files[0]?.file;
+    // data.resume_file = files[0]?.file; //OLD way
+    // Check if file is uploaded or not
+    if (files[0]?.serverId) {
+      data.resume_file = files[0]['serverId'];
+    }
 
+    //Validation for filepond
+    if (files.length === 0) {
+      toast.error("Please upload your resume");
+      return;
+    }
+    //Only allow pdf files
+    if (files[0].fileType !== "application/pdf") {
+      toast.error("Only pdf files are allowed");
+      return;
+    }
 
     addMutation.mutate(data);
   };
@@ -118,13 +133,16 @@ export const CandProfileForm = (props) => {
             />
           </div>
           <div className="mt-4">
+            <p className="mb-2 text-sm text-gray-700 font-semibold" htmlFor="file">Upload Your Resume (PDF Format Only) </p>
             <FilePond
               files={files}
               onupdatefiles={setFiles}
               allowMultiple={false}
+              dropValidation={true}
               credits={false}
-              acceptedFileTypes={["pdf"]}
-              name="resume"
+              maxFiles={1}
+              server={{ process: "http://localhost:8000/api/upload/resume/" }}
+              name="file"
               labelIdle='Drag & Drop your resume or <span class="filepond--label-action">Browse</span>'
             />
           </div>
