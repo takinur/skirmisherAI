@@ -99,13 +99,7 @@ class CandidateProfile(models.Model):
 
 
 
-class Skills(models.Model):
-    name = models.CharField(max_length=80)
-    created_at = models.DateTimeField(auto_now=True)
-    updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
-    
-    def __str__(self):
-        return self.name
+
     
 class Education(models.Model):
     name = models.CharField(max_length=80)
@@ -135,7 +129,7 @@ class Social(models.Model):
     def __str__(self):
         return self.name
 
-class Projects(models.Model):
+class Project(models.Model):
     details = models.TextField(default='')
     
     created_at = models.DateTimeField(auto_now=True)
@@ -149,11 +143,10 @@ class Resume(models.Model):
     email = models.EmailField(max_length=255, unique=False, blank=True, default='')
     phone = models.CharField(max_length=20, blank=True, default='')
     
-    skills = models.ForeignKey(Skills, on_delete=models.CASCADE, null=True, blank=True)
     education = models.ForeignKey(Education, on_delete=models.CASCADE, null=True, blank=True)
     experince = models.ForeignKey(Experience, on_delete=models.CASCADE, null=True, blank=True)
     social = models.ForeignKey(Social, on_delete=models.CASCADE, null=True, blank=True)
-    projects = models.ForeignKey(Projects, on_delete=models.CASCADE, null=True, blank=True)
+    projects = models.ForeignKey(Project, on_delete=models.CASCADE, null=True, blank=True)
     
     text = models.TextField(default='', blank=True)
     
@@ -162,3 +155,12 @@ class Resume(models.Model):
     
     def __str__(self) -> str:
         return super().__str__()    
+
+class Skill(models.Model):
+    name = models.CharField(max_length=80)
+    resume = models.ForeignKey(Resume, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
+    
+    def __str__(self):
+        return self.name
