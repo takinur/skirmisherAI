@@ -62,6 +62,7 @@ class SkillSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
 class CandidateProfileSerializer(serializers.ModelSerializer):
+    skills = SkillSerializer(many=True, required=False)    
         
     resume_file = serializers.FileField(
         max_length = None,
@@ -73,3 +74,11 @@ class CandidateProfileSerializer(serializers.ModelSerializer):
         fields = '__all__'
         extra_kwargs = {'updated_at': {'write_only': True}}
         
+
+    def create(self, validated_data):   
+        skills_data = validated_data.pop('skills')
+        
+        candidate = CandidateProfile.objects.create(**validated_data)
+        for skill in skills_data:
+            Skill.objects.create(candidate=candidate, name = skill)
+        return candidate
