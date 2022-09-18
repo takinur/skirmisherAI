@@ -10,7 +10,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from .serializers import CandidateProfileSerializer, FileSerializer, UserCreateSerializer, MyTokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from ..models import CandidateProfile, EmployerProfile, Resume, Skill
+from ..models import CandidateProfile, EmployerProfile
 from .serializers import EmployerProfileSerializer
 
 # Machine Leaning Model from 
@@ -134,19 +134,18 @@ class CandidateProfileView(APIView):
         
     
     def post(self, request, *args, **kwargs):
-        # Create profile data from request
+        # Create profile from request data
         data = request.data
         serializer = CandidateProfileSerializer(data=data)
-        if serializer.is_valid():
-            # Remove URL to second slash
-            resume = data['resume_file'].split('/', 2)[2]
-            print('Resume URL', resume)
+        if serializer.is_valid():            
+            resume = data['resume_file'].split('/', 2)[2] # Remove URL to second slash
+            resume = resume.replace('"', '') # Remove quotes from string
             # For Debugging
             # resume = '/resources/resumes/T_007.pdf'.split('/', 2)[2]
-            
+            # print('temp', resume)
              # Parser Class for resume file
             extracted_data = ResumeExtractor.resume_result_wrapper(os.path.join(settings.MEDIA_ROOT, resume)) 
-            # Save extracted data to database
+            # print(extracted_data)
             try: 
                 if extracted_data['name'] is not None:
                     name = extracted_data['name']
@@ -157,16 +156,9 @@ class CandidateProfileView(APIView):
                 if extracted_data['phone'] is None:
                     phone = '0000000000'
                 total_exp = extracted_data['total_experience']
-                
-                
-                # # Save skills in database
-                # for skill in extracted_data['skills']:
-                #     Skill.objects.create(
-                #         name = skill,
-                #         candidate = serializer.data['id']
-                #         )
-            
-                # serializer.save(skills= extracted_data['skills'])
+
+                # Save to database including Extracted Data
+                serializer.save(skills= extracted_data['skills'])
   
 
             except Exception as e:
