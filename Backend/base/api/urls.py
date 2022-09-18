@@ -18,6 +18,8 @@ urlpatterns = [
     path('auth/token/refresh/', TokenRefreshView.as_view()),
     path('auth/token/verify/', TokenVerifyView.as_view()),
     
+    # Resume Upload
+    path('upload/resume/', views.FileUploadView.as_view()),
 
     # EMP PROFILE
     path('account/employer/', views.EmployerProfileView.as_view()),
