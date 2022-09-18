@@ -63,24 +63,24 @@ class SkillSerializer(serializers.ModelSerializer):
 class CandidateProfileSerializer(serializers.ModelSerializer):
     skills = SkillSerializer(many=True, read_only=True)    
         
-    resume_file = serializers.FileField(
-        max_length = None,
-        allow_empty_file = False,
-        # write_only = True
-    )
+    # resume_file = serializers.FileField(
+    #     max_length = None,
+    #     allow_empty_file = False,
+    #     # write_only = True
+    # )
     class Meta:
         model = CandidateProfile
         fields = ['id', 'resume_file', 'phone', 'designation', 'location', 'user', 'skills']
         extra_kwargs = {'user': {'write_only': True}}
         
 
-    # def create(self, validated_data):   
-    #     skills_data = validated_data.pop('skills')
+    def create(self, validated_data):   
+        skills_data = validated_data.pop('skills')
         
-    #     candidate = CandidateProfile.objects.create(**validated_data)
-    #     for skill in skills_data:
-    #         Skill.objects.create(candidate=candidate, name = skill)
-        # return candidate
+        candidate = CandidateProfile.objects.create(**validated_data)
+        for skill in skills_data:
+            Skill.objects.create(candidate=candidate, name = skill)
+        return candidate
     
 class FileSerializer(serializers.Serializer):
     file = serializers.FileField(max_length = None,
