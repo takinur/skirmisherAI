@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 from rest_framework.parsers import MultiPartParser, FormParser
 
-from .serializers import CandidateProfileSerializer, UserCreateSerializer, MyTokenObtainPairSerializer
+from .serializers import CandidateProfileSerializer, FileSerializer, UserCreateSerializer, MyTokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from ..models import CandidateProfile, EmployerProfile, Resume, Skill
@@ -138,12 +138,14 @@ class CandidateProfileView(APIView):
         data = request.data
         serializer = CandidateProfileSerializer(data=data)
         if serializer.is_valid():
-            # serializer.save()    
-            # Remove URL till second slash
-            # resume = serializer.data['resume_file'].split('/', 2)[2]
+            print('SSS', serializer._validated_data)
+            print('Nope', data)
+            # serializer.save()    #Save first to get id
+            # Remove URL to second slash
+            resume = serializer.data['resume_file'].split('/', 2)[2]
             
             # For Debugging
-            resume = '/resources/resumes/T_007.pdf'.split('/', 2)[2]
+            # resume = '/resources/resumes/T_007.pdf'.split('/', 2)[2]
             
             # TODO:Check for NULL here
             # EH?: Add try catch for extractor class
@@ -177,17 +179,17 @@ class CandidateProfileView(APIView):
                 #     # education=education,
                 # )
                 
-                # # Save every skill in database
-                # for skill in extracted_data['skills']:
-                #     Skill.objects.create(
-                #         name = skill,
-                #         resume = savedData
-                #         )
+                # # Save skills in database
+                for skill in extracted_data['skills']:
+                    Skill.objects.create(
+                        name = skill,
+                        candidate = serializer.data['id']
+                        )
             
                 # print(savedData.id)
                 # ADD skills to Data
                 # data['skills']  = extracted_data['skills']
-                serializer.save(skills= extracted_data['skills'])
+                # serializer.save(skills= extracted_data['skills'])
                 # data['name'] = extracted_data['name']
                 # # data.push(extracted_data['skills'])
                 # # print(data['name'])
@@ -199,3 +201,16 @@ class CandidateProfileView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
             
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+
+class FileUploadView(APIView):
+    parser_classes = (MultiPartParser, FormParser)
+    
+    def post(self, request, *args, **kwargs):
+        file_serializer = FileSerializer(data=request.data)
+        if file_serializer.is_valid():
+            file_serializer.save()
+            return Response(file_serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)

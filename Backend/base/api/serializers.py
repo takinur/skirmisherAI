@@ -1,4 +1,3 @@
-from typing_extensions import Required
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from django.contrib.auth.password_validation import validate_password
@@ -7,7 +6,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 # import model from parent folder
-from ..models import CandidateProfile, EmployerProfile, Skill
+from ..models import CandidateProfile, EmployerProfile, FileUpload, Skill
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -60,7 +59,7 @@ class SkillSerializer(serializers.ModelSerializer):
     class Meta:
         model = Skill
         fields = '__all__'
-        
+
 class CandidateProfileSerializer(serializers.ModelSerializer):
     skills = SkillSerializer(many=True, read_only=True)    
         
@@ -71,14 +70,29 @@ class CandidateProfileSerializer(serializers.ModelSerializer):
     )
     class Meta:
         model = CandidateProfile
-        fields = ['id', 'resume_file', 'phone', 'designation', 'skills']
-        extra_kwargs = {'updated_at': {'write_only': True}}
+        fields = ['id', 'resume_file', 'phone', 'designation', 'location', 'user', 'skills']
+        extra_kwargs = {'user': {'write_only': True}}
         
 
-    def create(self, validated_data):   
-        skills_data = validated_data.pop('skills')
+    # def create(self, validated_data):   
+    #     skills_data = validated_data.pop('skills')
         
-        candidate = CandidateProfile.objects.create(**validated_data)
-        for skill in skills_data:
-            Skill.objects.create(candidate=candidate, name = skill)
-        return candidate
+    #     candidate = CandidateProfile.objects.create(**validated_data)
+    #     for skill in skills_data:
+    #         Skill.objects.create(candidate=candidate, name = skill)
+        # return candidate
+    
+class FileSerializer(serializers.Serializer):
+    file = serializers.FileField(max_length = None,
+        allow_empty_file = False,
+        # write_only = True
+        )
+    
+    class Meta:
+        fields = ['file']    
+    
+    def create(self, validated_data):
+        
+        file = FileUpload.objects.create(**validated_data)
+        
+        return file
