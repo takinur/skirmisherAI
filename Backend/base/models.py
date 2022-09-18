@@ -83,6 +83,11 @@ class EmployerProfile(models.Model):
 # Resume Upload
 def upload_resume_to(instance, filename):
     return 'resumes/{filename}'.format(filename=filename)
+
+class FileUpload(models.Model):
+    file = models.FileField(upload_to=upload_resume_to)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
 class CandidateProfile(models.Model):
     designation = models.CharField(max_length=80, blank=True, default='')
     phone = models.CharField(max_length=20, blank=True, default='')
