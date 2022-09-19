@@ -12,7 +12,7 @@ export const EmployerDashboard = () => {
   const { user } = useSelector((state) => state.auth);
 
   //React query to fetch profile
-  const { isLoading, isError,  data } = useQuery(
+  const { isLoading, isError, error, data } = useQuery(
     "empProfile",
     fetchProfile,
     {
