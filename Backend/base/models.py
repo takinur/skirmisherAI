@@ -64,13 +64,13 @@ def upload_to(instance, filename):
 
 class EmployerProfile(models.Model):
     company_name = models.CharField(max_length=80)
-    slogan = models.CharField(max_length=200, blank=True, default='')
-    website = models.URLField(default='', blank=True,)
-    phone = models.CharField(max_length=20, blank=True, default='') #HACK: Remove me
-    location = models.CharField(max_length=100, default='')
-    about = models.TextField(default='', blank=True)
-    logo = models.ImageField(upload_to=upload_to, default='', blank=True) #FIXME: image upload
-    size = models.CharField(max_length=40, default='', blank=True)
+    slogan = models.CharField(max_length=200, blank=True, null=True)
+    website = models.URLField(null=True, blank=True,)
+    phone = models.CharField(max_length=20, blank=True, null=True) #HACK: Remove me
+    location = models.CharField(max_length=100, null=True)
+    about = models.TextField(null=True, blank=True)
+    logo = models.ImageField(upload_to=upload_to, null=True, blank=True) #FIXME: image upload
+    size = models.CharField(max_length=40, null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
     user = models.OneToOneField(UserAccount, on_delete=models.CASCADE)
@@ -89,15 +89,15 @@ class FileUpload(models.Model):
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
 class CandidateProfile(models.Model):
-    designation = models.CharField(max_length=80, blank=True, default='')
-    location = models.CharField(max_length=100, default='')
-    website = models.CharField(max_length=100, default='', blank=True)    
-    resume_file = models.CharField(max_length=255, default='', blank=True)
+    designation = models.CharField(max_length=80, blank=True, null=True)
+    location = models.CharField(max_length=100, null=True)
+    website = models.CharField(max_length=100, null=True, blank=True)    
+    resume_file = models.CharField(max_length=255, null=True, blank=True)
     #These are extracted from resume
-    name = models.CharField(max_length=80, default='', blank=True)
-    email = models.EmailField(max_length=255, unique=False, blank=True, default='')
-    phone = models.CharField(max_length=20, blank=True, default='')    
-    resume_raw_text = models.TextField(default='', blank=True)
+    name = models.CharField(max_length=80, null=True, blank=True)
+    email = models.EmailField(max_length=255, unique=False, blank=True, null=True)
+    phone = models.CharField(max_length=20, blank=True, null=True)    
+    resume_raw_text = models.TextField(null=True, blank=True)
     
     user = models.OneToOneField(UserAccount, on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
@@ -131,8 +131,8 @@ class Education(models.Model):
 class Experience(models.Model):
     name = models.CharField(max_length=80)
     candidate = models.ForeignKey(CandidateProfile, on_delete=models.CASCADE, related_name='experinces')
-    details = models.TextField(default='', blank=True)
-    range = models.CharField(max_length=100, default='', blank=True)
+    details = models.TextField(null=True, blank=True)
+    range = models.CharField(max_length=100, null=True, blank=True)
     total = models.IntegerField(default=0) #Might need to change
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
@@ -143,7 +143,7 @@ class Experience(models.Model):
 class Social(models.Model):
     name = models.CharField(max_length=80)
     candidate = models.ForeignKey(CandidateProfile, on_delete=models.CASCADE, related_name='socials')
-    url = models.URLField(default='', blank=True)
+    url = models.URLField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
     
@@ -151,7 +151,7 @@ class Social(models.Model):
         return self.name
 
 class Project(models.Model):
-    details = models.TextField(default='')
+    details = models.TextField(null=True)
     candidate = models.ForeignKey(CandidateProfile, on_delete=models.CASCADE, related_name='projects')
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
