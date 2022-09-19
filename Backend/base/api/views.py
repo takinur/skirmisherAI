@@ -139,48 +139,52 @@ class CandidateProfileView(APIView):
         # Create profile from request data
         data = request.data
         serializer = CandidateProfileSerializer(data=data)
-        if not serializer.is_valid():            
-            
-            resume = data['resume_file'].replace('"', '') # Remove quotes from string
-            # For Debugging
-            # resume = '/resources/resumes/T_007.pdf'.split('/', 2)[2]
-            # print('temp', resume)
-             # Parser Class for resume file
-            ext_data = ResumeExtractor.resume_result_wrapper(os.path.join(settings.MEDIA_ROOT, resume)) 
-            print(ext_data)
-            try: 
-                # Getting data from extracted data               
-                text = ext_data['text']
-                name = ext_data['name']                    
-                email = ext_data['email']
-                phone = ext_data['phone']
-                total_exp = ext_data['total_experience']
-                
-                skills = ext_data['skills']
-                edu = ext_data['education']
-                projects = ext_data['projects']
-                exp = ext_data['experience']
-                socili = ext_data['social_links']
-                
-                # Add with request data
-            
-                    
-                data['name'] = name
-                
+        
+        if not serializer.is_valid():                      
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-                    
-                # Save to database including Extracted Data
-                # serializer.save(skills= extracted_data['skills'])
-  
-
-            except Exception as e:
-                print(e)
+        # Save profile
+        resume = data['resume_file'].replace('"', '') # Remove quotes from string
+        # For Debugging
+        # resume = '/resources/resumes/T_007.pdf'.split('/', 2)[2]
+        # print('temp', resume)
+            # Parser Class for resume file
+        ext_data = ResumeExtractor.resume_result_wrapper(os.path.join(settings.MEDIA_ROOT, resume)) 
+        # print(ext_data)
+        try: 
+            # Getting data from extracted data               
+            # text = ext_data['text']
+            text = 'Some LONG Lorem'
+            name = ext_data['name']                    
+            email = ext_data['email']
+            phone = ext_data['phone']
+            total_exp = ext_data['total_experience']
             
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            skills = ext_data['skills']
+            edu = set(ext_data['education']) #Convert to unique set
+            projects = ext_data['projects']
+            exp = ext_data['experience']
+            socili = ext_data['social_links']
             
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+            # Format data for serializer
+            
+            print('Suppose to be', type(skills), 'But became:', type(edu))
+            
+            # Convert List to set
+            edu = set(edu)
+            
+            print('here we go again', type(edu), str(edu))
+            # Add resume data to serializer data and save
+            
 
+            # Save to database including Extracted Data
+            serializer.save(skills = skills, name = name, email = email, resume_raw_text = text, edu = edu) 
+
+
+        except Exception as e:
+            print(e)
+        
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class FileUploadView(APIView):

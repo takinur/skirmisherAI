@@ -104,21 +104,20 @@ class resumeExtraction(object):
         self.__details['phone'] = self.__extract_mobile_number(text)
         self.__details['email'] = self.__extract_email(text)
         self.__details['skills'] = self.__extract_skills(text)
+        self.__details['education'] = self.__extract_education(text)        
         self.__details['social_links'] = self.__extract_social_links(text)
         # CRUCIAL: Text that is essential for further processing
-        # self.__details['text'] = text 
+        # self.__details['text'] = text #EH?:Uncomment this line
         raw_entity = self.__extract_entity_sections(raw_text)
         try:
             self.__details['experience'] = raw_entity['experience']
-            self.__details['education'] = raw_entity['education']
             self.__details['projects'] = raw_entity['projects']
             self.__details['total_experience'] = self.__total_experience_year(
                 raw_entity)
         except KeyError:
             pass
         # if no education section is found, then try to extract education again
-        if not self.__details['education']:
-            self.__details['education'] = self.__extract_education(text)
+      
 
         return self.__details
 
