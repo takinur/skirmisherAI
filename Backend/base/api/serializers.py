@@ -83,7 +83,7 @@ class CandidateProfileSerializer(serializers.ModelSerializer):
         
         candidate = CandidateProfile.objects.create(**validated_data)
         # Save skills
-        for skill in skills_data:
+        for skill in skills_data:            
             Skill.objects.create(candidate=candidate, name = skill)
         # Save educations
         for edu in edu_data:
