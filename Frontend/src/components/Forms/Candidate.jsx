@@ -69,7 +69,7 @@ export const CandProfileForm = (props) => {
     addMutation.mutate(data);
   };
 
-  console.log("server respone", addMutation);
+  console.log("server response", addMutation);
 
   //Navigate to Profile
   useEffect(() => {
