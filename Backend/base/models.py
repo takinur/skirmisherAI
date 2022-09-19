@@ -90,19 +90,21 @@ class FileUpload(models.Model):
 
 class CandidateProfile(models.Model):
     designation = models.CharField(max_length=80, blank=True, default='')
-    phone = models.CharField(max_length=20, blank=True, default='')
     location = models.CharField(max_length=100, default='')
-    # resume_file = models.FileField(upload_to=upload_resume_to, default='', blank=True)
+    website = models.CharField(max_length=100, default='', blank=True)    
     resume_file = models.CharField(max_length=255, default='', blank=True)
+    #These are extracted from resume
     name = models.CharField(max_length=80, default='', blank=True)
     email = models.EmailField(max_length=255, unique=False, blank=True, default='')
+    phone = models.CharField(max_length=20, blank=True, default='')    
     resume_raw_text = models.TextField(default='', blank=True)
-    user = models.OneToOneField(UserAccount, on_delete=models.CASCADE)
+    
+    user = models.OneToOneField(UserAccount, on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
     
     def __str__(self) -> str:
-        return super().resume #FIXME: Resume is not defined probably
+        return super().resume_file 
 
 
 
