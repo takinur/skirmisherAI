@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 # import model from parent folder
-from ..models import CandidateProfile, EmployerProfile, FileUpload, Skill
+from ..models import CandidateProfile, Education, EmployerProfile, FileUpload, Skill
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -58,26 +58,39 @@ class EmployerProfileSerializer(serializers.ModelSerializer):
 class SkillSerializer(serializers.ModelSerializer):
     class Meta:
         model = Skill
-        fields = ['id', 'name', 'updated_at']
+        fields = ['id', 'name']
+        extra_kwargs = {'candidate': {'write_only': True}}
+        
+class EduSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Education
+        fields = ['id', 'name']
         extra_kwargs = {'candidate': {'write_only': True}}
 
 class CandidateProfileSerializer(serializers.ModelSerializer):
     skills = SkillSerializer(many=True, read_only=True)    
+    educations = EduSerializer(many=True, read_only=True)    
         
     class Meta:
         model = CandidateProfile
-        fields = ['id', 'resume_file', 'name', 'phone', 'designation', 'location', 'user', 'skills']
-        extra_kwargs = {'user': {'write_only': True}}
+        fields = ['id', 'resume_file', 'name', 'phone', 'designation', 'location', 'skills', 'website', 'educations']
+        extra_kwargs = {'user': {'write_only': True}, 'resume_raw_text': {'write_only': True}}
         
 
     def create(self, validated_data):   
         skills_data = validated_data.pop('skills')
+        edu_data = validated_data.pop('edu')
         
         candidate = CandidateProfile.objects.create(**validated_data)
+        # Save skills
         for skill in skills_data:
             Skill.objects.create(candidate=candidate, name = skill)
-        return candidate
-    
+        # Save educations
+        for edu in edu_data:
+            Education.objects.create(candidate=candidate, name = str(edu))
+
+        return candidate #Main return 
+        
 class FileSerializer(serializers.Serializer):
     file = serializers.FileField(max_length = None,
         allow_empty_file = False,
