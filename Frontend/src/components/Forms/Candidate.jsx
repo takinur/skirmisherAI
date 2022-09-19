@@ -10,7 +10,6 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { toast } from "react-toastify";
 
-
 // Import FilePond
 import { FilePond } from "react-filepond";
 import "filepond/dist/filepond.min.css";
@@ -47,14 +46,13 @@ export const CandProfileForm = (props) => {
   const { register, handleSubmit } = useForm();
   const [files, setFiles] = useState([]); // FilePond state
 
-
   const submitForm = (data) => {
     data.user = props.user.id;
     data.designation = selectedDesig.name;
     // data.resume_file = files[0]?.file; //OLD way
     // Check if file is uploaded or not
     if (files[0]?.serverId) {
-      data.resume_file = files[0]['serverId'];
+      data.resume_file = files[0]["serverId"];
     }
 
     //Validation for filepond
@@ -85,8 +83,7 @@ export const CandProfileForm = (props) => {
     if (addMutation.error) {
       let err = addMutation.error.response.data;
 
-      if (err.company_name) toast.error("Company name is required.");
-      if (err.website) toast.error(err.website[0]);
+      if (err.location) toast.error("Location is required.");
 
       console.log("Error updating Profile", err);
     }
@@ -96,23 +93,13 @@ export const CandProfileForm = (props) => {
 
   return (
     <div className="flex flex-col sm:justify-center items-center pt-6 sm:pt-0 ">
-      <div className="w-full sm:max-w-2xl mt-6 px-6 py-4 bg-gray-200 shadow-md overflow-hidden sm:rounded-lg">
+      <div className="w-full  sm:max-w-2xl mt-6 px-6 py-4 bg-gray-200 shadow-md overflow-hidden sm:rounded-lg">
         <div className="text-center mb-7">
           <h2 className="text-3xl">Confirm some additional Details.</h2>
         </div>
         <form onSubmit={handleSubmit(submitForm)}>
-          <div className="wrapper md:grid grid-cols-2">
+          <div className="wrapper md:grid grid-cols-2"> 
             <div className="mt-4 mr-2">
-              <Label htmlFor="phone">Mobile Number</Label>
-              <Input
-                id="phone"
-                type="text"
-                className="mt-1 block w-full"
-                {...register("phone")}
-                required
-              />
-            </div>
-            <div className="mt-4 ">
               <Label htmlFor="phone">Current Designation</Label>
               <SelectListBox
                 items={designations}
@@ -120,8 +107,18 @@ export const CandProfileForm = (props) => {
                 setSelected={setSelectedDesig}
               />
             </div>
-          </div>
-          <div className="mt-4 flex-auto">
+            <div className="mt-4 mr-2">
+              <Label htmlFor="website">Website (Optional) </Label>
+              <Input
+                id="website"
+                type="text"
+                className="mt-1 block w-full"
+                {...register("website")}
+                required
+              />
+            </div>
+          </div>         
+          <div className="mt-4 mr-2">
             <Label htmlFor="location">Location </Label>
             <Input
               id="location"
@@ -133,7 +130,12 @@ export const CandProfileForm = (props) => {
             />
           </div>
           <div className="mt-4">
-            <p className="mb-2 text-sm text-gray-700 font-semibold" htmlFor="file">Upload Your Resume (PDF Format Only) </p>
+            <p
+              className="mb-2 text-sm text-gray-700 font-semibold"
+              htmlFor="file"
+            >
+              Upload Your Resume (PDF Format Only){" "}
+            </p>
             <FilePond
               files={files}
               onupdatefiles={setFiles}
@@ -141,13 +143,14 @@ export const CandProfileForm = (props) => {
               dropValidation={true}
               credits={false}
               maxFiles={1}
-              
-              server={{ process: import.meta.env.VITE_BASE_URL+"upload/resume/" }}
+              server={{
+                process: import.meta.env.VITE_BASE_URL + "upload/resume/",
+              }}
               name="file"
               labelIdle='Drag & Drop your resume or <span class="filepond--label-action">Browse</span>'
             />
           </div>
-          <div className="mt-4 flex justify-end">
+          <div className="mt-8 flex justify-end">
             <ButtonDefault
               className={classNames("ml-4", {
                 "opacity-25": isLoading,

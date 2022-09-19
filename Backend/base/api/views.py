@@ -138,14 +138,14 @@ class CandidateProfileView(APIView):
         data = request.data
         serializer = CandidateProfileSerializer(data=data)
         if serializer.is_valid():            
-            resume = data['resume_file'].split('/', 2)[2] # Remove URL to second slash
-            resume = resume.replace('"', '') # Remove quotes from string
+            
+            resume = data['resume_file'].replace('"', '') # Remove quotes from string
             # For Debugging
             # resume = '/resources/resumes/T_007.pdf'.split('/', 2)[2]
             # print('temp', resume)
              # Parser Class for resume file
             extracted_data = ResumeExtractor.resume_result_wrapper(os.path.join(settings.MEDIA_ROOT, resume)) 
-            # print(extracted_data)
+            print(extracted_data)
             try: 
                 if extracted_data['name'] is not None:
                     name = extracted_data['name']
@@ -158,7 +158,7 @@ class CandidateProfileView(APIView):
                 total_exp = extracted_data['total_experience']
 
                 # Save to database including Extracted Data
-                serializer.save(skills= extracted_data['skills'])
+                # serializer.save(skills= extracted_data['skills'])
   
 
             except Exception as e:
