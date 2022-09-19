@@ -143,7 +143,7 @@ class CandidateProfileView(APIView):
         if not serializer.is_valid():                      
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        # Save profile
+        # __Save profile
         resume = data['resume_file'].replace('"', '') # Remove quotes from string
         # For Debugging
         # resume = '/resources/resumes/T_007.pdf'.split('/', 2)[2]
@@ -153,8 +153,7 @@ class CandidateProfileView(APIView):
         # print(ext_data)
         try: 
             # Getting data from extracted data               
-            # text = ext_data['text']
-            text = 'Some LONG Lorem'
+            text = ext_data['text'] 
             name = ext_data['name']                    
             email = ext_data['email']
             phone = ext_data['phone']
@@ -182,7 +181,7 @@ class CandidateProfileView(APIView):
 
 
         except Exception as e:
-            print(e)
+            return Response({'message': 'Error while parsing resume', 'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
         
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
