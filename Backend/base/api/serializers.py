@@ -92,7 +92,8 @@ class FileSerializer(serializers.Serializer):
         file = data['file']
         if file.content_type != 'application/pdf':
             raise serializers.ValidationError("File is not a PDF")
-        if file.size > 10485760:
+        # File size shoud be less than 5MB
+        if file.size > 5242880:
             raise serializers.ValidationError("File is too large")
         return data
     
