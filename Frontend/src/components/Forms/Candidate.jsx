@@ -59,12 +59,12 @@ export const CandProfileForm = (props) => {
 
     //Validation for filepond
     if (files.length === 0) {
-      toast.error("Please upload your resume");
+      toast.error("Please upload your resume.");
       return;
     }
     //Only allow pdf files
     if (files[0].fileType !== "application/pdf") {
-      toast.error("Only pdf files are allowed");
+      toast.error("Only pdf files are allowed.");
       return;
     }
 
@@ -141,7 +141,8 @@ export const CandProfileForm = (props) => {
               dropValidation={true}
               credits={false}
               maxFiles={1}
-              server={{ process: "http://localhost:8000/api/upload/resume/" }}
+              
+              server={{ process: import.meta.env.VITE_BASE_URL+"upload/resume/" }}
               name="file"
               labelIdle='Drag & Drop your resume or <span class="filepond--label-action">Browse</span>'
             />
