@@ -60,11 +60,11 @@ export const CandProfileForm = (props) => {
       toast.error("Please upload your resume.");
       return;
     }
-    //Only allow pdf files
-    if (files[0].fileType !== "application/pdf") {
-      toast.error("Only pdf files are allowed.");
-      return;
-    }
+    // //Only allow pdf files
+    // if (files[0].fileType !== "application/pdf") {
+    //   toast.error("Only pdf files are allowed.");
+    //   return;
+    // }
 
     addMutation.mutate(data);
   };
@@ -73,17 +73,18 @@ export const CandProfileForm = (props) => {
 
   //Navigate to Profile
   useEffect(() => {
-    // if (addMutation.isSuccess) {
-    //   toast.success("Great, Profile Updated.");
-    //   //reload page after 2 seconds
-    //   setTimeout(() => {
-    //     window.location.reload();
-    //   }, 2000);
-    // }
+    if (addMutation.isSuccess) {
+      toast.success("Great, Profile Updated.");
+      //reload page after 2 seconds
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    }
     if (addMutation.error) {
       let err = addMutation.error.response.data;
 
-      if (err.location) toast.error("Location is required.");
+      if(err.location) toast.error("Location is required.");
+      if(err.message) toast.warning('Something Went Wrong!')
 
       console.log("Error updating Profile", err);
     }
