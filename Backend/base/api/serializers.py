@@ -86,8 +86,16 @@ class FileSerializer(serializers.Serializer):
     
     class Meta:
         fields = ['file']    
+        model = FileUpload
+        
+    def validate(self, data):
+        file = data['file']
+        if file.content_type != 'application/pdf':
+            raise serializers.ValidationError("File is not a PDF")
+        if file.size > 10485760:
+            raise serializers.ValidationError("File is too large")
+        return data
     
     def create(self, validated_data):        
         file = FileUpload.objects.create(**validated_data)
-        
         return file
