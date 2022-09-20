@@ -73,13 +73,13 @@ export const CandProfileForm = (props) => {
 
   //Navigate to Profile
   useEffect(() => {
-    if (addMutation.isSuccess) {
-      toast.success("Great, Profile Updated.");
-      //reload page after 2 seconds
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
-    }
+    // if (addMutation.isSuccess) {
+    //   toast.success("Great, Profile Updated.");
+    //   //reload page after 2 seconds
+    //   setTimeout(() => {
+    //     window.location.reload();
+    //   }, 2000);
+    // }
     if (addMutation.error) {
       let err = addMutation.error.response.data;
 

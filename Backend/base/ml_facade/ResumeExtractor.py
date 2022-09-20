@@ -255,7 +255,7 @@ class resumeExtraction(object):
         exp_ = []
         for line in experience_list:
             experience = re.search(
-                r'(?P<fmonth>\w+.\d+)\s*(\D|to)\s*(?P<smonth>\w+.\d+|present)',
+                r'(?P<fmonth>\w+.\d+)\s*(\D|to)\s*(?P<smonth>\w+.\d+|present|ongoing)',
                 line,
                 re.I
             )

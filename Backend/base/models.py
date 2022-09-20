@@ -130,7 +130,7 @@ class Education(models.Model):
 
 class Experience(models.Model):
     name = models.CharField(max_length=80)
-    candidate = models.ForeignKey(CandidateProfile, on_delete=models.CASCADE, related_name='experinces')
+    candidate = models.ForeignKey(CandidateProfile, on_delete=models.CASCADE, related_name='experiences')
     details = models.TextField(null=True, blank=True)
     range = models.CharField(max_length=100, null=True, blank=True)
     total = models.IntegerField(default=0) #Might need to change
