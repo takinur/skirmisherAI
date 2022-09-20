@@ -120,13 +120,13 @@ function DetailedProfileView(profileData, user) {
                 </div>
               </div>
               <div className="mt-10 py-10 border-t border-gray-200 w-full grid">
-                <div className="mx-auto border-l-8 border-green-700 px-3 bg-green-50 ">
-                  <h3 className="text-2xl font-semibold leading-normal text-gray-700 mb-2 ">                    
+                <div className="mr-auto ml-4 border-l-8 border-green-700 px-3 bg-green-50 ">
+                  <h3 className="text-3xl font-semibold leading-normal text-gray-700 mb-2 ">                    
                     Your Skills*
                   </h3>
                 </div>
-                <div className="flex flex-col w-full ">
-                  <div className="p-1  mt-2 text-center space-x-1 space-y-2">
+                <div className="flex flex-col w-full mt-4 ">
+                  <div className="p-1  mt-2 text-justify space-x-1 space-y-2">
                     {profileData.skills.map((skill) => (
                       <button
                         key={skill.id}
