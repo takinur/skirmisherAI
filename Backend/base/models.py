@@ -143,7 +143,6 @@ class Experience(models.Model):
 class Social(models.Model):
     name = models.CharField(max_length=80)
     candidate = models.ForeignKey(CandidateProfile, on_delete=models.CASCADE, related_name='socials')
-    url = models.URLField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
     
