@@ -161,14 +161,18 @@ class CandidateProfileView(APIView):
             
             skills = ext_data['skills']
             edu = set(ext_data['education']) #Convert to unique set
-            projects = ext_data['projects']
             exp = ext_data['experience']
+            projects = ext_data['projects']
             socili = ext_data['social_links']
             
             # TODO: Start with experience
-            
-            # Format data for serializer
-            
+            exp_data = {}
+            if exp is not None: 
+                exp_data['name'] = exp[0]
+                exp_data['total'] = total_exp
+                
+                
+            print('Exp', exp_data)
             print('Suppose to be', type(skills), 'But became:', type(exp))
             
             # Convert List to set
@@ -179,7 +183,7 @@ class CandidateProfileView(APIView):
             
 
             # Save to database including Extracted Data
-            # serializer.save(skills = skills, name = name, email = email, phone=phone, resume_raw_text = text, edu = edu, exp=exp) 
+            # serializer.save(skills = skills, name = name, email = email, phone=phone, resume_raw_text = text, edu = edu, exp=exp_data) 
 
 
         except Exception as e:
