@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 # import model from parent folder
-from ..models import CandidateProfile, Education, EmployerProfile, Experience, FileUpload, Skill
+from ..models import CandidateProfile, Education, EmployerProfile, Experience, FileUpload, Skill, Social
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -71,15 +71,21 @@ class ExpSerializer(serializers.ModelSerializer):
         model = Experience
         fields = ['id', 'name', 'total']
         extra_kwargs = {'candidate': {'write_only': True}}
+class SociSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Social
+        fields = ['id', 'name', ]
+        extra_kwargs = {'candidate': {'write_only': True}}
 
 class CandidateProfileSerializer(serializers.ModelSerializer):
     skills = SkillSerializer(many=True, read_only=True)    
     educations = EduSerializer(many=True, read_only=True)    
     experiences = ExpSerializer(many=True, read_only=True)    
-        
+    socials = SociSerializer(many=True, read_only=True)
+    
     class Meta:
         model = CandidateProfile
-        fields = ['id', 'resume_file', 'user', 'name', 'phone', 'designation', 'location', 'skills', 'website', 'educations', 'experiences']
+        fields = ['id', 'resume_file', 'user', 'name', 'phone', 'designation', 'location', 'skills', 'website', 'educations', 'experiences', 'socials']
         extra_kwargs = {'user': {'write_only': True}, 'resume_raw_text': {'write_only': True} }
         
 
@@ -87,6 +93,7 @@ class CandidateProfileSerializer(serializers.ModelSerializer):
         skills_data = validated_data.pop('skills')
         edu_data = validated_data.pop('edu')
         exp_data = validated_data.pop('exp')
+        social_data = validated_data.pop('social')
         
         candidate = CandidateProfile.objects.create(**validated_data)
         # Save skills
@@ -97,6 +104,10 @@ class CandidateProfileSerializer(serializers.ModelSerializer):
             Education.objects.create(candidate=candidate, name = str(edu))
         # Save Experince
             Experience.objects.create(candidate=candidate, name = exp_data['name'], total = exp_data['total'])
+        # Save Social
+        for social in social_data:
+            Social.objects.create(candidate=candidate, name = social)
+            
         return candidate #Main return 
         
 class FileSerializer(serializers.Serializer):
