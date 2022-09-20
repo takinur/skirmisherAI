@@ -107,7 +107,7 @@ class resumeExtraction(object):
         self.__details['education'] = self.__extract_education(text)        
         self.__details['social_links'] = self.__extract_social_links(text)
         # CRUCIAL: Text that is essential for further processing
-        # self.__details['text'] = text #EH?:Uncomment this line
+        self.__details['text'] = text #EH?:Uncomment this line
         raw_entity = self.__extract_entity_sections(raw_text)
         try:
             self.__details['experience'] = raw_entity['experience']

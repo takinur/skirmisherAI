@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 class UserManager(BaseUserManager):
     def create_user(self, name, email, password=None, role=None):
         if not email:
-            raise ValueError('Users must have an email address')
+            raise ValueError('Users must have an email address!')
         
         email = self.normalize_email(email)
         email = email.lower()
@@ -155,4 +155,5 @@ class Project(models.Model):
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
         
-
+    def __str__(self):
+        return self.details
