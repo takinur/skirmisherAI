@@ -255,12 +255,13 @@ class resumeExtraction(object):
         exp_ = []
         for line in experience_list:
             experience = re.search(
-                r'(?P<fmonth>\w+.\d+)\s*(\D|to)\s*(?P<smonth>\w+.\d+|present|ongoing)',
+                r'(?P<fmonth>\w+.\d+)\s*(\D|to)\s*(?P<smonth>\w+.\d+|present)',
                 line,
                 re.I
             )
             if experience:
                 exp_.append(experience.groups())
+        
         total_exp = sum(
             [self.__get_number_of_months_from_dates(i[0], i[2]) for i in exp_]
         )
