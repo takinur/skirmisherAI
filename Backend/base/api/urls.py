@@ -40,7 +40,7 @@ urlpatterns = [
     
     # JOB Private
     path('jobs/', VacancyView.as_view()),
-    path('jobs/', VacancyView.as_view()),
+    path('jobs/<int:vacancy_id>', DetailedVacancyView.as_view()),
     
     # JOB Public
     path('jobs/public/', RetriveVacancyView.as_view()),
