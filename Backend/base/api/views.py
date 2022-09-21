@@ -199,7 +199,7 @@ class FileUploadView(APIView):
         else:
             return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
-        
+#Job Views for Employer / Recruiter
 class VacancyView(APIView):
     # permission_classes = [permissions.IsAuthenticated]
     
@@ -220,3 +220,27 @@ class VacancyView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 
+# Jobs List View
+class RetriveVacancyView(APIView):
+    #Authentication is not required
+    def get(self, request, *args, **kwargs):
+        jobs = Vacancy.objects.all().order_by('-created_at')
+        serializer = VacancySerializer(jobs, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+# Job Detail View
+class DetailedVacancyView(APIView):
+    # permission_classes = [permissions.IsAuthenticated]
+    # queryset = EmployerProfile.objects.order_by('-created_at')
+    serializer_class = VacancySerializer
+    
+    # Retrive vacancy by id
+    def get(self, request, *args, **kwargs):
+        vacancy_id = kwargs['vacancy_id']
+        vacancy = Vacancy.objects.get(id=vacancy_id)
+        if vacancy is not None:
+            serializer = VacancySerializer(vacancy)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        
+        return Response(status=status.HTTP_400_BAD_REQUEST, data={'message': 'Vacancy not found!'})        
+    

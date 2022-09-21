@@ -8,6 +8,8 @@ from .views import (
     EmployerProfileView,
     CandidateProfileView,
     VacancyView,
+    RetriveVacancyView,
+    DetailedVacancyView,
     )
 
 from rest_framework_simplejwt.views import (
@@ -36,6 +38,11 @@ urlpatterns = [
     path('account/candidate/', CandidateProfileView.as_view()),
     path('account/candidate/<int:user_id>', CandidateProfileView.as_view()),
     
-    # JOB 
+    # JOB Private
     path('jobs/', VacancyView.as_view()),
+    path('jobs/', VacancyView.as_view()),
+    
+    # JOB Public
+    path('jobs/public/', RetriveVacancyView.as_view()),
+    path('jobs/public/<int:vacancy_id>', DetailedVacancyView.as_view()),
 ]
