@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 # import model from parent folder
-from ..models import CandidateProfile, Education, EmployerProfile, Experience, FileUpload, Project, Skill, Social
+from ..models import CandidateProfile, Education, EmployerProfile, Experience, FileUpload, Project, Skill, Social, Vacancy
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -142,3 +142,15 @@ class FileSerializer(serializers.Serializer):
     def create(self, validated_data):        
         file = FileUpload.objects.create(**validated_data)
         return file
+    
+    
+class VacancySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Vacancy
+        fields = '__all__'
+        extra_kwargs = {'employer': {'write_only': True}}
+        
+    def to_representation(self, instance):
+        data = super().to_representation(instance)            
+        data['employer'] = instance.employer.name
+        return data
