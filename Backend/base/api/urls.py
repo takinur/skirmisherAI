@@ -1,6 +1,14 @@
 from django.urls import path
 from . import views
-from .views import MyTokenObtainPairView, RegisterView, RetriveUserView
+from .views import (
+    MyTokenObtainPairView, 
+    RegisterView, 
+    RetriveUserView,
+    FileUploadView,
+    EmployerProfileView,
+    CandidateProfileView,
+    VacancyView,
+    )
 
 from rest_framework_simplejwt.views import (
     # TokenObtainPairView,
@@ -19,14 +27,15 @@ urlpatterns = [
     path('auth/token/verify/', TokenVerifyView.as_view()),
     
     # Resume Upload
-    path('upload/resume/', views.FileUploadView.as_view()),
+    path('upload/resume/', FileUploadView.as_view()),
 
     # EMP PROFILE
-    path('account/employer/', views.EmployerProfileView.as_view()),
-    path('account/employer/<int:user_id>', views.EmployerProfileView.as_view()),
+    path('account/employer/', EmployerProfileView.as_view()),
+    path('account/employer/<int:user_id>', EmployerProfileView.as_view()),
     # Cand PROFILE
-    path('account/candidate/', views.CandidateProfileView.as_view()),
-    path('account/candidate/<int:user_id>', views.CandidateProfileView.as_view()),
+    path('account/candidate/', CandidateProfileView.as_view()),
+    path('account/candidate/<int:user_id>', CandidateProfileView.as_view()),
     
-    #TODO: JOB 
+    # JOB 
+    path('jobs/', VacancyView.as_view()),
 ]
