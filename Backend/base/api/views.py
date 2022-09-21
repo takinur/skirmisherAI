@@ -204,7 +204,7 @@ class VacancyView(APIView):
     # permission_classes = [permissions.IsAuthenticated]
     
     # Get all vacancies
-    def get(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):       
         vacancies = Vacancy.objects.all()
         serializer = VacancySerializer(vacancies, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -230,17 +230,23 @@ class RetriveVacancyView(APIView):
 
 # Job Detail View
 class DetailedVacancyView(APIView):
-    # permission_classes = [permissions.IsAuthenticated]
-    # queryset = EmployerProfile.objects.order_by('-created_at')
-    serializer_class = VacancySerializer
+    def get_object(self, vacancy_id):
+        '''
+        Helper method to get object by id
+        '''
+        try:
+            return Vacancy.objects.get(id=vacancy_id)
+        except Vacancy.DoesNotExist:
+            return None
     
     # Retrive vacancy by id
     def get(self, request, *args, **kwargs):
         vacancy_id = kwargs['vacancy_id']
-        vacancy = Vacancy.objects.get(id=vacancy_id)
+        vacancy = self.get_object(vacancy_id)
         if vacancy is not None:
             serializer = VacancySerializer(vacancy)
             return Response(serializer.data, status=status.HTTP_200_OK)
-        
-        return Response(status=status.HTTP_400_BAD_REQUEST, data={'message': 'Vacancy not found!'})        
+    
+        return Response(status=status.HTTP_400_BAD_REQUEST, data={'message': 'Vacancy not found.'})
+               
     
