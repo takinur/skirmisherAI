@@ -16,6 +16,11 @@ const SideBar = ({ navbar, toggleNavbar }) => {
         icon: HomeIcon,
       },
       {
+        name: "Jobs",
+        link: "/employer/jobs",
+        icon: ListIcon,
+      },
+      {
         name: "Setting",
         link: "/user/setting",
         icon: ListIcon,
