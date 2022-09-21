@@ -108,8 +108,6 @@ class CandidateProfile(models.Model):
 
 
 
-
-
 class Skill(models.Model):
     name = models.CharField(max_length=80)
     candidate = models.ForeignKey(CandidateProfile, on_delete=models.CASCADE, related_name='skills')
@@ -157,3 +155,21 @@ class Project(models.Model):
         
     def __str__(self):
         return self.details
+
+class Vacancy(models.Model):
+    title = models.CharField(max_length=80)
+    type = models.CharField(max_length=80, null=True, blank=True)
+    level = models.CharField(max_length=80, null=True, blank=True)
+    salary = models.CharField(max_length=80, null=True, blank=True)
+    qualifications = models.TextField(null=True, blank=True)
+    benefits = models.CharField(max_length=100, null=True, blank=True)
+    
+    work_location = models.CharField(max_length=100, null=True, blank=True)
+    
+    description = models.TextField(null=True)
+    employer = models.ForeignKey(EmployerProfile, on_delete=models.CASCADE, related_name='vacancies')
+    created_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
+    
+    def __str__(self):
+        return self.title
