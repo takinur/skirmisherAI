@@ -9,10 +9,10 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 from rest_framework.parsers import MultiPartParser, FormParser
 
-from .serializers import CandidateProfileSerializer, FileSerializer, UserCreateSerializer, MyTokenObtainPairSerializer
+from .serializers import CandidateProfileSerializer, FileSerializer, UserCreateSerializer, MyTokenObtainPairSerializer, VacancySerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from ..models import CandidateProfile, EmployerProfile
+from ..models import CandidateProfile, EmployerProfile, Vacancy
 from .serializers import EmployerProfileSerializer
 
 # Machine Leaning Model from 
@@ -198,3 +198,25 @@ class FileUploadView(APIView):
             return Response(str(saved_file.file), status=status.HTTP_201_CREATED)
         else:
             return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        
+class VacancyView(APIView):
+    # permission_classes = [permissions.IsAuthenticated]
+    
+    # Get all vacancies
+    def get(self, request, *args, **kwargs):
+        vacancies = Vacancy.objects.all()
+        serializer = VacancySerializer(vacancies, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    # Create new vacancy
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        serializer = VacancySerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
