@@ -18,6 +18,12 @@ from rest_framework_simplejwt.views import (
     TokenVerifyView
 )
 
+# ffdff
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register('trash', views.SomeFuckingViewset, basename='trash')
+
 urlpatterns = [
     path('', views.getRoutes, name='getRoutes'),
     
@@ -45,4 +51,6 @@ urlpatterns = [
     # JOB Public
     path('jobs/public/', RetriveVacancyView.as_view()),
     path('jobs/public/<int:vacancy_id>', DetailedVacancyView.as_view()),
-]
+] 
+
+urlpatterns += router.urls
