@@ -249,4 +249,29 @@ class DetailedVacancyView(APIView):
     
         return Response(status=status.HTTP_400_BAD_REQUEST, data={'message': 'Vacancy not found.'})
                
+from rest_framework import viewsets
+from rest_framework import mixins
+
+# Do not include delete method
+class CreateListRetrieveViewSet(mixins.CreateModelMixin,
+                                mixins.ListModelMixin,
+                                mixins.RetrieveModelMixin,
+                                viewsets.GenericViewSet):
+    """
+    A viewset that provides `retrieve`, `create`, and `list` actions.
+
+    To use it, override the class and set the `.queryset` and
+    `.serializer_class` attributes.
+    """
+    pass
+class SomeFuckingViewset(CreateListRetrieveViewSet):
+    # authentication_classes = [permissions.IsAuthenticated]
+    queryset = CandidateProfile.objects.all()
+    serializer_class = CandidateProfileSerializer
     
+# With every fucking Methods/actions
+
+# class SomeFuckingViewset(viewsets.ModelViewSet):
+#     # authentication_classes = [permissions.IsAuthenticated]
+#     queryset = CandidateProfile.objects.all()
+#     serializer_class = CandidateProfileSerializer
