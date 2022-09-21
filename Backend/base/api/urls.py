@@ -27,4 +27,6 @@ urlpatterns = [
     # Cand PROFILE
     path('account/candidate/', views.CandidateProfileView.as_view()),
     path('account/candidate/<int:user_id>', views.CandidateProfileView.as_view()),
+    
+    #TODO: JOB 
 ]

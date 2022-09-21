@@ -15,6 +15,8 @@ import Footer from "./components/Footer";
 import Logout from "./pages/Auth/Logout";
 import { NotFound } from "./pages/Error";
 
+import { jobs as Empjobs } from "./pages/Employer/jobs";
+
 import UserProfile from "./pages/Auth/UserProfile";
 
 function App() {
@@ -27,18 +29,18 @@ function App() {
 
         {/* ProtectedRoutes */}
         <Route element={<ProtectedRoute />}>
-          <Route path="/about" element={<AboutPage />} />
-        </Route>
-        <Route element={<ProtectedRoute />}>
+
           <Route path="/user/profile" element={<UserProfile />} />
-        </Route>
-        <Route element={<ProtectedRoute />}>
+   
           <Route path="/dashboard" element={<Dashboard />} />
-        </Route>
-        <Route element={<ProtectedRoute />}>
+
+          <Route path="/employer/jobs" element={<Empjobs />} />
+
           <Route path="/logout" element={<Logout />} />
         </Route>
         {/* End Protected Routes */}
+        
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route
           path="*"

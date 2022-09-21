@@ -165,7 +165,7 @@ class CandidateProfileView(APIView):
             socili = set(ext_data['social_links'])
             projects = set(ext_data['projects'])
             
-            # TODO: Start with experience
+            #Parse Experience
             exp_data = {}
             if exp is not None: 
                 exp_data['name'] = exp[0]
