@@ -218,9 +218,9 @@ class VacancyView(viewsets.ModelViewSet):
     def get_queryset(self):
         emp_id = self.request.query_params.get('emp_id', None)
         if emp_id is not None:
-            return Vacancy.objects.filter(employer_id=emp_id)
-        return Vacancy.objects.all()
-
+            return Vacancy.objects.filter(employer_id=emp_id).order_by('-created_at')
+        # Data not found return empty queryset
+        return Vacancy.objects.none()
 
 # Custom Viewset for Job Views
 class VacancyPublicViewSet(
