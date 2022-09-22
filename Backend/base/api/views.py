@@ -36,7 +36,13 @@ def getRoutes(request):
         '/api/auth/token/verify/',
         '/api/auth/register/',
         '/api/auth/user/',
-        '/api/employer/'
+        '/api/employer/',
+        '/api/employer/<int:user_id>',
+        '/api/candidate/',
+        '/api/candidate/<int:user_id>',
+        '/api/upload/resume/',
+        '/api/jobs/',
+        '/api/jobs-public/',
     ]
     
     return Response(routes)
@@ -205,9 +211,15 @@ class FileUploadView(APIView):
 #Job Views for Employer / Recruiter
 class VacancyView(viewsets.ModelViewSet):
     # permission_classes = [permissions.IsAuthenticated]
-    queryset = Vacancy.objects.order_by('-created_at')
+    # queryset = Vacancy.objects.order_by('-created_at')
     serializer_class = VacancySerializer
-
+    
+    # Return all vacancies for employer
+    def get_queryset(self):
+        emp_id = self.request.query_params.get('emp_id', None)
+        if emp_id is not None:
+            return Vacancy.objects.filter(employer_id=emp_id)
+        return Vacancy.objects.all()
 
 
 # Custom Viewset for Job Views
