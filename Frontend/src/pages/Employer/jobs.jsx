@@ -12,7 +12,7 @@ export const jobs = () => {
   const API = useAxiosPrivate();
 
   const empID = 2;
-/*
+
   //React query to fetch Jobs
   const { isLoading, isError, data } = useQuery("jobs", fetchJobs, {
     refetchOnWindowFocus: false,
@@ -26,53 +26,10 @@ export const jobs = () => {
   if (isLoading) return <Loading />;
   if (isError) return <h1>Error</h1>;
   console.log(data);
-*/
 
-const getData = [
-  {
-    id: 1,
-    title: "Software Engineer",
-    description: 'Some description',
-    location: 'Some location',
-    salary: 10000,
-    emp_id: 2,
-    created_at: '2021-05-01T00:00:00.000Z',
-    status : 'active'
-  },
-  {
-    id: 2,
-    title: "Deeer",
-    description: 'Some description',
-    location: 'Some location',
-    salary: 10000,
-    emp_id: 2,
-    created_at: '2021-05-01T00:00:00.000Z',
-    status : 'active'
-  },
-  {
-    id: 3,
-    title: "Dev Engineer",
-    description: 'Some description',
-    location: 'Some location',
-    salary: 10000,
-    emp_id: 2,
-    created_at: '2021-05-01T00:00:00.000Z',
-    status : 'nope'
-  },
-  {
-    id: 4,
-    title: "Electric Engineer",
-    description: 'i dont know',
-    location: 'London, UK',
-    salary: 5000,
-    emp_id: 2,
-    created_at: '2021-05-01T00:00:00.000Z',
-    status : 'inactive'
-  }
-]
 
-  const columns = useMemo(
-    () => [
+
+  const columns =  [
       {
   
         title: "Job Title",
@@ -84,10 +41,6 @@ const getData = [
         dataIndex: "location",
       },
       {
-        title: "Job Type",
-        dataIndex: "type",
-      },
-      {
         title: "Job Salary",
         dataIndex: "salary",
         sorter: (a, b) => a.salary - b.salary,
@@ -96,6 +49,22 @@ const getData = [
         title: "Job Status",
         dataIndex: "status",
         //Active or Inactive
+        filters: [
+          {
+            text: "Active",
+            value: "Active",
+          },
+          {
+            text: "Inactive",
+            value: "Inactive",
+          },
+       
+        ]
+      },
+      {
+        title: "Date",
+        dataIndex: "created_at",
+        sorter: (a, b) => a.created_at - b.created_at,
       },
       {
         title: 'Action',
@@ -113,10 +82,9 @@ const getData = [
           </span>
         ),
       },
-    ], []
-  )
+    ]
 
-  const data = useMemo(() => getData, [])
+  // const data = useMemo(() => getData, [])
 
   return (
     <AuthLayout title="Manage Job Posting">
