@@ -60,55 +60,58 @@ const getData = [
     status : 'nope'
   },
   {
-    id: 3,
+    id: 4,
     title: "Electric Engineer",
     description: 'i dont know',
     location: 'London, UK',
     salary: 5000,
     emp_id: 2,
     created_at: '2021-05-01T00:00:00.000Z',
-    status : 'nope'
+    status : 'inactive'
   }
 ]
 
   const columns = useMemo(
     () => [
       {
-        id: "title",
-        header: "Job Title",
-        accessorKey: "title",
-        //Not filterable
-        enableFilters : false,
+  
+        title: "Job Title",
+        dataIndex: "title",
+        sorter: (a, b) => a.title - b.title,
       },
       {
-        id: "description",
-        header: "Job Description",
-        accessorKey: "description",
+        title: "Job Location",
+        dataIndex: "location",
       },
       {
-        id: "location",
-        header: "Job Location",
-        accessorKey: "location",
+        title: "Job Type",
+        dataIndex: "type",
       },
       {
-        id: "type",
-        header: "Job Type",
-        accessorKey: "type",
+        title: "Job Salary",
+        dataIndex: "salary",
+        sorter: (a, b) => a.salary - b.salary,
       },
       {
-        id: "category",
-        header: "Job Category",
-        accessorKey: "category",
+        title: "Job Status",
+        dataIndex: "status",
+        //Active or Inactive
       },
       {
-        id: "salary",
-        header: "Job Salary",
-        accessorKey: "salary",
-      },
-      {
-        id: "status",
-        header: "Job Status",
-        accessorKey: "status",
+        title: 'Action',
+        key: 'action',
+        sorter: false,
+        render: (record) => (
+          <span>
+            <a>Delete {record.id}</a>
+            <a>
+              <span>
+                More actions
+               
+              </span>
+            </a>
+          </span>
+        ),
       },
     ], []
   )
