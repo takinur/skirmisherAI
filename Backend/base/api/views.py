@@ -8,6 +8,9 @@ from rest_framework import permissions, status
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework import viewsets
+from rest_framework import mixins
+
 
 from .serializers import CandidateProfileSerializer, FileSerializer, UserCreateSerializer, MyTokenObtainPairSerializer, VacancySerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -200,78 +203,27 @@ class FileUploadView(APIView):
             return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
 #Job Views for Employer / Recruiter
-class VacancyView(APIView):
+class VacancyView(viewsets.ModelViewSet):
     # permission_classes = [permissions.IsAuthenticated]
-    
-    # Get all vacancies
-    def get(self, request, *args, **kwargs):       
-        vacancies = Vacancy.objects.all()
-        serializer = VacancySerializer(vacancies, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-    
-    # Create new vacancy
-    def post(self, request, *args, **kwargs):
-        data = request.data
-        serializer = VacancySerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+    queryset = Vacancy.objects.order_by('-created_at')
+    serializer_class = VacancySerializer
 
-# Jobs List View
-class RetriveVacancyView(APIView):
-    #Authentication is not required
-    def get(self, request, *args, **kwargs):
-        jobs = Vacancy.objects.all().order_by('-created_at')
-        serializer = VacancySerializer(jobs, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
 
-# Job Detail View
-class DetailedVacancyView(APIView):
-    def get_object(self, vacancy_id):
-        '''
-        Helper method to get object by id
-        '''
-        try:
-            return Vacancy.objects.get(id=vacancy_id)
-        except Vacancy.DoesNotExist:
-            return None
-    
-    # Retrive vacancy by id
-    def get(self, request, *args, **kwargs):
-        vacancy_id = kwargs['vacancy_id']
-        vacancy = self.get_object(vacancy_id)
-        if vacancy is not None:
-            serializer = VacancySerializer(vacancy)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-    
-        return Response(status=status.HTTP_400_BAD_REQUEST, data={'message': 'Vacancy not found.'})
-               
-from rest_framework import viewsets
-from rest_framework import mixins
 
-# Do not include delete method
-class CreateListRetrieveViewSet(mixins.CreateModelMixin,
-                                mixins.ListModelMixin,
-                                mixins.RetrieveModelMixin,
-                                viewsets.GenericViewSet):
+# Custom Viewset for Job Views
+class VacancyPublicViewSet(
+                            # mixins.CreateModelMixin,
+                            mixins.ListModelMixin,
+                            mixins.RetrieveModelMixin,
+                            viewsets.GenericViewSet):
     """
     A viewset that provides `retrieve`, `create`, and `list` actions.
-
-    To use it, override the class and set the `.queryset` and
-    `.serializer_class` attributes.
+    
     """
     pass
-class SomeFuckingViewset(CreateListRetrieveViewSet):
-    # authentication_classes = [permissions.IsAuthenticated]
-    queryset = CandidateProfile.objects.all()
-    serializer_class = CandidateProfileSerializer
-    
-# With every fucking Methods/actions
 
-# class SomeFuckingViewset(viewsets.ModelViewSet):
-#     # authentication_classes = [permissions.IsAuthenticated]
-#     queryset = CandidateProfile.objects.all()
-#     serializer_class = CandidateProfileSerializer
+#Job Views for Public / Candidates
+class RetriveVacancyView(VacancyPublicViewSet):
+    #Authentication is not required
+    queryset = Vacancy.objects.order_by('-created_at')
+    serializer_class = VacancySerializer
