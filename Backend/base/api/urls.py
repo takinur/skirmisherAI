@@ -9,7 +9,6 @@ from .views import (
     CandidateProfileView,
     VacancyView,
     RetriveVacancyView,
-    DetailedVacancyView,
     )
 
 from rest_framework_simplejwt.views import (
@@ -18,11 +17,14 @@ from rest_framework_simplejwt.views import (
     TokenVerifyView
 )
 
-# ffdff
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-router.register('trash', views.SomeFuckingViewset, basename='trash')
+
+router.register('jobs', VacancyView, basename='jobs')
+router.register('jobs-public', RetriveVacancyView, basename='public-jobs')
+
+
 
 urlpatterns = [
     path('', views.getRoutes, name='getRoutes'),
@@ -45,12 +47,12 @@ urlpatterns = [
     path('account/candidate/<int:user_id>', CandidateProfileView.as_view()),
     
     # JOB Private
-    path('jobs/', VacancyView.as_view()),
-    path('jobs/<int:vacancy_id>', DetailedVacancyView.as_view()),
+    # path('jobs/', VacancyView.as_view()),
+    # path('jobs/<int:vacancy_id>', DetailedVacancyView.as_view()),
     
-    # JOB Public
-    path('jobs/public/', RetriveVacancyView.as_view()),
-    path('jobs/public/<int:vacancy_id>', DetailedVacancyView.as_view()),
+    # # JOB Public
+    # path('jobs/public/', RetriveVacancyView.as_view()),
+    # path('jobs/public/<int:vacancy_id>', DetailedVacancyView.as_view()),
 ] 
 
 urlpatterns += router.urls
