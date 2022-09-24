@@ -39,13 +39,13 @@ export const Table = ({ ...props }) => {
                       className="py-3 px-6 text-left"
                     >
                       {header.isPlaceholder ? null : (
-                        <div>
+                        <div className="flex r items-center">
                           {flexRender(
                             header.column.columnDef.header,
                             header.getContext()
                           )}
                           {header.column.getCanFilter() ? (
-                            <div>
+                            <div className="ml-2">
                               <Filter column={header.column} table={table} />
                             </div>
                           ) : null}
@@ -155,12 +155,13 @@ function Filter({ column, table }) {
   return typeof firstValue === "undefined" ? (
     <span className="flex items-center gap-1"> </span>
   ) : (
+    
     <input
       type="text"
       value={column.getFilterValue() ?? ""}
       onChange={(e) => column.setFilterValue(e.target.value)}
       placeholder={`Search...`}
-      className="w-36 border shadow rounded"
+      className="border-2 w-28 border-gray-300 bg-white h-10 px-5 pr-1 rounded-lg text-sm focus:outline-none"
     />
   );
 }
