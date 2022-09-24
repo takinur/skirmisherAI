@@ -7,7 +7,6 @@ import { Loading } from "../../components/Loading";
 import { useMemo } from "react";
 import { Table } from "../../components/Table";
 
-
 export const jobs = () => {
   const API = useAxiosPrivate();
 
@@ -27,64 +26,55 @@ export const jobs = () => {
   if (isError) return <h1>Error</h1>;
   console.log(data);
 
-
-
-  const columns =  [
-      {
-  
-        title: "Job Title",
-        dataIndex: "title",
-        sorter: (a, b) => a.title - b.title,
+  //Columns for the table
+  const columns = [
+    {
+      // id: "title",
+      header: "Job Title",
+      accessorKey: "title",
+    },
+    {
+      id: "type",
+      header: "Type",
+      accessorKey: "type",
+    },
+    {
+      id: "salary",
+      header: "Salary Info",
+      accessorKey: "salary",
+      //Not filterable
+      enableColumnFilter: false,
+    },
+    {
+      id: "location",
+      header: "Location",
+      accessorKey: "work_location",
+      //Not filterable
+      enableColumnFilter: false,
+    },
+    {
+      id: "date",
+      header: "Posted On",
+      accessorKey: "created_at",
+      //Convert django date to readable format
+      cell: (row) => {
+        const date = new Date(row.getValue());
+        // Days ago format
+        const days = Math.floor((new Date() - date) / 86400000);
+        return days + " days ago";
       },
-      {
-        title: "Job Location",
-        dataIndex: "location",
-      },
-      {
-        title: "Job Salary",
-        dataIndex: "salary",
-        sorter: (a, b) => a.salary - b.salary,
-      },
-      {
-        title: "Job Status",
-        dataIndex: "status",
-        //Active or Inactive
-        filters: [
-          {
-            text: "Active",
-            value: "Active",
-          },
-          {
-            text: "Inactive",
-            value: "Inactive",
-          },
-       
-        ]
-      },
-      {
-        title: "Date",
-        dataIndex: "created_at",
-        sorter: (a, b) => a.created_at - b.created_at,
-      },
-      {
-        title: 'Action',
-        key: 'action',
-        sorter: false,
-        render: (record) => (
-          <span>
-            <a>Delete {record.id}</a>
-            <a>
-              <span>
-                More actions
-               
-              </span>
-            </a>
-          </span>
-        ),
-      },
-    ]
-
-  // const data = useMemo(() => getData, [])
+      //Not filterable
+      enableColumnFilter: false,
+    },
+    {
+      id: "actions",
+      header: "Actions",
+      accessorKey: "id",
+      cell: (row) => <span className="text-blue-500">{row.getValue()}</span>,
+      //Not filterable
+      enableColumnFilter: false,
+    },
+  ];
 
   return (
     <AuthLayout title="Manage Job Posting">
