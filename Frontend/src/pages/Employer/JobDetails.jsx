@@ -9,7 +9,6 @@ const navigate = useNavigate();
  const { id } = useParams();
 
 
-
   return (
     <AuthLayout title="Job Details">
     <div className="wrapper">

@@ -19,6 +19,7 @@ import { jobs as Empjobs } from "./pages/Employer/jobs";
 import { JobDetails } from "./pages/Employer/JobDetails";
 
 import UserProfile from "./pages/Auth/UserProfile";
+import { CreateNewJob } from "./pages/Employer/CreateNewJob";
 
 function App() {
   return (
@@ -33,10 +34,11 @@ function App() {
 
           <Route path="/user/profile" element={<UserProfile />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          
+
 
           <Route path="/employer/jobs" element={<Empjobs />} />
           <Route path="/employer/jobs/:id" element={<JobDetails />} />
+          <Route path="/employer/jobs/create" element={<CreateNewJob />} />
 
 
           <Route path="/logout" element={<Logout />} />
