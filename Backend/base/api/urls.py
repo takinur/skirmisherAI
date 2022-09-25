@@ -20,11 +20,9 @@ from rest_framework_simplejwt.views import (
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-
+# Jobs Routes
 router.register('jobs', VacancyView, basename='jobs')
 router.register('jobs-public', RetriveVacancyView, basename='public-jobs')
-
-
 
 urlpatterns = [
     path('', views.getRoutes, name='getRoutes'),

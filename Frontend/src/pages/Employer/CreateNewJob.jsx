@@ -78,11 +78,11 @@ export const CreateNewJob = () => {
   const { register, handleSubmit } = useForm();
 
   const addMutation = useMutation((data) =>
-    API.post("/account/employer/", data)
+    API.post("/jobs/", data)
   );
   const submitForm = (data) => {
     //Override form data with user id
-    data.employee = 2; //TODO: Get user id from the State
+    data.employer = 2; //TODO: Get user id from the State
     data.level = setselectedExp.name;
 
     //Unique skills array
@@ -90,25 +90,25 @@ export const CreateNewJob = () => {
     //Combine skills array
     data.qualifications = uniqueSkills.join(", ");
     console.log("TO BE SUBMIT", data);
-    // addMutation.mutate(employee);
+    addMutation.mutate(data);
   };
 
   //Navigate to Profile
   useEffect(() => {
-    // if (addMutation.isSuccess) {
-    //   toast.success("Profile Updated");
-    //   //reload page after 2 seconds
-    //   setTimeout(() => {
-    //     window.location.reload();
-    //   }, 2000);
-    // }
+    if (addMutation.isSuccess) {
+      toast.success("New job posted Succesfully!");
+      // //reload page after 2 seconds
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 2000);
+    }
     if (addMutation.error) {
       let err = addMutation.error.response.data;
 
       if (err.company_name) toast.error("Company name is required.");
       if (err.website) toast.error(err.website[0]);
 
-      console.log("Error updating Profile", err);
+      console.log("Error creating Job", err);
     }
   }, [addMutation.isSuccess, addMutation.error]);
 
