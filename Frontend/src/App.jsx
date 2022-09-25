@@ -16,6 +16,7 @@ import Logout from "./pages/Auth/Logout";
 import { NotFound } from "./pages/Error";
 
 import { jobs as Empjobs } from "./pages/Employer/jobs";
+import { JobDetails } from "./pages/Employer/JobDetails";
 
 import UserProfile from "./pages/Auth/UserProfile";
 
@@ -31,10 +32,12 @@ function App() {
         <Route element={<ProtectedRoute />}>
 
           <Route path="/user/profile" element={<UserProfile />} />
-   
           <Route path="/dashboard" element={<Dashboard />} />
+          
 
           <Route path="/employer/jobs" element={<Empjobs />} />
+          <Route path="/employer/jobs/:id" element={<JobDetails />} />
+
 
           <Route path="/logout" element={<Logout />} />
         </Route>
