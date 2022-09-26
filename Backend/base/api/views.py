@@ -211,7 +211,7 @@ class FileUploadView(APIView):
 #Job Views for Employer / Recruiter
 class VacancyView(viewsets.ModelViewSet):
     # permission_classes = [permissions.IsAuthenticated]
-    # queryset = Vacancy.objects.order_by('-created_at')
+    queryset = Vacancy.objects.order_by('-created_at')
     serializer_class = VacancySerializer
     
     # Return all vacancies for employer
@@ -220,7 +220,8 @@ class VacancyView(viewsets.ModelViewSet):
         if emp_id is not None:
             return Vacancy.objects.filter(employer_id=emp_id).order_by('-created_at')
         # Data not found return empty queryset
-        return Vacancy.objects.none()
+        return Vacancy.objects.order_by('-created_at')
+    
 
 # Custom Viewset for Job Views
 class VacancyPublicViewSet(
