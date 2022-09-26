@@ -65,35 +65,79 @@ const skills = [
 ];
 
 export const CreateNewJob = () => {
+  // const { id } = useParams(); //Parameter from Route
+  const id = 12; // TODO: Remove this line
+  const isAddMode = !id;
+
   const navigate = useNavigate();
   const API = useAxiosPrivate();
 
   const [selectedExp, setselectedExp] = useState(expLevel[0]);
   const [selectedSkill, setselectedSkill] = useState([skills[0], skills[1]]);
 
-  console.log("selected EXP", selectedExp);
-  console.log("selected SKILL", selectedSkill);
 
   //React hook form
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
 
-  const addMutation = useMutation((data) =>
-    API.post("/jobs/", data)
-  );
+  const addMutation = useMutation((data) => API.post("/jobs/", data));
+  const updateMutation = useMutation((data) => API.put(`/jobs/${id}`, data));
+
   const submitForm = (data) => {
-    //Override form data with user id
-    data.employer = 2; //TODO: Get user id from the State
-    data.level = setselectedExp.name;
+    return isAddMode ? createJob(data) : updateJob(id, data);
 
-    //Unique skills array
-    let uniqueSkills = [...new Set(selectedSkill.map((item) => item.name))];
-    //Combine skills array
-    data.qualifications = uniqueSkills.join(", ");
-    console.log("TO BE SUBMIT", data);
-    addMutation.mutate(data);
+    //Override form data with user id
+    // data.employer = 2; //TODO: Get user id from the State
+    // data.level = setselectedExp.name;
+
+    // //Unique skills array
+    // let uniqueSkills = [...new Set(selectedSkill.map((item) => item.name))];
+    // //Combine skills array
+    // data.qualifications = uniqueSkills.join(", ");
+    // console.log("TO BE SUBMIT", data);
+    // addMutation.mutate(data);
   };
 
-  //Navigate to Profile
+  function createJob(data) {
+    console.log("Create this data: ", data);
+    // return addMutation.mutate(data);
+  }
+
+  function updateJob(id, data) {
+    console.log("Update this data: ", data);
+    // return updateMutation.mutate(data);
+  }
+
+  useEffect(() => {
+    if (!isAddMode) {
+      //Fetch data with ID
+      const fetchJob = async () => {
+        const { data } = await API.get(`/jobs/${id}/`);
+        console.log("FETCHED DATA", data);
+        const fields = [
+          "title",
+          "type",
+          "work_location",
+          "benefits",
+          "description",
+          "salary",
+        ];
+        // const tempexp = expLevel.find(
+        //   // (item) => item.name === data['level']
+        // );
+        // setselectedExp(tempexp);
+        setselectedSkill([skills[2], skills[3]]);
+        //Set form values from returned data
+        fields.forEach((field) => setValue(field, data[field]));
+      };
+      // Call the async function
+      fetchJob();
+
+  
+    }
+  }, []);
+
+  /*
+  //Navigate to Jobs Page
   useEffect(() => {
     if (addMutation.isSuccess) {
       toast.success("New job posted Succesfully!");
@@ -112,7 +156,9 @@ export const CreateNewJob = () => {
     }
   }, [addMutation.isSuccess, addMutation.error]);
 
-  const isLoading = addMutation.isLoading;
+  const isLoading = addMutation.isLoading; */
+
+  const isLoading = false;
 
   return (
     <AuthLayout title="Add New Job">
@@ -179,7 +225,7 @@ export const CreateNewJob = () => {
             </div>
             <div className="wrapper md:grid grid-cols-2">
               <div className="mt-4 mr-2">
-                <Label htmlFor="phone">Benefits</Label>
+                <Label htmlFor="benefits">Benefits</Label>
                 <Input
                   id="benefits"
                   type="text"
@@ -191,7 +237,7 @@ export const CreateNewJob = () => {
                 </span>
               </div>
               <div className="mt-4 ">
-                <Label htmlFor="phone">Experience</Label>
+                <Label htmlFor="expLevel">Experience</Label>
                 <SelectListBox
                   items={expLevel}
                   selected={selectedExp}
@@ -200,7 +246,7 @@ export const CreateNewJob = () => {
               </div>
             </div>
             <div className="mt-4 ">
-              <Label htmlFor="phone">Qualifications for Job</Label>
+              <Label htmlFor="skills">Qualifications for Job</Label>
               <SelectListBox
                 items={skills}
                 selected={selectedSkill}

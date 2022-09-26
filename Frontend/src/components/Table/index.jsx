@@ -87,13 +87,13 @@ export const Table = ({ ...props }) => {
         <span className="text-sm text-gray-700 dark:text-gray-400">
           Showing
           <span className="font-semibold text-gray-900 dark:text-white mx-1">
-            {table.getRowModel().rows.length}
+          {table.getState().pagination.pageIndex + 1}
           </span>
            out of
           <span className="font-semibold text-gray-900 dark:text-white mx-1">
-            {table.getRowModel().rows.length}
+            {table.getPageCount()}
           </span>
-          Entries
+          Pages
         </span>
         <div className="inline-flex mt-2 xs:mt-0">
           <button
