@@ -1,11 +1,13 @@
 import React from "react";
-import {Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-export const NoExInfo = ({...props}) => {
+export const NoExInfo = ({ ...props }) => {
   return (
     <Link
-    to={props.to}
-     className="flex items-center hover:opacity-90 cursor-pointer justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple">
+      {...props}
+      to={props.to}
+      className="flex items-center hover:opacity-90 cursor-pointer justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
+    >
       <div className="flex items-center justify-center">
         <div className="alert-icon flex items-center bg-blue-100 border-2 border-blue-500 justify-center h-10 w-10 flex-shrink-0 rounded-full mr-2">
           <span className="text-blue-600">
@@ -18,10 +20,11 @@ export const NoExInfo = ({...props}) => {
             </svg>
           </span>
         </div>
-      <span className="text-base" >{props.text}</span>
+        <span className="text-base">{props.text}</span>
       </div>
       <span className="text-base">
-        Lets set it now<span>→</span>
+        {props.callact ? props.callact : "Lets set it now"}
+        <span className="ml-1">→</span>
       </span>
     </Link>
   );
