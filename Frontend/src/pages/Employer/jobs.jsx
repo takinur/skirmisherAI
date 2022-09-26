@@ -12,7 +12,8 @@ export const jobs = () => {
   const API = useAxiosPrivate();
 
   const empID = 2; //Hardcoded for now
-
+  const employer = 2; //Hardcoded for now
+  
   //React query to fetch Jobs
   const { isLoading, isError, data } = useQuery("jobs", fetchJobs, {
     refetchOnWindowFocus: false,
@@ -82,13 +83,15 @@ export const jobs = () => {
       <div className="wrapper">
         <Link
         to={`/employer/jobs/create`}
+        state={{ employer: employer }}
+
           type="button"
           className="mt-4 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           Post a new Job
           <svg
             aria-hidden="true"
-            class="ml-2 -mr-1 w-5 h-5"
+            className="ml-2 -mr-1 w-5 h-5"
             fill="currentColor"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"

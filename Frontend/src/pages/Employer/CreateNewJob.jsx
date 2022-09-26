@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { toast } from "react-toastify";
@@ -66,7 +66,12 @@ const skills = [
 
 export const CreateNewJob = () => {
   // const { id } = useParams(); //Parameter from Route
-  const id = 12; // TODO: Remove this line
+  const id = null; // TODO: Remove this line  
+  const empId = 2; // Hardcoded for now
+  const location = useLocation();
+  const employerId = location.state?.employer;
+  console.log('Required ID', employerId, location);
+
   const isAddMode = !id;
 
   const navigate = useNavigate();
@@ -75,36 +80,31 @@ export const CreateNewJob = () => {
   const [selectedExp, setselectedExp] = useState(expLevel[0]);
   const [selectedSkill, setselectedSkill] = useState([skills[0], skills[1]]);
 
-
   //React hook form
   const { register, handleSubmit, setValue } = useForm();
 
-  const addMutation = useMutation((data) => API.post("/jobs/", data));
-  const updateMutation = useMutation((data) => API.put(`/jobs/${id}`, data));
-
+  const addMutation = useMutation(
+    async (data) => await API.post("/jobs/", data)
+  );
+  const updateMutation = useMutation(
+    async (data) => await API.put(`/jobs/${id}/`, data)
+  );
+  
+  //Handle form submit event
   const submitForm = (data) => {
     return isAddMode ? createJob(data) : updateJob(id, data);
-
-    //Override form data with user id
-    // data.employer = 2; //TODO: Get user id from the State
-    // data.level = setselectedExp.name;
-
-    // //Unique skills array
-    // let uniqueSkills = [...new Set(selectedSkill.map((item) => item.name))];
-    // //Combine skills array
-    // data.qualifications = uniqueSkills.join(", ");
-    // console.log("TO BE SUBMIT", data);
-    // addMutation.mutate(data);
   };
 
   function createJob(data) {
     console.log("Create this data: ", data);
-    // return addMutation.mutate(data);
+    data.employer = empId;
+    return addMutation.mutate(data);
   }
 
   function updateJob(id, data) {
     console.log("Update this data: ", data);
-    // return updateMutation.mutate(data);
+    data.employer = empId;
+    return updateMutation.mutate(data);
   }
 
   useEffect(() => {
@@ -131,10 +131,26 @@ export const CreateNewJob = () => {
       };
       // Call the async function
       fetchJob();
-
-  
     }
-  }, []);
+
+    if(addMutation.isSuccess){
+      toast.success("Job Posted successfully");
+      // navigate("/employer/dashboard");
+    }
+    if(updateMutation.isSuccess){
+      toast.success("Job updated successfully");
+      // navigate("/employer/dashboard");
+    }
+    if(addMutation.isError){
+      toast.error("Something went wrong");
+      console.log(updateMutation.error);
+    }
+    if(updateMutation.isError){
+      toast.error("Something went wrong");
+      console.log(updateMutation.error);
+    }
+
+  }, [updateMutation.isSuccess, updateMutation.isError]);
 
   /*
   //Navigate to Jobs Page
