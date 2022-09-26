@@ -64,7 +64,7 @@ const skills = [
   { name: "Laravel", id: 36 },
 ];
 
-export const CreateNewJob = () => {
+export const CreateUpdateJob = () => {
   const navigate = useNavigate();
   const API = useAxiosPrivate();
 
@@ -110,7 +110,7 @@ export const CreateNewJob = () => {
       //Fetch data with ID
       const fetchJob = async () => {
         const { data } = await API.get(`/jobs/${id}/`);
-        console.log("FETCHED DATA", data);
+        // console.log("FETCHED DATA", data);
         const fields = [
           "title",
           "type",
