@@ -65,45 +65,43 @@ const skills = [
 ];
 
 export const CreateNewJob = () => {
-  // const { id } = useParams(); //Parameter from Route
-  const id = null; // TODO: Remove this line  
-  const empId = 2; // Hardcoded for now
-  const location = useLocation();
-  const employerId = location.state?.employer;
-  console.log('Required ID', employerId, location);
-
-  const isAddMode = !id;
-
   const navigate = useNavigate();
   const API = useAxiosPrivate();
 
+  const { id } = useParams(); //Parameter from Route
+  const isAddMode = !id;
+
+  const location = useLocation();
+  const employerId = location.state?.employer; //Employer ID from the state
+
+  //State for the form
   const [selectedExp, setselectedExp] = useState(expLevel[0]);
   const [selectedSkill, setselectedSkill] = useState([skills[0], skills[1]]);
 
   //React hook form
   const { register, handleSubmit, setValue } = useForm();
 
+  //React query mutations
   const addMutation = useMutation(
     async (data) => await API.post("/jobs/", data)
   );
   const updateMutation = useMutation(
     async (data) => await API.put(`/jobs/${id}/`, data)
   );
-  
+
   //Handle form submit event
   const submitForm = (data) => {
     return isAddMode ? createJob(data) : updateJob(id, data);
   };
 
   function createJob(data) {
-    console.log("Create this data: ", data);
-    data.employer = empId;
+    // console.log("Create this data: ", data);
+    data.employer = employerId;
     return addMutation.mutate(data);
   }
-
   function updateJob(id, data) {
-    console.log("Update this data: ", data);
-    data.employer = empId;
+    // console.log("Update this data: ", data);
+    data.employer = employerId;
     return updateMutation.mutate(data);
   }
 
@@ -133,55 +131,38 @@ export const CreateNewJob = () => {
       fetchJob();
     }
 
-    if(addMutation.isSuccess){
-      toast.success("Job Posted successfully");
-      // navigate("/employer/dashboard");
-    }
-    if(updateMutation.isSuccess){
-      toast.success("Job updated successfully");
-      // navigate("/employer/dashboard");
-    }
-    if(addMutation.isError){
-      toast.error("Something went wrong");
-      console.log(updateMutation.error);
-    }
-    if(updateMutation.isError){
-      toast.error("Something went wrong");
-      console.log(updateMutation.error);
-    }
-
-  }, [updateMutation.isSuccess, updateMutation.isError]);
-
-  /*
-  //Navigate to Jobs Page
-  useEffect(() => {
     if (addMutation.isSuccess) {
-      toast.success("New job posted Succesfully!");
-      // //reload page after 2 seconds
-      // setTimeout(() => {
-      //   window.location.reload();
-      // }, 2000);
+      toast.success("Job Posted successfully");
+      setTimeout(() => {
+        navigate(-1);
+      }, 2000);
     }
-    if (addMutation.error) {
-      let err = addMutation.error.response.data;
-
-      if (err.company_name) toast.error("Company name is required.");
-      if (err.website) toast.error(err.website[0]);
-
-      console.log("Error creating Job", err);
+    if (updateMutation.isSuccess) {
+      toast.success("Job updated successfully");
+      //Navigate after 2 seconds
+      setTimeout(() => {
+        navigate(-1);
+      }, 2000);
     }
-  }, [addMutation.isSuccess, addMutation.error]);
-
-  const isLoading = addMutation.isLoading; */
-
-  const isLoading = false;
+    //TODO: Handle errors
+    if (addMutation.isError) {
+      toast.error("Something went wrong");
+      console.log(updateMutation.error);
+    }
+    if (updateMutation.isError) {
+      toast.error("Something went wrong");
+      console.log(updateMutation.error);
+    }
+  }, [updateMutation.isError, updateMutation.isSuccess, addMutation.isError, addMutation.isSuccess ]);
+  //Loading state
+  const isLoading = addMutation.isLoading || updateMutation.isLoading;
 
   return (
     <AuthLayout title="Add New Job">
       <div className="flex flex-col sm:justify-center items-center pt-6 sm:pt-0 ">
         <div className="w-full sm:max-w-2xl mt-6 px-6 py-4 bg-gray-200 shadow-md overflow-hidden sm:rounded-lg">
           <div className="text-center mb-7">
-            <h2 className="text-3xl">Post new job for talent hiring</h2>
+            <h2 className="text-3xl font-bold text-gray-700  ">{isAddMode ? 'Post new job for talent hiring' : 'Change posted Job' }</h2>
           </div>
           <form onSubmit={handleSubmit(submitForm)}>
             <div className="mt-1 flex-auto">
@@ -288,7 +269,7 @@ export const CreateNewJob = () => {
                 })}
                 disabled={isLoading}
               >
-                Save Changes
+                {isAddMode ? "Post Job" : "Update Job"}
               </ButtonDefault>
             </div>
           </form>
