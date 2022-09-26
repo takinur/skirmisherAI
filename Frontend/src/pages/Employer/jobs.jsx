@@ -59,6 +59,9 @@ export const jobs = () => {
     const res = await API.get(`/jobs?emp_id=${employer}`);
     return res.data;
   }
+  //TODO: Call for jobs only if profile exist
+  //Change color probably
+  //Add conditonal rendering
 
   console.log("Jobs returned :", data);
 
