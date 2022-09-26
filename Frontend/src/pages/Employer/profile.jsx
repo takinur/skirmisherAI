@@ -25,6 +25,7 @@ export const Profile = (props) => {
   if (isError) return <EmpProfileForm user={props.user} />;
   //Return detailed profile view
   if (data) return DetailedProfileView(data, props.user);
+
 };
 
 function DetailedProfileView(company, user) {
