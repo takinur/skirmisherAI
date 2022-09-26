@@ -13,7 +13,7 @@ export const jobs = () => {
 
   const empID = 2; //Hardcoded for now
   const employer = 2; //Hardcoded for now
-  
+
   //React query to fetch Jobs
   const { isLoading, isError, data } = useQuery("jobs", fetchJobs, {
     refetchOnWindowFocus: false,
@@ -72,7 +72,7 @@ export const jobs = () => {
       id: "actions",
       header: "Actions",
       accessorKey: "id",
-      cell: (row) => <Actions row={row.getValue()} />,
+      cell: (row) => <Actions row={row.getValue()} employer={employer} />,
       //Not filterable
       enableColumnFilter: false,
     },
@@ -82,9 +82,8 @@ export const jobs = () => {
     <AuthLayout title="Manage Job Posting">
       <div className="wrapper">
         <Link
-        to={`/employer/jobs/create`}
-        state={{ employer: employer }}
-
+          to={`/employer/jobs/create`}
+          state={{ employer: employer }}
           type="button"
           className="mt-4 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
@@ -110,11 +109,11 @@ export const jobs = () => {
 };
 
 //Actions column
-function Actions({ row }) {
+function Actions({ row, employer }) {
   return (
     <div className="flex item-center">
       <div className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-        <Link to={`/employer/jobs/${row}`}>
+        <Link to={`/employer/jobs/${row}/view`}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -137,19 +136,21 @@ function Actions({ row }) {
         </Link>
       </div>
       <div className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-          />
-        </svg>
+        <Link to={`/employer/jobs/${row}/edit`} state={{ employer: employer }}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+            />
+          </svg>
+        </Link>
       </div>
       <div className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
         <svg
