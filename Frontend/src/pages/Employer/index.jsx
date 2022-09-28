@@ -6,33 +6,27 @@ import { useSelector } from "react-redux";
 import { NoExInfo } from "../../components/Alerts";
 import { Loading } from "../../components/Loading";
 
+import { useProfile } from "../../hooks/useProfile";
+
 export const EmployerDashboard = () => {
   const API = useAxiosPrivate();
   //User from redux store
   const { user } = useSelector((state) => state.auth);
 
-  //React query to fetch profile
-  const { isLoading, isError, error, data } = useQuery(
-    "empProfile",
-    fetchProfile,
-    {
-      refetchOnWindowFocus: false,
-      retry: 2,
-    }
-  );
-  //Async function to fetch profile
-  async function fetchProfile() {
-    const res = await API.get(`/account/employer/${user.id}`);
-    return res.data;
-  }
+  //Custom hook to check if user profile exist
+  const {
+    isLoading: empLoading,
+    isError: empErr,
+    data: employer,
+  } = useProfile(); //Pass retry Agument :INT
 
 
-  console.log("From dashindex Data:", data);
+  console.log("From dashindex Data:", employer);
 
   //Conditional rendering
   const renderDetails = () => {
-    if (isLoading) return <Loading />;
-    if (isError && error.request.status === 400) return <NoExInfo to="/user/profile" text='It seems that you have not provided additional details! ' />;
+    if (empLoading) return <Loading />;
+    if (empErr) return <NoExInfo to="/user/profile" text='It seems that you have not provided additional details! ' />;
     // if (data) return <Greeting data={data} />;
   };
 

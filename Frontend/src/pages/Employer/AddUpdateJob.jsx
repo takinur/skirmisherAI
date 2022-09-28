@@ -153,16 +153,31 @@ export const CreateUpdateJob = () => {
       toast.error("Something went wrong");
       console.log(updateMutation.error);
     }
-  }, [updateMutation.isError, updateMutation.isSuccess, addMutation.isError, addMutation.isSuccess ]);
+  }, [
+    updateMutation.isError,
+    updateMutation.isSuccess,
+    addMutation.isError,
+    addMutation.isSuccess,
+  ]);
   //Loading state
   const isLoading = addMutation.isLoading || updateMutation.isLoading;
 
   return (
     <AuthLayout title="Add New Job">
+      <ButtonDefault
+        onClick={() =>  navigate(-1)}
+        className={classNames("ml-5 md:mt-2 !bg-purple-600")}
+      >
+        Go Back
+      </ButtonDefault>
       <div className="flex flex-col sm:justify-center items-center pt-6 sm:pt-0 ">
         <div className="w-full sm:max-w-2xl mt-6 px-6 py-4 bg-gray-200 shadow-md overflow-hidden sm:rounded-lg">
           <div className="text-center mb-7">
-            <h2 className="text-3xl font-bold text-gray-700  ">{isAddMode ? 'Post new job for talent hiring' : 'Change posted Job' }</h2>
+            <h2 className="text-3xl font-bold text-gray-700  ">
+              {isAddMode
+                ? "Post new job for talent hiring"
+                : "Change posted Job"}
+            </h2>
           </div>
           <form onSubmit={handleSubmit(submitForm)}>
             <div className="mt-1 flex-auto">
