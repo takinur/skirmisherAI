@@ -2,13 +2,13 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-200">
+    <footer className="bg-gray-200 dark:bg-slate-600">
       <div className="max-w-5xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
-        <div className="flex justify-center text-teal-600">
+        <div className="flex justify-center text-teal-600 dark:text-zinc-200">
             hehe LOGO
         </div>
 
-        <p className="max-w-md mx-auto mt-6 leading-relaxed text-center text-gray-500">
+        <p className="max-w-md mx-auto mt-6 leading-relaxed text-center text-gray-500 dark:text-zinc-300">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt
           consequuntur amet culpa cum itaque neque.
         </p>
@@ -21,7 +21,7 @@ const Footer = () => {
           <ul className="flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
             <li>
               <a
-                className="text-gray-700 transition hover:text-gray-700/75"
+                className="text-gray-700 transition hover:text-gray-700/75 dark:text-zinc-100"
                 href="/"
               >
                 About
