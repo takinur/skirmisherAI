@@ -172,7 +172,7 @@ export const CreateUpdateJob = () => {
         Go Back
       </ButtonDefault>
       <div className="flex flex-col sm:justify-center items-center pt-6 sm:pt-0 ">
-        <div className="w-full sm:max-w-2xl mt-6 px-6 py-4 bg-gray-200 shadow-md overflow-hidden sm:rounded-lg">
+        <div className="w-full sm:max-w-2xl mt-6 px-6 py-4 bg-gray-200 shadow-md overflow-hidden sm:rounded-lg dark:bg-gray-200 ">
           <div className="text-center mb-7">
             <h2 className="text-3xl font-bold text-gray-700  ">
               {isAddMode
@@ -208,7 +208,7 @@ export const CreateUpdateJob = () => {
               </span>
             </div>
             <div className="wrapper md:flex">
-              <div className="mt-4 mr-2 flex-auto">
+              <div className="mt-4 md:mr-2 flex-auto">
                 <div className="wrapper">
                   <Label htmlFor="salary">Salary (Optional)</Label>
                   <Input
@@ -237,7 +237,7 @@ export const CreateUpdateJob = () => {
               </div>
             </div>
             <div className="wrapper md:grid grid-cols-2">
-              <div className="mt-4 mr-2">
+              <div className="mt-4 md:mr-2">
                 <Label htmlFor="benefits">Benefits</Label>
                 <Input
                   id="benefits"
