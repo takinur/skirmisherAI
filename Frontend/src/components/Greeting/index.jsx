@@ -15,12 +15,12 @@ export const Greeting = ({ props }) => {
     }
   };
   return (
-    <div className="w-full flex justify-between mt-2 rounded-md h-24 bg-slate-50">
+    <div className="w-full flex justify-between mt-2 rounded-md h-24 bg-slate-50 dark:bg-slate-500">
       <div className="flex flex-col justify-center ml-4">
-        <h1 className="text-2xl font-bold text-slate-900 font-mono">
+        <h1 className="text-2xl font-bold text-slate-900 font-mono dark:text-slate-200">
           {greeting()}, {props ? props.name : "MR Unknown"}.
         </h1>
-        <p className="text-slate-900 font-sans">
+        <p className="text-slate-900 font-sans dark:text-slate-300">
           {dayjs().format("dddd, MMMM D, YYYY")}
         </p>
       </div>

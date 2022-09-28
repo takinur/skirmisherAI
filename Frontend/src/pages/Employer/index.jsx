@@ -34,7 +34,7 @@ export const EmployerDashboard = () => {
     <div className="h-full">
       <Greeting props={user} />
 
-      <div className="w-full mt-4 rounded-md bg-slate-100 min-h-screen">
+      <div className="w-full mt-4 rounded-md bg-slate-100 min-h-screen dark:bg-slate-400">
         {renderDetails()}
       </div>
     </div>
