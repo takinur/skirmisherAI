@@ -274,17 +274,6 @@ const SideBar = ({ navbar, toggleNavbar }) => {
             </button>
           </li>
         </ul>
-        <div className="px-6 my-6">
-          <button
-            className="align-bottom inline-flex items-center justify-center cursor-pointer leading-5 transition-colors duration-150 font-medium focus:outline-none px-4 py-2 rounded-lg text-sm text-white bg-purple-600 border border-transparent active:bg-purple-600 hover:bg-purple-700 focus:shadow-outline-purple"
-            type="button"
-          >
-            Create account
-            <span className="ml-2" aria-hidden="true">
-              +
-            </span>
-          </button>
-        </div>
       </div>
     </aside>
   );
