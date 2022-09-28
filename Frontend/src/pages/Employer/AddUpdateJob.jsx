@@ -12,6 +12,7 @@ import AuthLayout from "../Layout/Auth";
 import Label from "../../components/Label";
 import Input from "../../components/Input";
 import ButtonDefault from "../../components/ButtonDefault";
+import TextArea from "../../components/TextArea";
 
 const expLevel = [
   { name: "Freshers are encourged" },
@@ -165,7 +166,7 @@ export const CreateUpdateJob = () => {
   return (
     <AuthLayout title="Add New Job">
       <ButtonDefault
-        onClick={() =>  navigate(-1)}
+        onClick={() => navigate(-1)}
         className={classNames("ml-5 md:mt-2 !bg-purple-600")}
       >
         Go Back
@@ -269,13 +270,13 @@ export const CreateUpdateJob = () => {
 
             <div className="mt-4">
               <Label htmlFor="description">Other details about the job</Label>
-              <textarea
+              <TextArea
                 id="description"
                 rows="4"
-                {...register("description")}
-                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Full Job Description"
-              ></textarea>
+                className="mt-2"
+                {...register("description")}                
+                placeholder="Ex: Full Job Description"
+              />
             </div>
             <div className="mt-4 flex justify-end">
               <ButtonDefault
