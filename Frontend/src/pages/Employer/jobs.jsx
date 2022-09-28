@@ -17,6 +17,7 @@ export const jobs = () => {
   // const employer = null;
   // const id = 2;
   //React query to fetch profile
+  // Fetch id from state
   const {
     isLoading: isProfileLoading,
     isError: isProfileError,
