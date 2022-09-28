@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const NoExInfo = ({ ...props }) => {
+
   return (
     <Link
       {...props}
@@ -23,13 +24,10 @@ export const NoExInfo = ({ ...props }) => {
         <span className="text-base">{props.text}</span>
       </div>
       <span className="text-base">
-        {props.callact ? props.callact : "Lets set it now"}
+        {props.callToact ? props.callToact : "Lets set it now"}
         <span className="ml-1">→</span>
       </span>
     </Link>
   );
 };
 
-// export const CloseAbleAlert = () => {
-//   return <div>SOme closeable Alert</div>;
-// };

@@ -22,7 +22,7 @@ export const jobs = () => {
 
   // console.log("FROM HOOK", employer);
 
-  const isEnabled = employer !== undefined ? true : false;
+  const isEnabled = employer !== undefined || null ? true : false;
 
   // React query to fetch Jobs
   const { isLoading, data } = useQuery(
@@ -34,11 +34,11 @@ export const jobs = () => {
     {
       refetchOnWindowFocus: false,
       retry: 2,
-      enabled: isEnabled, //Disable query if employer is null
+      enabled: isEnabled, //Disable query if employer is null / undefined
     }
   );
 
-  console.log("Jobs;", data);
+  // console.log("Jobs;", data);
 
   //Conditional rendering
   const renderDetails = () => {
@@ -55,7 +55,7 @@ export const jobs = () => {
         <NoExInfo
           to="/employer/jobs/create"
           text="You have not posted any jobs"
-          callact="Post a new Job"
+          callToact="Post a new Job"
           state={{ employer: employer.id }}
         />
       );
