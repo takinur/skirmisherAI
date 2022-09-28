@@ -6,65 +6,87 @@ import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 import { Loading } from "../../components/Loading";
 import { Table } from "../../components/Table";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { NoExInfo } from "../../components/Alerts";
+
+import { useProfile } from "../../hooks/useProfile";
 
 export const jobs = () => {
   const API = useAxiosPrivate();
 
-  //User from state
-  const { user } = useSelector((state) => state.auth);
-  // const employer = null;
-  // const id = 2;
-  //React query to fetch profile
-  // Fetch id from state
+  //Custom hook to check if user profile exist
   const {
-    isLoading: isProfileLoading,
-    isError: isProfileError,
-    error: profileErr,
-    data: profileData,
-  } = useQuery("empProfile", fetchProfile, {
-    refetchOnWindowFocus: false,
-    retry: 2,
-  });
-  //Async function to fetch profile
-  async function fetchProfile() {
-    const res = await API.get(`/account/employer/${user.id}`);
-    return res.data;
-  }
+    isLoading: empLoading,
+    isError: empErr,
+    data: employer,
+  } = useProfile();
+
+  // console.log("FROM HOOK", employer);
+
+  const isEnabled = employer !== undefined ? true : false;
+
+  // React query to fetch Jobs
+  const { isLoading, data } = useQuery(
+    "jobs",
+    async () => {
+      const res = await API.get(`/jobs?emp_id=${employer?.id}`);
+      return res.data;
+    },
+    {
+      refetchOnWindowFocus: false,
+      retry: 2,
+      enabled: isEnabled, //Disable query if employer is null
+    }
+  );
+
+  console.log("Jobs;", data);
 
   //Conditional rendering
-  // const renderDetails = () => {
-  //   if (isProfileLoading) return <Loading />;
-  //   if (isProfileError && profileErr.request.status === 400)
-  //     return (
-  //       <NoExInfo
-  //         to="/user/profile"
-  //         text="It seems that you have not provided additional details! "
-  //       />
-  //     );
-  //   if (profileData) {
-  //   }
-  // };
+  const renderDetails = () => {
+    if (empLoading || isLoading) return <Loading />;
+    if (empErr)
+      return (
+        <NoExInfo
+          to="/user/profile"
+          text="It seems that you have not provided additional details! "
+        />
+      );
+    if (data.length === 0)
+      return (
+        <NoExInfo
+          to="/employer/jobs/create"
+          text="You have not posted any jobs"
+          callact="Post a new Job"
+          state={{ employer: employer.id }}
+        />
+      );
+    return (
+      <div className="wrapper">
+        <Link
+          to={`/employer/jobs/create`}
+          state={{ employer: employer.id }}
+          type="button"
+          className="mt-4 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+          Post a new Job
+          <svg
+            aria-hidden="true"
+            className="ml-2 -mr-1 w-5 h-5"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fillRule="evenodd"
+              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+              clipRule="evenodd"
+            ></path>
+          </svg>
+        </Link>
 
-  // const employer = profileData?.id;
-  const employer = 4;
-
-  //React query to fetch Jobs
-  const { isLoading, data } = useQuery("jobs", fetchJobs, {
-    refetchOnWindowFocus: false,
-    retry: 0,
-  });
-  //Async function to fetch Jobs
-  async function fetchJobs() {
-    const res = await API.get(`/jobs?emp_id=${employer}`);
-    return res.data;
-  }
-  //TODO: Call for jobs only if profile exist
-  //Change color probably
-  //Add conditonal rendering
-
-  console.log("Jobs returned :", data);
+        <Table columns={columns} data={data} />
+      </div>
+    );
+  };
 
   //Columns for the table
   const columns = [
@@ -116,56 +138,7 @@ export const jobs = () => {
     },
   ];
 
-  return (
-    <AuthLayout title="Manage Job Posting">
-      {isProfileLoading ? (
-        <Loading />
-      ) : isProfileError ? (
-        <NoExInfo
-          to="/user/profile"
-          text="It seems that you have not provided additional details! "
-        />
-      ) : (
-        <div className="wrapper">
-          <Link
-            to={`/employer/jobs/create`}
-            state={{ employer: employer }}
-            type="button"
-            className="mt-4 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Post a new Job
-            <svg
-              aria-hidden="true"
-              className="ml-2 -mr-1 w-5 h-5"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
-          </Link>
-          {isLoading ? (
-            <Loading />
-          ) : data ? (
-            <div className="wrapper mt-4">
-              <NoExInfo
-                to={`/employer/jobs/create`}
-                text="No job Posted yet! "
-                callact="Post a new Job"
-                state={{ employer: employer }}
-              />
-            </div>
-          ) : (
-            <Table columns={columns} data={data} />
-          )}
-        </div>
-      )}
-    </AuthLayout>
-  );
+  return <AuthLayout title="Manage Job Posting">{renderDetails()}</AuthLayout>;
 };
 
 //Actions column
