@@ -20,13 +20,18 @@ export const EmployerDashboard = () => {
     data: employer,
   } = useProfile(); //Pass retry Agument :INT
 
-
   console.log("From dashindex Data:", employer);
 
   //Conditional rendering
   const renderDetails = () => {
     if (empLoading) return <Loading />;
-    if (empErr) return <NoExInfo to="/user/profile" text='It seems that you have not provided additional details! ' />;
+    if (empErr)
+      return (
+        <NoExInfo
+          to="/user/profile"
+          text="It seems that you have not provided additional details! "
+        />
+      );
     // if (data) return <Greeting data={data} />;
   };
 
@@ -34,11 +39,9 @@ export const EmployerDashboard = () => {
     <div className="h-full">
       <Greeting props={user} />
 
-      <div className="w-full mt-4 rounded-md bg-slate-100 min-h-screen dark:bg-slate-400">
+      <div className="mt-4 min-h-screen w-full rounded-md bg-slate-100 dark:bg-slate-400">
         {renderDetails()}
       </div>
     </div>
   );
 };
-
-

@@ -167,13 +167,13 @@ export const CreateUpdateJob = () => {
     <AuthLayout title="Add New Job">
       <ButtonDefault
         onClick={() => navigate(-1)}
-        className={classNames("ml-5 md:mt-2 !bg-purple-600")}
+        className={classNames("ml-5 !bg-purple-600 md:mt-2")}
       >
         Go Back
       </ButtonDefault>
-      <div className="flex flex-col sm:justify-center items-center pt-6 sm:pt-0 ">
-        <div className="w-full sm:max-w-2xl mt-6 px-6 py-4 bg-gray-200 shadow-md overflow-hidden sm:rounded-lg dark:bg-gray-200 ">
-          <div className="text-center mb-7">
+      <div className="flex flex-col items-center pt-6 sm:justify-center sm:pt-0 ">
+        <div className="mt-6 w-full overflow-hidden bg-gray-200 px-6 py-4 shadow-md dark:bg-gray-200 sm:max-w-2xl sm:rounded-lg ">
+          <div className="mb-7 text-center">
             <h2 className="text-3xl font-bold text-gray-700  ">
               {isAddMode
                 ? "Post new job for talent hiring"
@@ -208,7 +208,7 @@ export const CreateUpdateJob = () => {
               </span>
             </div>
             <div className="wrapper md:flex">
-              <div className="mt-4 md:mr-2 flex-auto">
+              <div className="mt-4 flex-auto md:mr-2">
                 <div className="wrapper">
                   <Label htmlFor="salary">Salary (Optional)</Label>
                   <Input
@@ -236,7 +236,7 @@ export const CreateUpdateJob = () => {
                 </span>
               </div>
             </div>
-            <div className="wrapper md:grid grid-cols-2">
+            <div className="wrapper grid-cols-2 md:grid">
               <div className="mt-4 md:mr-2">
                 <Label htmlFor="benefits">Benefits</Label>
                 <Input
@@ -274,7 +274,7 @@ export const CreateUpdateJob = () => {
                 id="description"
                 rows="4"
                 className="mt-2"
-                {...register("description")}                
+                {...register("description")}
                 placeholder="Ex: Full Job Description"
               />
             </div>
