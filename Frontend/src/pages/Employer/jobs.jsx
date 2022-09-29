@@ -41,11 +41,11 @@ export const jobs = () => {
   );
 
   // console.log("Jobs;", data);
-  
+
   //Delete Method
-  const handleDelete = (id) =>{
-    console.log('deete', id)
-  }
+  const handleDelete = (id) => {
+    console.log("deete", id);
+  };
 
   //Conditional rendering
   const renderDetails = () => {
@@ -72,12 +72,12 @@ export const jobs = () => {
           to={`/employer/jobs/create`}
           state={{ employer: employer.id }}
           type="button"
-          className="mt-4 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          className="mt-4 inline-flex items-center rounded-lg bg-green-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           Post a new Job
           <svg
             aria-hidden="true"
-            className="ml-2 -mr-1 w-5 h-5"
+            className="ml-2 -mr-1 h-5 w-5"
             fill="currentColor"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
@@ -162,8 +162,8 @@ export const jobs = () => {
 //Actions column
 function Actions({ row, employer, handleDelete }) {
   return (
-    <div className="flex item-center">
-      <div className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+    <div className="item-center flex">
+      <div className="mr-2 w-4 transform hover:scale-110 hover:text-purple-500">
         <Link to={`/employer/jobs/${row}/view`}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -186,7 +186,7 @@ function Actions({ row, employer, handleDelete }) {
           </svg>
         </Link>
       </div>
-      <div className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+      <div className="mr-2 w-4 transform hover:scale-110 hover:text-purple-500">
         <Link to={`/employer/jobs/${row}/edit`} state={{ employer: employer }}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -203,7 +203,7 @@ function Actions({ row, employer, handleDelete }) {
           </svg>
         </Link>
       </div>
-      <div className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+      <div className="mr-2 w-4 transform hover:scale-110 hover:text-purple-500">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -225,10 +225,10 @@ function Actions({ row, employer, handleDelete }) {
 function ConfirmModal({ isModal, closeModal }) {
   return (
     <HeadlessModal isOpen={isModal} closeModal={closeModal}>
-      <div className="text-center p-5 flex-auto justify-center">
+      <div className="flex-auto justify-center p-5 text-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="w-4 h-4 -m-1 flex items-center text-red-500 mx-auto"
+          className="-m-1 mx-auto flex h-4 w-4 items-center text-red-500"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -242,7 +242,7 @@ function ConfirmModal({ isModal, closeModal }) {
         </svg>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="w-16 h-16 flex items-center text-red-500 mx-auto"
+          className="mx-auto flex h-16 w-16 items-center text-red-500"
           viewBox="0 0 20 20"
           fill="currentColor"
         >
@@ -252,21 +252,21 @@ function ConfirmModal({ isModal, closeModal }) {
             clip-rule="evenodd"
           />
         </svg>
-        <h2 className="text-xl font-bold py-4 ">Are you sure?</h2>
-        <p className="text-sm text-gray-500 px-8">
+        <h2 className="py-4 text-xl font-bold ">Are you sure?</h2>
+        <p className="px-8 text-sm text-gray-500">
           Do you really want to delete your Job posting? This process cannot be
           undone
         </p>
       </div>
 
-      <div className="p-3  mt-2 text-center space-x-4 md:block">
+      <div className="mt-2  space-x-4 p-3 text-center md:block">
         <button
           onClick={closeModal}
-          className="mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100"
+          className="mb-2 rounded-full border bg-white px-5 py-2 text-sm font-medium tracking-wider text-gray-600 shadow-sm hover:bg-gray-100 hover:shadow-lg md:mb-0"
         >
           Cancel
         </button>
-        <button className="mb-2 md:mb-0 bg-red-500 border border-red-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-red-600">
+        <button className="mb-2 rounded-full border border-red-500 bg-red-500 px-5 py-2 text-sm font-medium tracking-wider text-white shadow-sm hover:bg-red-600 hover:shadow-lg md:mb-0">
           Delete
         </button>
       </div>
