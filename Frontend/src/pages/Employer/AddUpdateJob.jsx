@@ -172,9 +172,9 @@ export const CreateUpdateJob = () => {
         Go Back
       </ButtonDefault>
       <div className="flex flex-col items-center pt-6 sm:justify-center sm:pt-0 ">
-        <div className="mt-6 w-full overflow-hidden bg-gray-200 px-6 py-4 shadow-md dark:bg-gray-200 sm:max-w-2xl sm:rounded-lg ">
+        <div className="mt-6 w-full overflow-hidden bg-gray-200 px-6 py-4 shadow-md dark:bg-gray-900 sm:max-w-2xl sm:rounded-lg ">
           <div className="mb-7 text-center">
-            <h2 className="text-3xl font-bold text-gray-700  ">
+            <h2 className="text-3xl font-bold text-gray-700 dark:text-gray-300 ">
               {isAddMode
                 ? "Post new job for talent hiring"
                 : "Change posted Job"}
@@ -190,7 +190,7 @@ export const CreateUpdateJob = () => {
                 {...register("title")}
                 required
               />
-              <span className="text-sm text-gray-500">
+              <span className="text-sm text-gray-500 dark:text-slate-400">
                 <b>Example:</b> Full-Stack MERN Stack Developer
               </span>
             </div>
@@ -203,7 +203,7 @@ export const CreateUpdateJob = () => {
                 {...register("type")}
                 required
               />
-              <span className="text-sm text-gray-500">
+              <span className="text-sm text-gray-500 dark:text-slate-400">
                 <b>Example:</b> Full-Time / Remote / Part-Time
               </span>
             </div>
@@ -217,7 +217,7 @@ export const CreateUpdateJob = () => {
                     className="mt-1 block w-full"
                     {...register("salary")}
                   />
-                  <span className="text-sm text-gray-500">
+                  <span className="text-sm text-gray-500 dark:text-slate-400">
                     <b>Example:</b> $60000 - $80000 / Year
                   </span>
                 </div>
@@ -231,7 +231,7 @@ export const CreateUpdateJob = () => {
                   {...register("work_location")}
                   required
                 />
-                <span className="text-sm text-gray-500">
+                <span className="text-sm text-gray-500 dark:text-slate-400">
                   Add regions or Cities
                 </span>
               </div>
@@ -245,7 +245,7 @@ export const CreateUpdateJob = () => {
                   className="mt-1 block w-full"
                   {...register("benefits")}
                 />
-                <span className="text-sm text-gray-500">
+                <span className="text-sm text-gray-500 dark:text-slate-400">
                   <b>Example:</b> 401K, Health Insurance
                 </span>
               </div>

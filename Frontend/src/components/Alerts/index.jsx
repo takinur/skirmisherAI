@@ -24,7 +24,7 @@ export const NoExInfo = ({ ...props }) => {
         <span className="text-base">{props.text}</span>
       </div>
       <span className="text-base">
-        {props.callToact ? props.callToact : "Lets set it now"}
+        {props.callto ? props.callto : "Lets set it now"}
         <span className="ml-1">→</span>
       </span>
     </Link>
