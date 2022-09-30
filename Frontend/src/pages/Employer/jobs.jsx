@@ -60,7 +60,7 @@ export const jobs = () => {
     },
     {
       id: "date",
-      header: "Posted On",
+      header: "Posted",
       accessorKey: "created_at",
       //Convert django date to readable format
       cell: (row) => {
@@ -106,7 +106,7 @@ export const jobs = () => {
   const deleteRow = async () => {
     try {
       const response = await API.delete(`/jobs/${jobID}`);
-      console.log(response);
+      // console.log(response);
       if (response.status === 204) {
         closeModal();
         //refetch the data
@@ -132,8 +132,8 @@ export const jobs = () => {
       return (
         <NoExInfo
           to="/employer/jobs/create"
-          text="You have not posted any jobs"
-          callToact="Post a new Job"
+          text="You have not posted any jobs."
+          callto="Post a new Job"
           state={{ employer: employer.id }}
         />
       );
