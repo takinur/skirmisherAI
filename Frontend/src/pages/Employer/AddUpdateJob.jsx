@@ -136,14 +136,14 @@ export const CreateUpdateJob = () => {
       toast.success("Job Posted successfully");
       setTimeout(() => {
         navigate(-1);
-      }, 2000);
+      }, 1000);
     }
     if (updateMutation.isSuccess) {
       toast.success("Job updated successfully");
       //Navigate after 2 seconds
       setTimeout(() => {
         navigate(-1);
-      }, 2000);
+      }, 1000);
     }
     //TODO: Handle errors
     if (addMutation.isError) {
