@@ -20,6 +20,7 @@ import { JobDetails } from "./pages/Employer/JobDetails";
 
 import UserProfile from "./pages/Auth/UserProfile";
 import { CreateUpdateJob } from "./pages/Employer/AddUpdateJob";
+import { Jobs as Findwork } from "./pages/Jobs";
 
 function App() {
   return (
@@ -29,17 +30,20 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Register />} />
 
+        <Route path="/find-work" element={<Findwork />} />
+
         {/* ProtectedRoutes */}
         <Route element={<ProtectedRoute />}>
 
           <Route path="/user/profile" element={<UserProfile />} />
           <Route path="/dashboard" element={<Dashboard />} />
 
-
-          <Route path="/employer/jobs" element={<Empjobs />} />
-          <Route path="/employer/jobs/:id" element={<JobDetails />} />
-          <Route path="/employer/jobs/create" element={<CreateUpdateJob />} />
-          <Route path="/employer/jobs/:id/edit" element={<CreateUpdateJob />} />
+          <Route path="/employer/jobs" >
+            <Route index element={<Empjobs />} />
+            <Route path=":id/view" element={<JobDetails />} />
+            <Route path="create" element={<CreateUpdateJob />} />
+            <Route path=":id/edit" element={<CreateUpdateJob />} />
+          </Route>
 
 
           <Route path="/logout" element={<Logout />} />

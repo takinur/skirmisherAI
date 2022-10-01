@@ -6,8 +6,6 @@ import { Transition } from "@headlessui/react";
 import { getUserDetails } from "../features/auth/authSlice";
 import { useSelector, useDispatch } from "react-redux";
 
-import { FaMoon, FaSun } from "react-icons/fa";
-import useDarkMode from "../hooks/useDarkMode";
 
 export default function Navbar() {
   const [navbar, setNavbar] = useState(false);
@@ -75,10 +73,7 @@ export default function Navbar() {
               </Link>
             </div>
             <div className="toggle md:hidden">
-              <div className="wrapper flex">
-                <div className="mr-4 mt-[2px]">
-                  <ThemeIcon />
-                </div>
+              <div className="wrapper flex">               
                 {mobileNav()}
               </div>
               <Transition
@@ -176,9 +171,6 @@ export default function Navbar() {
                     </NavLink>
                   </li>
                 ))}
-                <li className="mt-2">
-                  <ThemeIcon />
-                </li>
                 {user ? (
                   <li>
                     <Link
@@ -271,16 +263,3 @@ export default function Navbar() {
   }
 }
 
-const ThemeIcon = () => {
-  const [darkTheme, setDarkTheme] = useDarkMode();
-  const handleMode = () => setDarkTheme(!darkTheme);
-  return (
-    <span onClick={handleMode}>
-      {darkTheme ? (
-        <FaSun size="22" className="top-navigation-icon" />
-      ) : (
-        <FaMoon size="22" className="top-navigation-icon" />
-      )}
-    </span>
-  );
-};
