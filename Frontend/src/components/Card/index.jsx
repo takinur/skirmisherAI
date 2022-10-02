@@ -2,26 +2,43 @@ import classNames from "classnames";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-export const JobCard = ({id, title, company, location, type, posted}) => {
-
-  console.log(title);
-
+export const JobCard = ({ id, title, company, location, type, posted, setJobDetails }) => {
   const [saved, setSaved] = useState(true);
+
+  //Format date to hours ago
+  const date = new Date(posted);
+  const hours = Math.floor((new Date() - date) / 1000 / 60 / 60);
+  const days = Math.floor(hours / 24);
+  const months = Math.floor(days / 30);
+  const years = Math.floor(months / 12);
+
+  const time = () => {
+    if (hours < 24) {
+      return hours + " hours ago";
+    } else if (days < 30) {
+      return days + " days ago";
+    } else if (months < 12) {
+      return months + " months ago";
+    } else {
+      return years + " years ago";
+    }
+  };
 
   const handleSave = (id) => {
     console.log("Saved", id);
     setSaved(!saved);
   };
 
-  const handleItemClick = () => {
+  const handleItemClick = (id) => {
     console.log("Clicked");
+    setJobDetails(id);
   };
 
   return (
     <div className="relative my-2 w-full cursor-pointer rounded-md bg-gray-50 py-5 px-4 hover:bg-gray-100 ">
       <div
         className="absolute top-0 left-0  h-full w-full"
-        onClick={() => handleItemClick(1)}
+        onClick={() => handleItemClick(id)}
       ></div>
       <div className="flex">
         <svg
@@ -51,7 +68,10 @@ export const JobCard = ({id, title, company, location, type, posted}) => {
           onClick={() => handleSave(2)}
         >
           <svg
-            className={classNames("h-6 w-6 hover:fill-red-500 hover:text-red-500 ", {  "text-gray-500": saved, "text-gray-500 fill-gray-500": !saved })}
+            className={classNames(
+              "h-6 w-6 hover:fill-red-500 hover:text-red-500 ",
+              { "text-gray-500": saved, "fill-gray-500 text-gray-500": !saved }
+            )}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="none"
@@ -67,61 +87,62 @@ export const JobCard = ({id, title, company, location, type, posted}) => {
       <div className="mt-3 flex justify-between">
         <div className="flex text-sm text-gray-800">
           <span className="mx-2 block bg-gray-200 px-3 py-1 font-medium text-gray-800">
-            Full Time
+            {type}
           </span>
           <span className="mx-2 block bg-gray-200 px-3 py-1 font-medium text-gray-800">
             Full Time
           </span>
         </div>
 
-        <div className="time flex">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="mt-1 h-5 w-5"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-          12h ago
+        <div className="flex">
+          <div className="wrapper mt-[7px]">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.4}
+              stroke="currentColor"
+              className="h-5 w-5"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
+          <span className="mx-1 mt-1 font-sans">{time()}</span>
         </div>
       </div>
     </div>
   );
 };
 
-
 export const JobLoading = () => {
   return (
     <div className="relative my-2 w-full cursor-pointer rounded-md bg-gray-50 py-5 px-4 hover:bg-gray-100 ">
-      <div className="animate-pulse flex">
-        <div className="h-9 w-9 bg-gray-200 rounded-md"></div>
+      <div className="flex animate-pulse">
+        <div className="h-9 w-9 rounded-md bg-gray-200"></div>
         <div className="flex-1">
-          <div className="mx-2 h-4 bg-gray-200 rounded-md"></div>
-          <div className="mx-2 mt-1 h-4 bg-gray-200 rounded-md"></div>
-          <div className="mx-2 mt-1 h-4 bg-gray-200 rounded-md"></div>
+          <div className="mx-2 h-4 rounded-md bg-gray-200"></div>
+          <div className="mx-2 mt-1 h-4 rounded-md bg-gray-200"></div>
+          <div className="mx-2 mt-1 h-4 rounded-md bg-gray-200"></div>
         </div>
         <div className="save-icon z-20 cursor-pointer ">
-          <div className="h-6 w-6 bg-gray-200 rounded-md"></div>
+          <div className="h-6 w-6 rounded-md bg-gray-200"></div>
         </div>
       </div>
       <div className="mt-3 flex justify-between">
         <div className="flex text-sm text-gray-800">
-          <div className="mx-2 h-4 bg-gray-200 rounded-md"></div>
-          <div className="mx-2 h-4 bg-gray-200 rounded-md"></div>
+          <div className="mx-2 h-4 rounded-md bg-gray-200"></div>
+          <div className="mx-2 h-4 rounded-md bg-gray-200"></div>
         </div>
 
         <div className="time flex">
-          <div className="h-5 w-5 bg-gray-200 rounded-md"></div>
-          <div className="mx-2 h-4 bg-gray-200 rounded-md"></div>
+          <div className="h-5 w-5 rounded-md bg-gray-200"></div>
+          <div className="mx-2 h-4 rounded-md bg-gray-200"></div>
         </div>
       </div>
     </div>
   );
-}
+};
