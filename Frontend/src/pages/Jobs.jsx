@@ -52,7 +52,7 @@ export const Jobs = () => {
         </div>
         <div className="mt-10 w-full">
           <div className="grid-wrapper">
-            <div className="flex flex-grow flex-col pl-10">
+            <div className="flex flex-grow flex-col md:pl-10">
               <div className="flex justify-between">
                 <div className="text-sm font-semibold text-gray-800 ">
                   Showing 46 Jobs
@@ -62,16 +62,16 @@ export const Jobs = () => {
                   <span className="menu-icon">▼</span>
                 </div>
               </div>
-              <div className="mt-4 flex flex-grow">
-                <div className="wrapper w-2/5 ">
+              <div className="mt-4 md:flex md:flex-grow">
+                <div className="wrapper md:w-2/5 ">
                   <JobCard />
                   <JobCard />
                   <JobCard />
                 </div>
-                <div className="ml-4 w-3/5 rounded-md bg-gray-50">
+                <div className="md:ml-4 md:w-3/5 rounded-md bg-gray-50">
                   <div className="flex h-40 w-full items-center justify-center rounded-t-md bg-gray-300 ">
                     <span className="font-mono font-semibold text-gray-700">
-                      Tagline One the shoulder pfff
+                      Tagline Fuck off and die
                     </span>
                   </div>
                   <div className="z-10 -mt-8 h-16 w-16 bg-gray-100 shadow-md">
@@ -81,7 +81,7 @@ export const Jobs = () => {
                     Apply Now
                   </button>
                   <div className="px-8 pt-12">
-                    <div className="flex text-gray-800 ">
+                    <div className="md:flex text-gray-800 ">
                       <div className="text-2xl font-bold">UI /UX Designer</div>
                       <div className="ml-auto flex items-center">
                         <svg
@@ -113,7 +113,7 @@ export const Jobs = () => {
                         </svg>
                       </div>
                     </div>
-                    <div className="mt-2 flex justify-between">
+                    <div className="mt-2 md:flex justify-between">
                       <div className="font-xs text-gray-700">
                         Patreon
                         <span className="loc ml-2">Londontowne, MD.</span>
@@ -122,7 +122,7 @@ export const Jobs = () => {
                         Posted 8 days ago
                       </div>
                     </div>
-                    <div className="mt-5 flex h-16 justify-between rounded-2xl bg-gray-300 px-6 py-1">
+                    <div className="mt-5 md:flex md:h-16 justify-between rounded-2xl bg-gray-300 px-6 py-1">
                       <div className="leading-7">
                         <div className="whitespace-nowrap font-semibold text-gray-800">
                           Experience
