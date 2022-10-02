@@ -22,6 +22,24 @@ export const jobs = () => {
     setModal(false);
     setJobID(null);
   };
+  const postedon = (time) => {
+    //Format date to hours ago
+    const date = new Date(time);
+    const hours = Math.floor((new Date() - date) / 1000 / 60 / 60);
+    const days = Math.floor(hours / 24);
+    const months = Math.floor(days / 30);
+    const years = Math.floor(months / 12);
+
+    if (hours < 24) {
+      return hours + " hours ago";
+    } else if (days < 30) {
+      return days + " days ago";
+    } else if (months < 12) {
+      return months + " months ago";
+    } else {
+      return years + " years ago";
+    }
+  };
 
   //Custom hook to check if user profile exist
   const {
@@ -64,10 +82,7 @@ export const jobs = () => {
       accessorKey: "created_at",
       //Convert django date to readable format
       cell: (row) => {
-        const date = new Date(row.getValue());
-        // Days ago format
-        const days = Math.floor((new Date() - date) / 86400000);
-        return days + " days ago";
+        return postedon(row.getValue());
       },
       //Not filterable
       enableColumnFilter: false,
@@ -114,7 +129,7 @@ export const jobs = () => {
         toast.info("Job deleted successfully");
       }
     } catch (error) {
-      console.log('Delete Error', error);
+      console.log("Delete Error", error);
     }
   };
 
