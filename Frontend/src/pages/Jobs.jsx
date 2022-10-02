@@ -63,37 +63,29 @@ export const Jobs = () => {
                 </div>
               </div>
               <div className="mt-4 flex flex-grow">
-                <div className="wrapper w-2/5 ">                  
+                <div className="wrapper w-2/5 ">
                   <JobCard />
                   <JobCard />
                   <JobCard />
                 </div>
-                <div className="w-3/5 bg-green-500 ml-4 rounded-md">
-                  <div className="w-full bg-gray-50 h-40">
-                        Hi we best company
+                <div className="ml-4 w-3/5 rounded-md bg-gray-50">
+                  <div className="flex h-40 w-full items-center justify-center rounded-t-md bg-gray-300 ">
+                    <span className="font-mono font-semibold text-gray-700">
+                      Tagline One the shoulder pfff
+                    </span>
                   </div>
-                  <div className="job-logos">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-                      <path
-                        xmlns="http://www.w3.org/2000/svg"
-                        d="M0 .5h4.2v23H0z"
-                        fill="#042b48"
-                        data-original="#212121"
-                      ></path>
-                      <path
-                        xmlns="http://www.w3.org/2000/svg"
-                        d="M15.4.5a8.6 8.6 0 100 17.2 8.6 8.6 0 000-17.2z"
-                        fill="#fefefe"
-                        data-original="#f4511e"
-                      ></path>
-                    </svg>
+                  <div className="z-10 -mt-8 h-16 w-16 bg-gray-100 shadow-md">
+                    LOGO
                   </div>
-                  <div className="job-explain-content">
-                    <div className="job-title-wrapper">
-                      <div className="job-card-title">UI /UX Designer</div>
-                      <div className="job-action">
+                  <button className="float-right -mt-6 ml-4 mr-2 rounded-md bg-blue-700 px-4 py-2 text-sm font-semibold text-white">
+                    Apply Now
+                  </button>
+                  <div className="px-8 pt-12">
+                    <div className="flex text-gray-800 ">
+                      <div className="text-2xl font-bold">UI /UX Designer</div>
+                      <div className="ml-auto flex items-center">
                         <svg
-                          className="heart"
+                          className="h-6 w-6"
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 24 24"
                           fill="none"
@@ -105,6 +97,7 @@ export const Jobs = () => {
                           <path d="M20.8 4.6a5.5 5.5 0 00-7.7 0l-1.1 1-1-1a5.5 5.5 0 00-7.8 7.8l1 1 7.8 7.8 7.8-7.7 1-1.1a5.5 5.5 0 000-7.8z" />
                         </svg>
                         <svg
+                          className="ml-2 h-6 w-6"
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 24 24"
                           fill="none"
@@ -112,7 +105,6 @@ export const Jobs = () => {
                           strokeWidth="2"
                           strokeLinecap="round"
                           strokeLinejoin="round"
-                          className="feather feather-share-2"
                         >
                           <circle cx="18" cy="5" r="3" />
                           <circle cx="6" cy="12" r="3" />
@@ -121,37 +113,52 @@ export const Jobs = () => {
                         </svg>
                       </div>
                     </div>
-                    <div className="job-subtitle-wrapper">
-                      <div className="company-name">
-                        Patreon{" "}
-                        <span className="comp-location">Londontowne, MD.</span>
+                    <div className="mt-2 flex justify-between">
+                      <div className="font-xs text-gray-700">
+                        Patreon
+                        <span className="loc ml-2">Londontowne, MD.</span>
                       </div>
-                      <div className="posted">
+                      <div className="font-xs text-gray-700">
                         Posted 8 days ago
-                        <span className="app-number">98 Application</span>
                       </div>
                     </div>
-                    <div className="explain-bar">
-                      <div className="explain-contents">
-                        <div className="explain-title">Experience</div>
-                        <div className="explain-subtitle">Minimum 1 Year</div>
+                    <div className="mt-5 flex h-16 justify-between rounded-2xl bg-gray-300 px-6 py-1">
+                      <div className="leading-7">
+                        <div className="whitespace-nowrap font-semibold text-gray-800">
+                          Experience
+                        </div>
+                        <div className="hitespace-nowrap font-sans text-gray-900">
+                          Minimum 1 Year
+                        </div>
                       </div>
-                      <div className="explain-contents">
-                        <div className="explain-title">Work Level</div>
-                        <div className="explain-subtitle">Senior level</div>
+                      <div className="leading-7">
+                        <div className="whitespace-nowrap font-semibold text-gray-800">
+                          Work Level
+                        </div>
+                        <div className="hitespace-nowrap font-sans text-gray-900">
+                          Senior Level
+                        </div>
                       </div>
-                      <div className="explain-contents">
-                        <div className="explain-title">Employee Type</div>
-                        <div className="explain-subtitle">Full Time Jobs</div>
+                      <div className="leading-7">
+                        <div className="whitespace-nowrap font-semibold text-gray-800">
+                          Employee Type
+                        </div>
+                        <div className="hitespace-nowrap font-sans text-gray-900">
+                          Full time
+                        </div>
                       </div>
-                      <div className="explain-contents">
-                        <div className="explain-title">Offer Salary</div>
-                        <div className="explain-subtitle">$2150.0 / Month</div>
+                      <div className="leading-7">
+                        <div className="whitespace-nowrap font-semibold text-gray-800">
+                          Salary
+                        </div>
+                        <div className="hitespace-nowrap font-sans text-gray-900">
+                          $2150.0 / Month
+                        </div>
                       </div>
                     </div>
-                    <div className="overview-text">
-                      <div className="overview-text-header">Overview</div>
-                      <div className="overview-text-subheader">
+                    <div className="mt-8">
+                      <div className="mb-7 font-semibold">Overview</div>
+                      <div className="mb-7 leading-8">
                         We believe that design (and you) will be critical to the
                         company's success. You will work with our founders and
                         our early customers to help define and build our product
@@ -163,32 +170,19 @@ export const Jobs = () => {
                         overall product and visual identity and should be
                         comfortable to flex into working.
                       </div>
-                    </div>
-                    <div className="overview-text">
-                      <div className="overview-text-header">
-                        Job Description
-                      </div>
-                      <div className="overview-text-item">
-                        3+ years working as a product designer.
-                      </div>
-                      <div className="overview-text-item">
-                        A portfolio that highlights your approach to problem
-                        solving, as well as you skills in UI.
-                      </div>
-                      <div className="overview-text-item">
-                        Experience conducting research and building out smooth
-                        flows.
-                      </div>
-                      <div className="overview-text-item">
-                        Excellent communication skills with a well-defined
-                        design process.
-                      </div>
-                      <div className="overview-text-item">
-                        Familiarity with design tools like Sketch and Figma
-                      </div>
-                      <div className="overview-text-item">
-                        Up-level our overall design and bring consistency to
-                        end-user facing properties
+                      <div className="mb-7 font-semibold">Benefits</div>
+                      <div className="mb-7 leading-8">
+                        <ul className="list-inside list-disc">
+                          <li>
+                            Design and build the next generation of our product
+                            and visual identity
+                          </li>
+                          <li>
+                            Work with our founders and early customers to
+                            understand their needs and translate them into
+                            product requirements
+                          </li>
+                        </ul>
                       </div>
                     </div>
                   </div>
