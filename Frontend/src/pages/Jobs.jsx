@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { JobCard, JobLoading } from "../components/Card";
 import GuestLayout from "./Layout/Guest";
 import { jobDetails as DetailSection } from "../components/Card/jobDetails";
 import { useQuery } from "react-query";
 import { axiosInstance as API } from "../api/axiosInstance";
 
-
 export const Jobs = () => {
+  const [jobDetails, setJobDetails] = useState(0);
 
+
+  console.log("Show:", jobDetails);
 
   // React query to fetch Jobs
   const { isLoading, data, refetch } = useQuery(
@@ -19,12 +21,10 @@ export const Jobs = () => {
     {
       refetchOnWindowFocus: false,
       retry: 2,
-      
     }
   );
 
-
-  console.log('Returned' , data);
+  console.log("Returned", data);
 
   return (
     <GuestLayout>
@@ -98,13 +98,21 @@ export const Jobs = () => {
                           type={job.type}
                           posted={job.created_at}
                           id={job.id}
+                          setJobDetails={setJobDetails}
                         />
                       ))
                     )
                   }
                 </div>
                 <div className="rounded-md bg-gray-50 md:ml-4 md:w-3/5">
-                  <DetailSection />
+                  {/* {
+                    // Check if job details is not null
+                    jobDetails !== null ? (
+                      <DetailSection title={data[jobDetails].title} />
+                    ) : (
+                      <h1>Simething went wrong</h1>
+                    )
+                  } */}
                 </div>
               </div>
             </div>
