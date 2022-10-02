@@ -2,7 +2,9 @@ import classNames from "classnames";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-export const JobCard = () => {
+export const JobCard = ({id, title, company, location, type, posted}) => {
+
+  console.log(title);
 
   const [saved, setSaved] = useState(true);
 
@@ -39,10 +41,10 @@ export const JobCard = () => {
         </svg>
         <div className="flex-1">
           <div className="mx-2 text-xl font-semibold text-gray-800">
-            UI / UX Designer
+            {title}
           </div>
-          <div className="mx-2 mt-1 text-xs">Google INC</div>
-          <div className="mx-2 mt-1 text-xs">Edmonton AB T5J 3S8</div>
+          <div className="mx-2 mt-1 text-xs">{company}</div>
+          <div className="mx-2 mt-1 text-xs">{location}</div>
         </div>
         <div
           className="save-icon z-20 cursor-pointer "
@@ -93,3 +95,33 @@ export const JobCard = () => {
     </div>
   );
 };
+
+
+export const JobLoading = () => {
+  return (
+    <div className="relative my-2 w-full cursor-pointer rounded-md bg-gray-50 py-5 px-4 hover:bg-gray-100 ">
+      <div className="animate-pulse flex">
+        <div className="h-9 w-9 bg-gray-200 rounded-md"></div>
+        <div className="flex-1">
+          <div className="mx-2 h-4 bg-gray-200 rounded-md"></div>
+          <div className="mx-2 mt-1 h-4 bg-gray-200 rounded-md"></div>
+          <div className="mx-2 mt-1 h-4 bg-gray-200 rounded-md"></div>
+        </div>
+        <div className="save-icon z-20 cursor-pointer ">
+          <div className="h-6 w-6 bg-gray-200 rounded-md"></div>
+        </div>
+      </div>
+      <div className="mt-3 flex justify-between">
+        <div className="flex text-sm text-gray-800">
+          <div className="mx-2 h-4 bg-gray-200 rounded-md"></div>
+          <div className="mx-2 h-4 bg-gray-200 rounded-md"></div>
+        </div>
+
+        <div className="time flex">
+          <div className="h-5 w-5 bg-gray-200 rounded-md"></div>
+          <div className="mx-2 h-4 bg-gray-200 rounded-md"></div>
+        </div>
+      </div>
+    </div>
+  );
+}
