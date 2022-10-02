@@ -1,9 +1,14 @@
-import React from "react";
+import classNames from "classnames";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 export const JobCard = () => {
-  const handleSave = () => {
-    console.log("Saved");
+
+  const [saved, setSaved] = useState(true);
+
+  const handleSave = (id) => {
+    console.log("Saved", id);
+    setSaved(!saved);
   };
 
   const handleItemClick = () => {
@@ -11,7 +16,11 @@ export const JobCard = () => {
   };
 
   return (
-    <div className="w-full cursor-pointer rounded-md bg-gray-50 py-5 px-4 my-2 hover:bg-gray-100 ">
+    <div className="relative my-2 w-full cursor-pointer rounded-md bg-gray-50 py-5 px-4 hover:bg-gray-100 ">
+      <div
+        className="absolute top-0 left-0  h-full w-full"
+        onClick={() => handleItemClick(1)}
+      ></div>
       <div className="flex">
         <svg
           className="h-9 w-9 text-white"
@@ -35,9 +44,12 @@ export const JobCard = () => {
           <div className="mx-2 mt-1 text-xs">Google INC</div>
           <div className="mx-2 mt-1 text-xs">Edmonton AB T5J 3S8</div>
         </div>
-        <div className="save-icon">
+        <div
+          className="save-icon z-20 cursor-pointer "
+          onClick={() => handleSave(2)}
+        >
           <svg
-            className="heart h-6 w-6"
+            className={classNames("h-6 w-6 hover:fill-red-500 hover:text-red-500 ", {  "text-gray-500": saved, "text-gray-500 fill-gray-500": !saved })}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="none"

@@ -1,10 +1,8 @@
 import React from "react";
-import { FaClock } from "react-icons/fa";
 import { JobCard } from "../components/Card";
 import GuestLayout from "./Layout/Guest";
 import { jobDetails as DetailSection } from "../components/Card/jobDetails";
 
-import "./demo.css";
 
 export const Jobs = () => {
   return (
