@@ -1,10 +1,31 @@
 import React from "react";
-import { JobCard } from "../components/Card";
+import { JobCard, JobLoading } from "../components/Card";
 import GuestLayout from "./Layout/Guest";
 import { jobDetails as DetailSection } from "../components/Card/jobDetails";
+import { useQuery } from "react-query";
+import { axiosInstance as API } from "../api/axiosInstance";
 
 
 export const Jobs = () => {
+
+
+  // React query to fetch Jobs
+  const { isLoading, data, refetch } = useQuery(
+    "jobs",
+    async () => {
+      const res = await API.get(`jobs-public/`);
+      return res.data;
+    },
+    {
+      refetchOnWindowFocus: false,
+      retry: 2,
+      
+    }
+  );
+
+
+  console.log('Returned' , data);
+
   return (
     <GuestLayout>
       <div>
@@ -63,9 +84,24 @@ export const Jobs = () => {
               </div>
               <div className="mt-4 md:flex md:flex-grow">
                 <div className="wrapper md:w-2/5 ">
-                  <JobCard />
-                  <JobCard />
-                  <JobCard />
+                  {
+                    // Check if data is loading
+                    isLoading ? (
+                      <JobLoading />
+                    ) : (
+                      data.map((job) => (
+                        <JobCard
+                          key={job.id}
+                          title={job.title}
+                          company={job.employer}
+                          location={job.work_location}
+                          type={job.type}
+                          posted={job.created_at}
+                          id={job.id}
+                        />
+                      ))
+                    )
+                  }
                 </div>
                 <div className="rounded-md bg-gray-50 md:ml-4 md:w-3/5">
                   <DetailSection />
