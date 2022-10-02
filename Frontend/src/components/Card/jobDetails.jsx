@@ -2,9 +2,7 @@ import React from "react";
 
 export const jobDetails = () => {
 
-    const handleSave = () => {
-        console.log("Save");
-    };
+
 
   return (
     <>
@@ -14,7 +12,7 @@ export const jobDetails = () => {
         </span>
       </div>
       <div className="z-10 -mt-8 h-16 w-16 bg-gray-100 shadow-md">LOGO</div>
-      <button className="float-right -mt-6 ml-4 mr-2 rounded-md bg-blue-700 px-4 py-2 text-sm font-semibold text-white">
+      <button className="float-right -mt-6 ml-4 mr-2 rounded-md bg-blue-700 hover:bg-blue-800 px-4 py-2 text-sm font-semibold text-white">
         Apply Now
       </button>
       <div className="px-8 pt-12">
