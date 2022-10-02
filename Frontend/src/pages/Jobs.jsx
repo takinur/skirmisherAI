@@ -66,8 +66,8 @@ export const Jobs = () => {
                 <div className="flex w-2/5 flex-col bg-red-400 ">
                   <div className="bg-green-600">
                     <div className="py-5 px-4 w-full cursor-pointer rounded-md bg-indigo-500 ">
-                      <div className="overview-wrapper">
-                        <svg
+                      <div className="flex">
+                        <svg className="w-9 h-9 text-white" fill="none"
                           viewBox="0 -13 512 512"
                           xmlns="http://www.w3.org/2000/svg"
                         >
@@ -80,14 +80,14 @@ export const Jobs = () => {
                             fill="#feb0a5"
                           />
                         </svg>
-                        <div className="overview-detail">
-                          <div className="job-card-title">UI / UX Designer</div>
+                        <div className="flex-1">
+                          <div className="mx-2 text-xl font-semibold text-gray-800">UI / UX Designer</div>
                           <div className="job-card-subtitle">
                             2972 Westheimer Rd. Santa Ana.
                           </div>
                         </div>
                         <svg
-                          className="heart"
+                          className="heart h-6 w-6"
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 24 24"
                           fill="none"
@@ -112,7 +112,7 @@ export const Jobs = () => {
                     </div>
                   </div>
                 </div>
-                <div className="w-3/5">
+                <div className="w-3/5 bg-green-500">
                   <img className="job-bg" alt="" />
                   <div className="job-logos">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
