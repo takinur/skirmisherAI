@@ -51,69 +51,27 @@ export const Jobs = () => {
           </div>
         </div>
         <div className="mt-10 w-full">
-          <div className="detail-page">
+          <div className="grid-wrapper">
             <div className="flex flex-grow flex-col pl-10">
               <div className="flex justify-between">
                 <div className="text-sm font-semibold text-gray-800 ">
                   Showing 46 Jobs
                 </div>
                 <div className="text-sm font-semibold text-gray-800">
-                  Sort by: <span className="post-time">Newest Post </span>
+                  Sort by: <span className="post-time">Newest Job </span>
                   <span className="menu-icon">▼</span>
                 </div>
               </div>
-              <div className="flex flex-grow mt-4">
-                <div className="flex w-2/5 flex-col bg-red-400 ">
-                  <div className="bg-green-600">
-                    <div className="py-5 px-4 w-full cursor-pointer rounded-md bg-indigo-500 ">
-                      <div className="flex">
-                        <svg className="w-9 h-9 text-white" fill="none"
-                          viewBox="0 -13 512 512"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <g fill="#feb0a5">
-                            <path d="M256 92.5l127.7 91.6L512 92 383.7 0 256 91.5 128.3 0 0 92l128.3 92zm0 0M256 275.9l-127.7-91.5L0 276.4l128.3 92L256 277l127.7 91.5 128.3-92-128.3-92zm0 0" />
-                            <path d="M127.7 394.1l128.4 92 128.3-92-128.3-92zm0 0" />
-                          </g>
-                          <path
-                            d="M512 92L383.7 0 256 91.5v1l127.7 91.6zm0 0M512 276.4l-128.3-92L256 275.9v1l127.7 91.5zm0 0M256 486.1l128.4-92-128.3-92zm0 0"
-                            fill="#feb0a5"
-                          />
-                        </svg>
-                        <div className="flex-1">
-                          <div className="mx-2 text-xl font-semibold text-gray-800">UI / UX Designer</div>
-                          <div className="job-card-subtitle">
-                            2972 Westheimer Rd. Santa Ana.
-                          </div>
-                        </div>
-                        <svg
-                          className="heart h-6 w-6"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M20.8 4.6a5.5 5.5 0 00-7.7 0l-1.1 1-1-1a5.5 5.5 0 00-7.8 7.8l1 1 7.8 7.8 7.8-7.7 1-1.1a5.5 5.5 0 000-7.8z" />
-                        </svg>
-                      </div>
-                      <div className="job-overview-buttons">
-                        <div className="search-buttons time-button">
-                          Full Time
-                        </div>
-                        <div className="search-buttons level-button">
-                          Senior Level
-                        </div>
-                        <div className="job-stat">New</div>
-                        <div className="job-day">4d</div>
-                      </div>
-                    </div>
-                  </div>
+              <div className="mt-4 flex flex-grow">
+                <div className="wrapper w-2/5 ">                  
+                  <JobCard />
+                  <JobCard />
+                  <JobCard />
                 </div>
-                <div className="w-3/5 bg-green-500">
-                  <img className="job-bg" alt="" />
+                <div className="w-3/5 bg-green-500 ml-4 rounded-md">
+                  <div className="w-full bg-gray-50 h-40">
+                        Hi we best company
+                  </div>
                   <div className="job-logos">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
                       <path

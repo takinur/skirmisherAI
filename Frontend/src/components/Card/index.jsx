@@ -11,66 +11,71 @@ export const JobCard = () => {
   };
 
   return (
-    <div className="relative mt-2 w-full cursor-pointer overflow-hidden rounded bg-gray-50 shadow-lg hover:bg-inherit">
-      <div className="px-6 py-4">
-        <div className="header flex justify-between text-gray-700">
-          <div className="mb-2 text-xl font-bold">Web Developer</div>
-          <div className="relative z-20 mb-2">
-            <button
-              className="absolute right-0 top-0 h-8 w-8 rounded-full border-2 border-gray-500 hover:bg-gray-50"
-              onClick={handleSave}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="m-auto h-5 w-5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
-                />
-              </svg>
-            </button>
+    <div className="w-full cursor-pointer rounded-md bg-gray-50 py-5 px-4 my-2 hover:bg-gray-100 ">
+      <div className="flex">
+        <svg
+          className="h-9 w-9 text-white"
+          fill="none"
+          viewBox="0 -13 512 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g fill="#feb0a5">
+            <path d="M256 92.5l127.7 91.6L512 92 383.7 0 256 91.5 128.3 0 0 92l128.3 92zm0 0M256 275.9l-127.7-91.5L0 276.4l128.3 92L256 277l127.7 91.5 128.3-92-128.3-92zm0 0" />
+            <path d="M127.7 394.1l128.4 92 128.3-92-128.3-92zm0 0" />
+          </g>
+          <path
+            d="M512 92L383.7 0 256 91.5v1l127.7 91.6zm0 0M512 276.4l-128.3-92L256 275.9v1l127.7 91.5zm0 0M256 486.1l128.4-92-128.3-92zm0 0"
+            fill="#feb0a5"
+          />
+        </svg>
+        <div className="flex-1">
+          <div className="mx-2 text-xl font-semibold text-gray-800">
+            UI / UX Designer
           </div>
+          <div className="mx-2 mt-1 text-xs">Google INC</div>
+          <div className="mx-2 mt-1 text-xs">Edmonton AB T5J 3S8</div>
         </div>
-        <div className=" text-gray-700">
-          <div className="mb-2 text-sm font-semibold">
-            <span className="text-gray-700">Google, California</span>
-          </div>
-          <p className="text-base text-gray-700">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Voluptatibus quia, nulla! Maiores et perferendis eaque,
-            exercitationem praesentium nihil.
-          </p>
+        <div className="save-icon">
+          <svg
+            className="heart h-6 w-6"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M20.8 4.6a5.5 5.5 0 00-7.7 0l-1.1 1-1-1a5.5 5.5 0 00-7.8 7.8l1 1 7.8 7.8 7.8-7.7 1-1.1a5.5 5.5 0 000-7.8z" />
+          </svg>
         </div>
-        <div className="mt-2">
-          <div className="flex justify-between text-gray-700">
-            <span className="text-md  bg-gray-200  px-3 py-1 font-medium text-gray-800 md:block">
-              Remote
-            </span>
-            <div className="time flex">
-              {" "}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="mt-1 h-5 w-5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              12h ago
-            </div>
-          </div>
+      </div>
+      <div className="mt-3 flex justify-between">
+        <div className="flex text-sm text-gray-800">
+          <span className="mx-2 block bg-gray-200 px-3 py-1 font-medium text-gray-800">
+            Full Time
+          </span>
+          <span className="mx-2 block bg-gray-200 px-3 py-1 font-medium text-gray-800">
+            Full Time
+          </span>
+        </div>
+
+        <div className="time flex">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="mt-1 h-5 w-5"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          12h ago
         </div>
       </div>
     </div>
