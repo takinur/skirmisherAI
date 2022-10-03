@@ -7,6 +7,7 @@ import {
 } from "../components/Card/jobDetails";
 import { useQuery } from "react-query";
 import { axiosInstance as API } from "../api/axiosInstance";
+import classNames from "classnames";
 
 export const Jobs = () => {
   // React query to fetch Jobs
@@ -82,7 +83,9 @@ export const Jobs = () => {
             <div className="flex flex-grow flex-col md:pl-10">
               <div className="flex justify-between">
                 <div className="text-sm font-semibold text-gray-800 ">
-                  Showing 46 Jobs
+                  Showing 46 Jobs <br/>
+                  <button className={classNames("text-blue-700 font-bold block md:hidden", jobDetails === null ? 'hidden' : '' )} onClick={() => setJobDetails(null)}>Back to List</button>
+
                 </div>
                 <div className="text-sm font-semibold text-gray-800">
                   Sort by: <span className="post-time">Newest Job </span>
@@ -90,7 +93,7 @@ export const Jobs = () => {
                 </div>
               </div>
               <div className="mt-4 md:flex md:flex-grow max-h-screen">
-                <div className="wrapper md:w-2/5 overflow-y-auto">
+                <div className={classNames("wrapper md:block md:w-2/5 overflow-y-auto", jobDetails !== null ? 'hidden' : '' )}>
                   {
                     // Check if data is loading
                     isLoading ? (
