@@ -1,6 +1,6 @@
 import React from "react";
 
-export const jobDetails = () => {
+export const jobDetails = ({title, company, description, experience }) => {
 
 
 
@@ -17,7 +17,7 @@ export const jobDetails = () => {
       </button>
       <div className="px-8 pt-12">
         <div className="text-gray-800 md:flex ">
-          <div className="text-2xl font-bold">UI /UX Designer</div>
+          <div className="text-2xl font-bold">{title}</div>
           <div className="ml-auto flex items-center">
             <svg
               className="h-6 w-6"
@@ -61,7 +61,7 @@ export const jobDetails = () => {
               Experience
             </div>
             <div className="hitespace-nowrap font-sans text-gray-900">
-              Minimum 1 Year
+              {experience ? experience : "No Experience"}
             </div>
           </div>
           <div className="leading-7">
@@ -92,14 +92,7 @@ export const jobDetails = () => {
         <div className="mt-8">
           <div className="mb-7 font-semibold">Overview</div>
           <div className="mb-7 leading-8">
-            We believe that design (and you) will be critical to the company's
-            success. You will work with our founders and our early customers to
-            help define and build our product functionality, while maintaining
-            the quality bar that customers have come to expect from modern SaaS
-            applications. You have a strong background in product design with a
-            quantitavely anf qualitatively analytical mindset. You will also
-            have the opportunity to craft our overall product and visual
-            identity and should be comfortable to flex into working.
+           {description}
           </div>
           <div className="mb-7 font-semibold">Benefits</div>
           <div className="mb-7 leading-8">

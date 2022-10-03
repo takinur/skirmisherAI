@@ -191,7 +191,7 @@ export const CreateUpdateJob = () => {
                 required
               />
               <span className="text-sm text-gray-500 dark:text-slate-400">
-                <b>Example:</b> Full-Stack MERN Stack Developer
+                <b>Example:</b> MERN Stack Developer
               </span>
             </div>
             <div className="mt-4 flex-auto">
