@@ -117,8 +117,8 @@ export const Jobs = () => {
                       experience={showDetails[0].level}
                       posted={showDetails[0].created_at}
                       description={showDetails[0].description}
+                      salary={showDetails[0].salary}
                       id={showDetails[0].id}
-                      setJobDetails={setJobDetails}
                     />
                   ) : null}
                 </div>

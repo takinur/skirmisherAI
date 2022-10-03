@@ -1,28 +1,12 @@
 import classNames from "classnames";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { relativeTime } from "../../hooks/useRelativetime";
 
 export const JobCard = ({ id, title, company, location, type, posted, setJobDetails }) => {
   const [saved, setSaved] = useState(true);
 
-  //Format date to hours ago
-  const date = new Date(posted);
-  const hours = Math.floor((new Date() - date) / 1000 / 60 / 60);
-  const days = Math.floor(hours / 24);
-  const months = Math.floor(days / 30);
-  const years = Math.floor(months / 12);
 
-  const time = () => {
-    if (hours < 24) {
-      return hours + " hours ago";
-    } else if (days < 30) {
-      return days + " days ago";
-    } else if (months < 12) {
-      return months + " months ago";
-    } else {
-      return years + " years ago";
-    }
-  };
 
   const handleSave = (id) => {
     console.log("Saved", id);
@@ -111,7 +95,7 @@ export const JobCard = ({ id, title, company, location, type, posted, setJobDeta
               />
             </svg>
           </div>
-          <span className="mx-1 mt-1 font-sans">{time()}</span>
+          <span className="mx-1 mt-1 font-sans">{relativeTime(posted)}</span>
         </div>
       </div>
     </div>
