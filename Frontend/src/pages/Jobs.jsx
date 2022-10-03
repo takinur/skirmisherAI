@@ -21,8 +21,12 @@ export const Jobs = () => {
 
   const [jobDetails, setJobDetails] = useState(null);
 
-  //View detials of a job with id
+  console.log(data);
 
+   
+  
+
+  //View detials of a job with id
   const showDetails = data?.filter((job) => job.id === jobDetails);
   //Set loading state
   console.log(showDetails);

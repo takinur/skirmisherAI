@@ -1,19 +1,41 @@
 import React from "react";
 import { relativeTime } from "../../hooks/useRelativetime";
 
-export const jobDetails = ({title, company, description, experience, salary, type, posted }) => {
-
-
-
+export const jobDetails = ({
+  title,
+  company,
+  description,
+  experience,
+  salary,
+  type,
+  posted,
+}) => {
   return (
     <>
       <div className="flex h-40 w-full items-center justify-center rounded-t-md bg-gray-300 ">
         <span className="font-mono font-semibold text-gray-700">
-          Tagline Fuck off and die
+          {company.slogan}
         </span>
       </div>
-      <div className="z-10 -mt-8 h-16 w-16 bg-gray-100 shadow-md">LOGO</div>
-      <button className="float-right -mt-6 ml-4 mr-2 rounded-md bg-blue-700 hover:bg-blue-800 px-4 py-2 text-sm font-semibold text-white">
+      <div className="z-10 -mt-8 h-16 w-16 bg-gray-100 shadow-md">
+        {
+          // Check if company logo is available
+          company.logo ? (
+            <img
+              className="h-16 w-16"
+              src={company.logo}
+              alt="company logo"
+            />
+          ) : (
+            <div className="flex h-16 w-16 items-center justify-center  bg-green-700">
+              <span className="text-4xl font-semibold text-gray-50">
+                {company.company_name.charAt(0)}
+              </span>
+            </div>
+          )
+        }
+      </div>
+      <button className="float-right -mt-6 ml-4 mr-2 rounded-md bg-blue-700 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-800">
         Apply Now
       </button>
       <div className="px-8 pt-12">
@@ -54,7 +76,9 @@ export const jobDetails = ({title, company, description, experience, salary, typ
             Patreon
             <span className="loc ml-2">Londontowne, MD.</span>
           </div>
-          <div className="font-xs text-gray-700">Posted {relativeTime(posted)}</div>
+          <div className="font-xs text-gray-700">
+            Posted {relativeTime(posted)}
+          </div>
         </div>
         <div className="mt-5 justify-between rounded-2xl bg-gray-300 px-6 py-1 md:flex md:h-16">
           <div className="leading-7">
@@ -88,16 +112,14 @@ export const jobDetails = ({title, company, description, experience, salary, typ
             <div className="hitespace-nowrap font-sans text-gray-900">
               {
                 //If dollar sign is not present in salary, add it
-                salary && !salary.includes("$") ? "$" + salary : salary                
+                salary && !salary.includes("$") ? "$" + salary : salary
               }
             </div>
           </div>
         </div>
         <div className="mt-8">
           <div className="mb-7 font-semibold">Overview</div>
-          <div className="mb-7 leading-8">
-           {description}
-          </div>
+          <div className="mb-7 leading-8">{description}</div>
           <div className="mb-7 font-semibold">Benefits</div>
           <div className="mb-7 leading-8">
             <ul className="list-inside list-disc">
