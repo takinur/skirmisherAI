@@ -52,7 +52,7 @@ export const JobCard = ({
           <div className="mx-2 text-xl font-semibold text-gray-800">
             {title}
           </div>
-          <div className="mx-2 mt-1 text-xs">{company.company_name}</div>
+          <div className="mx-2 mt-1 text-base font-mono">{company.company_name}</div>
           <div className="mx-2 mt-1 text-xs">{location}</div>
         </div>
         <div
