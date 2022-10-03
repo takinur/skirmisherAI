@@ -6,11 +6,6 @@ import { useQuery } from "react-query";
 import { axiosInstance as API } from "../api/axiosInstance";
 
 export const Jobs = () => {
-  const [jobDetails, setJobDetails] = useState(0);
-
-
-  console.log("Show:", jobDetails);
-
   // React query to fetch Jobs
   const { isLoading, data, refetch } = useQuery(
     "jobs",
@@ -24,7 +19,15 @@ export const Jobs = () => {
     }
   );
 
-  console.log("Returned", data);
+  const [jobDetails, setJobDetails] = useState(null);
+
+  //View detials of a job with id
+
+  const showDetails = data?.filter((job) => job.id === jobDetails);
+  //Set loading state
+  console.log(showDetails);
+
+  // console.log("Show:", data.id === jobDetails?.id ? data.id[jobDetails?.id] : null);
 
   return (
     <GuestLayout>
@@ -105,14 +108,19 @@ export const Jobs = () => {
                   }
                 </div>
                 <div className="rounded-md bg-gray-50 md:ml-4 md:w-3/5">
-                  {/* {
-                    // Check if job details is not null
-                    jobDetails !== null ? (
-                      <DetailSection title={data[jobDetails].title} />
-                    ) : (
-                      <h1>Simething went wrong</h1>
-                    )
-                  } */}
+                  {jobDetails ? (
+                    <DetailSection
+                      title={showDetails[0].title}
+                      company={showDetails[0].employer}
+                      location={showDetails[0].work_location}
+                      type={showDetails[0].type}
+                      experience={showDetails[0].level}
+                      posted={showDetails[0].created_at}
+                      description={showDetails[0].description}
+                      id={showDetails[0].id}
+                      setJobDetails={setJobDetails}
+                    />
+                  ) : null}
                 </div>
               </div>
             </div>
