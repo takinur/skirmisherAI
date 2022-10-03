@@ -73,7 +73,8 @@ export const CreateUpdateJob = () => {
   const isAddMode = !id;
 
   const location = useLocation();
-  const employerId = location.state?.employer; //Employer ID from the state
+  const employerId = location.state?.employer ; //Employer ID from the state
+
 
   //State for the form
   const [selectedExp, setselectedExp] = useState(expLevel[0]);
@@ -96,13 +97,24 @@ export const CreateUpdateJob = () => {
   };
 
   function createJob(data) {
-    // console.log("Create this data: ", data);
+
     data.employer = employerId;
+    data.level = selectedExp.name;
+
+    //Unique skills array
+    let uniqueSkills = [...new Set(selectedSkill.map((item) => item.name))];
+    //Combine skills array
+    data.qualifications = uniqueSkills.join(", ");
+
+    // console.log("Create this data: ", data);
+
     return addMutation.mutate(data);
   }
   function updateJob(id, data) {
-    // console.log("Update this data: ", data);
+
     data.employer = employerId;
+    // console.log("Update this data: ", data);
+
     return updateMutation.mutate(data);
   }
 
