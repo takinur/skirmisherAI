@@ -188,21 +188,21 @@ export const JobDetailsLoading = () => {
   return (
     <>
       <div className="flex h-40 w-full  items-center justify-center rounded-t-md bg-gray-300  ">
-        <div role="status" class="max-w-lg space-y-2.5 animate-pulse ">
-          <div class="flex w-full items-center space-x-2">
-            <div class="h-2.5 w-32 rounded-full bg-gray-700"></div>
-            <div class="h-2.5 w-24 rounded-full bg-gray-600"></div>
-            <div class="h-2.5 w-full rounded-full bg-gray-600"></div>
+        <div role="status" className="max-w-lg space-y-2.5 animate-pulse ">
+          <div className="flex w-full items-center space-x-2">
+            <div className="h-2.5 w-32 rounded-full bg-gray-700"></div>
+            <div className="h-2.5 w-24 rounded-full bg-gray-600"></div>
+            <div className="h-2.5 w-full rounded-full bg-gray-600"></div>
           </div>
-          <div class="flex w-full max-w-[480px] items-center space-x-2">
-            <div class="h-2.5 w-full rounded-full bg-gray-700"></div>
-            <div class="h-2.5 w-full rounded-full bg-gray-600"></div>
-            <div class="h-2.5 w-24 rounded-full bg-gray-600"></div>
+          <div className="flex w-full max-w-[480px] items-center space-x-2">
+            <div className="h-2.5 w-full rounded-full bg-gray-700"></div>
+            <div className="h-2.5 w-full rounded-full bg-gray-600"></div>
+            <div className="h-2.5 w-24 rounded-full bg-gray-600"></div>
           </div>
-          <div class="flex w-full max-w-[400px] items-center space-x-2">
-            <div class="h-2.5 w-full rounded-full bg-gray-600"></div>
-            <div class="h-2.5 w-80 rounded-full bg-gray-700"></div>
-            <div class="h-2.5 w-full rounded-full bg-gray-600"></div>
+          <div className="flex w-full max-w-[400px] items-center space-x-2">
+            <div className="h-2.5 w-full rounded-full bg-gray-600"></div>
+            <div className="h-2.5 w-80 rounded-full bg-gray-700"></div>
+            <div className="h-2.5 w-full rounded-full bg-gray-600"></div>
           </div>
         </div>
       </div>
