@@ -121,7 +121,9 @@ export const Jobs = () => {
                       experience={showDetails[0].level}
                       posted={showDetails[0].created_at}
                       description={showDetails[0].description}
+                      qualifications={showDetails[0].qualifications}
                       salary={showDetails[0].salary}
+                      benefits={showDetails[0].benefits}
                       id={showDetails[0].id}
                     />
                   ) : null}
