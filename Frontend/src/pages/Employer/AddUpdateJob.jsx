@@ -172,8 +172,9 @@ export const CreateUpdateJob = () => {
     addMutation.isError,
     addMutation.isSuccess,
   ]);
-  //Loading state
+  //Loading state //Disabled state
   const isLoading = addMutation.isLoading || updateMutation.isLoading;
+  const isDisabled = isLoading || addMutation.isSuccess || updateMutation.isSuccess;
 
   return (
     <AuthLayout title="Add New Job">
@@ -287,15 +288,15 @@ export const CreateUpdateJob = () => {
                 rows="4"
                 className="mt-2"
                 {...register("description")}
-                placeholder="Ex: Full Job Description"
+                placeholder="Ex: Responsibilites, Skills, etc"
               />
             </div>
             <div className="mt-4 flex justify-end">
               <ButtonDefault
                 className={classNames("ml-4", {
-                  "opacity-25": isLoading,
+                  "opacity-25": isDisabled,
                 })}
-                disabled={isLoading}
+                disabled={isDisabled}
               >
                 {isAddMode ? "Post Job" : "Update Job"}
               </ButtonDefault>

@@ -12,7 +12,7 @@ export const relativeTime = (time) => {
   const years = Math.floor(months / 12);
 
     if (seconds < 60) {
-        return seconds + " seconds ago";
+        return "Less than a min ago";
     } else if (minutes < 60) {
         return minutes + " minutes ago";
     } else if (hours < 24) {
