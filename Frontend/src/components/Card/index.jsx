@@ -5,7 +5,6 @@ import { relativeTime } from "../../hooks/useRelativetime";
 export const JobCard = ({ id, title, company, location, type, posted, setJobDetails }) => {
   const [saved, setSaved] = useState(true);
 
-  console.log('company', company)
 
   const handleSave = (id) => {
     console.log("Saved", id);
