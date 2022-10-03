@@ -254,7 +254,7 @@ function Actions({ row, employer, setModal, setJobID }) {
         </Link>
       </div>
       <div className="mr-2 w-4 transform hover:scale-110 hover:text-purple-500">
-        <Link to={`/employer/jobs/${row}/edit`} state={{ employer: employer }}>
+        <Link to={`/employer/jobs/${row}/edit`} state={{ employer: employer.id }}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
