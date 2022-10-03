@@ -1,39 +1,9 @@
 import React from "react";
 
-export const SearchJobs = ({ jobs, setSearchResults }) => {
-
-    console.log('jobs', jobs);
-    
+export const SearchJobs = ({SetSearchValue}) => {
   const handleSearch = (e) => {
-    if (!e.target.value) return setSearchResults(jobs);
-
-    const results = jobs.filter((job) => {
-      const jobTitle = job.title.toLowerCase();
-      const jobCompany = job.employer?.company_name.toLowerCase();
-      const jobLocation = job.work_location?.toLowerCase();      
-      const jobType = job.type?.toLowerCase();
-      const jobLevel = job.level?.toLowerCase();
-      const jobDescription = job.description?.toLowerCase();
-      const jobQualifications = job.qualifications?.toLowerCase();
-
-      const searchValue = e.target.value.toLowerCase();
-
-      return (
-        
-        //If not undefined and includes search value
-        (jobTitle && jobTitle.includes(searchValue)) ||
-        (jobCompany && jobCompany.includes(searchValue)) ||
-        (jobLocation && jobLocation.includes(searchValue)) ||
-        (jobType && jobType.includes(searchValue)) ||
-        (jobLevel && jobLevel.includes(searchValue)) ||
-        (jobDescription && jobDescription.includes(searchValue)) ||
-        (jobQualifications && jobQualifications.includes(searchValue))
-        );
-
-      
-    });
-
-    setSearchResults(results);
+    if (!e.target.value) return SetSearchValue("");
+    SetSearchValue(e.target.value);
   };
 
   return (
