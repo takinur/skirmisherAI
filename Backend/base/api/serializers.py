@@ -143,14 +143,24 @@ class FileSerializer(serializers.Serializer):
         file = FileUpload.objects.create(**validated_data)
         return file
     
-    
+
+
+
 class VacancySerializer(serializers.ModelSerializer):
     class Meta:
         model = Vacancy
         fields = '__all__'
         extra_kwargs = {'employer': {'write_only': True}}
+                
         
     def to_representation(self, instance):
         data = super().to_representation(instance)            
         data['employer'] = instance.employer.company_name
         return data
+    
+class PublicVacancySerializer(serializers.ModelSerializer):
+    employer = EmployerProfileSerializer(read_only=True)
+    class Meta:
+        model = Vacancy
+        fields = '__all__'
+                
