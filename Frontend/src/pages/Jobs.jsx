@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { JobCard, JobLoading } from "../components/Card";
 import GuestLayout from "./Layout/Guest";
-import { jobDetails as DetailSection, JobDetailsLoading } from "../components/Card/jobDetails";
+import {
+  jobDetails as DetailSection,
+  JobDetailsLoading,
+} from "../components/Card/jobDetails";
 import { useQuery } from "react-query";
 import { axiosInstance as API } from "../api/axiosInstance";
 
@@ -19,27 +22,16 @@ export const Jobs = () => {
     }
   );
 
+  //Search job by title company or location
 
-
-  const [jobDetails, setJobDetails] = useState(null);
-
-  console.log('Returned', data);
-
-  //wait for data to fetch then set first job as jobDetails
-  // if (data && !jobDetails) {
-  //   setJobDetails(data[0]);
-  // }
-
-  console.log('After setting state:', jobDetails);
-  
-
+  //IF data is loaded set state to first job
+  const [jobDetails, setJobDetails] = useState(data ? data[0] : null);
 
   //View detials of a job with id
   const showDetails = data?.filter((job) => job.id === jobDetails);
   //Set loading state
-  console.log(showDetails);
+  // console.log(showDetails);
 
-  // console.log("Show:", data.id === jobDetails?.id ? data.id[jobDetails?.id] : null);
 
   return (
     <GuestLayout>
@@ -97,19 +89,26 @@ export const Jobs = () => {
                   <span className="menu-icon">▼</span>
                 </div>
               </div>
-              <div className="mt-4 md:flex md:flex-grow">
-                <div className="wrapper md:w-2/5 ">
+              <div className="mt-4 md:flex md:flex-grow max-h-screen">
+                <div className="wrapper md:w-2/5 overflow-y-auto">
                   {
                     // Check if data is loading
                     isLoading ? (
-                      <JobLoading />
+                      <>
+                        <JobLoading />
+                        <JobLoading />
+                        <JobLoading />
+                        <JobLoading />
+                      </>
                     ) : (
+                      data &&
                       data.map((job) => (
                         <JobCard
                           key={job.id}
                           title={job.title}
                           company={job.employer}
                           location={job.work_location}
+                          level={job.level}
                           type={job.type}
                           posted={job.created_at}
                           id={job.id}
@@ -119,22 +118,24 @@ export const Jobs = () => {
                     )
                   }
                 </div>
-                <div className="rounded-md bg-gray-50 md:ml-4 md:w-3/5">
+                <div className="rounded-md bg-gray-50 md:ml-4 md:w-3/5 overflow-y-auto ">
                   {jobDetails ? (
                     <DetailSection
-                      title={showDetails[0].title}
-                      company={showDetails[0].employer}
-                      location={showDetails[0].work_location}
-                      type={showDetails[0].type}
-                      experience={showDetails[0].level}
-                      posted={showDetails[0].created_at}
-                      description={showDetails[0].description}
-                      qualifications={showDetails[0].qualifications}
-                      salary={showDetails[0].salary}
-                      benefits={showDetails[0].benefits}
-                      id={showDetails[0].id}
+                      title={showDetails[0]?.title}
+                      company={showDetails[0]?.employer}
+                      location={showDetails[0]?.work_location}
+                      type={showDetails[0]?.type}
+                      experience={showDetails[0]?.level}
+                      posted={showDetails[0]?.created_at}
+                      description={showDetails[0]?.description}
+                      qualifications={showDetails[0]?.qualifications}
+                      salary={showDetails[0]?.salary}
+                      benefits={showDetails[0]?.benefits}
+                      id={showDetails[0]?.id}
                     />
-                  ) : <JobDetailsLoading />}
+                  ) : (
+                    <JobDetailsLoading />
+                  )}
                 </div>
               </div>
             </div>
