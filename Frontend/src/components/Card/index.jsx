@@ -9,6 +9,7 @@ export const JobCard = ({
   location,
   type,
   posted,
+  level,
   setJobDetails,
 }) => {
   const [saved, setSaved] = useState(true);
@@ -19,8 +20,13 @@ export const JobCard = ({
   };
 
   const handleItemClick = (id) => {
+    //Set the job details after  2 seconds
+    setJobDetails(null);
+    setTimeout(() => {
+      setJobDetails(id);
+    }, 1500);
+
     console.log("Clicked");
-    setJobDetails(id);
   };
 
   return (
@@ -70,16 +76,17 @@ export const JobCard = ({
           </svg>
         </div>
       </div>
-      <div className="mt-3 flex justify-between">
-        <div className="flex text-sm text-gray-800">
-          <span className="mx-2 block bg-gray-200 px-3 py-1 font-medium text-gray-800">
-            {type}
+      <div className="mt-3 ">
+        <div className="text-sm text-gray-800 md:flex">
+          <span className="mx-2 block max-h-7 bg-gray-200 px-3 py-1 font-medium text-gray-800 md:whitespace-nowrap">
+            {type ? type : "Full Time"}
           </span>
-          <span className="mx-2 block bg-gray-200 px-3 py-1 font-medium text-gray-800">
-            Full Time
+          <span className="mx-2 mt-2 block max-h-7 whitespace-nowrap bg-gray-200 px-3 py-1 font-medium text-gray-800 md:mt-0">
+            {level ? level : "Fresher are welcome"}
           </span>
         </div>
-
+      </div>
+      <div className="mt-3 flex justify-end">
         <div className="flex">
           <div className="wrapper mt-[7px]">
             <svg
