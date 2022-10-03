@@ -1,12 +1,11 @@
 import classNames from "classnames";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { relativeTime } from "../../hooks/useRelativetime";
 
 export const JobCard = ({ id, title, company, location, type, posted, setJobDetails }) => {
   const [saved, setSaved] = useState(true);
 
-
+  console.log('company', company)
 
   const handleSave = (id) => {
     console.log("Saved", id);
@@ -44,7 +43,7 @@ export const JobCard = ({ id, title, company, location, type, posted, setJobDeta
           <div className="mx-2 text-xl font-semibold text-gray-800">
             {title}
           </div>
-          <div className="mx-2 mt-1 text-xs">{company}</div>
+          <div className="mx-2 mt-1 text-xs">{company.company_name}</div>
           <div className="mx-2 mt-1 text-xs">{location}</div>
         </div>
         <div
