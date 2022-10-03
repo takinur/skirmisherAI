@@ -10,6 +10,7 @@ export const JobCard = ({
   type,
   posted,
   level,
+  qualifications,
   setJobDetails,
 }) => {
   const [saved, setSaved] = useState(true);
@@ -52,8 +53,10 @@ export const JobCard = ({
           <div className="mx-2 text-xl font-semibold text-gray-800">
             {title}
           </div>
-          <div className="mx-2 mt-1 text-base font-mono">{company.company_name}</div>
-          <div className="mx-2 mt-1 text-xs">{location}</div>
+          <div className="mx-2 mt-1 font-serif text-base">
+            {company.company_name}
+          </div>
+          <div className="mx-2 mt-1 text-xs">{location} ({type})</div>
         </div>
         <div
           className="save-icon z-20 cursor-pointer "
@@ -76,17 +79,29 @@ export const JobCard = ({
           </svg>
         </div>
       </div>
-      <div className="mt-3 ">
-        <div className="text-sm text-gray-800 md:flex">
-          <span className="mx-2 block max-h-7 bg-gray-200 px-3 py-1 font-medium text-gray-800 md:whitespace-nowrap">
-            {type ? type : "Full Time"}
-          </span>
-          <span className="mx-2 mt-2 block max-h-7 whitespace-nowrap bg-gray-200 px-3 py-1 font-medium text-gray-800 md:mt-0">
-            {level ? level : "Fresher are welcome"}
-          </span>
+
+      <div className="mt-3 flex justify-between">
+        <div className="leading-8">
+          {
+            //If qualifications are not present, show "Not Specified"
+            qualifications
+              ? //extract each skill from skils string
+                qualifications
+                  .split(",")
+                  .slice(0, 4)
+                  .map((skill, index) => (
+                    <span
+                      key={index}
+                      className="mr-2 rounded-full bg-gray-300 px-3 py-1 text-sm font-semibold text-gray-700"
+                    >
+                      {skill}
+                    </span>
+                  ))
+              : "Skills Not Specified"
+
+            //Show maximum 3 skills
+          }
         </div>
-      </div>
-      <div className="mt-3 flex justify-end">
         <div className="flex">
           <div className="wrapper mt-[7px]">
             <svg

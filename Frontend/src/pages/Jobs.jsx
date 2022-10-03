@@ -25,8 +25,22 @@ export const Jobs = () => {
       refetchOnWindowFocus: false,
       retry: 2,
       select: (jobs) =>
-        jobs.filter((job) =>
-          job.title.toLowerCase().includes(searchValue.toLowerCase())
+        jobs.filter(
+          (job) =>
+            job.title.toLowerCase().includes(searchValue.toLowerCase()) ||
+            job.employer?.company_name
+              .toLowerCase()
+              .includes(searchValue.toLowerCase()) ||
+            (job.work_location &&
+              job.work_location
+                .toLowerCase()
+                .includes(searchValue.toLowerCase())) ||
+            (job.qualifications &&
+              job.qualifications
+                .toLowerCase()
+                .includes(searchValue.toLowerCase())) ||
+            (job.type &&
+              job.type.toLowerCase().includes(searchValue.toLowerCase()))
         ),
     }
   );
@@ -106,6 +120,7 @@ export const Jobs = () => {
                           type={job.type}
                           posted={job.created_at}
                           id={job.id}
+                          qualifications={job.qualifications}
                           setJobDetails={setJobDetails}
                         />
                       ))
