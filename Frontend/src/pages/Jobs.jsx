@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { JobCard, JobLoading } from "../components/Card";
 import GuestLayout from "./Layout/Guest";
-import { jobDetails as DetailSection } from "../components/Card/jobDetails";
+import { jobDetails as DetailSection, JobDetailsLoading } from "../components/Card/jobDetails";
 import { useQuery } from "react-query";
 import { axiosInstance as API } from "../api/axiosInstance";
 
@@ -19,12 +19,20 @@ export const Jobs = () => {
     }
   );
 
+
+
   const [jobDetails, setJobDetails] = useState(null);
 
-  console.log(data);
+  console.log('Returned', data);
 
-   
+  //wait for data to fetch then set first job as jobDetails
+  // if (data && !jobDetails) {
+  //   setJobDetails(data[0]);
+  // }
+
+  console.log('After setting state:', jobDetails);
   
+
 
   //View detials of a job with id
   const showDetails = data?.filter((job) => job.id === jobDetails);
@@ -126,7 +134,7 @@ export const Jobs = () => {
                       benefits={showDetails[0].benefits}
                       id={showDetails[0].id}
                     />
-                  ) : null}
+                  ) : <JobDetailsLoading />}
                 </div>
               </div>
             </div>
