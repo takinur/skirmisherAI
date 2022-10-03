@@ -12,7 +12,7 @@ from rest_framework import viewsets
 from rest_framework import mixins
 
 
-from .serializers import CandidateProfileSerializer, FileSerializer, UserCreateSerializer, MyTokenObtainPairSerializer, VacancySerializer
+from .serializers import CandidateProfileSerializer, FileSerializer, PublicVacancySerializer, UserCreateSerializer, MyTokenObtainPairSerializer, VacancySerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from ..models import CandidateProfile, EmployerProfile, Vacancy
@@ -239,4 +239,4 @@ class VacancyPublicViewSet(
 class RetriveVacancyView(VacancyPublicViewSet):
     #Authentication is not required
     queryset = Vacancy.objects.order_by('-created_at')
-    serializer_class = VacancySerializer
+    serializer_class = PublicVacancySerializer
