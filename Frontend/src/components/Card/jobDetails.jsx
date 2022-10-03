@@ -1,6 +1,7 @@
 import React from "react";
+import { relativeTime } from "../../hooks/useRelativetime";
 
-export const jobDetails = ({title, company, description, experience }) => {
+export const jobDetails = ({title, company, description, experience, salary, type, posted }) => {
 
 
 
@@ -53,7 +54,7 @@ export const jobDetails = ({title, company, description, experience }) => {
             Patreon
             <span className="loc ml-2">Londontowne, MD.</span>
           </div>
-          <div className="font-xs text-gray-700">Posted 8 days ago</div>
+          <div className="font-xs text-gray-700">Posted {relativeTime(posted)}</div>
         </div>
         <div className="mt-5 justify-between rounded-2xl bg-gray-300 px-6 py-1 md:flex md:h-16">
           <div className="leading-7">
@@ -77,7 +78,7 @@ export const jobDetails = ({title, company, description, experience }) => {
               Employee Type
             </div>
             <div className="hitespace-nowrap font-sans text-gray-900">
-              Full time
+              {type ? type : "Full Time"}
             </div>
           </div>
           <div className="leading-7">
@@ -85,7 +86,10 @@ export const jobDetails = ({title, company, description, experience }) => {
               Salary
             </div>
             <div className="hitespace-nowrap font-sans text-gray-900">
-              $2150.0 / Month
+              {
+                //If dollar sign is not present in salary, add it
+                salary && !salary.includes("$") ? "$" + salary : salary                
+              }
             </div>
           </div>
         </div>
