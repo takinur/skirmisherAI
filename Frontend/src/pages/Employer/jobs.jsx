@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import AuthLayout from "../Layout/Auth";
 import { useQuery } from "react-query";
 import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 import { toast } from "react-toastify";
+import { relativeTime } from "../../hooks/useRelativetime";
+
 
 import { Loading } from "../../components/Loading";
 import { Table } from "../../components/Table";
@@ -11,7 +13,7 @@ import { NoExInfo } from "../../components/Alerts";
 
 import { useProfile } from "../../hooks/useProfile";
 import HeadlessModal from "../../components/Modal";
-import { useState } from "react";
+
 
 export const jobs = () => {
   const API = useAxiosPrivate();
@@ -21,24 +23,6 @@ export const jobs = () => {
   const closeModal = () => {
     setModal(false);
     setJobID(null);
-  };
-  const postedon = (time) => {
-    //Format date to hours ago
-    const date = new Date(time);
-    const hours = Math.floor((new Date() - date) / 1000 / 60 / 60);
-    const days = Math.floor(hours / 24);
-    const months = Math.floor(days / 30);
-    const years = Math.floor(months / 12);
-
-    if (hours < 24) {
-      return hours + " hours ago";
-    } else if (days < 30) {
-      return days + " days ago";
-    } else if (months < 12) {
-      return months + " months ago";
-    } else {
-      return years + " years ago";
-    }
   };
 
   //Custom hook to check if user profile exist
@@ -82,7 +66,7 @@ export const jobs = () => {
       accessorKey: "created_at",
       //Convert django date to readable format
       cell: (row) => {
-        return postedon(row.getValue());
+        return relativeTime(row.getValue());
       },
       //Not filterable
       enableColumnFilter: false,
