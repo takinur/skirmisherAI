@@ -160,7 +160,7 @@ export const Jobs = () => {
                       benefits={showDetails[0]?.benefits}
                       id={showDetails[0]?.id}
                       canApply={canApply}
-                      applicant={profile.id}
+                      applicant={profile?.id}
                     />
                   ) : (
                     <JobDetailsLoading />
