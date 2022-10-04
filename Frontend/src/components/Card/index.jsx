@@ -9,25 +9,23 @@ export const JobCard = ({
   location,
   type,
   posted,
-  level,
   qualifications,
   setJobDetails,
+  canApply,
 }) => {
-  const [saved, setSaved] = useState(true);
+  const [saved, setSaved] = useState(false);
 
-  const handleSave = (id) => {
-    console.log("Saved", id);
+  const handleSave = (jobId) => {
+    console.log("Saved", jobId);
     setSaved(!saved);
   };
 
-  const handleItemClick = (id) => {
+  const handleItemClick = (jobId) => {
     //Set the job details after  2 seconds
     setJobDetails(null);
     setTimeout(() => {
-      setJobDetails(id);
+      setJobDetails(jobId);
     }, 1500);
-
-    console.log("Clicked");
   };
 
   return (
@@ -56,28 +54,38 @@ export const JobCard = ({
           <div className="mx-2 mt-1 font-serif text-base">
             {company.company_name}
           </div>
-          <div className="mx-2 mt-1 text-xs">{location} ({type})</div>
+          <div className="mx-2 mt-1 text-xs">
+            {location} ({type})
+          </div>
         </div>
-        <div
-          className="save-icon z-20 cursor-pointer "
-          onClick={() => handleSave(2)}
-        >
-          <svg
-            className={classNames(
-              "h-6 w-6 hover:fill-gray-800 hover:text-gray-800 ",
-              { "text-gray-500": saved, "fill-gray-500 text-gray-500": !saved }
-            )}
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M20.8 4.6a5.5 5.5 0 00-7.7 0l-1.1 1-1-1a5.5 5.5 0 00-7.8 7.8l1 1 7.8 7.8 7.8-7.7 1-1.1a5.5 5.5 0 000-7.8z" />
-          </svg>
-        </div>
+        {
+          //IF the user is candidate, show the save button
+          canApply && (
+            <div
+              className="save-icon z-20 cursor-pointer "
+              onClick={() => handleSave(2)}
+            >
+              <svg
+                className={classNames(
+                  "h-6 w-6 hover:fill-gray-800 hover:text-gray-800 ",
+                  {
+                    "text-gray-500": !saved,
+                    "fill-gray-500 text-gray-500": saved,
+                  }
+                )}
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M20.8 4.6a5.5 5.5 0 00-7.7 0l-1.1 1-1-1a5.5 5.5 0 00-7.8 7.8l1 1 7.8 7.8 7.8-7.7 1-1.1a5.5 5.5 0 000-7.8z" />
+              </svg>
+            </div>
+          )
+        }
       </div>
 
       <div className="mt-3 flex justify-between">
