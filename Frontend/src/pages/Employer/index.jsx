@@ -1,23 +1,21 @@
 import React from "react";
 import { Greeting } from "../../components/Greeting";
-import { useSelector } from "react-redux";
 import { NoExInfo } from "../../components/Alerts";
 import { Loading } from "../../components/Loading";
 
 import { useProfile } from "../../hooks/useProfile";
 
 export const EmployerDashboard = () => {
-  //User from redux store
-  const { user } = useSelector((state) => state.auth);
 
   //Custom hook to check if user profile exist
   const {
     isLoading: empLoading,
     isError: empErr,
     data: employer,
+    user,
   } = useProfile(); //Pass retry Agument :INT
 
-  console.log("From dashindex Data:", employer);
+  console.log("From EMP dashindex Data:", employer);
 
   //Conditional rendering
   const renderDetails = () => {
