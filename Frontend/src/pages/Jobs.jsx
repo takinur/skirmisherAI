@@ -10,11 +10,27 @@ import { axiosInstance as API } from "../api/axiosInstance";
 import classNames from "classnames";
 
 import { SearchJobs } from "../components/Search/SearchJobs";
+import { useCandProfile } from "../hooks/useProfile";
+
+
+//EH? Check for user auth 
+//Apply for Job model view and react
+//Wishlist Job
+
 
 export const Jobs = () => {
   const [searchValue, SetSearchValue] = useState("");
 
-  // React query to fetch Jobs
+
+  const { data: profile, isError:isProfileErr, error: profileErr } = useCandProfile();
+
+  console.log('Profile', profile);
+
+  if(profile !== undefined || null){
+    
+  }
+
+  // React query to fetch Jobs and filter them
   const { isLoading, data, refetch } = useQuery(
     ["jobs"],
     async () => {
@@ -52,7 +68,7 @@ export const Jobs = () => {
 
   //View detials of a job with id
   const showDetails = data?.filter((job) => job.id === jobDetails);
-  console.log("Detials", showDetails);
+  // console.log("Detials", showDetails);
 
   return (
     <GuestLayout>

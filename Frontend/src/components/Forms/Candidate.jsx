@@ -90,7 +90,7 @@ export const CandProfileForm = (props) => {
     }
   }, [addMutation.isSuccess, addMutation.error]);
 
-  const isLoading = addMutation.isLoading;
+  const isLoading = addMutation.isLoading || addMutation.isSuccess;
 
   return (
     <div className="flex flex-col sm:justify-center items-center pt-6 sm:pt-0 ">

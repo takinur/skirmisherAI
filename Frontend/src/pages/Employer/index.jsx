@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { useQuery } from "react-query";
-import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
+import React from "react";
 import { Greeting } from "../../components/Greeting";
 import { useSelector } from "react-redux";
 import { NoExInfo } from "../../components/Alerts";
@@ -9,7 +7,6 @@ import { Loading } from "../../components/Loading";
 import { useProfile } from "../../hooks/useProfile";
 
 export const EmployerDashboard = () => {
-  const API = useAxiosPrivate();
   //User from redux store
   const { user } = useSelector((state) => state.auth);
 
