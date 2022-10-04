@@ -1,4 +1,6 @@
-import React from "react";
+import classNames from "classnames";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { relativeTime } from "../../hooks/useRelativetime";
 
 export const jobDetails = ({
@@ -12,7 +14,22 @@ export const jobDetails = ({
   qualifications,
   benefits,
   location,
+  canApply,
+  applicant,
+  id,
+
 }) => {
+  const [saved, setSaved] = useState(false);
+
+  const handleSave = (jobId) => {
+    console.log("Saved", jobId);
+    setSaved(!saved);
+  };
+
+  const handleApply = (jobId) => {
+    console.log('Appply to this job: ', jobId, 'CAND: ', applicant)
+  }
+
   return (
     <>
       <div className="flex h-40 w-full items-center justify-center rounded-t-md bg-gray-300 ">
@@ -34,25 +51,50 @@ export const jobDetails = ({
           )
         }
       </div>
-      <button className="float-right -mt-6 ml-4 mr-2 rounded-md bg-blue-700 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-800">
-        Apply Now
-      </button>
+      {canApply  ? (
+        <button onClick={() => handleApply(id)}
+         className="float-right -mt-6 ml-4 mr-2 rounded-md bg-blue-700 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-800">
+          Apply Now
+        </button>
+      ) : (
+        <Link
+          to={"/user/profile"}
+          className="float-right -mt-6 ml-4 mr-2 rounded-md bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700"
+        >
+          Complete your Profile to Apply
+        </Link>
+      )}
+
       <div className="px-8 pt-12">
         <div className="flex text-gray-800 ">
           <div className="text-2xl font-bold">{title}</div>
           <div className="ml-auto flex items-center">
-            <svg
-              className="h-6 w-6"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M20.8 4.6a5.5 5.5 0 00-7.7 0l-1.1 1-1-1a5.5 5.5 0 00-7.8 7.8l1 1 7.8 7.8 7.8-7.7 1-1.1a5.5 5.5 0 000-7.8z" />
-            </svg>
+            {canApply && (
+              <div
+                className="save-icon z-20 cursor-pointer "
+                onClick={() => handleSave(2)}
+              >
+                <svg
+                  className={classNames(
+                    "h-6 w-6 hover:fill-gray-800 hover:text-gray-800 ",
+                    {
+                      "text-gray-500": !saved,
+                      "fill-gray-500 text-gray-500": saved,
+                    }
+                  )}
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M20.8 4.6a5.5 5.5 0 00-7.7 0l-1.1 1-1-1a5.5 5.5 0 00-7.8 7.8l1 1 7.8 7.8 7.8-7.7 1-1.1a5.5 5.5 0 000-7.8z" />
+                </svg>
+              </div>
+            )}
+
             <svg
               className="ml-2 h-6 w-6"
               xmlns="http://www.w3.org/2000/svg"
@@ -188,7 +230,7 @@ export const JobDetailsLoading = () => {
   return (
     <>
       <div className="flex h-40 w-full  items-center justify-center rounded-t-md bg-gray-300  ">
-        <div role="status" className="max-w-lg space-y-2.5 animate-pulse ">
+        <div role="status" className="max-w-lg animate-pulse space-y-2.5 ">
           <div className="flex w-full items-center space-x-2">
             <div className="h-2.5 w-32 rounded-full bg-gray-700"></div>
             <div className="h-2.5 w-24 rounded-full bg-gray-600"></div>
