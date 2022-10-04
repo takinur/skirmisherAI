@@ -19,6 +19,7 @@ export const jobDetails = ({
   id,
 }) => {
   const [saved, setSaved] = useState(false);
+  const [isApplied, setIsApplied] = useState(false);
 
   const handleSave = (jobId) => {
     console.log("Saved", jobId);
@@ -27,6 +28,38 @@ export const jobDetails = ({
 
   const handleApply = (jobId) => {
     console.log("Appply to this job: ", jobId, "CAND: ", applicant);
+    setIsApplied(true);
+  };
+
+  const showApplyButton = () => {
+    if (isApplied) {
+      return (
+        <span
+          className="float-right -mt-6 ml-4 mr-2  text-green-700  text-base font-semibold text-white "
+        >
+          Applied  
+        </span>
+      );
+    }
+    if (canApply) {
+      return (
+        <button
+          onClick={() => handleApply(id)}
+          className="float-right -mt-6 ml-4 mr-2 rounded-md bg-blue-700 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-800"
+        >
+          Apply Now
+        </button>
+      );
+    } else {
+      return (
+        <Link
+          to={"/user/profile"}
+          className="float-right -mt-6 ml-4 mr-2 rounded-md bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700"
+        >
+          Complete your Profile to Apply
+        </Link>
+      );
+    }
   };
 
   return (
@@ -50,21 +83,7 @@ export const jobDetails = ({
           )
         }
       </div>
-      {canApply ? (
-        <button
-          onClick={() => handleApply(id)}
-          className="float-right -mt-6 ml-4 mr-2 rounded-md bg-blue-700 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-800"
-        >
-          Apply Now
-        </button>
-      ) : (
-        <Link
-          to={"/user/profile"}
-          className="float-right -mt-6 ml-4 mr-2 rounded-md bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700"
-        >
-          Complete your Profile to Apply
-        </Link>
-      )}
+      {showApplyButton()}
 
       <div className="px-8 pt-12">
         <div className="flex text-gray-800 ">
