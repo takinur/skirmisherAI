@@ -41,7 +41,7 @@ function DetailedProfileView(profileData, user) {
                         className="max-w-150-px absolute -m-16 -ml-20 h-auto rounded-full border-none align-middle shadow-xl lg:-ml-16"
                       />
                     ) : (
-                      <div className="flex h-16 w-16 items-center justify-center -mt-8 rounded-full  bg-gray-700">
+                      <div className="-mt-8 flex h-16 w-16 items-center justify-center rounded-full  bg-gray-700">
                         <span className="text-4xl font-semibold text-gray-50">
                           {user?.name.charAt(0)}
                         </span>
@@ -50,7 +50,7 @@ function DetailedProfileView(profileData, user) {
                   </div>
                 </div>
                 <div className="w-full md:px-4 lg:order-3 lg:w-4/12 lg:self-center lg:text-right">
-                  <div className="py-6 md:px-3 float-right sm:mt-0">
+                  <div className="float-right py-6 sm:mt-0 md:px-3">
                     <button
                       className="mb-1 rounded bg-green-500 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-green-600 sm:mr-2"
                       type="button"
@@ -60,11 +60,10 @@ function DetailedProfileView(profileData, user) {
                   </div>
                 </div>
                 <div className="w-full px-4 lg:order-1 lg:w-4/12">
-                      {/* {ADD any top header info} */}
-                  
+                  {/* {ADD any top header info} */}
                 </div>
               </div>
-              <div className="md:mt-12 text-center">
+              <div className="text-center md:mt-12">
                 <h3 className="mb-2 text-4xl font-semibold leading-normal text-gray-700">
                   {user.name}
                 </h3>
@@ -101,11 +100,11 @@ function DetailedProfileView(profileData, user) {
                   </h3>
                 </div>
                 <div className="mt-4 flex w-full flex-col ">
-                  <div className="mt-2  space-x-1 space-y-2 p-1 text-justify">
+                  <div className="mt-2 space-x-1 space-y-2 p-1 text-justify">
                     {profileData.skills.map((skill) => (
                       <button
                         key={skill.id}
-                        className="rounded-full bg-gray-300 px-5 py-2 text-sm font-medium tracking-wider  text-gray-600 shadow-sm hover:bg-gray-400 hover:shadow-2xl"
+                        className="rounded-full bg-gray-300 px-5 py-2 text-sm font-medium tracking-wider text-gray-600 shadow-sm hover:bg-gray-400 hover:shadow-2xl"
                       >
                         {skill.name}
                       </button>

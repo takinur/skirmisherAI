@@ -17,7 +17,6 @@ export const jobDetails = ({
   canApply,
   applicant,
   id,
-
 }) => {
   const [saved, setSaved] = useState(false);
 
@@ -27,8 +26,8 @@ export const jobDetails = ({
   };
 
   const handleApply = (jobId) => {
-    console.log('Appply to this job: ', jobId, 'CAND: ', applicant)
-  }
+    console.log("Appply to this job: ", jobId, "CAND: ", applicant);
+  };
 
   return (
     <>
@@ -51,9 +50,11 @@ export const jobDetails = ({
           )
         }
       </div>
-      {canApply  ? (
-        <button onClick={() => handleApply(id)}
-         className="float-right -mt-6 ml-4 mr-2 rounded-md bg-blue-700 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-800">
+      {canApply ? (
+        <button
+          onClick={() => handleApply(id)}
+          className="float-right -mt-6 ml-4 mr-2 rounded-md bg-blue-700 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-800"
+        >
           Apply Now
         </button>
       ) : (
@@ -186,26 +187,29 @@ export const jobDetails = ({
             </div>
           </div>
         </div>
-        <div className="mt-8">
+        <div className="mt-8 w-full ">
           <div className="mb-7 font-semibold">Overview</div>
           <div className="mb-7 leading-8">{description}</div>
           <div className="mb-2 font-semibold">Qualifications</div>
-          <div className="mb-7 leading-8">
-            {
-              //If qualifications are not present, show "Not Specified"
-              qualifications
-                ? //extract each skill from skils string
-                  qualifications.split(",").map((skill, index) => (
-                    <span
-                      key={index}
-                      className="mr-2 rounded-full bg-gray-300 px-3 py-1 text-sm font-semibold text-gray-700"
-                    >
-                      {skill}
-                    </span>
-                  ))
-                : "Not Specified"
-            }
+          <div className="mt-4 flex w-full flex-col ">
+            <div className="mb-7 space-x-1 space-y-2 p-1 text-justify">
+              {
+                //If qualifications are not present, show "Not Specified"
+                qualifications
+                  ? //extract each skill from skils string
+                    qualifications.split(",").map((skill, index) => (
+                      <button
+                        key={index}
+                        className="rounded-full bg-gray-300 px-3 py-1 text-sm font-medium tracking-wider text-gray-600 shadow-sm hover:bg-gray-400 hover:shadow-2xl"
+                      >
+                        {skill}
+                      </button>
+                    ))
+                  : "Not Specified"
+              }
+            </div>
           </div>
+
           <div className="mb-2 font-semibold">Benefits</div>
           <div className="mb-7 leading-8">
             {
