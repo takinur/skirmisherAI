@@ -21,14 +21,12 @@ import { useCandProfile } from "../hooks/useProfile";
 export const Jobs = () => {
   const [searchValue, SetSearchValue] = useState("");
 
-
   const { data: profile, isError:isProfileErr, error: profileErr } = useCandProfile();
 
-  console.log('Profile', profile);
+  const canApply = profile !== undefined || null ? true : false;
+  // const canApply = false;
+  console.log('Can Apply?', canApply);
 
-  if(profile !== undefined || null){
-    
-  }
 
   // React query to fetch Jobs and filter them
   const { isLoading, data, refetch } = useQuery(
@@ -70,6 +68,8 @@ export const Jobs = () => {
   const showDetails = data?.filter((job) => job.id === jobDetails);
   // console.log("Detials", showDetails);
 
+
+
   return (
     <GuestLayout>
       <div>
@@ -108,7 +108,7 @@ export const Jobs = () => {
                   <span className="menu-icon">▼</span>
                 </div>
               </div>
-              <div className="mt-4 max-h-screen md:flex md:flex-grow">
+              <div className="mt-4 md:max-h-screen md:flex md:flex-grow">
                 <div
                   className={classNames(
                     "wrapper overflow-y-auto md:block md:w-2/5",
@@ -138,6 +138,8 @@ export const Jobs = () => {
                           id={job.id}
                           qualifications={job.qualifications}
                           setJobDetails={setJobDetails}
+                          canApply={canApply}
+      
                         />
                       ))
                     )
@@ -157,6 +159,8 @@ export const Jobs = () => {
                       salary={showDetails[0]?.salary}
                       benefits={showDetails[0]?.benefits}
                       id={showDetails[0]?.id}
+                      canApply={canApply}
+                      applicant={profile.id}
                     />
                   ) : (
                     <JobDetailsLoading />
