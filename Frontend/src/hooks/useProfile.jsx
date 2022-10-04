@@ -22,10 +22,10 @@ export const useProfile = (retry = 0) => {
     return res.data;
   }
 
-  return { isLoading, isError, error, data };
+  return { isLoading, isError, error, data, user };
 };
 
-export const useCandProfile = () => {
+export const useCandProfile = (retry = 0 ) => {
   const API = useAxiosPrivate();
   const { user } = useSelector((state) => state.auth);
   const { isLoading, isError, error, data } = useQuery(
@@ -33,7 +33,7 @@ export const useCandProfile = () => {
     fetchProfile,
     {
       refetchOnWindowFocus: false,
-      retry: 0,
+      retry: retry
     }
   );
 
@@ -43,5 +43,5 @@ export const useCandProfile = () => {
     return res.data;
   }
 
-  return { isLoading, isError, error, data };
+  return { isLoading, isError, error, data, user };
 };
