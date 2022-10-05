@@ -35,7 +35,7 @@ export const jobDetails = ({
     if (isApplied) {
       return (
         <span
-          className="float-right -mt-6 ml-4 mr-2  text-green-700  text-base font-semibold text-white "
+          className="float-right -mt-6 ml-4 mr-2  text-green-700  text-base font-semibold  "
         >
           Applied  
         </span>

@@ -12,10 +12,10 @@ from rest_framework import viewsets
 from rest_framework import mixins
 
 
-from .serializers import CandidateProfileSerializer, FileSerializer, PublicVacancySerializer, UserCreateSerializer, MyTokenObtainPairSerializer, VacancySerializer
+from .serializers import CandidateProfileSerializer, FileSerializer, JobApplicationSerializer, PublicVacancySerializer, UserCreateSerializer, MyTokenObtainPairSerializer, VacancySerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from ..models import CandidateProfile, EmployerProfile, Vacancy
+from ..models import CandidateProfile, EmployerProfile, JobApplication, Vacancy
 from .serializers import EmployerProfileSerializer
 
 # Machine Leaning Model from 
@@ -240,3 +240,21 @@ class RetriveVacancyView(VacancyPublicViewSet):
     #Authentication is not required
     queryset = Vacancy.objects.order_by('-created_at')
     serializer_class = PublicVacancySerializer
+
+# Job Application Views
+class JobApplicationView(viewsets.ModelViewSet):
+    # permission_classes = [permissions.IsAuthenticated]
+    queryset = JobApplication.objects.order_by('-created_at')
+    serializer_class = JobApplicationSerializer
+    
+    # Return all vacancies for Candidate
+    def get_queryset(self):        
+        cand_id = self.request.query_params.get('cand_id', None)
+        # emp_id = self.request.query_params.get('emp_id', None)
+                
+        if cand_id is not None:
+            return JobApplication.objects.filter(candidate_id=cand_id).order_by('-created_at')             
+
+        return JobApplication.objects.order_by('-created_at')
+    
+    
