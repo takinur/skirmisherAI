@@ -32,7 +32,16 @@ export const jobDetails = ({
     return res.data;
   };
   if (applicant) {
-    //
+    useEffect(() => {
+      checkIfApplied().then((res) => {
+        //Filter the list of applied jobs to get the job with the same id
+        const applied = res.filter((job) => job.applied_id === id);
+        //If the job is found in the list of applied jobs, set isApplied to true
+        if (applied.length > 0) {
+          setIsApplied(true);
+        }
+      });
+    }, []);
   }
 
   //Apply for Job
@@ -44,7 +53,7 @@ export const jobDetails = ({
     const job = {};
     job.vacancy = jobId;
     job.candidate = applicant;
-    job.status = 'Applied'
+    job.status = "Applied";
 
     // console.log("Appply to this job: ", job);
 
