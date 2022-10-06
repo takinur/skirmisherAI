@@ -12,11 +12,9 @@ import classNames from "classnames";
 import { SearchJobs } from "../components/Search/SearchJobs";
 import { useCandProfile } from "../hooks/useProfile";
 
-
-//EH? Check for user auth 
+//EH? Check for user auth
 //Apply for Job model view and react
 //Wishlist Job
-
 
 export const Findwork = () => {
   const [searchValue, SetSearchValue] = useState("");
@@ -25,8 +23,7 @@ export const Findwork = () => {
 
   const canApply = profile !== undefined || null ? true : false;
   // const canApply = false;
-  console.log('Can Apply?', canApply);
-
+  console.log("Can Apply?", canApply);
 
   // React query to fetch Jobs and filter them
   const { isLoading, data, refetch } = useQuery(
@@ -68,7 +65,12 @@ export const Findwork = () => {
   const showDetails = data?.filter((job) => job.id === jobDetails);
   // console.log("Detials", showDetails);
 
-
+  //HACK: Set state to first job after 4 seconds
+  setTimeout(() => {
+    if (data && jobDetails === null) {
+      setJobDetails(data[0]?.id);
+    }
+  }, 4000);
 
   return (
     <GuestLayout>
@@ -108,7 +110,7 @@ export const Findwork = () => {
                   <span className="menu-icon">▼</span>
                 </div>
               </div>
-              <div className="mt-4 md:max-h-screen md:flex md:flex-grow">
+              <div className="mt-4 md:flex md:max-h-screen md:flex-grow">
                 <div
                   className={classNames(
                     "wrapper overflow-y-auto md:block md:w-2/5",
@@ -139,7 +141,6 @@ export const Findwork = () => {
                           qualifications={job.qualifications}
                           setJobDetails={setJobDetails}
                           canApply={canApply}
-      
                         />
                       ))
                     )
