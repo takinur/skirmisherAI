@@ -65,12 +65,15 @@ export const Findwork = () => {
   const showDetails = data?.filter((job) => job.id === jobDetails);
   // console.log("Detials", showDetails);
 
-  //HACK: Set state to first job after 4 seconds
-  setTimeout(() => {
-    if (data && jobDetails === null) {
-      setJobDetails(data[0]?.id);
-    }
-  }, 4000);
+  //HACK: Set state to first job after 4 seconds only for Desktop
+  const isMobile = window.innerWidth < 768;
+  if (!isMobile) {
+    setTimeout(() => {
+      if (data && jobDetails === null) {
+        setJobDetails(data[0]?.id);
+      }
+    }, 4000);
+  }
 
   return (
     <GuestLayout>
