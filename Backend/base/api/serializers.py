@@ -188,4 +188,10 @@ class RetriveJobApplicationSerializer(serializers.ModelSerializer):
         model = JobApplication
         fields = '__all__'
         
+    
+    def to_representation(self, instance):
+        data = super().to_representation(instance)       
+        data['job_title'] = instance.vacancy.title
+        data['employer'] = instance.vacancy.employer.company_name
         
+        return data
