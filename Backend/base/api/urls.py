@@ -26,7 +26,7 @@ router.register('jobs', VacancyView, basename='jobs')
 router.register('jobs-public', RetriveVacancyView, basename='public-jobs')
 
 #Applications Routes
-router.register('application', JobApplicationView, basename='applications')
+router.register('v1/application', JobApplicationView, basename='applications')
 
 urlpatterns = [
     path('', views.getRoutes, name='getRoutes'),

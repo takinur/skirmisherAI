@@ -1,7 +1,10 @@
 import classNames from "classnames";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useMutation } from "react-query";
 import { Link } from "react-router-dom";
+import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 import { relativeTime } from "../../hooks/useRelativetime";
+import { toast } from "react-toastify";
 
 export const jobDetails = ({
   title,
@@ -21,29 +24,66 @@ export const jobDetails = ({
   const [saved, setSaved] = useState(false);
   const [isApplied, setIsApplied] = useState(false);
 
-  const handleSave = (jobId) => {
+  const API = useAxiosPrivate();
+
+  //Check if the user has already applied for the job with axios
+  const checkIfApplied = async () => {
+    const res = await API.get(`v1/application/?cad_id=${applicant}`);
+    return res.data;
+  };
+  if (applicant) {
+    //
+  }
+
+  //Apply for Job
+  const applyMutation = useMutation(
+    async (data) => await API.post("v1/application/", data)
+  );
+
+  const handleApply = (jobId) => {
+    const job = {};
+    job.vacancy = jobId;
+    job.candidate = applicant;
+
+    console.log("Appply to this job: ", job);
+
+    applyMutation.mutate(job);
+  };
+
+  const handleWishlist = (jobId) => {
     console.log("Saved", jobId);
     setSaved(!saved);
   };
 
-  const handleApply = (jobId) => {
-    console.log("Appply to this job: ", jobId, "CAND: ", applicant);
-    setIsApplied(true);
-  };
+  //Navigate to Profile
+  useEffect(() => {
+    if (applyMutation.isSuccess) {
+      toast.success("Applied Successfully.");
+      setIsApplied(true);
+    }
+    if (applyMutation.error) {
+      let err = applyMutation.error.response.data;
+
+      toast.error("Something went wrong.");
+
+      console.log("Error updating Profile", err);
+    }
+  }, [applyMutation.isSuccess, applyMutation.error]);
+
+  const isDisabled = applyMutation.isLoading || applyMutation.isSuccess;
 
   const showApplyButton = () => {
     if (isApplied) {
       return (
-        <span
-          className="float-right -mt-6 ml-4 mr-2  text-green-700  text-base font-semibold  "
-        >
-          Applied  
+        <span className="float-right -mt-6 ml-4 mr-2  text-base  font-semibold text-green-700  ">
+          Applied
         </span>
       );
     }
     if (canApply) {
       return (
         <button
+          disabled={isDisabled}
           onClick={() => handleApply(id)}
           className="float-right -mt-6 ml-4 mr-2 rounded-md bg-blue-700 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-800"
         >
@@ -92,7 +132,7 @@ export const jobDetails = ({
             {canApply && (
               <div
                 className="save-icon z-20 cursor-pointer "
-                onClick={() => handleSave(2)}
+                onClick={() => handleWishlist(2)}
               >
                 <svg
                   className={classNames(
