@@ -2,11 +2,9 @@ import React from "react";
 import { CandProfileForm } from "../../components/Forms/Candidate";
 import { Loading } from "../../components/Loading";
 import {
-  FaBuilding,
   FaGlobe,
   FaMapMarkerAlt,
   FaPhoneAlt,
-  FaUsers,
 } from "react-icons/fa";
 
 import { useCandProfile } from "../../hooks/useProfile";

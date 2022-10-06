@@ -21,7 +21,7 @@ import { useCandProfile } from "../hooks/useProfile";
 export const Jobs = () => {
   const [searchValue, SetSearchValue] = useState("");
 
-  const { data: profile, isError:isProfileErr, error: profileErr } = useCandProfile();
+  const { data: profile } = useCandProfile();
 
   const canApply = profile !== undefined || null ? true : false;
   // const canApply = false;
@@ -59,7 +59,7 @@ export const Jobs = () => {
     }
   );
 
-  console.log("not hooks", data);
+  // console.log("Fetchd Jobs", data);
 
   //IF data is loaded set state to first job
   const [jobDetails, setJobDetails] = useState(data ? data[0]?.id : null);
