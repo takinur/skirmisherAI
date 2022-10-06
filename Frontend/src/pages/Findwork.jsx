@@ -18,7 +18,7 @@ import { useCandProfile } from "../hooks/useProfile";
 //Wishlist Job
 
 
-export const Jobs = () => {
+export const Findwork = () => {
   const [searchValue, SetSearchValue] = useState("");
 
   const { data: profile } = useCandProfile();
