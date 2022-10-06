@@ -3,7 +3,8 @@ from . import views
 from .views import (
     JobApplicationView,
     MyTokenObtainPairView, 
-    RegisterView, 
+    RegisterView,
+    RetriveJobApplicationView, 
     RetriveUserView,
     FileUploadView,
     EmployerProfileView,
@@ -27,6 +28,7 @@ router.register('jobs-public', RetriveVacancyView, basename='public-jobs')
 
 #Applications Routes
 router.register('v1/application', JobApplicationView, basename='applications')
+router.register('v1/application-dashboard', RetriveJobApplicationView, basename='applications-dashboard')
 
 urlpatterns = [
     path('', views.getRoutes, name='getRoutes'),

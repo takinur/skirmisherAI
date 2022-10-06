@@ -13,7 +13,7 @@ from rest_framework import mixins
 
 
 from .serializers import ( CandidateProfileSerializer, FileSerializer,
-                          JobApplicationSerializer, PublicVacancySerializer, 
+                          JobApplicationSerializer, PublicVacancySerializer, RetriveJobApplicationSerializer, 
                           UserCreateSerializer, MyTokenObtainPairSerializer, 
                           VacancySerializer )
 
@@ -249,10 +249,34 @@ class JobApplicationView(viewsets.ModelViewSet):
     # Return all vacancies for Candidate
     def get_queryset(self):        
         cand_id = self.request.query_params.get('cand_id', None)
-        # emp_id = self.request.query_params.get('emp_id', None)
                 
         if cand_id is not None:
             return JobApplication.objects.filter(candidate_id=cand_id).order_by('-created_at')             
 
         return JobApplication.objects.order_by('-created_at')
     
+
+
+#Jobs for Employer dashboard    
+class JobApplicationPublicViewSet(
+                            mixins.ListModelMixin,
+                            mixins.RetrieveModelMixin,
+                            viewsets.GenericViewSet):
+    """
+    A viewset that provides `retrieve` and `list` actions.
+    
+    """
+    pass
+
+class RetriveJobApplicationView(JobApplicationPublicViewSet):
+    #Authentication is not required
+    queryset = JobApplication.objects.order_by('-created_at')
+    serializer_class = RetriveJobApplicationSerializer
+    
+    def get_queryset(self):
+        job_id = self.request.query_params.get('job_id', None)
+        
+        if job_id is not None:
+            return JobApplication.objects.filter(vacancy_id=job_id).order_by('-created_at')             
+
+        return JobApplication.objects.order_by('-created_at')
