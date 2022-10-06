@@ -181,3 +181,11 @@ class JobApplicationSerializer(serializers.ModelSerializer):
         data['employer'] = instance.vacancy.employer.company_name
         
         return data
+
+class RetriveJobApplicationSerializer(serializers.ModelSerializer):
+    candidate = CandidateProfileSerializer(read_only=True)
+    class Meta:
+        model = JobApplication
+        fields = '__all__'
+        
+        
