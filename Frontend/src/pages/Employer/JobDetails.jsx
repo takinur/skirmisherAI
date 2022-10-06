@@ -6,7 +6,7 @@ export const JobDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  
+
 
   //TODO: Fetch Job Details
   //TODO: Fetch Job Applications
