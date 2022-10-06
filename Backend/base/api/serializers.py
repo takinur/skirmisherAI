@@ -165,14 +165,16 @@ class PublicVacancySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+
 class JobApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = JobApplication
         fields = '__all__'
-        extra_kwargs = {'vacancy': {'write_only': True}, 'candidate': {'write_only': True}}
+        extra_kwargs = {'candidate': {'write_only': True}, 'vacancy': {'write_only': True}}
+        
         
     def to_representation(self, instance):
-        data = super().to_representation(instance)            
-        data['vacancy'] = instance.vacancy.title
-        data['candidate'] = instance.candidate.name
+        data = super().to_representation(instance)       
+        data['candidate'] = instance.candidate.name  
+        data['applied_id'] = instance.vacancy.id
         return data

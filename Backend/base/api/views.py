@@ -12,7 +12,11 @@ from rest_framework import viewsets
 from rest_framework import mixins
 
 
-from .serializers import CandidateProfileSerializer, FileSerializer, JobApplicationSerializer, PublicVacancySerializer, UserCreateSerializer, MyTokenObtainPairSerializer, VacancySerializer
+from .serializers import ( CandidateProfileSerializer, FileSerializer,
+                          JobApplicationSerializer, PublicVacancySerializer, 
+                          UserCreateSerializer, MyTokenObtainPairSerializer, 
+                          VacancySerializer )
+
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from ..models import CandidateProfile, EmployerProfile, JobApplication, Vacancy
@@ -256,5 +260,4 @@ class JobApplicationView(viewsets.ModelViewSet):
             return JobApplication.objects.filter(candidate_id=cand_id).order_by('-created_at')             
 
         return JobApplication.objects.order_by('-created_at')
-    
     
