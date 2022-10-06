@@ -44,8 +44,9 @@ export const jobDetails = ({
     const job = {};
     job.vacancy = jobId;
     job.candidate = applicant;
+    job.status = 'Applied'
 
-    console.log("Appply to this job: ", job);
+    // console.log("Appply to this job: ", job);
 
     applyMutation.mutate(job);
   };
