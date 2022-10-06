@@ -82,11 +82,6 @@ class RetriveUserView(APIView):
     
 class EmployerProfileView(APIView):
     # permission_classes = [permissions.IsAuthenticated]
-    # queryset = EmployerProfile.objects.order_by('-created_at')
-    # serializer_class = EmployerProfileSerializer
-    # parser_classes = (MultiPartParser, FormParser)
-    
-    # def perform_create(self, serializer):
     
     def get_object(self, user_id):
         '''
@@ -120,7 +115,6 @@ class EmployerProfileView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 class CandidateProfileView(APIView):
     # permission_classes = [permissions.IsAuthenticated]
-    # queryset = EmployerProfile.objects.order_by('-created_at')
     serializer_class = CandidateProfileSerializer
     parser_classes = (MultiPartParser, FormParser)
     
@@ -144,7 +138,7 @@ class CandidateProfileView(APIView):
         if profile is not None:
             serializer = CandidateProfileSerializer(profile)
             return Response(serializer.data, status=status.HTTP_200_OK)
-        
+    
         return Response(status=status.HTTP_400_BAD_REQUEST, data={'message': 'Sadge, Profile not found'})
         
         
