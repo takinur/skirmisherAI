@@ -61,11 +61,11 @@ export const jobDetails = ({
   };
 
   const handleWishlist = (jobId) => {
-    console.log("Saved", jobId);
+    console.log("Wishlisted", jobId);
     setSaved(!saved);
   };
 
-  //Navigate to Profile
+  //Show success message if the user has applied for the job
   useEffect(() => {
     if (applyMutation.isSuccess) {
       toast.success("Applied Successfully.");
