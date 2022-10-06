@@ -12,8 +12,8 @@ import classNames from "classnames";
 import { SearchJobs } from "../components/Search/SearchJobs";
 import { useCandProfile } from "../hooks/useProfile";
 
-//EH? Check for user auth
-//Apply for Job model view and react
+//EH? Check for user role
+//Apply for Job model Confirmation
 //Wishlist Job
 
 export const Findwork = () => {
@@ -23,7 +23,6 @@ export const Findwork = () => {
 
   const canApply = profile !== undefined || null ? true : false;
   // const canApply = false;
-  console.log("Can Apply?", canApply);
 
   // React query to fetch Jobs and filter them
   const { isLoading, data, refetch } = useQuery(
@@ -56,7 +55,6 @@ export const Findwork = () => {
     }
   );
 
-  // console.log("Fetchd Jobs", data);
 
   //IF data is loaded set state to first job
   const [jobDetails, setJobDetails] = useState(data ? data[0]?.id : null);
