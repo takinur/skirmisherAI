@@ -7,16 +7,17 @@ import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 
 export const JobDetails = () => {
   const navigate = useNavigate();
-  const API = useAxiosPrivate()
-
+  const API = useAxiosPrivate();
 
   const { id } = useParams();
 
-  if(!id) {
+  if (!id) {
     navigate("/employer/jobs");
   }
 
-  //Fetch Job Applications 
+  
+
+  //Fetch Job Applications
   const { isLoading, data, refetch } = useQuery(
     "applications",
     async () => {
@@ -29,10 +30,7 @@ export const JobDetails = () => {
     }
   );
 
-  console.log('Feteched', data);
-
-  
-
+  console.log("Feteched", data);
 
   //TODO: Fetch Job Details
   //TODO: Fetch Job Applications
@@ -42,11 +40,21 @@ export const JobDetails = () => {
 
   return (
     <AuthLayout title="Job Details">
+      <h1
+        onClick={() => navigate(-1)}
+        className={classNames("ml-5 !bg-purple-600 md:mt-2")}
+      >
+        Go Back
+      </h1>
+      
       <div className="wrapper">
         <h1>Job ID: {id} </h1>
         <button onClick={() => navigate(-1)} className="bg-red-400">
           Go back
         </button>
+        <h1 className="text-center text-2xl text-gray-600">
+          {data && data[0].job_title}
+        </h1>
       </div>
     </AuthLayout>
   );
