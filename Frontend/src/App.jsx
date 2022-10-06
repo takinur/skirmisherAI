@@ -14,13 +14,16 @@ import { ContactPage } from "./pages/Contact";
 import Footer from "./components/Footer";
 import Logout from "./pages/Auth/Logout";
 import { NotFound } from "./pages/Error";
+import { Findwork } from "./pages/Findwork";
+
 
 import { jobs as Empjobs } from "./pages/Employer/jobs";
 import { JobDetails } from "./pages/Employer/JobDetails";
+import { CreateUpdateJob } from "./pages/Employer/AddUpdateJob";
 
 import UserProfile from "./pages/Auth/UserProfile";
-import { CreateUpdateJob } from "./pages/Employer/AddUpdateJob";
-import { Jobs as Findwork } from "./pages/Jobs";
+
+import { Jobs as CandJobs } from "./pages/Candidate/Jobs";
 
 function App() {
   return (
@@ -37,6 +40,8 @@ function App() {
 
           <Route path="/user/profile" element={<UserProfile />} />
           <Route path="/dashboard" element={<Dashboard />} />
+
+          <Route path="applicant/jobs" element={<CandJobs />} />
 
           <Route path="/employer/jobs" >
             <Route index element={<Empjobs />} />
