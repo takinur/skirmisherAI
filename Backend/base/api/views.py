@@ -47,6 +47,7 @@ def getRoutes(request):
         '/api/upload/resume/',
         '/api/jobs/',
         '/api/jobs-public/',
+        '/api/v1/application/',
     ]
     
     return Response(routes)

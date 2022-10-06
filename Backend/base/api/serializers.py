@@ -177,4 +177,7 @@ class JobApplicationSerializer(serializers.ModelSerializer):
         data = super().to_representation(instance)       
         data['candidate'] = instance.candidate.name  
         data['applied_id'] = instance.vacancy.id
+        data['job_title'] = instance.vacancy.title
+        data['employer'] = instance.vacancy.employer.company_name
+        
         return data
