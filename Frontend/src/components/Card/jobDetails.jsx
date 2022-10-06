@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 import { relativeTime } from "../../hooks/useRelativetime";
 import { toast } from "react-toastify";
+import { FaCheckCircle } from "react-icons/fa";
 
 export const jobDetails = ({
   title,
@@ -56,7 +57,6 @@ export const jobDetails = ({
     job.status = "Applied";
 
     // console.log("Appply to this job: ", job);
-
     applyMutation.mutate(job);
   };
 
@@ -83,14 +83,13 @@ export const jobDetails = ({
   const isDisabled = applyMutation.isLoading || applyMutation.isSuccess;
 
   const showApplyButton = () => {
-    if (isApplied) {
+    if (isApplied ) {
       return (
-        <span className="float-right -mt-6 ml-4 mr-2  text-base  font-semibold text-green-700  ">
-          Applied
-        </span>
+        <div className="float-right -mt-6 ml-4 mr-2  text-base  font-semibold text-green-700  flex ">
+         <span>Applied</span>  <FaCheckCircle className="ml-1 mt-1" />
+        </div>
       );
-    }
-    if (canApply) {
+    } else if (canApply) {
       return (
         <button
           disabled={isDisabled}
@@ -116,18 +115,18 @@ export const jobDetails = ({
     <>
       <div className="flex h-40 w-full items-center justify-center rounded-t-md bg-gray-300 ">
         <span className="font-mono font-semibold text-gray-700">
-          {company.slogan}
+          {company?.slogan}
         </span>
       </div>
       <div className="z-10 -mt-8 h-16 w-16 bg-gray-100 shadow-md">
         {
           // Check if company logo is available
-          company.logo ? (
+          company?.logo ? (
             <img className="h-16 w-16" src={company.logo} alt="company logo" />
           ) : (
             <div className="flex h-16 w-16 items-center justify-center  bg-green-700">
               <span className="text-4xl font-semibold text-gray-50">
-                {company.company_name.charAt(0)}
+                {company?.company_name.charAt(0)}
               </span>
             </div>
           )
@@ -184,8 +183,8 @@ export const jobDetails = ({
         </div>
         <div className="mt-2 flex justify-between">
           <div className="font-xs text-gray-700">
-            {company.company_name},
-            <span className="loc ml-2">{company.location}</span>
+            {company?.company_name},
+            <span className="loc ml-2">{company?.location}</span>
           </div>
           <div className="font-xs text-gray-700">
             Posted {relativeTime(posted)}
@@ -207,7 +206,7 @@ export const jobDetails = ({
                 d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z"
               />
             </svg>
-            {company.size}
+            {company?.size}
           </span>
           <span className="loc mt-1 flex">
             <svg
@@ -224,7 +223,7 @@ export const jobDetails = ({
                 d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
               />
             </svg>
-            {company.website}
+            {company?.website}
           </span>
         </div>
         <div className="mt-5 justify-between rounded-2xl bg-gray-300 px-6 py-1 md:flex md:h-16">
