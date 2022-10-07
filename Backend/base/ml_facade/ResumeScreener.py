@@ -79,4 +79,3 @@ resumeScreen = resumeScreener()
 
 print(resumeScreen)
 # pickle.dump(resumeScreen,open("resumeScreener.pkl","wb"))
-
