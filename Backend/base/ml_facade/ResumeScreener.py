@@ -14,7 +14,7 @@ import re
 import json
 import pickle
 import os
-import sys,fitz
+import sys
 
 class resumeScreener:
     def __init__(self):
