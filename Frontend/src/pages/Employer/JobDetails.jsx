@@ -3,6 +3,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import AuthLayout from "../Layout/Auth";
 import { useQuery } from "react-query";
 import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
+import classNames from "classnames";
+
+import ButtonDefault from "../../components/ButtonDefault";
 
 export const JobDetails = () => {
   const navigate = useNavigate();
@@ -38,21 +41,42 @@ export const JobDetails = () => {
 
   return (
     <AuthLayout title="Job Details">
-      <h1
+      <ButtonDefault
         onClick={() => navigate(-1)}
         className={classNames("ml-5 !bg-purple-600 md:mt-2")}
       >
         Go Back
-      </h1>
+      </ButtonDefault>
 
       <div className="wrapper">
         <h1>Job ID: {id} </h1>
         <button onClick={() => navigate(-1)} className="bg-red-400">
           Go back
         </button>
-        <h1 className="text-center text-2xl text-gray-600">
+        <h1 className="font text-center text-2xl text-gray-600">
           {data && data[0].job_title}
         </h1>
+        <div className="grid grid-cols-1 gap-4">
+          {data.map((item) => (
+            <div className="relative flex items-start rounded-sm bg-white p-4 shadow-lg">
+              <div className="my-auto flex h-12 w-12 items-center justify-center rounded-full border border-blue-100 bg-blue-50">
+                <span className="text-3xl font-bold text-blue-500">
+                  {
+                    // show index in reverse order
+                    // data.length - index
+                    5
+                  }
+                </span>
+              </div>
+
+              <div className="ml-4 mt-1">
+                <h2 className="font-semibold">Title</h2>
+                <p className="text-sm text-gray-500">job.employer</p>
+                <p className="mt-2 text-sm text-gray-500">Applied</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </AuthLayout>
   );
