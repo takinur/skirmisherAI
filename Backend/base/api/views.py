@@ -221,6 +221,8 @@ class VacancyView(viewsets.ModelViewSet):
         # Data not found return empty queryset
         return Vacancy.objects.order_by('-created_at')
     
+        
+    
 
 # Custom Viewset for Job Views
 class VacancyPublicViewSet(
@@ -240,6 +242,7 @@ class RetriveVacancyView(VacancyPublicViewSet):
     queryset = Vacancy.objects.order_by('-created_at')
     serializer_class = PublicVacancySerializer
 
+
 # Job Application Views
 class JobApplicationView(viewsets.ModelViewSet):
     # permission_classes = [permissions.IsAuthenticated]
@@ -254,6 +257,11 @@ class JobApplicationView(viewsets.ModelViewSet):
             return JobApplication.objects.filter(candidate_id=cand_id).order_by('-created_at')             
 
         return JobApplication.objects.order_by('-created_at')
+    
+
+         
+    
+    
     
 
 

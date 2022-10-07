@@ -17,7 +17,7 @@ import json
 from rich import print, print_json
 
 
-class resumeExtraction(object):
+class resumeExtraction:
     def __init__(self, resume):
         self.STOPWORDS = set(stopwords.words('english')+['``', "''"])
         # Education Degrees
