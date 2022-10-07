@@ -46,7 +46,7 @@ class resumeExtraction:
             'summary',
             'leadership'
         ]
-        self.data = pd.read_csv(os.path.join(os.path.dirname(__file__), 'skillsDB.csv')) #EH?: SKILLS FILE PATH
+        self.data = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data/skillsDB.csv')) #EH?: SKILLS FILE PATH
         self.SKILLS_DB = list(self.data.columns.values)
         # Natural Language and vocabulary
         self.nlp = spacy.load('en_core_web_sm')
