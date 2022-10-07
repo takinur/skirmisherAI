@@ -4,7 +4,6 @@ import AuthLayout from "../Layout/Auth";
 import { useQuery } from "react-query";
 import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 
-
 export const JobDetails = () => {
   const navigate = useNavigate();
   const API = useAxiosPrivate();
@@ -14,8 +13,6 @@ export const JobDetails = () => {
   if (!id) {
     navigate("/employer/jobs");
   }
-
-  
 
   //Fetch Job Applications
   const { isLoading, data, refetch } = useQuery(
@@ -37,6 +34,7 @@ export const JobDetails = () => {
   //TODO: Fetch Job Candidates
   //TODO: invite for interview (API)
   //TODO: hire (API)
+  //EH? TEST Employer -> "nuxosepil@mailinator.com"
 
   return (
     <AuthLayout title="Job Details">
@@ -46,7 +44,7 @@ export const JobDetails = () => {
       >
         Go Back
       </h1>
-      
+
       <div className="wrapper">
         <h1>Job ID: {id} </h1>
         <button onClick={() => navigate(-1)} className="bg-red-400">
