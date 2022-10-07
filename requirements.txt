@@ -39,6 +39,7 @@ packaging==21.3
 pandas==1.4.3
 pathlib==1.0.1
 pathy==0.6.2
+Pillow==9.2.0
 preshed==3.0.7
 prov==2.0.0
 psycopg2==2.9.3
@@ -72,8 +73,3 @@ typing_extensions==4.3.0
 tzdata==2022.2
 urllib3==1.26.12
 wasabi==0.10.1
-
-
-# python -m spacy download en_core_web_sm
-# pip freeze > requirements.txt
-# pip instasll -r requirements.txt
