@@ -1,4 +1,4 @@
-from rich import print #Pretty print
+from rich import print  # Pretty print
 
 import os
 from django.conf import settings
@@ -12,25 +12,25 @@ from rest_framework import viewsets
 from rest_framework import mixins
 
 
-from .serializers import ( CandidateProfileSerializer, FileSerializer,
-                          JobApplicationSerializer, PublicVacancySerializer, RetriveJobApplicationSerializer, 
-                          UserCreateSerializer, MyTokenObtainPairSerializer, 
-                          VacancySerializer )
+from .serializers import (CandidateProfileSerializer, FileSerializer,
+                          JobApplicationSerializer, PublicVacancySerializer, RetriveJobApplicationSerializer,
+                          UserCreateSerializer, MyTokenObtainPairSerializer,
+                          VacancySerializer)
 
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from ..models import CandidateProfile, EmployerProfile, JobApplication, Vacancy
 from .serializers import EmployerProfileSerializer
 
-# Machine Leaning Model from 
+# Machine Leaning Model from
 from ..ml_facade import resumeExtractor, resumeScreener
 
 
 # Token Obtain Pair View
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
-    
-    
+
+
 # Documentation URLS
 @api_view(['GET'])
 def getRoutes(request):
@@ -49,40 +49,40 @@ def getRoutes(request):
         '/api/jobs-public/',
         '/api/v1/application/',
     ]
-    
+
     return Response(routes)
 
 
-class RegisterView(APIView):    
+class RegisterView(APIView):
     def post(self, request):
         data = request.data
-        
+
         serializer = UserCreateSerializer(data=data)
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
-        
+
         user = serializer.create(serializer.validated_data)
         # user = UserCreateSerializer(user)
-        
+
         tokenref = RefreshToken.for_user(user)
         tokenacc = AccessToken.for_user(user)
-        
-        return Response({"access": str(tokenacc), "refresh": str(tokenref)} , status=status.HTTP_201_CREATED)
-    
+
+        return Response({"access": str(tokenacc), "refresh": str(tokenref)}, status=status.HTTP_201_CREATED)
+
+
 class RetriveUserView(APIView):
     permission_classes = [permissions.IsAuthenticated]
-    
+
     def get(self, request):
         user = request.user
         user = UserCreateSerializer(user)
-        
+
         return Response(user.data, status=status.HTTP_200_OK)
-    
-    
+
+
 class EmployerProfileView(APIView):
     # permission_classes = [permissions.IsAuthenticated]
-    
+
     def get_object(self, user_id):
         '''
         Helper method to get object by id
@@ -91,7 +91,7 @@ class EmployerProfileView(APIView):
             return EmployerProfile.objects.get(user_id=user_id)
         except EmployerProfile.DoesNotExist:
             return None
-    
+
     # Retrive profile by user id
     def get(self, request, *args, **kwargs):
         user_id = kwargs['user_id']
@@ -99,11 +99,9 @@ class EmployerProfileView(APIView):
         if profile is not None:
             serializer = EmployerProfileSerializer(profile)
             return Response(serializer.data, status=status.HTTP_200_OK)
-        
+
         return Response(status=status.HTTP_400_BAD_REQUEST, data={'message': 'Sadge, Profile not found'})
-        
-        
-    
+
     def post(self, request, *args, **kwargs):
         # Create profile with given data
         data = request.data
@@ -111,28 +109,28 @@ class EmployerProfileView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-    
+
+
 class CandidateProfileView(APIView):
     # permission_classes = [permissions.IsAuthenticated]
     serializer_class = CandidateProfileSerializer
     parser_classes = (MultiPartParser, FormParser)
-    
+
     # def perform_create(self, serializer):
-    
+
     def get_object(self, user_id):
         '''
         Helper method to get object by id
         '''
         try:
-            return CandidateProfile.objects.get(user_id=user_id)            
+            return CandidateProfile.objects.get(user_id=user_id)
         except CandidateProfile.DoesNotExist:
             return None
         # Return profile with skills
         # CandidateProfile.objects.prefetch_related('skills').get(user_id=user_id)
-    
+
     # Retrive profile by user id
     def get(self, request, *args, **kwargs):
         user_id = kwargs['user_id']
@@ -140,81 +138,82 @@ class CandidateProfileView(APIView):
         if profile is not None:
             serializer = CandidateProfileSerializer(profile)
             return Response(serializer.data, status=status.HTTP_200_OK)
-    
+
         return Response(status=status.HTTP_400_BAD_REQUEST, data={'message': 'Sadge, Profile not found'})
-        
-        
-    
+
     def post(self, request, *args, **kwargs):
         # Create profile from request data
         data = request.data
         serializer = CandidateProfileSerializer(data=data)
-        
-        if not serializer.is_valid():                      
+
+        if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         # __Save profile
-        resume = data['resume_file'].replace('"', '') # Remove quotes from string
+        resume = data['resume_file'].replace(
+            '"', '')  # Remove quotes from string
         # For Debugging
         # resume = '/resources/resumes/T_007.pdf'.split('/', 2)[2]
         # print('temp', resume)
-            # Parser Class for resume file
-        ext_data = resumeExtractor.resume_result_wrapper(os.path.join(settings.MEDIA_ROOT, resume)) 
+        # Parser Class for resume file
+        ext_data = resumeExtractor.resume_result_wrapper(
+            os.path.join(settings.MEDIA_ROOT, resume))
         # print(ext_data)
-        try: 
-            # Getting data from extracted data               
-            text = ext_data['text'] 
-            name = ext_data['name']                    
+        try:
+            # Getting data from extracted data
+            text = ext_data['text']
+            name = ext_data['name']
             email = ext_data['email']
             phone = ext_data['phone']
             total_exp = ext_data['total_experience']
-            
+
             skills = ext_data['skills']
-            edu = set(ext_data['education']) #Convert to unique set
+            edu = set(ext_data['education'])  # Convert to unique set
             exp = ext_data['experience']
             socili = set(ext_data['social_links'])
             projects = set(ext_data['projects'])
-            
-            #Parse Experience
+
+            # Parse Experience
             exp_data = {}
-            if exp is not None: 
+            if exp is not None:
                 exp_data['name'] = exp[0]
                 exp_data['total'] = total_exp
-                
-                
+
             # print('SOC', projects)
             # print('Suppose to be', type(skills), 'But became:', type(socili))
-            
-            # Add resume data to serializer data and save
-        
-            serializer.save(skills = skills, name = name, email = email, phone = phone, resume_raw_text = text, edu = edu, exp = exp_data, social = socili, projects= projects)
 
+            # Add resume data to serializer data and save
+
+            serializer.save(skills=skills, name=name, email=email, phone=phone,
+                            resume_raw_text=text, edu=edu, exp=exp_data, social=socili, projects=projects)
 
         except Exception as e:
             return Response({'message': 'Error while parsing resume', 'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
-        
+
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class FileUploadView(APIView):
     parser_classes = (MultiPartParser, FormParser)
-    
+
     def post(self, request, *args, **kwargs):
         file_serializer = FileSerializer(data=request.data)
-        
-        if file_serializer.is_valid():            
-            saved_file = file_serializer.save()        
-            
+
+        if file_serializer.is_valid():
+            saved_file = file_serializer.save()
+
             return Response(str(saved_file.file), status=status.HTTP_201_CREATED)
         else:
             return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
-#Job Views for Employer / Recruiter
+
+# Job Views for Employer / Recruiter
+
+
 class VacancyView(viewsets.ModelViewSet):
     # permission_classes = [permissions.IsAuthenticated]
     queryset = Vacancy.objects.order_by('-created_at')
     serializer_class = VacancySerializer
-    
+
     # Return all vacancies for employer
     def get_queryset(self):
         emp_id = self.request.query_params.get('emp_id', None)
@@ -222,23 +221,23 @@ class VacancyView(viewsets.ModelViewSet):
             return Vacancy.objects.filter(employer_id=emp_id).order_by('-created_at')
         # Data not found return empty queryset
         return Vacancy.objects.order_by('-created_at')
-    
-        
-    
+
 
 # Custom Viewset for Job Views
 class VacancyPublicViewSet(
-                            # mixins.CreateModelMixin,
-                            mixins.ListModelMixin,
-                            mixins.RetrieveModelMixin,
-                            viewsets.GenericViewSet):
+    # mixins.CreateModelMixin,
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+        viewsets.GenericViewSet):
     """
     A viewset that provides `retrieve`, `create`, and `list` actions.
-    
+
     """
     pass
 
-#Job Views for Public / Candidates
+# Job Views for Public / Candidates
+
+
 class RetriveVacancyView(VacancyPublicViewSet):
     #Authentication is not required
     queryset = Vacancy.objects.order_by('-created_at')
@@ -249,6 +248,7 @@ class RetriveVacancyView(VacancyPublicViewSet):
 class JobApplicationView(APIView):
     # permission_classes = [permissions.IsAuthenticated]
     serializer_class = JobApplicationSerializer
+
     def get_object(self, cand_id):
         '''
            Helper method to get object by id
@@ -257,92 +257,95 @@ class JobApplicationView(APIView):
             return JobApplication.objects.filter(candidate_id=cand_id).order_by('-created_at')
         except JobApplication.DoesNotExist:
             return None
-    
+
     # Return all Applications for Candidate
     def get(self, request, *args, **kwargs):
-        
+
         # Candidate ID from query params
         cand_id = self.request.query_params.get('cand_id', None)
-        
+
         applications = self.get_object(cand_id)
         if applications is not None:
             serializer = JobApplicationSerializer(applications, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)    
-                      
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
         return JobApplication.objects.order_by('-created_at')
-    
-    
+
+    def calculate_score(self, profile, vacancy):
+        '''
+           Helper Method to Calculate score
+        '''
+
+        # Required Skills and format
+        req_skills = vacancy.qualifications.split(',')
+        req_skills = [skill.lower().replace(' ', '') for skill in req_skills]
+
+        # Collect Candidate skills and format them
+        cand_skills = profile.skills.all().values_list('name', flat=True)
+        cand_skills = [skill.lower() for skill in cand_skills]
+
+        # Check how many skills match
+        matched_skills = set(req_skills).intersection(cand_skills)
+
+        # Calculate percentage of matched skills
+        matched_skills_percent = (len(matched_skills) / len(req_skills)) * 100
+
+        return matched_skills_percent
+
     def post(self, request, *args, **kwargs):
         data = request.data
         serializer = JobApplicationSerializer(data=data)
-        
-        if not serializer.is_valid():                      
+
+        if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
+
         print('Data', data)
-        
+
         # Return profile with skills, experiences
-        profile = CandidateProfile.objects.prefetch_related('skills', 'experiences').get(id=data['candidate'])
-        
-        #Return Vacancy 
+        profile = CandidateProfile.objects.prefetch_related(
+            'skills', 'experiences').get(id=data['candidate'])
+
+        # Return Vacancy
         vacancy = Vacancy.objects.get(id=data['vacancy'])
-        
-        
-        # Required Skill        
-        req_skills = vacancy.qualifications.split(',')
-        # Format skills to lowercase and remove spaces
-        req_skills = [skill.lower().replace(' ', '') for skill in req_skills]
-        
-        
-        # Collect Candidate skills
-        cand_skills = profile.skills.all().values_list('name', flat=True)
-        #Candidate skills to lower case
-        cand_skills = [skill.lower() for skill in cand_skills]
-        
-        
-        # Check how many skills match
-        matched_skills = set(req_skills).intersection(cand_skills)
-        
-        # Calculate percentage of matched skills
-        matched_skills_percent = (len(matched_skills) / len(req_skills)) * 100
-        
-        
-        print(matched_skills_percent)
-        
-        
+
+        # Calculate Score for Application
+        calculated_score = self.calculate_score(profile, vacancy)
+        print('Score', calculated_score)
+
         # Raw text from resume
         # print(profile.resume_raw_text)
 
         # base_score = resumeScreener().wrapper(text, label))
-        
+
         # serializer.save() # Save application
-        
-        
+
         # return Response(serializer.data, status=status.HTTP_201_CREATED)
-        
+
         # Temporary return success
         return Response({'message': 'Success'}, status=status.HTTP_201_CREATED)
 
-#Jobs for Employer dashboard    
+
+# Jobs for Employer dashboard
 class JobApplicationPublicViewSet(
-                            mixins.ListModelMixin,
-                            mixins.RetrieveModelMixin,
-                            viewsets.GenericViewSet):
+        mixins.ListModelMixin,
+        mixins.RetrieveModelMixin,
+        viewsets.GenericViewSet):
     """
     A viewset that provides `retrieve` and `list` actions.
-    
+
     """
     pass
+
 
 class RetriveJobApplicationView(JobApplicationPublicViewSet):
     #Authentication is not required
     queryset = JobApplication.objects.order_by('-created_at')
     serializer_class = RetriveJobApplicationSerializer
-    
+
     def get_queryset(self):
         job_id = self.request.query_params.get('job_id', None)
-        
+
         if job_id is not None:
-            return JobApplication.objects.filter(vacancy_id=job_id).order_by('-created_at')             
+            return JobApplication.objects.filter(vacancy_id=job_id).order_by('-created_at')
 
         return JobApplication.objects.order_by('-created_at')
