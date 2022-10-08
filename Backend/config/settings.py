@@ -10,13 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 import os
+from platform import platform
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-from datetime import timedelta
 
 
 # Quick-start development settings - unsuitable for production
@@ -40,25 +40,27 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     'base.apps.BaseConfig',
-    
+
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
+
+    'django_q',
 ]
 
 REST_FRAMEWORK = {
 
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        
+
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
-  
+
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(days=5), # CRUCIAL: CHANGE to 5 days
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=5),  # CRUCIAL: CHANGE to 5 days
     'REFRESH_TOKEN_LIFETIME': timedelta(days=90),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': False,
@@ -91,10 +93,10 @@ SIMPLE_JWT = {
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    
+
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
-    
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -132,13 +134,13 @@ DATABASES = {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',
     # }
-    'default':{
+    'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'skirmisherdb',
         'USER': 'wraith',
         'PASSWORD': 'strongpass',
         'HOST': 'localhost',
-        'PORT': '5432',          
+        'PORT': '5432',
     }
 }
 
@@ -190,6 +192,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 CORS_ALLOW_ALL_ORIGINS = True
-AUTH_USER_MODEL = 'base.UserAccount' #Authendication model
+AUTH_USER_MODEL = 'base.UserAccount'  # Authendication model
 # APPEND_SLASH = False
 ALLOWED_HOSTS = ['*']
+
+Q_CLUSTER = {
+    'name': 'DjangORM',
+    'workers': 4,
+    'timeout': 60,
+    'compress': True,
+    'save_limit': 250,
+    'queue_limit': 50,
+    'orm': 'default',
+    'sync': True if platform.system() == 'Windows' else False,
+}
