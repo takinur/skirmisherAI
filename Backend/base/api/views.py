@@ -23,7 +23,7 @@ from ..models import CandidateProfile, EmployerProfile, JobApplication, Vacancy
 from .serializers import EmployerProfileSerializer
 
 # Machine Leaning Model from 
-from ..ml_facade import resumeExtractor
+from ..ml_facade import resumeExtractor, resumeScreener
 
 
 # Token Obtain Pair View
@@ -113,6 +113,8 @@ class EmployerProfileView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
 class CandidateProfileView(APIView):
     # permission_classes = [permissions.IsAuthenticated]
     serializer_class = CandidateProfileSerializer
@@ -244,22 +246,51 @@ class RetriveVacancyView(VacancyPublicViewSet):
 
 
 # Job Application Views
-class JobApplicationView(viewsets.ModelViewSet):
+class JobApplicationView(APIView):
     # permission_classes = [permissions.IsAuthenticated]
-    queryset = JobApplication.objects.order_by('-created_at')
     serializer_class = JobApplicationSerializer
+    def get_object(self, cand_id):
+        '''
+           Helper method to get object by id
+        '''
+        try:
+            return JobApplication.objects.filter(candidate_id=cand_id).order_by('-created_at')
+        except JobApplication.DoesNotExist:
+            return None
     
-    # Return all vacancies for Candidate
-    def get_queryset(self):        
+    # Return all Applications for Candidate
+    def get(self, request, *args, **kwargs):
+        
+        # Candidate ID from query params
         cand_id = self.request.query_params.get('cand_id', None)
-                
-        if cand_id is not None:
-            return JobApplication.objects.filter(candidate_id=cand_id).order_by('-created_at')             
-
+        
+        applications = self.get_object(cand_id)
+        if applications is not None:
+            serializer = JobApplicationSerializer(applications, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)    
+                      
         return JobApplication.objects.order_by('-created_at')
     
+    
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        serializer = JobApplicationSerializer(data=data)
+        
+        if not serializer.is_valid():                      
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        
+        # cand_id = request.data['candidate']
+        # vac_id = request.data['vacancy']
+        
+        # # Return profile with skills, experiences
+        # profile = CandidateProfile.objects.prefetch_related('skills', 'experiences').get(id=cand_id)
 
-         
+        # print('Profile', profile)
+
+        # base_score = resumeScreener().wrapper(text, label))
+        
+        # return super().perform_create(serializer)
     
     
     
