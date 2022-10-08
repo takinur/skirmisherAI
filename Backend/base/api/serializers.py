@@ -171,7 +171,10 @@ class JobApplicationSerializer(serializers.ModelSerializer):
         model = JobApplication
         fields = '__all__'
         extra_kwargs = {'candidate': {'write_only': True}, 'vacancy': {'write_only': True}}
-        
+       
+    def create(self, validated_data):
+        application = JobApplication.objects.create(**validated_data)
+        return application 
         
     def to_representation(self, instance):
         data = super().to_representation(instance)       

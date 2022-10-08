@@ -279,22 +279,33 @@ class JobApplicationView(APIView):
         if not serializer.is_valid():                      
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
+        print('Data', data)
         
-        # cand_id = request.data['candidate']
-        # vac_id = request.data['vacancy']
+        # Return profile with skills, experiences
+        profile = CandidateProfile.objects.prefetch_related('skills', 'experiences').get(id=data['candidate'])
         
-        # # Return profile with skills, experiences
-        # profile = CandidateProfile.objects.prefetch_related('skills', 'experiences').get(id=cand_id)
-
-        # print('Profile', profile)
+        #Return Vacancy 
+        vacanccy = Vacancy.objects.get(id=data['vacancy'])
+        
+        # Collect Candidate skills
+        cand_skills = []
+        for skill in profile.skills.all():
+            skills.append(skill.name)
+        
+        # Print skills
+        print('Skills', skills)
+        
+        print('Profile', profile.resume_raw_text)
 
         # base_score = resumeScreener().wrapper(text, label))
         
-        # return super().perform_create(serializer)
-    
-    
-    
-
+        # serializer.save() # Save application
+        
+        
+        # return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+        # Temporary return success
+        return Response({'message': 'Success'}, status=status.HTTP_201_CREATED)
 
 #Jobs for Employer dashboard    
 class JobApplicationPublicViewSet(
