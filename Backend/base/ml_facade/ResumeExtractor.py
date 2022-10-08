@@ -46,7 +46,10 @@ class resumeExtraction:
             'summary',
             'leadership'
         ]
-        self.data = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data/skillsDB.csv')) #EH?: SKILLS FILE PATH
+        # self.data = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data\skillsDB.csv')) #EH?: SKILLS FILE PATH
+        
+        self.data = pd.read_csv(os.path.join(os.path.dirname(__file__), 'assets/data/skillsDB.csv'))
+
         self.SKILLS_DB = list(self.data.columns.values)
         # Natural Language and vocabulary
         self.nlp = spacy.load('en_core_web_sm')
@@ -303,11 +306,6 @@ class resumeExtraction:
         
 
 
-file_url = 'assets/test_resumes/T_001.pdf'
-# file_url = 'assets/test_resumes/abd_r.pdf'
-# file_url = 'assets/test_resumes/T_002.docx'
-# file_url = 'assets/test_resumes/T_003.pdf'
-# file_url = 'assets/test_resumes/T_004.pdf'
 
 # explicit function to return the text from file
 def resume_result_wrapper(resume):
@@ -324,9 +322,17 @@ def resume_result_wrapper(resume):
 Crucial for Debugging and Testing
 
 ---Take Argument from command line and Extract resume
----python ResumeExtractor.py -f "assets/test_resumes/T_001.pdf"
+---python resumeExtractor.py "assets/test_resumes/T_001.pdf"
 
 '''
+
+
+file_url = 'assets/test_resumes/T_001.pdf'
+# file_url = 'assets/test_resumes/abd_r.pdf'
+# file_url = 'assets/test_resumes/T_002.docx'
+# file_url = 'assets/test_resumes/T_003.pdf'
+# file_url = 'assets/test_resumes/T_004.pdf'
+
 
 if __name__ == '__main__':
     # Check if the number of arguments is correct
