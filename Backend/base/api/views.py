@@ -285,17 +285,33 @@ class JobApplicationView(APIView):
         profile = CandidateProfile.objects.prefetch_related('skills', 'experiences').get(id=data['candidate'])
         
         #Return Vacancy 
-        vacanccy = Vacancy.objects.get(id=data['vacancy'])
+        vacancy = Vacancy.objects.get(id=data['vacancy'])
+        
+        
+        # Required Skill        
+        req_skills = vacancy.qualifications.split(',')
+        # Format skills to lowercase and remove spaces
+        req_skills = [skill.lower().replace(' ', '') for skill in req_skills]
+        
         
         # Collect Candidate skills
-        cand_skills = []
-        for skill in profile.skills.all():
-            skills.append(skill.name)
+        cand_skills = profile.skills.all().values_list('name', flat=True)
+        #Candidate skills to lower case
+        cand_skills = [skill.lower() for skill in cand_skills]
         
-        # Print skills
-        print('Skills', skills)
         
-        print('Profile', profile.resume_raw_text)
+        # Check how many skills match
+        matched_skills = set(req_skills).intersection(cand_skills)
+        
+        # Calculate percentage of matched skills
+        matched_skills_percent = (len(matched_skills) / len(req_skills)) * 100
+        
+        
+        print(matched_skills_percent)
+        
+        
+        # Raw text from resume
+        # print(profile.resume_raw_text)
 
         # base_score = resumeScreener().wrapper(text, label))
         
