@@ -1,15 +1,20 @@
 from django_q.tasks import async_task
 
-from Backend.base.models import JobApplication
+from base.models import JobApplication
+
+from django.utils import timezone
+
+# Machine Leaning Model from
+from .ml_facade import resumeScreener
 
 
-def calculate_score(self, profile, vacancy):
+def calculate_score(profile, vacancy):
     '''
        Helper Method to Calculate score
     '''
 
     # Required Skills and format
-    req_skills = vacancy.qualifications.split(',')
+    req_skills = (vacancy.qualifications or "").split(',')
     req_skills = [skill.lower().replace(' ', '') for skill in req_skills]
 
     # Collect Candidate skills and format them
@@ -26,8 +31,8 @@ def calculate_score(self, profile, vacancy):
     text = profile.resume_raw_text
     label = vacancy.title
     # Call NLP Model to get score
-    # nlp_score = resumeScreener.wrapper(text, label)
-    nlp_score = 0.0
+    nlp_score = resumeScreener.wrapper(text, label)
+
     # Calculate final score
     final_score = 0
 
@@ -42,8 +47,7 @@ def calculate_score(self, profile, vacancy):
 
 
 # Score Calculator
-def task_calculate_score(job_application_id):
-
+def update_score(job_application_id):
     application = JobApplication.objects.select_related(
         'candidate', 'vacancy').get(id=job_application_id)
 
@@ -56,4 +60,5 @@ def task_calculate_score(job_application_id):
     application.total_score = score[0]
     application.skill_score = score[1]
     application.nlp_score = score[2]
+    application.updated_at = timezone.now()
     application.save()

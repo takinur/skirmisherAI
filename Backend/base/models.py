@@ -26,6 +26,7 @@ class UserManager(BaseUserManager):
             name,
             email,
             password=password,
+            role=1,  # HACK: CHANGE later for ADMIN
         )
 
         user.is_staff = True
