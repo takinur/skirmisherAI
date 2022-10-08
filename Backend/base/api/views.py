@@ -23,7 +23,9 @@ from ..models import CandidateProfile, EmployerProfile, JobApplication, Vacancy
 from .serializers import EmployerProfileSerializer
 
 # Machine Leaning Model from
-from ..ml_facade import resumeExtractor, resumeScreener
+from ..ml_facade import resumeExtractor
+
+from django_q.tasks import async_task
 
 
 # Token Obtain Pair View
@@ -279,7 +281,8 @@ class JobApplicationView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         # serializer.save() # Save application
-
+        
+        async_task("base.tasks.update_score", 7)
         # return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         # Temporary return success
