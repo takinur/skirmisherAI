@@ -288,9 +288,29 @@ class JobApplicationView(APIView):
         matched_skills = set(req_skills).intersection(cand_skills)
 
         # Calculate percentage of matched skills
-        matched_skills_percent = (len(matched_skills) / len(req_skills)) * 100
+        skill_score = (len(matched_skills) / len(req_skills)) * 100
 
-        return matched_skills_percent
+        # Raw text and Job Title
+        text = profile.resume_raw_text
+        label = vacancy.title
+        # Call NLP Model to get score
+        # nlp_score = resumeScreener.wrapper(text, label)
+        nlp_score = 0.0
+        # Calculate final score
+        final_score = 0
+
+        # Skill Score weightage 30% of total score
+        final_score += (skill_score * 0.3)
+        # NLP Score weightage 60% of total score
+        final_score += (nlp_score * 0.6)
+        # Experience Score weightage 10% of total score
+        # final = final_score + (profile.experiences['total'] * 0.1)
+
+        print('Base Score', final_score)
+
+        print(profile.experiences)
+
+        return final_score
 
     def post(self, request, *args, **kwargs):
         data = request.data
@@ -311,11 +331,6 @@ class JobApplicationView(APIView):
         # Calculate Score for Application
         calculated_score = self.calculate_score(profile, vacancy)
         print('Score', calculated_score)
-
-        # Raw text from resume
-        # print(profile.resume_raw_text)
-
-        # base_score = resumeScreener().wrapper(text, label))
 
         # serializer.save() # Save application
 
