@@ -328,11 +328,9 @@ Crucial for Debugging and Testing
 
 '''
 
-
 if __name__ == '__main__':
-    # Length of arguments
-    args_len = len(sys.argv)
     # Check if the number of arguments is correct
+    args_len = len(sys.argv)
     if args_len > 1:
         file_url = sys.argv[1]
 
