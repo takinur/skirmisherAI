@@ -27,7 +27,7 @@ router.register('jobs', VacancyView, basename='jobs')
 router.register('jobs-public', RetriveVacancyView, basename='public-jobs')
 
 #Applications Routes
-router.register('v1/application', JobApplicationView, basename='applications')
+# router.register('v1/application', JobApplicationView, basename='applications')
 router.register('v1/application-dashboard', RetriveJobApplicationView, basename='applications-dashboard')
 
 urlpatterns = [
@@ -49,6 +49,10 @@ urlpatterns = [
     # Cand PROFILE
     path('account/candidate/', CandidateProfileView.as_view()),
     path('account/candidate/<int:user_id>', CandidateProfileView.as_view()),
+    
+    #Job Applications
+    path('v1/application/', JobApplicationView.as_view()),
+    path('v1/application/<int:cand_id>', JobApplicationView.as_view()),
 ] 
 
 urlpatterns += router.urls
