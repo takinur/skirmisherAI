@@ -203,6 +203,3 @@ class JobApplication(models.Model):
         Vacancy, on_delete=models.CASCADE, related_name='applications')
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
-
-    def __str__(self):
-        return self.status
