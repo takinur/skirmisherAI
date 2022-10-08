@@ -2,8 +2,11 @@ import sys
 import numpy as np
 import tensorflow as tf
 from tensorflow import keras
-from tensorflow.keras.preprocessing.text import Tokenizer
-from tensorflow.keras.preprocessing.sequence import pad_sequences
+# from tensorflow.keras.preprocessing.text import Tokenizer
+# from tensorflow.keras.preprocessing.sequence import pad_sequences
+
+from rich import print, print_json
+
 import nltk
 from nltk.corpus import stopwords
 #nltk.download('stopwords')
@@ -53,7 +56,8 @@ class resumeScreener:
         cleaned_input = self._clean_resume(text)
         # Convert user input to padded sequence
         predict_sequences = feature_tokenizer.texts_to_sequences([cleaned_input])
-        predict_padded = pad_sequences(predict_sequences, maxlen=self.max_length, padding=self.padding_type, truncating=self.trunc_type)
+        # predict_padded = pad_sequences(predict_sequences, maxlen=self.max_length, padding=self.padding_type, truncating=self.trunc_type)
+        predict_padded = tf.keras.utils.pad_sequences(predict_sequences, maxlen=self.max_length, padding=self.padding_type, truncating=self.trunc_type)
         predict_padded = np.array(predict_padded)
         
         # Load model and make prediction
@@ -75,7 +79,35 @@ class resumeScreener:
         
         return data
 
-resumeScreen = resumeScreener()
 
-print(resumeScreen)
+
+def wrapper (text):
+    text  = 'TAKINUR I MAHIM Dhaka, Bangladesh takinurm@gmail.com takinur.com github.com/takinur linkedin.com/in/takinur 2019 - Ongoing B.Sc. (hons.) in Computing University of Greenwich EDUCATION Relevant Coursework: Computing Project, Software Development Technique, Dynamic Website, Human Computer Interaction Design, Object-Oriented Programming, Database Administration PROFESSIONAL EXPERIENCE Full-Stack Web Developer (Freelance) Modified existing websites to correct coding errors, features add and workflow changes. Implemented mobile-first with usable components for better UX. Worked closely with clients to collect requirements and to ensure product quality. Designed and created UI that is optimized and SEO friendly. Configured web servers and deployed production ready website. 2021 - Ongoing SKILLS Programming: Python, JavaScript, TypeScript, PHP, HTML, CSS, SQL Technologies: Docker, Git, Bash, Node.JS, Figma, AWS, Linux, Composer, Vite, RestAPI, Testing Django, FastAPI, React, TailwindCSS, VUE, Laravel, Bootstrap, Next, Nuxt, Express Frameworks: Databases: PostgreSQL, MySQL, Oracle, MongoDB, SQLite Other: English Language, Tensorflow, Pandas, Matplotlib, Agile, OOP, Quick Learner PROJECTS Developed a booking site for consumers to book, manage and track parcel. Implemented HR Management and three-way user management system. Made a customized process for flawless payment with Stripe API. E-Courier Web Application PHP, Laravel, JavaScript, TailwindCSS, MySQL, VUE.JS Reversed Job Platform Python, FastAPI, PHP, Laravel, JavaScript, Bootstrap, MySQL Enabled users to post, manage and view jobs along with skills overview. Made a advance search feature to find and invite preferred candidate to hire. Talent Screening Web APP Python, Django, JavaScript, React, TailwindCSS, PostgreSQL, Redux, TensorFlow Developed a SPA Application with Restful API for automatic Resume Screening. Implemented Machine Leaning Algorithm to analyze and Suitability Prediction. Executed custom Natural Language Processing to extract essential info from Resume. Researched thoroughly and documented the study with background and scopes. Web Developer BIOVAAS TECH AID | Multiplan Center, 69-71 New Elephant Road, Dhaka Built and maintained website for E-Commerce Platform. Assisted troubleshooting software. Modified, extended as per requirements and performed white-box, black-box testing. Filed reports, gathered requirements, and performed research for extensibility. Jan 2020 - Jun 2021'
+    rs = resumeScreener()
+    return rs.screenResume(text)
+
 # pickle.dump(resumeScreen,open("resumeScreener.pkl","wb"))
+
+
+
+'''
+Crucial for Debugging and Testing
+
+---Take Argument from command line and Screen resume
+---python resumeScreener.py "Resume Text"
+
+'''
+
+if __name__ == '__main__':
+    text  = 'TAKINUR I MAHIM Dhaka, Bangladesh takinurm@gmail.com takinur.com github.com/takinur linkedin.com/in/takinur 2019 - Ongoing B.Sc. (hons.) in Computing University of Greenwich EDUCATION Relevant Coursework: Computing Project, Software Development Technique, Dynamic Website, Human Computer Interaction Design, Object-Oriented Programming, Database Administration PROFESSIONAL EXPERIENCE Full-Stack Web Developer (Freelance) Modified existing websites to correct coding errors, features add and workflow changes. Implemented mobile-first with usable components for better UX. Worked closely with clients to collect requirements and to ensure product quality. Designed and created UI that is optimized and SEO friendly. Configured web servers and deployed production ready website. 2021 - Ongoing SKILLS Programming: Python, JavaScript, TypeScript, PHP, HTML, CSS, SQL Technologies: Docker, Git, Bash, Node.JS, Figma, AWS, Linux, Composer, Vite, RestAPI, Testing Django, FastAPI, React, TailwindCSS, VUE, Laravel, Bootstrap, Next, Nuxt, Express Frameworks: Databases: PostgreSQL, MySQL, Oracle, MongoDB, SQLite Other: English Language, Tensorflow, Pandas, Matplotlib, Agile, OOP, Quick Learner PROJECTS Developed a booking site for consumers to book, manage and track parcel. Implemented HR Management and three-way user management system. Made a customized process for flawless payment with Stripe API. E-Courier Web Application PHP, Laravel, JavaScript, TailwindCSS, MySQL, VUE.JS Reversed Job Platform Python, FastAPI, PHP, Laravel, JavaScript, Bootstrap, MySQL Enabled users to post, manage and view jobs along with skills overview. Made a advance search feature to find and invite preferred candidate to hire. Talent Screening Web APP Python, Django, JavaScript, React, TailwindCSS, PostgreSQL, Redux, TensorFlow Developed a SPA Application with Restful API for automatic Resume Screening. Implemented Machine Leaning Algorithm to analyze and Suitability Prediction. Executed custom Natural Language Processing to extract essential info from Resume. Researched thoroughly and documented the study with background and scopes. Web Developer BIOVAAS TECH AID | Multiplan Center, 69-71 New Elephant Road, Dhaka Built and maintained website for E-Commerce Platform. Assisted troubleshooting software. Modified, extended as per requirements and performed white-box, black-box testing. Filed reports, gathered requirements, and performed research for extensibility. Jan 2020 - Jun 2021'
+
+    # Check if the number of arguments is correct
+    args_len = len(sys.argv)
+    if args_len > 1:
+        text = sys.argv[1]
+
+    # Extracted data from the resume class
+    data = wrapper(text)
+
+    print(data)
+

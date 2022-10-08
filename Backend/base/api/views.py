@@ -23,7 +23,7 @@ from ..models import CandidateProfile, EmployerProfile, JobApplication, Vacancy
 from .serializers import EmployerProfileSerializer
 
 # Machine Leaning Model from 
-from ..ml_facade import ResumeExtractor
+from ..ml_facade import resumeExtractor
 
 
 # Token Obtain Pair View
@@ -157,7 +157,7 @@ class CandidateProfileView(APIView):
         # resume = '/resources/resumes/T_007.pdf'.split('/', 2)[2]
         # print('temp', resume)
             # Parser Class for resume file
-        ext_data = ResumeExtractor.resume_result_wrapper(os.path.join(settings.MEDIA_ROOT, resume)) 
+        ext_data = resumeExtractor.resume_result_wrapper(os.path.join(settings.MEDIA_ROOT, resume)) 
         # print(ext_data)
         try: 
             # Getting data from extracted data               
