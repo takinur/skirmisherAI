@@ -52,11 +52,11 @@ export const JobDetails = () => {
         <h1 className="font text-center text-2xl text-gray-600">
           {data && data[0].job_title}
         </h1>
-        <div className="grid grid-cols-1 gap-4 mt-4">
-          {/* {data.map((item) => ( */}
-          <div className="relative flex items-start rounded-sm bg-white p-4 shadow-lg">
-            <div className="my-auto flex h-12 w-12 items-center justify-center rounded-full border border-blue-100 bg-blue-50">
-              <span className="text-3xl font-bold text-blue-500">
+        <div className="mt-4 grid grid-cols-1 gap-4">
+          <div className="wrapper flex w-full px-5 md:h-20 ">
+            <div className="has-rank my-auto flex w-24 items-center justify-center">
+              <span className="font-serif text-3xl font-bold text-gray-600">
+                #
                 {
                   // show index in reverse order
                   // data.length - index
@@ -64,14 +64,21 @@ export const JobDetails = () => {
                 }
               </span>
             </div>
-
-            <div className="ml-4 mt-1">
-              <h2 className="font-semibold">Title</h2>
-              <p className="text-sm text-gray-500">job.employer</p>
-              <p className="mt-2 text-sm text-gray-500">Applied</p>
+            <div className="relative grid w-full grid-cols-7 items-center gap-4 rounded-md bg-white shadow-lg">
+              <div className="col-span-3 pl-4 font-semibold text-gray-600">
+                Vladmir Putin
+              </div>
+              <div className="font-mono text-2xl font-semibold text-gray-600 ">
+                {" "}
+                70%{" "}
+              </div>
+              <div className="font-mono text-2xl font-semibold text-gray-600">
+                50%{" "}
+              </div>
+              <div className="font-semibold text-gray-600"> 4 Days ago </div>
+              <div className="font-semibold text-gray-600">Invite</div>
             </div>
           </div>
-          {/* ))} */}
         </div>
       </div>
     </AuthLayout>
