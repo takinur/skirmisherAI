@@ -43,39 +43,35 @@ export const JobDetails = () => {
     <AuthLayout title="Job Details">
       <ButtonDefault
         onClick={() => navigate(-1)}
-        className={classNames("ml-5 !bg-purple-600 md:mt-2")}
+        className={classNames("ml-1 !bg-gray-700 md:mt-2")}
       >
-        Go Back
+        Go Back to Jobs
       </ButtonDefault>
 
       <div className="wrapper">
-        <h1>Job ID: {id} </h1>
-        <button onClick={() => navigate(-1)} className="bg-red-400">
-          Go back
-        </button>
         <h1 className="font text-center text-2xl text-gray-600">
           {data && data[0].job_title}
         </h1>
-        <div className="grid grid-cols-1 gap-4">
-          {data.map((item) => (
-            <div className="relative flex items-start rounded-sm bg-white p-4 shadow-lg">
-              <div className="my-auto flex h-12 w-12 items-center justify-center rounded-full border border-blue-100 bg-blue-50">
-                <span className="text-3xl font-bold text-blue-500">
-                  {
-                    // show index in reverse order
-                    // data.length - index
-                    5
-                  }
-                </span>
-              </div>
-
-              <div className="ml-4 mt-1">
-                <h2 className="font-semibold">Title</h2>
-                <p className="text-sm text-gray-500">job.employer</p>
-                <p className="mt-2 text-sm text-gray-500">Applied</p>
-              </div>
+        <div className="grid grid-cols-1 gap-4 mt-4">
+          {/* {data.map((item) => ( */}
+          <div className="relative flex items-start rounded-sm bg-white p-4 shadow-lg">
+            <div className="my-auto flex h-12 w-12 items-center justify-center rounded-full border border-blue-100 bg-blue-50">
+              <span className="text-3xl font-bold text-blue-500">
+                {
+                  // show index in reverse order
+                  // data.length - index
+                  5
+                }
+              </span>
             </div>
-          ))}
+
+            <div className="ml-4 mt-1">
+              <h2 className="font-semibold">Title</h2>
+              <p className="text-sm text-gray-500">job.employer</p>
+              <p className="mt-2 text-sm text-gray-500">Applied</p>
+            </div>
+          </div>
+          {/* ))} */}
         </div>
       </div>
     </AuthLayout>
