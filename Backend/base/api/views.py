@@ -140,7 +140,7 @@ class CandidateProfileView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
 
         # Return empty profile
-        return Response(status=status.HTTP_200_OK, data={'message': 'Profile not found'})
+        # return Response(status=status.HTTP_200_OK, data={'message': 'Profile not found'})
         return Response(status=status.HTTP_400_BAD_REQUEST, data={'message': 'Sadge, Profile not found'})
 
     def post(self, request, *args, **kwargs):
@@ -163,7 +163,7 @@ class CandidateProfileView(APIView):
         # print(ext_data)
         try:
             # Getting data from extracted data
-            resume_raw_text = ext_data['text']
+            text = ext_data['text']
             name = ext_data['name']
             email = ext_data['email']
             phone = ext_data['phone']
@@ -186,8 +186,8 @@ class CandidateProfileView(APIView):
 
             # Add resume data to serializer data and save
 
-            serializer.save(skills, name, email, phone,
-                            resume_raw_text, edu, exp, social, projects)
+            serializer.save(skills = skills, name = name, email = email, phone = phone,
+                            resume_raw_text = text, edu = edu, exp = exp, social = social, projects = projects)
 
         except Exception as e:
             return Response({'message': 'Error while parsing resume', 'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
@@ -275,8 +275,11 @@ class JobApplicationView(viewsets.ModelViewSet):
         saved = serializer.save()
         # Update Suitability Score
         async_task("base.tasks.update_score", saved.id)
+        
+        # Return first then call task
+        
     
-
+        return saved
 
 # Jobs for Employer dashboard
 class JobApplicationPublicViewSet(
