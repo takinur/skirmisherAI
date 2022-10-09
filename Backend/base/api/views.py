@@ -139,6 +139,8 @@ class CandidateProfileView(APIView):
             serializer = CandidateProfileSerializer(profile)
             return Response(serializer.data, status=status.HTTP_200_OK)
 
+        # Return empty profile
+        return Response(status=status.HTTP_200_OK, data={'message': 'Profile not found'})
         return Response(status=status.HTTP_400_BAD_REQUEST, data={'message': 'Sadge, Profile not found'})
 
     def post(self, request, *args, **kwargs):
@@ -245,7 +247,7 @@ class RetriveVacancyView(VacancyPublicViewSet):
 
 
 # Job Application Views
-class JobApplicationView(APIView):
+class JobApplicationView(viewsets.ModelViewSet):
     # permission_classes = [permissions.IsAuthenticated]
     serializer_class = JobApplicationSerializer
 
@@ -257,34 +259,23 @@ class JobApplicationView(APIView):
             return JobApplication.objects.filter(candidate_id=cand_id).order_by('-created_at')
         except JobApplication.DoesNotExist:
             return None
-
-    # Return all Applications for Candidate
-    def get(self, request, *args, **kwargs):
-
-        # Candidate ID from query params
+    
+    def get_queryset(self):
         cand_id = self.request.query_params.get('cand_id', None)
 
         applications = self.get_object(cand_id)
         if applications is not None:
-            serializer = JobApplicationSerializer(applications, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            return applications
+            # return Response(serializer.data, status=status.HTTP_200_OK)
 
         return JobApplication.objects.order_by('-created_at')
-
-    def post(self, request, *args, **kwargs):
-        data = request.data
-        serializer = JobApplicationSerializer(data=data)
-
-        if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-        # serializer.save() # Save application
-
-        async_task("base.tasks.update_score", 7)
-        # return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-        # Temporary return success
-        return Response({'message': 'Success'}, status=status.HTTP_201_CREATED)
+    
+    def perform_create(self, serializer):
+                
+        saved = serializer.save()
+        # Update Suitability Score
+        async_task("base.tasks.update_score", saved.id)
+    
 
 
 # Jobs for Employer dashboard
