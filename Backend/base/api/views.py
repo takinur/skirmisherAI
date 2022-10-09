@@ -12,10 +12,8 @@ from rest_framework import viewsets
 from rest_framework import mixins
 
 
-from .serializers import (CandidateProfileSerializer, FileSerializer,
-                          JobApplicationSerializer, PublicVacancySerializer, RetriveJobApplicationSerializer,
-                          UserCreateSerializer, MyTokenObtainPairSerializer,
-                          VacancySerializer)
+from .serializers import CandidateProfileSerializer, FileSerializer, JobApplicationSerializer, PublicVacancySerializer
+from .serializers import RetriveJobApplicationSerializer, UserCreateSerializer, MyTokenObtainPairSerializer, VacancySerializer
 
 from rest_framework_simplejwt.views import TokenObtainPairView
 
@@ -163,7 +161,7 @@ class CandidateProfileView(APIView):
         # print(ext_data)
         try:
             # Getting data from extracted data
-            text = ext_data['text']
+            resume_raw_text = ext_data['text']
             name = ext_data['name']
             email = ext_data['email']
             phone = ext_data['phone']
@@ -171,23 +169,23 @@ class CandidateProfileView(APIView):
 
             skills = ext_data['skills']
             edu = set(ext_data['education'])  # Convert to unique set
-            exp = ext_data['experience']
-            socili = set(ext_data['social_links'])
+            experiences = ext_data['experience']
+            social = set(ext_data['social_links'])
             projects = set(ext_data['projects'])
 
-            # Parse Experience
-            exp_data = {}
-            if exp is not None:
-                exp_data['name'] = exp[0]
-                exp_data['total'] = total_exp
+            # Format Experience
+            exp = {}
+            if experiences is not None:
+                exp['name'] = experiences[0]
+                exp['total'] = total_exp
 
             # print('SOC', projects)
             # print('Suppose to be', type(skills), 'But became:', type(socili))
 
             # Add resume data to serializer data and save
 
-            serializer.save(skills=skills, name=name, email=email, phone=phone,
-                            resume_raw_text=text, edu=edu, exp=exp_data, social=socili, projects=projects)
+            serializer.save(skills, name, email, phone,
+                            resume_raw_text, edu, exp, social, projects)
 
         except Exception as e:
             return Response({'message': 'Error while parsing resume', 'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
@@ -237,7 +235,7 @@ class VacancyPublicViewSet(
     """
     pass
 
-# Job Views for Public / Candidates
+# Job Views for Candidates
 
 
 class RetriveVacancyView(VacancyPublicViewSet):
@@ -281,7 +279,7 @@ class JobApplicationView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         # serializer.save() # Save application
-        
+
         async_task("base.tasks.update_score", 7)
         # return Response(serializer.data, status=status.HTTP_201_CREATED)
 
