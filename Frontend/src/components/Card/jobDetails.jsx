@@ -29,7 +29,7 @@ export const jobDetails = ({
 
   //Check if the user has already applied for the job with axios
   const checkIfApplied = async () => {
-    const res = await API.get(`v1/application/?cad_id=${applicant}`);
+    const res = await API.get(`v1/application/?cand_id=${applicant}`);
     return res.data;
   };
   if (applicant) {

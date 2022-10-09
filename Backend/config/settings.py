@@ -205,5 +205,5 @@ Q_CLUSTER = {
     'save_limit': 250,
     'queue_limit': 50,
     'orm': 'default',
-    'sync': True if platform.system() == 'Windows' else False,
+    # 'sync': True if platform.system() == 'Windows' else False,
 }
