@@ -11,6 +11,7 @@ import classNames from "classnames";
 
 import { SearchJobs } from "../components/Search/SearchJobs";
 import { useCandProfile } from "../hooks/useProfile";
+import { useEffect } from "react";
 
 //EH? Check for user role
 //Apply for Job model Confirmation
@@ -18,6 +19,7 @@ import { useCandProfile } from "../hooks/useProfile";
 
 export const Findwork = () => {
   const [searchValue, SetSearchValue] = useState("");
+  const [jobDetails, setJobDetails] = useState(null);
 
   const { data: profile } = useCandProfile();
 
@@ -55,23 +57,18 @@ export const Findwork = () => {
     }
   );
 
-
-  //IF data is loaded set state to first job
-  const [jobDetails, setJobDetails] = useState(data ? data[0]?.id : null);
-
   //View detials of a job with id
   const showDetails = data?.filter((job) => job.id === jobDetails);
   // console.log("Detials", showDetails);
 
   //HACK: Set state to first job after 4 seconds only for Desktop
   const isMobile = window.innerWidth < 768;
-  if (!isMobile) {
-    setTimeout(() => {
-      if (data && jobDetails === null) {
-        setJobDetails(data[0]?.id);
-      }
-    }, 4000);
-  }
+
+  useEffect(() => {
+    if (data && jobDetails === null && !isMobile) {
+      setJobDetails(data[0]?.id);
+    }
+  }, [data]);
 
   return (
     <GuestLayout>
