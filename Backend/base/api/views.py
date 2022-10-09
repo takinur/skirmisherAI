@@ -186,8 +186,8 @@ class CandidateProfileView(APIView):
 
             # Add resume data to serializer data and save
 
-            serializer.save(skills = skills, name = name, email = email, phone = phone,
-                            resume_raw_text = text, edu = edu, exp = exp, social = social, projects = projects)
+            serializer.save(skills=skills, name=name, email=email, phone=phone,
+                            resume_raw_text=text, edu=edu, exp=exp, social=social, projects=projects)
 
         except Exception as e:
             return Response({'message': 'Error while parsing resume', 'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
@@ -259,7 +259,7 @@ class JobApplicationView(viewsets.ModelViewSet):
             return JobApplication.objects.filter(candidate_id=cand_id).order_by('-created_at')
         except JobApplication.DoesNotExist:
             return None
-    
+
     def get_queryset(self):
         cand_id = self.request.query_params.get('cand_id', None)
 
@@ -269,19 +269,20 @@ class JobApplicationView(viewsets.ModelViewSet):
             # return Response(serializer.data, status=status.HTTP_200_OK)
 
         return JobApplication.objects.order_by('-created_at')
-    
+
     def perform_create(self, serializer):
-                
+
         saved = serializer.save()
         # Update Suitability Score
         async_task("base.tasks.update_score", saved.id)
-        
+
         # Return first then call task
-        
-    
+
         return saved
 
 # Jobs for Employer dashboard
+
+
 class JobApplicationPublicViewSet(
         mixins.ListModelMixin,
         mixins.RetrieveModelMixin,
@@ -302,6 +303,6 @@ class RetriveJobApplicationView(JobApplicationPublicViewSet):
         job_id = self.request.query_params.get('job_id', None)
 
         if job_id is not None:
-            return JobApplication.objects.filter(vacancy_id=job_id).order_by('-created_at')
+            return JobApplication.objects.filter(vacancy_id=job_id).order_by('-total_score')
 
         return JobApplication.objects.order_by('-created_at')
