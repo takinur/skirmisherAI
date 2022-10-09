@@ -47,9 +47,12 @@ export const JobDetails = () => {
       >
         Go Back to Jobs
       </ButtonDefault>
+      <div className="flex h-24 flex-col md:flex-row mt-8 bg-white">
+        Search sort filter Et cetra
+      </div>
 
       <div className="wrapper">
-        <div className="justify-between px-8 md:flex">
+        <div className="justify-between px-8 md:flex mt-4">
           <div className="text-2xl text-gray-600 md:ml-20">
             {data && data[0].job_title}
           </div>
