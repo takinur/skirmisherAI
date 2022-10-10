@@ -1,7 +1,7 @@
 import React from "react";
 import { relativeTime } from "../../hooks/useRelativeTime";
 
-import { Disclosure } from "@headlessui/react";
+import { Disclosure, Transition } from "@headlessui/react";
 import { FaChevronUp } from "react-icons/fa";
 
 export const Applications = ({ ...item }) => {
@@ -20,9 +20,11 @@ export const Applications = ({ ...item }) => {
             <>
               <Disclosure.Button
                 as="div"
-                className="relative grid h-full w-full cursor-pointer grid-cols-8 items-center gap-4 rounded-md bg-white shadow-lg"
+                className={`${
+                  open ? "rounded-t-md" : "rounded-md shadow-lg"
+                } "relative " grid h-full w-full cursor-pointer grid-cols-8 items-center gap-4  bg-white`}
               >
-                <div className="col-span-3 pl-4 font-semibold text-gray-600">
+                <div className="font-roboto col-span-3 pl-4 font-semibold text-gray-600">
                   {item.candidate.name}
                 </div>
                 <div className="font-mono text-xl font-medium text-gray-600 ">
@@ -55,13 +57,26 @@ export const Applications = ({ ...item }) => {
                 </div>
                 <FaChevronUp
                   className={`${
-                    open ? "rotate-180 transform" : ""
+                    open ? "rotate-180 transform" : "rotate-90 "
                   } h-5 w-5 text-purple-500`}
                 />
               </Disclosure.Button>
-              <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
-                No.
-              </Disclosure.Panel>
+              <Transition
+                enter="transition duration-500 ease-out"
+                enterFrom="transform scale-95 opacity-0"
+                enterTo="transform scale-100 opacity-100"
+                leave="transition duration-75 ease-out"
+                leaveFrom="transform scale-100 opacity-100"
+                leaveTo="transform scale-95 opacity-0"
+              >
+                <Disclosure.Panel
+                  as="div"
+                  className="rounded-b-md bg-gray-200 px-4 p-6 text-sm text-gray-500 opacity-100 shadow-lg"
+                >
+                  Yes! You can purchase a license that you can share with your
+                  entire team.
+                </Disclosure.Panel>
+              </Transition>
             </>
           )}
         </Disclosure>
