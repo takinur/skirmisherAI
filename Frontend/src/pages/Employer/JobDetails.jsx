@@ -34,7 +34,6 @@ export const JobDetails = () => {
     }
   );
 
-
   console.log("Feteched", data);
 
   //TODO: Fetch Job Details
@@ -54,7 +53,7 @@ export const JobDetails = () => {
       </ButtonDefault>
       <div className="mt-8 flex h-8 flex-col md:flex-row">Maybe</div>
 
-      <div className="wrapper ">
+      <div className="wrapper pb-20">
         <div className="mt-4 justify-between px-8 md:flex">
           <div className="text-2xl font-bold text-gray-600 md:ml-20">
             {data && data[0].job_title}
@@ -82,10 +81,11 @@ export const JobDetails = () => {
               <div className="font-bold text-gray-600"> Action </div>
             </div>
           </div>
-          {isLoading ? (<>
-            <ApplicationsSkeleton />
-            <ApplicationsSkeleton />
-            <ApplicationsSkeleton />
+          {isLoading ? (
+            <>
+              <ApplicationsSkeleton />
+              <ApplicationsSkeleton />
+              <ApplicationsSkeleton />
             </>
           ) : (
             data &&
