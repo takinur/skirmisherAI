@@ -109,13 +109,12 @@ export const CandProfileForm = (props) => {
               />
             </div>
             <div className="mt-4 mr-2">
-              <Label htmlFor="website">Website (Optional) </Label>
+              <Label htmlFor="website">Website / Portfolio (Optional) </Label>
               <Input
                 id="website"
                 type="text"
                 className="mt-1 block w-full"
                 {...register("website")}
-                required
               />
             </div>
           </div>         
