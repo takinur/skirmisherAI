@@ -5,8 +5,7 @@ import { FaGlobe, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
 
 import { useCandProfile } from "../../hooks/useProfile";
 
-export const Profile = (props) => {
-  //Props from Index page ~ Dashboard
+export const Profile = () => {
   //React query to fetch profile
   const { isLoading, isError, error, data, user } = useCandProfile();
 
