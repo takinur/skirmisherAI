@@ -48,13 +48,11 @@ export const JobDetails = () => {
       >
         Go Back to Jobs
       </ButtonDefault>
-      <div className="mt-8 flex h-8 flex-col md:flex-row">
-        Search sort filter Et cetra
-      </div>
+      <div className="mt-8 flex h-8 flex-col md:flex-row">Maybe</div>
 
-      <div className="wrapper">
+      <div className="wrapper ">
         <div className="mt-4 justify-between px-8 md:flex">
-          <div className="text-2xl text-gray-600 md:ml-20">
+          <div className="text-2xl font-bold text-gray-600 md:ml-20">
             {data && data[0].job_title}
           </div>
           <div className=" text-sm font-semibold text-gray-800">
@@ -81,7 +79,9 @@ export const JobDetails = () => {
             </div>
           </div>
           {data &&
-            data.map((item, index) => <Applications key={index} {...item} index={index } />)}
+            data.map((item, index) => (
+              <Applications key={index} {...item} index={index} />
+            ))}
         </div>
       </div>
     </AuthLayout>
