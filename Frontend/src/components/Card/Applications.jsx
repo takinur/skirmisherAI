@@ -22,7 +22,7 @@ export const Applications = ({ ...item }) => {
                 as="div"
                 className={`${
                   open ? "rounded-t-md" : "rounded-md shadow-lg"
-                } "relative " grid h-full w-full cursor-pointer grid-cols-8 items-center gap-4  bg-white`}
+                } "relative " grid h-full w-full cursor-pointer grid-cols-7 items-center gap-4  bg-white`}
               >
                 <div className="font-roboto col-span-3 pl-4 font-semibold text-gray-600">
                   {item.candidate.name}
@@ -49,17 +49,18 @@ export const Applications = ({ ...item }) => {
                   %
                 </div>
                 <div className="font-semibold text-gray-600">
-                  {" "}
-                  {relativeTime(item.created_at)}{" "}
+                  {relativeTime(item.created_at)}
                 </div>
-                <div className="cursor-pointer font-semibold text-green-600 hover:text-green-800 ">
-                  Invite View Profile
+                <div className="flex justify-between ">
+                  <span className="cursor-pointer font-semibold text-green-600 hover:text-green-800 ">
+                    Invite
+                  </span>
+                  <FaChevronUp
+                    className={`${
+                      open ? "rotate-180 transform" : "rotate-90 "
+                    } mr-2 h-5 w-5 text-purple-500 `}
+                  />
                 </div>
-                <FaChevronUp
-                  className={`${
-                    open ? "rotate-180 transform" : "rotate-90 "
-                  } h-5 w-5 text-purple-500`}
-                />
               </Disclosure.Button>
             </div>
             <Transition
@@ -76,8 +77,30 @@ export const Applications = ({ ...item }) => {
                 as="div"
                 className="mb-2 w-full rounded-b-md bg-gray-200 p-6 px-4 text-sm text-gray-500 opacity-100 shadow-lg"
               >
-                Yes! You can purchase a license that you can share with your
-                entire team.
+                <div className="mt-2 grid w-full border-t border-gray-200">
+                  <div className="mr-auto ml-4 border-l-8 border-green-700 bg-green-50 px-3 ">
+                    <h3 className="mb-2 text-3xl font-semibold leading-normal text-gray-700 ">
+                      Personal Info*
+                    </h3>
+                  </div>
+                  <div className="mt-4  w-full bg-red-500 ">
+                    
+                  </div>
+                </div>
+                <div className="mt-2 grid w-full border-t border-gray-200">
+                  <div className="mr-auto ml-4 border-l-8 border-green-700 bg-green-50 px-3 ">
+                    <h3 className="mb-2 text-3xl font-semibold leading-normal text-gray-700 ">
+                      Your Skills*
+                    </h3>
+                  </div>
+                  <div className="mt-4 flex w-full flex-col ">
+                    <div className="mt-2 space-x-1 space-y-2 p-1 text-justify">
+                      <button className="rounded-full bg-gray-300 px-5 py-2 text-sm font-medium tracking-wider text-gray-600 shadow-sm hover:bg-gray-400 hover:shadow-2xl">
+                        skill.name
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </Disclosure.Panel>
             </Transition>
           </div>
