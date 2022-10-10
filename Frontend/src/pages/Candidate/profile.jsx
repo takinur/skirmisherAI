@@ -1,28 +1,27 @@
 import React from "react";
 import { CandProfileForm } from "../../components/Forms/Candidate";
 import { Loading } from "../../components/Loading";
-import {
-  FaGlobe,
-  FaMapMarkerAlt,
-  FaPhoneAlt,
-} from "react-icons/fa";
+import { FaGlobe, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
 
 import { useCandProfile } from "../../hooks/useProfile";
 
-export const Profile = (props) => { //Props from Index page ~ Dashboard
+export const Profile = (props) => {
+  //Props from Index page ~ Dashboard
   //React query to fetch profile
-  const { isLoading, isError, error, data } = useCandProfile();
+  const { isLoading, isError, error, data, user } = useCandProfile();
 
-  console.log("Data from cand profile: ", props.user);
+  console.log("Data from cand profile: ", user);
 
   if (isLoading) return <Loading />;
   if (isError && error.request.status === 400)
-    return <CandProfileForm user={props.user} />;
+    return <CandProfileForm user={user} />;
   //Return detailed profile view
-  if (data) return DetailedProfileView(data, props.user);
+  if (data) return DetailedProfileView(data, user);
 };
 
 function DetailedProfileView(profileData, user) {
+  console.log("Cand Profile Data", profileData);
+  // TODO: add projects and experience sections
   return (
     <>
       <section className="relative py-8">
@@ -41,14 +40,14 @@ function DetailedProfileView(profileData, user) {
                     ) : (
                       <div className="-mt-8 flex h-16 w-16 items-center justify-center rounded-full  bg-gray-700">
                         <span className="text-4xl font-semibold text-gray-50">
-                          {user?.name.charAt(0)}                          
+                          {user?.name.charAt(0)}
                         </span>
                       </div>
                     )}
                   </div>
                 </div>
                 <div className="w-full md:px-4 lg:order-3 lg:w-4/12 lg:self-center lg:text-right">
-                  <div className="float-right md:py-6 sm:mt-0 md:px-3">
+                  <div className="float-right sm:mt-0 md:py-6 md:px-3">
                     <button
                       className="mb-1 rounded bg-green-500 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-green-600 sm:mr-2"
                       type="button"
@@ -57,8 +56,8 @@ function DetailedProfileView(profileData, user) {
                     </button>
                   </div>
                 </div>
-                <div className="w-full px-4 -mt-8 md:mt-6  lg:order-1 lg:w-4/12 text-gray-600  text-base ">
-                  <span className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                <div className="-mt-8 w-full px-4 text-base  text-gray-600 md:mt-6 lg:order-1  lg:w-4/12 ">
+                  <span className="mb-2 block text-xs font-bold uppercase tracking-wide text-gray-700">
                     {user?.email}
                   </span>
                 </div>
