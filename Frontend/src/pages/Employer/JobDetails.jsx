@@ -6,7 +6,10 @@ import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 import classNames from "classnames";
 
 import ButtonDefault from "../../components/ButtonDefault";
-import { Applications } from "../../components/Card/Applications";
+import {
+  Applications,
+  ApplicationsSkeleton,
+} from "../../components/Card/Applications";
 
 export const JobDetails = () => {
   const navigate = useNavigate();
@@ -30,6 +33,7 @@ export const JobDetails = () => {
       retry: 1,
     }
   );
+
 
   console.log("Feteched", data);
 
@@ -78,10 +82,17 @@ export const JobDetails = () => {
               <div className="font-bold text-gray-600"> Action </div>
             </div>
           </div>
-          {data &&
+          {isLoading ? (<>
+            <ApplicationsSkeleton />
+            <ApplicationsSkeleton />
+            <ApplicationsSkeleton />
+            </>
+          ) : (
+            data &&
             data.map((item, index) => (
               <Applications key={index} {...item} index={index} />
-            ))}
+            ))
+          )}
         </div>
       </div>
     </AuthLayout>

@@ -1,10 +1,7 @@
 import React from "react";
 import { relativeTime } from "../../hooks/useRelativeTime";
 
-
 export const Applications = ({ ...item }) => {
-
-
   console.log("Applications", item);
 
   return (
@@ -39,9 +36,53 @@ export const Applications = ({ ...item }) => {
             item.total_score.toString().replace(/\.?0+$/, "")}
           %
         </div>
-        <div className="font-semibold text-gray-600"> {relativeTime(item.created_at)} </div>
+        <div className="font-semibold text-gray-600">
+          {" "}
+          {relativeTime(item.created_at)}{" "}
+        </div>
         <div className="cursor-pointer font-semibold text-green-600 hover:text-green-800 ">
           Invite View Profile
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const ApplicationsSkeleton = () => {
+  return (
+    <div className="flex w-full animate-pulse px-5 md:h-20">
+      <div className="has-rank my-auto flex w-24 items-center justify-center">
+        <span className="font-serif text-3xl font-bold text-gray-600">
+          <div className="h-6 w-6 rounded-md bg-gray-200"></div>
+        </span>
+      </div>
+      <div className="relative grid w-full grid-cols-7 items-center gap-4 rounded-md bg-white shadow-lg">
+        <div className="col-span-3 pl-4 font-semibold text-gray-600">
+          <div className="flex w-full items-center space-x-2">
+            <div className="h-2.5 w-32 rounded-full bg-gray-700"></div>
+            <div className="h-2.5 w-24 rounded-full bg-gray-600"></div>
+          </div>
+        </div>
+        <div className="font-mono text-xl font-medium text-gray-600 ">
+          <div className="flex w-full items-center space-x-2">
+            <div className="h-2.5 w-32 rounded-full bg-gray-700"></div>
+          </div>
+        </div>
+        <div className="flex font-mono text-xl font-semibold text-gray-600">
+          <div className="flex w-full items-center space-x-2">
+            <div className="h-2.5 w-32 rounded-full bg-gray-700"></div>
+          </div>
+        </div>
+        <div className="font-semibold text-gray-600">
+          {" "}
+          <div className="flex w-full items-center space-x-2">
+            <div className="h-2.5 w-32 rounded-full bg-gray-700"></div>
+          </div>{" "}
+        </div>
+        <div className="cursor-pointer font-semibold text-green-600 hover:text-green-800 ">
+          <div className="flex w-full items-center space-x-2">
+            <div className="h-2.5 w-32 rounded-full bg-gray-700"></div>
+          </div>
         </div>
       </div>
     </div>
