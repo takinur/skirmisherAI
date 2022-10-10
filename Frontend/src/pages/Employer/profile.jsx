@@ -11,25 +11,17 @@ import {
   FaPhoneAlt,
   FaUsers,
 } from "react-icons/fa";
+import { useProfile } from "../../hooks/useProfile";
 
-export const Profile = (props) => {
+export const Profile = () => {
   const API = useAxiosPrivate();
 
-  //React query to fetch profile
-  const { isLoading, isError, data } = useQuery("empProfile", fetchProfile, {
-    refetchOnWindowFocus: false,
-    retry: 0,
-  });
-  //Async function to fetch profile
-  async function fetchProfile() {
-    const res = await API.get(`/account/employer/${props.user.id}`);
-    return res.data;
-  }
+  const { isLoading, isError, data, user } = useProfile();
 
   if (isLoading) return <Loading />;
-  if (isError) return <EmpProfileForm user={props.user} />;
+  if (isError) return <EmpProfileForm user={user} />;
   //Return detailed profile view
-  if (data) return DetailedProfileView(data, props.user);
+  if (data) return DetailedProfileView(data, user);
 };
 
 function DetailedProfileView(company, user) {
