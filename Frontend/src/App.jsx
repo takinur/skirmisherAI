@@ -16,7 +16,6 @@ import Logout from "./pages/Auth/Logout";
 import { NotFound } from "./pages/Error";
 import { Findwork } from "./pages/Findwork";
 
-
 import { jobs as Empjobs } from "./pages/Employer/jobs";
 import { JobDetails } from "./pages/Employer/JobDetails";
 import { CreateUpdateJob } from "./pages/Employer/AddUpdateJob";
@@ -24,11 +23,13 @@ import { CreateUpdateJob } from "./pages/Employer/AddUpdateJob";
 import UserProfile from "./pages/Auth/UserProfile";
 
 import { Jobs as CandJobs } from "./pages/Candidate/Jobs";
+import { ViewPdf } from "./components/PdfViewer";
 
 function App() {
   return (
     <>
       <Routes>
+        <Route path="/view-pdf" element={<ViewPdf />} />
         <Route index element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Register />} />
@@ -37,34 +38,27 @@ function App() {
 
         {/* ProtectedRoutes */}
         <Route element={<ProtectedRoute />}>
-
           <Route path="/user/profile" element={<UserProfile />} />
           <Route path="/dashboard" element={<Dashboard />} />
 
           <Route path="applicant/jobs" element={<CandJobs />} />
 
-          <Route path="/employer/jobs" >
+          <Route path="/employer/jobs">
             <Route index element={<Empjobs />} />
             <Route path=":id/view" element={<JobDetails />} />
             <Route path="create" element={<CreateUpdateJob />} />
             <Route path=":id/edit" element={<CreateUpdateJob />} />
           </Route>
 
-
           <Route path="/logout" element={<Logout />} />
         </Route>
         {/* End Protected Routes */}
-        
+
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
-        <Route
-          path="*"
-          element={
-            <NotFound />
-          }
-        />
+        <Route path="*" element={<NotFound />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
       <ToastContainer />
     </>
   );
