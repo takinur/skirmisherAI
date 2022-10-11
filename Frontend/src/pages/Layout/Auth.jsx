@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Footer from "../../components/Footer";
 import SideBar from "../../components/Sidebar";
 import TopNavigation from "../../components/TopNav";
 
@@ -23,6 +24,7 @@ const Layout = ({ children, ...props }) => {
         <main className="content-list min-h-screen p-2">
           {children}
         </main>
+        <Footer />
       </div>
     </div>
   );
