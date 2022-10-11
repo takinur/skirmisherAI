@@ -75,9 +75,9 @@ export const Applications = ({ ...item }) => {
               <div className="w-24"></div>
               <Disclosure.Panel
                 as="div"
-                className="mb-2 w-full rounded-b-md bg-gray-200 p-6 px-4 text-sm text-gray-500 opacity-100 shadow-lg"
+                className="mb-2 w-full select-text rounded-b-md bg-gray-200 p-6 px-4 text-sm text-gray-500 opacity-100 shadow-lg "
               >
-                <div className="mt-2 grid w-full border-t border-gray-200">
+                <section className="mt-2 grid w-full ">
                   <div className="mr-auto ml-4 border-l-8 border-green-700 bg-green-50 px-3 ">
                     <h3 className="mb-2 text-3xl font-semibold leading-normal text-gray-700 ">
                       Personal Information
@@ -135,21 +135,68 @@ export const Applications = ({ ...item }) => {
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="mt-2 grid w-full border-t border-gray-200">
+                </section>
+                <section className="mt-4 grid w-full ">
                   <div className="mr-auto ml-4 border-l-8 border-green-700 bg-green-50 px-3 ">
                     <h3 className="mb-2 text-3xl font-semibold leading-normal text-gray-700 ">
-                      Your Skills*
+                      Professional Skills
                     </h3>
                   </div>
-                  <div className="mt-4 flex w-full flex-col ">
-                    <div className="mt-2 space-x-1 space-y-2 p-1 text-justify">
-                      <button className="rounded-full bg-gray-300 px-5 py-2 text-sm font-medium tracking-wider text-gray-600 shadow-sm hover:bg-gray-400 hover:shadow-2xl">
-                        skill.name
-                      </button>
+                  <div className="mt-2 flex w-full flex-col ">
+                    <div className="mt-2 ml-4 space-x-1 space-y-2 p-1 text-justify">
+                      {item.candidate.skills.map((skill) => (
+                        <button
+                          disabled
+                          className="rounded-full bg-gray-300 px-5 py-2 text-sm font-medium tracking-wider text-gray-600 shadow-sm hover:bg-gray-400 hover:shadow-2xl"
+                        >
+                          {skill.name}
+                        </button>
+                      ))}
                     </div>
                   </div>
-                </div>
+                </section>
+                <section className="mt-8 grid w-full ">
+                  <div className="mr-auto ml-4 border-l-8 border-green-700 bg-green-50 px-3 ">
+                    <h3 className="mb-2 text-3xl font-semibold leading-normal text-gray-700 ">
+                      Work Experience
+                    </h3>
+                  </div>
+                  <div className="ml-4 mt-4 w-full">
+                    <div className="grid grid-cols-2 grid-rows-2 gap-4">
+                      {
+                        //If work experience is not provided, show "Not Provided"
+                        item.candidate.experiences.length !== 0 ? (
+                          item.candidate.experiences.map((experience) => (
+                            <>
+                              <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
+                                <p className="font-extrabold">Name</p>
+                                <span className="ml-2">
+                                  {" "}
+                                  {experience.name}{" "}
+                                </span>
+                              </div>
+                              <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
+                                <p className="font-extrabold">Years</p>
+                                <span className="ml-2">
+                                  {" "}
+                                  {experience.total != 0
+                                    ? experience.total
+                                    : "Not Provided"}{" "}
+                                </span>
+                              </div>
+                            </>
+                          ))
+                        ) : (
+                          <div className="mb-2 ml-2 text-center text-base font-medium leading-normal text-gray-700">
+                            <p className="font-extrabold">
+                              No Experience Provided !{" "}
+                            </p>
+                          </div>
+                        )
+                      }
+                    </div>
+                  </div>
+                </section>
               </Disclosure.Panel>
             </Transition>
           </div>
