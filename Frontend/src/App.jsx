@@ -23,13 +23,11 @@ import { CreateUpdateJob } from "./pages/Employer/AddUpdateJob";
 import UserProfile from "./pages/Auth/UserProfile";
 
 import { Jobs as CandJobs } from "./pages/Candidate/Jobs";
-import { ViewPdf } from "./components/PdfViewer";
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/view-pdf" element={<ViewPdf />} />
         <Route index element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Register />} />
@@ -58,7 +56,6 @@ function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      {/* <Footer /> */}
       <ToastContainer />
     </>
   );
