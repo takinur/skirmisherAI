@@ -5,6 +5,9 @@ import { FaGlobe, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
 
 import { useCandProfile } from "../../hooks/useProfile";
 
+// TODO: Add Other Sections
+// TODO: Add Resume Download Function
+
 export const Profile = () => {
   //React query to fetch profile
   const { isLoading, isError, error, data, user } = useCandProfile();
