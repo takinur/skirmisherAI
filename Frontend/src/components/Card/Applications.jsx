@@ -197,6 +197,102 @@ export const Applications = ({ ...item }) => {
                     </div>
                   </div>
                 </section>
+                <section className="mt-2 grid w-full ">
+                  <div className="mr-auto ml-4 border-l-8 border-green-700 bg-green-50 px-3 ">
+                    <h3 className="mb-2 text-3xl font-semibold leading-normal text-gray-700 ">
+                      Education
+                    </h3>
+                  </div>
+                  <div className="ml-4 mt-4 w-full">
+                    <div className="grid grid-cols-2 grid-rows-2 gap-4">
+                      {item.candidate.educations.length !== 0 ? (
+                        item.candidate.educations.map((education) => (
+                          <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
+                            <p className="font-extrabold">Details</p>
+                            <span className="ml-2">
+                              {
+                                //Remove parenthesis from name
+                                education.name
+                                  .replace(/[\])}[{(]/g, "")
+                                  //Remove single quotes from name
+                                  .replace(/'/g, "")
+                              }
+                            </span>
+                          </div>
+                        ))
+                      ) : (
+                        <div className="mb-2 ml-2 text-center text-base font-medium leading-normal text-gray-700">
+                          <p className="font-extrabold">
+                            No Education Provided !{" "}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </section>
+                <section className="mt-2 grid w-full ">
+                  <div className="mr-auto ml-4 border-l-8 border-green-700 bg-green-50 px-3 ">
+                    <h3 className="mb-2 text-3xl font-semibold leading-normal text-gray-700 ">
+                      Projects
+                    </h3>
+                  </div>
+                  <div className="ml-4 mt-4 w-full">
+                    <div className="gap-4">
+                      {item.candidate.projects.length !== 0 ? (
+                        //Join all projects into one string
+                        <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
+                          <p className="font-extrabold">Details</p>
+                          <span className="ml-2 w-full">
+                            {item.candidate.projects
+                              .map((project) => project.details)
+                              .join(", ")}
+                          </span>
+                        </div>
+                      ) : (
+                        <div className=" ml-2 text-center text-base font-medium leading-normal text-gray-700">
+                          <p className="font-extrabold">
+                            No Projects Provided !
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </section>
+                <section className="mt-4 grid w-full ">
+                  <div className="mr-auto ml-4 border-l-8 border-green-700 bg-green-50 px-3 ">
+                    <h3 className="mb-2 text-3xl font-semibold leading-normal text-gray-700 ">
+                      Social Links
+                    </h3>
+                  </div>
+                  <div className="ml-4 mt-4 w-full">
+                    <div className="grid grid-cols-2 grid-rows-3 gap-4">
+                      {item.candidate.socials.length !== 0 ? (
+                        item.candidate.socials.map((social) => (
+                          <a
+                            href={
+                              //If link does not contain http:// or https://, add it
+                              social.name
+                                ? social.name.includes("http")
+                                  ? social.name
+                                  : "http://" + social.name
+                                : "#"
+                            }
+                            target="_blank"
+                            className="ml-2 hover:text-blue-800 "
+                          >
+                            {social.name}{" "}
+                          </a>
+                        ))
+                      ) : (
+                        <div className="mb-2 ml-2 text-center text-base font-medium leading-normal text-gray-700">
+                          <p className="font-extrabold">
+                            No Social Links Provided !
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </section>
               </Disclosure.Panel>
             </Transition>
           </div>
