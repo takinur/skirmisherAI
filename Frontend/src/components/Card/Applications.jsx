@@ -84,16 +84,21 @@ export const Applications = ({ ...item }) => {
                     </h3>
                   </div>
                   <div className="ml-4 mt-4 w-full">
-                    <div className="grid grid-cols-3 grid-rows-2 gap-4">
-                      <div className=" mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
+                    <div className="grid grid-cols-2 grid-rows-2 gap-4 md:grid-cols-3">
+                      <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
                         <p className="font-extrabold">Name</p>
                         <span className="ml-2"> {item.candidate.name} </span>
                       </div>
-                      <div className=" mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
+                      <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
                         <p className="font-extrabold">Email</p>
-                        <span className="ml-2"> ohno@gmail.com </span>
+                        <span className="ml-2">
+                          {" "}
+                          {item.candidate.email
+                            ? item.candidate.email
+                            : "Not Provided"}{" "}
+                        </span>
                       </div>
-                      <div className=" mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
+                      <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
                         <p className="font-extrabold">Phone</p>
                         <span className="ml-2">
                           {item.candidate.phone
@@ -101,17 +106,20 @@ export const Applications = ({ ...item }) => {
                             : "Not Provided"}
                         </span>
                       </div>
-                      <div className=" mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
+                      <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
                         <p className="font-extrabold">Title</p>
-                        <span className="ml-2"> {item.candidate.designation} </span>
+                        <span className="ml-2">
+                          {" "}
+                          {item.candidate.designation}{" "}
+                        </span>
                       </div>
-                      <div className=" mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
-                        <p className="font-extrabold">Name</p>
-                        <span className="ml-2"> {item.candidate.name} </span>
-                      </div>
-                      <div className=" mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
+
+                      <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
                         <p className="font-extrabold">Portfolio</p>
-                        <span className="ml-2"> {item.candidate.name} </span>
+                        <span className="ml-2 whitespace-nowrap">
+                          {" "}
+                          {item.candidate.website}{" "}
+                        </span>
                       </div>
                     </div>
                   </div>
