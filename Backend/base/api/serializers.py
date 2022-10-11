@@ -100,7 +100,7 @@ class CandidateProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CandidateProfile
-        fields = ['id', 'resume_file', 'user', 'name', 'phone', 'designation', 'location',
+        fields = ['id', 'resume_file', 'user', 'email', 'name', 'phone', 'designation', 'location',
                   'skills', 'website', 'educations', 'experiences', 'socials', 'projects']
         extra_kwargs = {'user': {'write_only': True},
                         'resume_raw_text': {'write_only': True}}
