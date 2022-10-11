@@ -80,11 +80,40 @@ export const Applications = ({ ...item }) => {
                 <div className="mt-2 grid w-full border-t border-gray-200">
                   <div className="mr-auto ml-4 border-l-8 border-green-700 bg-green-50 px-3 ">
                     <h3 className="mb-2 text-3xl font-semibold leading-normal text-gray-700 ">
-                      Personal Info*
+                      Personal Information
                     </h3>
                   </div>
-                  <div className="mt-4  w-full bg-red-500 ">
-                    
+                  <div className="ml-4 mt-4 w-full">
+                    <div className="grid grid-cols-3 grid-rows-2 gap-4">
+                      <div className=" mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
+                        <p className="font-extrabold">Name</p>
+                        <span className="ml-2"> {item.candidate.name} </span>
+                      </div>
+                      <div className=" mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
+                        <p className="font-extrabold">Email</p>
+                        <span className="ml-2"> ohno@gmail.com </span>
+                      </div>
+                      <div className=" mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
+                        <p className="font-extrabold">Phone</p>
+                        <span className="ml-2">
+                          {item.candidate.phone
+                            ? item.candidate.phone
+                            : "Not Provided"}
+                        </span>
+                      </div>
+                      <div className=" mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
+                        <p className="font-extrabold">Title</p>
+                        <span className="ml-2"> {item.candidate.designation} </span>
+                      </div>
+                      <div className=" mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
+                        <p className="font-extrabold">Name</p>
+                        <span className="ml-2"> {item.candidate.name} </span>
+                      </div>
+                      <div className=" mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
+                        <p className="font-extrabold">Portfolio</p>
+                        <span className="ml-2"> {item.candidate.name} </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div className="mt-2 grid w-full border-t border-gray-200">
