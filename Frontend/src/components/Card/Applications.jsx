@@ -4,8 +4,27 @@ import { relativeTime } from "../../hooks/useRelativeTime";
 import { Disclosure, Transition } from "@headlessui/react";
 import { FaChevronUp } from "react-icons/fa";
 
-export const Applications = ({ ...item }) => {
+export const Applications = (item) => {
   console.log("Applications", item);
+
+  const hanldeViewResume = () => {
+    // Create Resume URL with Media URL from ENV ~ Remove Double Quotes
+    const media_url = import.meta.env.VITE_MEDIA_URL;
+    const resume_url = `${media_url}${item.candidate.resume_file.replace(
+      /['"]+/g,
+      ""
+    )}`;
+
+    const linkSource = `${resume_url}`;
+    const downloadLink = document.createElement("a");
+    // const fileName = `${item.candidate.name}_${item.job_title}.pdf`;
+    downloadLink.href = linkSource;
+    // downloadLink.download = fileName;
+    //Open in new tab
+    downloadLink.target = "_blank";
+
+    downloadLink.click();
+  };
 
   return (
     <>
@@ -78,10 +97,23 @@ export const Applications = ({ ...item }) => {
                 className="mb-2 w-full select-text rounded-b-md bg-gray-200 p-6 px-4 text-sm text-gray-500 opacity-100 shadow-lg "
               >
                 <section className="mt-2 grid w-full ">
-                  <div className="mr-auto ml-4 border-l-8 border-green-700 bg-green-50 px-3 ">
-                    <h3 className="mb-2 text-3xl font-semibold leading-normal text-gray-700 ">
-                      Personal Information
-                    </h3>
+                  <div className="ml-4 flex justify-between">
+                    <div className="border-l-8 border-green-700 bg-green-50 px-3 ">
+                      <h3 className="mb-2 text-3xl font-semibold leading-normal text-gray-700 ">
+                        Personal Information
+                      </h3>
+                    </div>
+                    <div className="flex items-center">
+                      <div className="sm:mt-0 md:px-3">
+                        <button
+                          onClick={hanldeViewResume}
+                          className="mb-1 rounded bg-green-500 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-green-600 sm:mr-2"
+                          type="button"
+                        >
+                          View Original Resume
+                        </button>
+                      </div>
+                    </div>
                   </div>
                   <div className="ml-4 mt-4 w-full">
                     <div className="grid grid-cols-2 grid-rows-2 gap-4 md:grid-cols-3">
@@ -268,20 +300,22 @@ export const Applications = ({ ...item }) => {
                     <div className="grid grid-cols-2 grid-rows-3 gap-4">
                       {item.candidate.socials.length !== 0 ? (
                         item.candidate.socials.map((social) => (
-                          <a
-                            href={
-                              //If link does not contain http:// or https://, add it
-                              social.name
-                                ? social.name.includes("http")
-                                  ? social.name
-                                  : "http://" + social.name
-                                : "#"
-                            }
-                            target="_blank"
-                            className="ml-2 hover:text-blue-800 "
-                          >
-                            {social.name}{" "}
-                          </a>
+                          <div className="wrapper font-mono">
+                            <a
+                              href={
+                                //If link does not contain http:// or https://, add it
+                                social.name
+                                  ? social.name.includes("http")
+                                    ? social.name
+                                    : "http://" + social.name
+                                  : "#"
+                              }
+                              target="_blank"
+                              className="ml-2 hover:text-blue-800 "
+                            >
+                              {social.name}{" "}
+                            </a>
+                          </div>
                         ))
                       ) : (
                         <div className="mb-2 ml-2 text-center text-base font-medium leading-normal text-gray-700">
