@@ -116,10 +116,22 @@ export const Applications = ({ ...item }) => {
 
                       <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
                         <p className="font-extrabold">Portfolio</p>
-                        <span className="ml-2 whitespace-nowrap">
-                          {" "}
-                          {item.candidate.website}{" "}
-                        </span>
+                        <a
+                          href={
+                            //If link does not contain http:// or https://, add it
+                            item.candidate.website
+                              ? item.candidate.website.includes("http")
+                                ? item.candidate.website
+                                : "http://" + item.candidate.website
+                              : "#"
+                          }
+                          target="_blank"
+                          className="ml-2 hover:text-blue-800 "
+                        >
+                          {item.candidate.website
+                            ? item.candidate.website
+                            : "Not Provided"}
+                        </a>
                       </div>
                     </div>
                   </div>
