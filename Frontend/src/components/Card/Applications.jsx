@@ -165,6 +165,15 @@ export const Applications = (item) => {
                             : "Not Provided"}
                         </a>
                       </div>
+                      <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
+                        <p className="font-extrabold">Location</p>
+                        <span className="ml-2">
+                          {" "}
+                          {item.candidate.location
+                            ? item.candidate.location
+                            : "Not Provided"}{" "}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </section>
