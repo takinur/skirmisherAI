@@ -11,7 +11,6 @@ import { AboutPage } from "./pages/About";
 import Register from "./pages/Auth/Register";
 import Dashboard from "./pages/Dashboard";
 import { ContactPage } from "./pages/Contact";
-import Footer from "./components/Footer";
 import Logout from "./pages/Auth/Logout";
 import { NotFound } from "./pages/Error";
 import { Findwork } from "./pages/Findwork";
@@ -24,10 +23,13 @@ import UserProfile from "./pages/Auth/UserProfile";
 
 import { Jobs as CandJobs } from "./pages/Candidate/Jobs";
 
+import { VideoMeet } from "./pages/Meet";
+
 function App() {
   return (
     <>
       <Routes>
+
         <Route index element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Register />} />
@@ -54,6 +56,7 @@ function App() {
 
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/meet" element={<VideoMeet />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <ToastContainer />
