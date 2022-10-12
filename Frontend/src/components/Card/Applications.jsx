@@ -99,7 +99,7 @@ export const Applications = (item) => {
                 <section className="mt-2 grid w-full ">
                   <div className="ml-4 flex justify-between">
                     <div className="border-l-8 border-green-700 bg-green-50 px-3 ">
-                      <h3 className="mb-2 text-3xl font-semibold leading-normal text-gray-700 ">
+                      <h3 className="my-1 text-2xl font-semibold leading-normal text-gray-700 ">
                         Personal Information
                       </h3>
                     </div>
@@ -179,7 +179,7 @@ export const Applications = (item) => {
                 </section>
                 <section className="mt-4 grid w-full ">
                   <div className="mr-auto ml-4 border-l-8 border-green-700 bg-green-50 px-3 ">
-                    <h3 className="mb-2 text-3xl font-semibold leading-normal text-gray-700 ">
+                    <h3 className="my-1 text-2xl font-semibold leading-normal text-gray-700 ">
                       Professional Skills
                     </h3>
                   </div>
@@ -198,7 +198,7 @@ export const Applications = (item) => {
                 </section>
                 <section className="mt-8 grid w-full ">
                   <div className="mr-auto ml-4 border-l-8 border-green-700 bg-green-50 px-3 ">
-                    <h3 className="mb-2 text-3xl font-semibold leading-normal text-gray-700 ">
+                    <h3 className="my-1 text-2xl font-semibold leading-normal text-gray-700 ">
                       Work Experience
                     </h3>
                   </div>
@@ -240,7 +240,7 @@ export const Applications = (item) => {
                 </section>
                 <section className="mt-2 grid w-full ">
                   <div className="mr-auto ml-4 border-l-8 border-green-700 bg-green-50 px-3 ">
-                    <h3 className="mb-2 text-3xl font-semibold leading-normal text-gray-700 ">
+                    <h3 className="my-1 text-2xl font-semibold leading-normal text-gray-700 ">
                       Education
                     </h3>
                   </div>
@@ -273,7 +273,7 @@ export const Applications = (item) => {
                 </section>
                 <section className="mt-2 grid w-full ">
                   <div className="mr-auto ml-4 border-l-8 border-green-700 bg-green-50 px-3 ">
-                    <h3 className="mb-2 text-3xl font-semibold leading-normal text-gray-700 ">
+                    <h3 className="my-1 text-2xl font-semibold leading-normal text-gray-700 ">
                       Projects
                     </h3>
                   </div>
@@ -301,7 +301,7 @@ export const Applications = (item) => {
                 </section>
                 <section className="mt-4 grid w-full ">
                   <div className="mr-auto ml-4 border-l-8 border-green-700 bg-green-50 px-3 ">
-                    <h3 className="mb-2 text-3xl font-semibold leading-normal text-gray-700 ">
+                    <h3 className="my-1 text-2xl font-semibold leading-normal text-gray-700 ">
                       Social Links
                     </h3>
                   </div>
