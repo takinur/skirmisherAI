@@ -22,8 +22,6 @@ export const Profile = () => {
 };
 
 function DetailedProfileView(profileData, user) {
-  console.log("Cand Profile Data", profileData);
-  // TODO: add projects and experience sections
   return (
     <>
       <section className="relative py-8">
@@ -71,31 +69,77 @@ function DetailedProfileView(profileData, user) {
                 <div className="mt-0 mb-2 flex justify-center text-sm font-bold uppercase leading-normal text-gray-400">
                   {profileData.designation}
                 </div>
-                <div className="mt-6 mb-2 flex justify-center text-sm font-bold leading-normal text-gray-500">
-                  <FaMapMarkerAlt className="mr-1 text-xl text-gray-400" />
-                  {profileData.location ? profileData.location : "Not Provided"}
-                </div>
-                <div className="mt-2 grid items-center justify-center">
-                  <div className="flex">
-                    <FaGlobe className="mr-1 mt-1 font-bold text-zinc-500" />
-                    <a
-                      className=" font-semibold text-blue-700 hover:opacity-90"
-                      target="_blank"
-                      href={profileData.website ? profileData.website : "#"}
-                    >
-                      {profileData.website
-                        ? profileData.website
-                        : "No website/ Portfolio"}
-                    </a>
-                  </div>
-                </div>
+
                 <div className="mt-4 mb-2 flex justify-center text-sm font-bold leading-normal text-gray-500">
                   <FaPhoneAlt className="mr-2 text-lg text-gray-500" />
                   {profileData.phone ? profileData.phone : "Not Provided"}
                 </div>
               </div>
-              <div className="mt-10 grid w-full border-t border-gray-200 py-10">
-                <div className="mr-auto ml-4 border-l-8 border-green-700 bg-green-50 px-3 ">
+
+              <section className="mt-6 grid w-full ">
+                <div className="border-l-8 border-green-700 bg-green-50 px-3 ">
+                  <h3 className="mb-2 text-3xl font-semibold leading-normal text-gray-700 ">
+                    Personal Information
+                  </h3>
+                </div>
+                <div className="ml-4 mt-4 w-full">
+                  <div className="grid grid-cols-2 grid-rows-2 gap-4 md:grid-cols-3">
+                    <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
+                      <p className="font-extrabold">Name</p>
+                      <span className="ml-2"> {profileData.name} </span>
+                    </div>
+                    <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
+                      <p className="font-extrabold">Email</p>
+                      <span className="ml-2">
+                        {" "}
+                        {profileData.email
+                          ? profileData.email
+                          : "Not Provided"}{" "}
+                      </span>
+                    </div>
+                    <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
+                      <p className="font-extrabold">Phone</p>
+                      <span className="ml-2">
+                        {profileData.phone ? profileData.phone : "Not Provided"}
+                      </span>
+                    </div>
+                    <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
+                      <p className="font-extrabold">Title</p>
+                      <span className="ml-2"> {profileData.designation} </span>
+                    </div>
+                    <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
+                      <p className="font-extrabold">Portfolio</p>
+                      <a
+                        href={
+                          //If link does not contain http:// or https://, add it
+                          profileData.website
+                            ? profileData.website.includes("http")
+                              ? profileData.website
+                              : "http://" + profileData.website
+                            : "#"
+                        }
+                        target="_blank"
+                        className="ml-2 hover:text-blue-800 "
+                      >
+                        {profileData.website
+                          ? profileData.website
+                          : "Not Provided"}
+                      </a>
+                    </div>
+                    <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
+                      <p className="font-extrabold">Location</p>
+                      <span className="ml-2">
+                        {" "}
+                        {profileData.location
+                          ? profileData.location
+                          : "Not Provided"}{" "}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <section className="mt-4 grid w-full py-10">
+                <div className=" ml-2 border-l-8 border-green-700 bg-green-50 px-3 ">
                   <h3 className="mb-2 text-3xl font-semibold leading-normal text-gray-700 ">
                     Your Skills*
                   </h3>
@@ -112,7 +156,142 @@ function DetailedProfileView(profileData, user) {
                     ))}
                   </div>
                 </div>
-              </div>
+              </section>
+              <section className="mt-8 grid w-full ">
+                <div className="ml-4 border-l-8 border-green-700 bg-green-50 px-3 ">
+                  <h3 className="mb-2 text-3xl font-semibold leading-normal text-gray-700 ">
+                    Work Experience
+                  </h3>
+                </div>
+                <div className="ml-4 mt-4 w-full">
+                  <div className="grid grid-cols-2 grid-rows-2 gap-4">
+                    {
+                      //If work experience is not provided, show "Not Provided"
+                      profileData.experiences.length !== 0 ? (
+                        profileData.experiences.map((experience) => (
+                          <>
+                            <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
+                              <p className="font-extrabold">Name</p>
+                              <span className="ml-2"> {experience.name} </span>
+                            </div>
+                            <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
+                              <p className="font-extrabold">Years</p>
+                              <span className="ml-2">
+                                {" "}
+                                {experience.total != 0
+                                  ? experience.total
+                                  : "Not Provided"}{" "}
+                              </span>
+                            </div>
+                          </>
+                        ))
+                      ) : (
+                        <div className="mb-2 ml-2 text-center text-base font-medium leading-normal text-gray-700">
+                          <p className="font-extrabold">
+                            No Experience Provided !{" "}
+                          </p>
+                        </div>
+                      )
+                    }
+                  </div>
+                </div>
+              </section>
+              <section className="mt-2 grid w-full ">
+                <div className=" ml-4 border-l-8 border-green-700 bg-green-50 px-3 ">
+                  <h3 className="mb-2 text-3xl font-semibold leading-normal text-gray-700 ">
+                    Education
+                  </h3>
+                </div>
+                <div className="ml-4 mt-4 w-full">
+                  <div className="grid grid-cols-2 grid-rows-2 gap-4">
+                    {profileData.educations.length !== 0 ? (
+                      profileData.educations.map((education) => (
+                        <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
+                          <p className="font-extrabold">Details</p>
+                          <span className="ml-2">
+                            {
+                              //Remove parenthesis from name
+                              education.name
+                                .replace(/[\])}[{(]/g, "")
+                                //Remove single quotes from name
+                                .replace(/'/g, "")
+                            }
+                          </span>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="mb-2 ml-2 text-center text-base font-medium leading-normal text-gray-700">
+                        <p className="font-extrabold">
+                          No Education Provided !{" "}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </section>
+              <section className="mt-2 grid w-full ">
+                <div className="ml-4 border-l-8 border-green-700 bg-green-50 px-3 ">
+                  <h3 className="mb-2 text-3xl font-semibold leading-normal text-gray-700 ">
+                    Projects
+                  </h3>
+                </div>
+                <div className="ml-4 mt-4 w-full">
+                  <div className="gap-4">
+                    {profileData.projects.length !== 0 ? (
+                      //Join all projects into one string
+                      <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
+                        <p className="font-extrabold">Details</p>
+                        <span className="ml-2 w-full">
+                          {profileData.projects
+                            .map((project) => project.details)
+                            .join(", ")}
+                        </span>
+                      </div>
+                    ) : (
+                      <div className=" ml-2 text-center text-base font-medium leading-normal text-gray-700">
+                        <p className="font-extrabold">No Projects Provided !</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </section>
+              <section className="mt-4 grid w-full ">
+                <div className="ml-4 border-l-8 border-green-700 bg-green-50 px-3 ">
+                  <h3 className="mb-2 text-3xl font-semibold leading-normal text-gray-700 ">
+                    Social Links
+                  </h3>
+                </div>
+                <div className="ml-4 mt-4 w-full">
+                  <div className="grid grid-cols-2 grid-rows-3 gap-4">
+                    {profileData.socials.length !== 0 ? (
+                      profileData.socials.map((social) => (
+                        <div className="wrapper font-mono">
+                          <a
+                            href={
+                              //If link does not contain http:// or https://, add it
+                              social.name
+                                ? social.name.includes("http")
+                                  ? social.name
+                                  : "http://" + social.name
+                                : "#"
+                            }
+                            target="_blank"
+                            className="ml-2 hover:text-blue-800 "
+                          >
+                            {social.name}{" "}
+                          </a>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="mb-2 ml-2 text-center text-base font-medium leading-normal text-gray-700">
+                        <p className="font-extrabold">
+                          No Social Links Provided !
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </section>
             </div>
           </div>
         </div>
