@@ -22,6 +22,25 @@ export const Profile = () => {
 };
 
 function DetailedProfileView(profileData, user) {
+
+  const hanldeViewResume = () => {
+    // Create Resume URL with Media URL from ENV ~ Remove Double Quotes
+    const media_url = import.meta.env.VITE_MEDIA_URL;
+    const resume_url = `${media_url}${profileData.resume_file.replace(
+      /['"]+/g,
+      ""
+    )}`;
+
+    const linkSource = `${resume_url}`;
+    const downloadLink = document.createElement("a");
+    // const fileName = `${item.candidate.name}_${item.job_title}.pdf`;
+    downloadLink.href = linkSource;
+    // downloadLink.download = fileName;
+    //Open in new tab
+    downloadLink.target = "_blank";
+
+    downloadLink.click();
+  };
   return (
     <>
       <section className="relative py-8">
@@ -49,6 +68,7 @@ function DetailedProfileView(profileData, user) {
                 <div className="w-full md:px-4 lg:order-3 lg:w-4/12 lg:self-center lg:text-right">
                   <div className="float-right sm:mt-0 md:py-6 md:px-3">
                     <button
+                    onClick={hanldeViewResume}
                       className="mb-1 rounded bg-green-500 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-green-600 sm:mr-2"
                       type="button"
                     >
