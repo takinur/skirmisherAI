@@ -33,12 +33,20 @@ function DetailedProfileView(company, user) {
             <div className="px-6">
               <div className="flex flex-wrap justify-center">
                 <div className="flex w-full justify-center px-4 lg:order-2 lg:w-3/12">
-                  <div className="relative">
-                    <img
-                      alt="Logo"
-                      src="/images/brand/logo.png"
-                      className="max-w-150-px h-auto rounded-full border-none align-middle shadow-xl"
-                    />
+                <div className="relative">
+                    {company?.logo ? (
+                      <img
+                        alt="..."
+                        src="https://www.takinur.com/images/LOGO_T_256.png"
+                        className="max-w-150-px absolute -m-16 -ml-20 h-auto rounded-full border-none align-middle shadow-xl lg:-ml-16"
+                      />
+                    ) : (
+                      <div className="-mt-8 flex h-16 w-16 items-center justify-center rounded-full  bg-indigo-400">
+                        <span className="text-4xl font-semibold text-gray-50">
+                          {company.company_name.charAt(0)}
+                        </span>
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div className="w-full px-4 lg:order-3 lg:w-4/12 lg:self-center lg:text-right">

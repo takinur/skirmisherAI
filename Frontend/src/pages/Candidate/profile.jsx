@@ -53,7 +53,7 @@ function DetailedProfileView(profileData, user) {
                     {profileData?.avatar ? (
                       <img
                         alt="..."
-                        src="https://www.takinur.com/images/LOGO_T_256.png"
+                        src={profileData.avatar}
                         className="max-w-150-px absolute -m-16 -ml-20 h-auto rounded-full border-none align-middle shadow-xl lg:-ml-16"
                       />
                     ) : (
