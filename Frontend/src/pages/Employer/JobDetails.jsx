@@ -10,6 +10,7 @@ import {
   Applications,
   ApplicationsSkeleton,
 } from "../../components/Card/Applications";
+import { FaChevronCircleLeft, FaChevronLeft } from "react-icons/fa";
 
 export const JobDetails = () => {
   const navigate = useNavigate();
@@ -36,9 +37,6 @@ export const JobDetails = () => {
 
   console.log("Feteched", data);
 
-  //TODO: Fetch Job Details
-  //TODO: Fetch Job Applications
-  //TODO: Fetch Job Candidates
   //TODO: invite for interview (API)
   //TODO: hire (API)
   //EH? TEST Employer -> "nuxosepil@mailinator.com"
@@ -49,9 +47,8 @@ export const JobDetails = () => {
         onClick={() => navigate(-1)}
         className={classNames("ml-1 !bg-gray-700 md:mt-2")}
       >
-        Go Back to Jobs
+        <FaChevronLeft className="mr-1" /> Back to Jobs
       </ButtonDefault>
-      <div className="mt-8 flex h-8 flex-col md:flex-row">Maybe</div>
 
       <div className="wrapper pb-20">
         <div className="mt-4 justify-between px-8 md:flex">

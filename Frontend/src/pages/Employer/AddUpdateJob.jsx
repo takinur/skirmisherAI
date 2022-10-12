@@ -13,6 +13,7 @@ import Label from "../../components/Label";
 import Input from "../../components/Input";
 import ButtonDefault from "../../components/ButtonDefault";
 import TextArea from "../../components/TextArea";
+import { FaChevronLeft } from "react-icons/fa";
 
 const expLevel = [
   { name: "Freshers are encourged" },
@@ -180,9 +181,9 @@ export const CreateUpdateJob = () => {
     <AuthLayout title="Add New Job">
       <ButtonDefault
         onClick={() => navigate(-1)}
-        className={classNames("ml-5 !bg-purple-600 md:mt-2")}
+        className={classNames("ml-5 !bg-gray-700 md:mt-2")}
       >
-        Go Back
+        <FaChevronLeft className="mr-1" />Go Back
       </ButtonDefault>
       <div className="flex flex-col items-center pt-6 sm:justify-center sm:pt-0 ">
         <div className="mt-6 w-full overflow-hidden bg-gray-200 px-6 py-4 shadow-md dark:bg-gray-900 sm:max-w-2xl sm:rounded-lg ">
