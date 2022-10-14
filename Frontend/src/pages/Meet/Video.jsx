@@ -10,7 +10,7 @@ export default function Video(props) {
   }, [users, tracks]);
 
   return (
-    <div className="cols-auto grid h-full gap-4">
+    <div className="cols-auto grid h-20 gap-4">
       <div className="bg-red-400">
         <AgoraVideoPlayer
           videoTrack={tracks[1]}
