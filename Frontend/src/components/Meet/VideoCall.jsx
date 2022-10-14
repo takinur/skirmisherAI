@@ -5,7 +5,7 @@ import {
   useClient,
   useMicrophoneAndCameraTracks,
   channelName,
-} from "./settings";
+} from "../../hooks/Meet/settings";
 import Video from "./Video";
 import Controls from "./Controls";
 

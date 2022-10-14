@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React, { useState } from "react";
-import { useClient } from "./settings";
+import { useClient } from "../../hooks/Meet/settings";
 
 const Controls = (props) => {
   const client = useClient();

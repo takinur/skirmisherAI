@@ -29,7 +29,6 @@ function App() {
   return (
     <>
       <Routes>
-
         <Route index element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Register />} />
@@ -57,6 +56,7 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/meet" element={<VideoMeet />} />
+        <Route path="/meet/:slug" element={<VideoMeet />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <ToastContainer />
