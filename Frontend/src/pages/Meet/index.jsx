@@ -1,32 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import GuestLayout from "../Layout/Guest";
 
-import AgoraUIKit from "agora-react-uikit";
+import {config, useClient, useMicrophoneAndCameraTracks, channelName} from "./settings";
+import Video from "./Video";
+import Controls from "./Controls";
+
 
 export const VideoMeet = () => {
-  const [videoCall, setVideoCall] = useState(true);
+  const [inCall, setInCall] = useState(false);
 
-  const rtcProps = {
-    appId: import.meta.env.RTC_APP_ID,
-    channel: "Interview",
-    token: import.meta.env.RTC_TOKEN,
-  };
 
-  const callbacks = {
-    EndCall: () => setVideoCall(false),
-  };
+
   return (
     <GuestLayout>
       <div className="mt-20">index</div>
-      {
-        videoCall ? (
-          <div style={{ display: "flex", width: "100vw", height: "100vh" }}>
-            <AgoraUIKit rtcProps={rtcProps} callbacks={callbacks} />
-          </div>
-        ) : (
-          <h3 onClick={() => setVideoCall(true)}>Join</h3>
-        )
-      }
     </GuestLayout>
   );
 };
