@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import GuestLayout from "../Layout/Guest";
 
-import VideoCall from "./VideoCall";
+import VideoCall from "../../components/meet/VideoCall";
 
 export const VideoMeet = () => {
   const [inCall, setInCall] = useState(false);
