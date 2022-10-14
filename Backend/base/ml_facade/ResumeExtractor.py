@@ -124,7 +124,7 @@ class resumeExtraction:
 
         return self.__details
 
-    # FIXME: Name is incorrect for some resumes
+    # DIE: Name is incorrect for some resumes
     def __extract_name(self, resume_text):
 
         nlp_text = self.nlp(resume_text)

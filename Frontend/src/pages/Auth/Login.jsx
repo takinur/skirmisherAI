@@ -42,13 +42,13 @@ export default function Login() {
       <Header>
         <Link
           to="/signup"
-          className="-mt-1 py-2 px-6 text-sm font-semibold rounded-full border-2 border-[#7510F7] shadow-md block hover:text-white md:inline-block hover:bg-[#7510F7] text-[#7510F7]"
+          className="-mt-1 block rounded-full border-2 border-[#7510F7] py-2 px-6 text-sm font-semibold text-[#7510F7] shadow-md hover:bg-[#7510F7] hover:text-white md:inline-block"
         >
           Sign Up
         </Link>
       </Header>
       <AuthenticationCard>
-        <div className="text-center mb-7">
+        <div className="mb-7 text-center">
           <h2 className="text-3xl">Log in to SkirmisherAI</h2>
         </div>
         <form onSubmit={handleSubmit(submitForm)}>
@@ -89,7 +89,7 @@ export default function Login() {
             <div className="flex items-center justify-end">
               <Link
                 to="/signup"
-                className="underline text-sm text-gray-600 hover:text-gray-900"
+                className="text-sm text-gray-600 underline hover:text-gray-900"
               >
                 Need an account?
               </Link>
@@ -106,11 +106,10 @@ export default function Login() {
         <div className="mt-4">
           <Link
             to="/forgot-password"
-            className="underline text-sm text-gray-600 hover:text-gray-900"
+            className="text-sm text-gray-600 underline hover:text-gray-900"
           >
             Forgotten my password
           </Link>
-          {/*TODO: same to greenwich update pass <p>Other password stuff</p> */}
         </div>
       </AuthenticationCard>
     </>
