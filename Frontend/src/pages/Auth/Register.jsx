@@ -100,26 +100,27 @@ export default function Register() {
       <Header>
         <Link
           to="/login"
-          className="-mt-1 py-2 px-6 text-sm font-semibold rounded-full border-2 border-[#7510F7] shadow-md block hover:text-white md:inline-block hover:bg-[#7510F7] text-[#7510F7]"
+          className="-mt-1 block rounded-full border-2 border-[#7510F7] py-2 px-6 text-sm font-semibold text-[#7510F7] shadow-md hover:bg-[#7510F7] hover:text-white md:inline-block"
         >
           Sign In
         </Link>
       </Header>
-      <section className="register min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-        <div className="w-full md:max-w-2xl mt-6 px-12 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+      <section className="register flex min-h-screen flex-col items-center bg-gray-100 pt-6 sm:justify-center sm:pt-0">
+        <div className="mt-6 w-full overflow-hidden bg-white px-12 py-4 shadow-md sm:rounded-lg md:max-w-2xl">
           {conditionalComponent()}
-          <div className="flex justify-center mt-4">
+          <div className="mt-4 flex justify-center">
             <p>
               {" "}
               Already have an account?
               <Link
                 to="/login"
-                className="ml-1 underline text-sm text-green-600 hover:text-gray-900"
+                className="ml-1 text-sm text-green-600 underline hover:text-gray-900"
               >
                 Login
               </Link>
             </p>
           </div>
+          {/*TODO: same to greenwich update pass <p>Other password stuff</p> */}
         </div>
       </section>
     </>
@@ -136,8 +137,8 @@ function RegisterForm({
 }) {
   return (
     <>
-      <div className="text-center pt-6">
-        <h2 className="text-3xl font-serif">
+      <div className="pt-6 text-center">
+        <h2 className="font-serif text-3xl">
           Sign Up to {selectedRole.id === 1 ? "Hire Talent" : "Find work"}
         </h2>
       </div>
@@ -193,7 +194,7 @@ function RegisterForm({
                 <a
                   target="_blank"
                   href="/terms"
-                  className="underline text-sm text-gray-600 hover:text-gray-900 mx-1"
+                  className="mx-1 text-sm text-gray-600 underline hover:text-gray-900"
                 >
                   Terms of Service
                 </a>
@@ -201,7 +202,7 @@ function RegisterForm({
                 <a
                   target="_blank"
                   href="/"
-                  className="underline text-sm text-gray-600 hover:text-gray-900 mx-1"
+                  className="mx-1 text-sm text-gray-600 underline hover:text-gray-900"
                 >
                   Privacy Policy
                 </a>
