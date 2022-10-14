@@ -70,7 +70,7 @@ class EmployerProfile(models.Model):
     slogan = models.CharField(max_length=200, blank=True, null=True)
     website = models.URLField(null=True, blank=True,)
     phone = models.CharField(max_length=20, blank=True,
-                             null=True)  # HACK: Remove me
+                             null=True)  
     location = models.CharField(max_length=100, null=True)
     about = models.TextField(null=True, blank=True)
     logo = models.ImageField(
