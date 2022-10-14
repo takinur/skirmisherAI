@@ -7,17 +7,18 @@ export default function Video(props) {
   const [isMultiple, setIsmultiple] = useState(false);
 
   useEffect(() => {
-    if (users.length > 1) {
+    if (users.length > 0) {
       setIsmultiple(true);
     } else {
       setIsmultiple(false);
     }
   }, [users]);
 
+  console.log(users);
   return (
     <div
       className={classNames(
-        "relative grid gap-2 md:grid-flow-col h-5/6",
+        "relative grid h-5/6 gap-2 md:grid-flow-col",
         !isMultiple ? "w-[600px]" : "w-screen"
       )}
     >

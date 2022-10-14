@@ -7,12 +7,12 @@ export const VideoMeet = () => {
   const [inCall, setInCall] = useState(false);
 
   return (
-    <GuestLayout>
-      <div className=" items-center justify-center bg-gray-400 py-24">
+    <div className="wrapper">
+      <div className=" items-center justify-center bg-gray-400 py-8">
         {inCall ? (
           <VideoCall setInCall={setInCall} />
         ) : (
-          <div className="flex items-center justify-center">
+          <div className="flex h-screen items-center justify-center">
             <button
               onClick={() => setInCall(true)}
               class="ripple flex rounded-full bg-green-700 p-3 text-center text-white shadow transition hover:bg-green-800 hover:shadow-lg focus:outline-none"
@@ -36,6 +36,6 @@ export const VideoMeet = () => {
           </div>
         )}
       </div>
-    </GuestLayout>
+    </div>
   );
 };

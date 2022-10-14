@@ -67,8 +67,8 @@ const VideoCall = (props) => {
   }, [channelName, client, ready, tracks]);
 
   return (
-    <div className="my-4 grid h-screen items-center justify-center overflow-hidden bg-red-500 py-4 ">
-      <div className="h-full bg-gray-500">
+    <div className="my-4 grid h-screen items-center justify-center overflow-hidden py-4 ">
+      <div className="h-full">
         {start && tracks && <Video tracks={tracks} users={users} />}
         {ready && tracks && (
           <Controls tracks={tracks} setStart={setStart} setInCall={setInCall} />
