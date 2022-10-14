@@ -1,17 +1,27 @@
 import { AgoraVideoPlayer } from "agora-rtc-react";
+import classNames from "classnames";
 import { useState, useEffect } from "react";
 
 export default function Video(props) {
   const { users, tracks } = props;
-  const [gridSpacing, setGridSpacing] = useState(12);
+  const [isMultiple, setIsmultiple] = useState(false);
 
   useEffect(() => {
-    setGridSpacing(Math.max(Math.floor(12 / (users.length + 1)), 4));
-  }, [users, tracks]);
+    if (users.length > 1) {
+      setIsmultiple(true);
+    } else {
+      setIsmultiple(false);
+    }
+  }, [users]);
 
   return (
-    <div className="cols-auto grid h-20 gap-4">
-      <div className="bg-red-400">
+    <div
+      className={classNames(
+        "relative grid gap-2 md:grid-flow-col h-5/6",
+        !isMultiple ? "w-[600px]" : "w-screen"
+      )}
+    >
+      <div className="mx-6 border-8 border-green-600 ">
         <AgoraVideoPlayer
           videoTrack={tracks[1]}
           style={{ height: "100%", width: "100%" }}
@@ -21,7 +31,7 @@ export default function Video(props) {
         users.map((user) => {
           if (user.videoTrack) {
             return (
-              <div className="bg-green-500">
+              <div className="mx-6 border-8 border-green-600">
                 <AgoraVideoPlayer
                   videoTrack={user.videoTrack}
                   key={user.uid}
