@@ -1,4 +1,4 @@
-import { createClient, createMicophoneAndCameraTracks } from "agora-rtc-react";
+import { createClient, createMicrophoneAndCameraTracks } from "agora-rtc-react";
 
 const appId = import.meta.env.VITE_RTC_APP_ID;
 const token = import.meta.env.VITE_RTC_TOKEN;
@@ -12,5 +12,5 @@ export const config = {
 
 export const useClient = createClient(config);
 
-export const useMicrophoneAndCameraTracks = createMicophoneAndCameraTracks();
+export const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks();
 export const channelName = import.meta.env.VITE_RTC_CHANNEL_NAME;
