@@ -7,9 +7,9 @@ export const VideoMeet = () => {
   const [videoCall, setVideoCall] = useState(true);
 
   const rtcProps = {
-    appId: "3b1d8e44bbdb4cde860aad026cfdfd15",
+    appId: import.meta.env.RTC_APP_ID,
     channel: "Interview",
-    token: "",
+    token: import.meta.env.RTC_TOKEN,
   };
 
   const callbacks = {
