@@ -1,20 +1,32 @@
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { relativeTime } from "../../hooks/useRelativeTime";
 
 import { Disclosure, Transition } from "@headlessui/react";
 import { FaChevronUp } from "react-icons/fa";
 import HeadlessModal from "../Modal";
 
+import Label from "../Label";
+import Input from "../Input";
+import ButtonDefault from "../ButtonDefault";
+import classNames from "classnames";
+import { useMutation } from "react-query";
+import { toast } from "react-toastify";
+import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
+
 export const Applications = (item) => {
+  const API = useAxiosPrivate();
+
   const [isModal, setModal] = useState(false);
 
   const closeModal = () => {
     setModal(false);
   };
   // console.log("Applications", item);
-
+  //Check Status
   const isInvited = item.status.toLowerCase() === "invited";
 
+  //Resume Download
   const hanldeViewResume = () => {
     // Create Resume URL with Media URL from ENV ~ Remove Double Quotes
     const media_url = import.meta.env.VITE_MEDIA_URL;
@@ -34,9 +46,40 @@ export const Applications = (item) => {
     downloadLink.click();
   };
 
-  const handleInvite = () => {
+  //React hook form
+  const { register, handleSubmit } = useForm();
+
+  //React query mutation
+  const { mutate } = useMutation(
+    async (data) => {
+      const res = await API.post("/v1/invitation/", data);
+      return res.data;
+    },
+    {
+      onSuccess: () => {
+        toast.success("Invitation Sent");
+        closeModal();
+      },
+      onError: (error) => {
+        console.log("Error saving invitation", error);
+        //Shot date error
+        if (error.response.data?.schedule) {
+          toast.error('Invalid Date Format. Use "YYYY-MM-DD"');
+        }
+      },
+    }
+  );
+
+  const handleInvite = (data) => {
     console.log("Invite", item.id);
+    data.vacancy_id = item.id;
+    //Generate Invitation Code
+    data.meet_url = Math.random().toString(36).substring(2, 15);
+
+    mutate(data);
   };
+
+  const isDisabled = false;
 
   return (
     <>
@@ -387,18 +430,42 @@ export const Applications = (item) => {
       <HeadlessModal isOpen={isModal} closeModal={closeModal}>
         <div className="flex-auto justify-center p-5 text-center">
           <h2 className="py-4 text-xl font-bold ">Are you sure to invite?</h2>
-          <p className="px-8 text-sm text-gray-500">
-            Do you really want to delete your Job posting? This process cannot
-            be undone
-          </p>
-        </div>
-        <div className="mt-2  space-x-4 p-3 text-center md:block">
-          <button
-            onClick={closeModal}
-            className="mb-2 rounded-full border bg-white px-5 py-2 text-sm font-medium tracking-wider text-gray-600 shadow-sm hover:bg-gray-100 hover:shadow-lg md:mb-0"
-          >
-            Confirm
-          </button>
+          <form onSubmit={handleSubmit(handleInvite)} className="">
+            <div className="mt-1 w-full text-left">
+              <Label htmlFor="schedule">Schedule Interview </Label>
+              <Input
+                id="schedule"
+                type="text"
+                className="mt-1 block w-full"
+                {...register("schedule")}
+                required
+              />
+            </div>
+            <div className="mt-4 w-full text-left">
+              <Label htmlFor="remarks">Remarks (Optional) </Label>
+              <Input
+                id="remarks"
+                type="text"
+                className="mt-1 block w-full"
+                {...register("remarks")}
+                placeholder="If any remarks"
+              />
+            </div>
+            <div className="mt-2 space-x-4 p-3 text-center md:block">
+              <button
+                className={classNames(
+                  "mb-2 rounded-full border bg-white px-5 py-2 text-sm font-medium tracking-wider text-gray-600 shadow-sm hover:bg-gray-100 hover:shadow-lg md:mb-0",
+                  {
+                    "opacity-25": isDisabled,
+                  }
+                )}
+                disabled={isDisabled}
+                type="submit"
+              >
+                Confirm
+              </button>
+            </div>
+          </form>
         </div>
       </HeadlessModal>
     </>
