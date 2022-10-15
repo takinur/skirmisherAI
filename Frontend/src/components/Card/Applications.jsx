@@ -70,12 +70,17 @@ export const Applications = (item) => {
     //Generate Invitation Code
     data.meet_url = Math.random().toString(36).substring(2, 15);
     data.status = "Invited";
+    data.schedule = dateTime;
 
-    console.log(dateTime);
+    //Current date and time
+    const now = new Date();
+    console.log("Now", now);
 
-    console.log("Data", data);
+    // console.log(dateTime);
 
-    // addMutation.mutate(data);
+    // console.log("Data", data);
+
+    addMutation.mutate(data);
   };
   //Status
   useEffect(() => {
