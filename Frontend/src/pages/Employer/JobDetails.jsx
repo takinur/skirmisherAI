@@ -35,10 +35,8 @@ export const JobDetails = () => {
     }
   );
 
-  console.log("Feteched", data);
+  // console.log("Feteched", data);
 
-  //TODO: invite for interview (API)
-  //TODO: hire (API)
   //EH? TEST Employer -> "nuxosepil@mailinator.com"
 
   return (
