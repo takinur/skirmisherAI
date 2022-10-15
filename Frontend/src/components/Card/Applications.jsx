@@ -8,22 +8,24 @@ import HeadlessModal from "../Modal";
 
 import Label from "../Label";
 import Input from "../Input";
-import ButtonDefault from "../ButtonDefault";
 import classNames from "classnames";
 import { useMutation } from "react-query";
 import { toast } from "react-toastify";
 import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 import { useEffect } from "react";
 
+import TimeDatePicker from "../Datepicker";
+
 export const Applications = (item) => {
   const API = useAxiosPrivate();
 
   const [isModal, setModal] = useState(false);
+  const [dateTime, SetDateTime] = useState(null);
 
   const closeModal = () => {
     setModal(false);
   };
-  console.log("Applications", item);
+  // console.log("Applications", item);
   //Check Status
   const isInvited = item.status.toLowerCase() === "invited";
 
@@ -69,7 +71,11 @@ export const Applications = (item) => {
     data.meet_url = Math.random().toString(36).substring(2, 15);
     data.status = "Invited";
 
-    addMutation.mutate(data);
+    console.log(dateTime);
+
+    console.log("Data", data);
+
+    // addMutation.mutate(data);
   };
   //Status
   useEffect(() => {
@@ -433,14 +439,10 @@ export const Applications = (item) => {
           <h2 className="py-4 text-xl font-bold ">Are you sure to invite?</h2>
           <form onSubmit={handleSubmit(handleInvite)} className="">
             <div className="mt-1 w-full text-left">
-              <Label htmlFor="schedule">Schedule Interview </Label>
-              <Input
-                id="schedule"
-                type="text"
-                className="mt-1 block w-full"
-                {...register("schedule")}
-                required
-              />
+              <Label className="mb-2" htmlFor="schedule">
+                Schedule Interview{" "}
+              </Label>
+              <TimeDatePicker SetDateTime={SetDateTime} />
             </div>
             <div className="mt-4 w-full text-left">
               <Label htmlFor="remarks">Remarks (Optional) </Label>
