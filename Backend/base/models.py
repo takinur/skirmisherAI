@@ -68,15 +68,14 @@ def upload_to(instance, filename):
 
 class EmployerProfile(models.Model):
     company_name = models.CharField(max_length=80)
-    slogan = models.CharField(max_length=200, blank=True, null=True)
+    slogan = models.CharField(max_length=200, default='')
     website = models.URLField(null=True, blank=True,)
-    phone = models.CharField(max_length=20, blank=True,
-                             null=True)
-    location = models.CharField(max_length=100, null=True)
-    about = models.TextField(null=True, blank=True)
+    phone = models.CharField(max_length=20, default='')
+    location = models.CharField(max_length=100, default='')
+    about = models.TextField(default='')
     logo = models.ImageField(
         upload_to=upload_to, null=True, blank=True)  # FIXME: image upload
-    size = models.CharField(max_length=40, null=True, blank=True)
+    size = models.CharField(max_length=40, default='')
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
     user = models.OneToOneField(UserAccount, on_delete=models.CASCADE)
@@ -96,15 +95,15 @@ class FileUpload(models.Model):
 
 
 class CandidateProfile(models.Model):
-    designation = models.CharField(max_length=80, blank=True, null=True)
-    location = models.CharField(max_length=100, null=True)
+    designation = models.CharField(max_length=80, default='')
+    location = models.CharField(max_length=100, default='')
     website = models.CharField(max_length=100, null=True, blank=True)
-    resume_file = models.CharField(max_length=255, null=True, blank=True)
+    resume_file = models.CharField(max_length=255, default='')
     # These are extracted from resume
-    name = models.CharField(max_length=80, null=True, blank=True)
+    name = models.CharField(max_length=80, default='')
     email = models.EmailField(
         max_length=255, unique=False, blank=True, null=True)
-    phone = models.CharField(max_length=20, blank=True, null=True)
+    phone = models.CharField(max_length=20, default='')
     resume_raw_text = models.TextField(null=True, blank=True)
 
     user = models.OneToOneField(
@@ -140,7 +139,7 @@ class Experience(models.Model):
     candidate = models.ForeignKey(
         CandidateProfile, on_delete=models.CASCADE, related_name='experiences')
     details = models.TextField(null=True, blank=True)
-    range = models.CharField(max_length=100, null=True, blank=True)
+    range = models.CharField(max_length=100, default='')
     total = models.IntegerField(default=0)  # Might need to change
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
@@ -173,13 +172,13 @@ class Project(models.Model):
 
 class Vacancy(models.Model):
     title = models.CharField(max_length=80)
-    type = models.CharField(max_length=80, null=True, blank=True)
+    type = models.CharField(max_length=80, default='')
     level = models.CharField(max_length=80, null=True, blank=True)
-    salary = models.CharField(max_length=80, null=True, blank=True)
-    qualifications = models.TextField(null=True, blank=True)
-    benefits = models.CharField(max_length=100, null=True, blank=True)
+    salary = models.CharField(max_length=80, default='')
+    qualifications = models.TextField(default='')
+    benefits = models.CharField(max_length=100, default='')
 
-    work_location = models.CharField(max_length=100, null=True, blank=True)
+    work_location = models.CharField(max_length=100, default='')
 
     description = models.TextField(null=True)
     employer = models.ForeignKey(
@@ -198,7 +197,7 @@ class JobApplication(models.Model):
         max_digits=5, decimal_places=2, default=0)
     nlp_score = models.DecimalField(max_digits=5, decimal_places=2, default=0)
 
-    status = models.CharField(max_length=80, null=True)
+    status = models.CharField(max_length=80, default='')
     candidate = models.ForeignKey(
         CandidateProfile, on_delete=models.CASCADE, related_name='applications')
     vacancy = models.ForeignKey(
@@ -210,7 +209,7 @@ class JobApplication(models.Model):
 class Invitation(models.Model):
     meet_url = models.CharField(max_length=200, default='')
     schedule = models.DateField(blank=True, null=True)
-    remarks =  models.CharField(max_length=200, default='')
+    remarks = models.CharField(max_length=200, default='')
     vacancy = models.ForeignKey(
         Vacancy, on_delete=models.CASCADE, related_name='Inviations')
     created_at = models.DateTimeField(auto_now=True)
