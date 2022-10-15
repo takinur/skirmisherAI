@@ -5,7 +5,9 @@ import { Disclosure, Transition } from "@headlessui/react";
 import { FaChevronUp } from "react-icons/fa";
 
 export const Applications = (item) => {
-  console.log("Applications", item);
+  // console.log("Applications", item);
+
+  const isInvited = item.status.toLowerCase() === "invited";
 
   const hanldeViewResume = () => {
     // Create Resume URL with Media URL from ENV ~ Remove Double Quotes
@@ -24,6 +26,10 @@ export const Applications = (item) => {
     downloadLink.target = "_blank";
 
     downloadLink.click();
+  };
+
+  const handleInvite = () => {
+    console.log("Invite", item.id);
   };
 
   return (
@@ -87,18 +93,15 @@ export const Applications = (item) => {
                   {relativeTime(item.created_at)}
                 </div>
                 <div className="flex justify-between ">
-                  {
-                    //Convert status to lower case
-                    item.status.toLowerCase() === "applied" ? (
-                      <span className="cursor-pointer font-semibold text-red-600 hover:text-red-800 ">
-                        Invited
-                      </span>
-                    ) : (
-                      <span className="cursor-pointer font-semibold text-green-600 hover:text-green-800 ">
-                        Invite
-                      </span>
-                    )
-                  }
+                  {isInvited ? (
+                    <span className="cursor-pointer font-semibold text-red-600 hover:text-red-800 ">
+                      Shortlisted
+                    </span>
+                  ) : (
+                    <span className=" cursor-pointer font-semibold text-green-600 hover:text-green-800 ">
+                      Invite
+                    </span>
+                  )}
                   <FaChevronUp
                     className={`${
                       open ? "rotate-180 transform" : "rotate-90 "
@@ -129,14 +132,23 @@ export const Applications = (item) => {
                       </h3>
                     </div>
                     <div className="flex items-center">
-                      <div className="sm:mt-0 md:px-3">
+                      <div className="flex sm:mt-0 md:px-3">
                         <button
                           onClick={hanldeViewResume}
-                          className="mb-1 rounded bg-green-500 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-green-600 sm:mr-2"
+                          className="mb-1 rounded bg-teal-500 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-green-600 sm:mr-2"
                           type="button"
                         >
                           View Original Resume
                         </button>
+                        {!isInvited && (
+                          <button
+                            onClick={handleInvite}
+                            className="mb-1 rounded bg-green-500 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-green-600 sm:mr-2"
+                            type="button"
+                          >
+                            Invite
+                          </button>
+                        )}
                       </div>
                     </div>
                   </div>
