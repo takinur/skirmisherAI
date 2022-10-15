@@ -12,12 +12,12 @@ from rest_framework import viewsets
 from rest_framework import mixins
 
 
-from .serializers import CandidateProfileSerializer, FileSerializer, JobApplicationSerializer, PublicVacancySerializer
+from .serializers import CandidateProfileSerializer, FileSerializer, InvitationSerializer, JobApplicationSerializer, PublicVacancySerializer
 from .serializers import RetriveJobApplicationSerializer, UserCreateSerializer, MyTokenObtainPairSerializer, VacancySerializer
 
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from ..models import CandidateProfile, EmployerProfile, JobApplication, Vacancy
+from ..models import CandidateProfile, EmployerProfile, Invitation, JobApplication, Vacancy
 from .serializers import EmployerProfileSerializer
 
 # Machine Leaning Model from
@@ -306,3 +306,16 @@ class RetriveJobApplicationView(JobApplicationPublicViewSet):
             return JobApplication.objects.filter(vacancy_id=job_id).order_by('-total_score')
 
         return JobApplication.objects.order_by('-created_at')
+
+
+class InvitationView(viewsets.ModelViewSet):
+    queryset = Invitation.objects.order_by('-created_at')
+    serializer_class = InvitationSerializer
+
+    def get_queryset(self):
+        job_id = self.request.query_params.get('job_id', None)
+
+        if job_id is not None:
+            return Invitation.objects.filter(vacancy_id=job_id)
+
+        return Invitation.objects.order_by('-created_at')
