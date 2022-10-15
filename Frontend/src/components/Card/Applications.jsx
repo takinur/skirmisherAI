@@ -13,6 +13,7 @@ import classNames from "classnames";
 import { useMutation } from "react-query";
 import { toast } from "react-toastify";
 import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
+import { useEffect } from "react";
 
 export const Applications = (item) => {
   const API = useAxiosPrivate();
@@ -22,7 +23,7 @@ export const Applications = (item) => {
   const closeModal = () => {
     setModal(false);
   };
-  // console.log("Applications", item);
+  console.log("Applications", item);
   //Check Status
   const isInvited = item.status.toLowerCase() === "invited";
 
@@ -48,38 +49,38 @@ export const Applications = (item) => {
 
   //React hook form
   const { register, handleSubmit } = useForm();
-
+  let isDisabled = false;
   //React query mutation
-  const { mutate } = useMutation(
-    async (data) => {
-      const res = await API.post("/v1/invitation/", data);
-      return res.data;
-    },
-    {
-      onSuccess: () => {
-        toast.success("Invitation Sent");
-        closeModal();
-      },
-      onError: (error) => {
-        console.log("Error saving invitation", error);
-        //Shot date error
-        if (error.response.data?.schedule) {
-          toast.error('Invalid Date Format. Use "YYYY-MM-DD"');
-        }
-      },
-    }
+  // const { mutate } = useMutation(async (data) => {
+  //   const res = await API.put("/v1/invitation/", data);
+  //   return res.data;
+  // });
+
+  // TODO: Update Job Status
+
+  const addMutation = useMutation(
+    async (data) => await API.post("/v1/invitation/", data)
   );
 
   const handleInvite = (data) => {
     console.log("Invite", item.id);
-    data.vacancy_id = item.id;
+    data.job_application = item.id;
     //Generate Invitation Code
     data.meet_url = Math.random().toString(36).substring(2, 15);
+    data.status = "Invited";
 
-    mutate(data);
+    addMutation.mutate(data);
   };
-
-  const isDisabled = false;
+  //Status
+  useEffect(() => {
+    if (addMutation.isSuccess) {
+      toast.success("Invitation Sent");
+    }
+    if (addMutation.isError) {
+      toast.error("Something went wrong");
+      console.log("Error", addMutation.error);
+    }
+  }, [addMutation.isSuccess, addMutation.isLoading, addMutation.isError]);
 
   return (
     <>
