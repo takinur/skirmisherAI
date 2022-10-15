@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
@@ -70,7 +71,7 @@ class EmployerProfile(models.Model):
     slogan = models.CharField(max_length=200, blank=True, null=True)
     website = models.URLField(null=True, blank=True,)
     phone = models.CharField(max_length=20, blank=True,
-                             null=True)  
+                             null=True)
     location = models.CharField(max_length=100, null=True)
     about = models.TextField(null=True, blank=True)
     logo = models.ImageField(
@@ -202,5 +203,15 @@ class JobApplication(models.Model):
         CandidateProfile, on_delete=models.CASCADE, related_name='applications')
     vacancy = models.ForeignKey(
         Vacancy, on_delete=models.CASCADE, related_name='applications')
+    created_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
+
+
+class Invitation(models.Model):
+    meet_url = models.CharField(max_length=200, default='')
+    schedule = models.DateField(blank=True, null=True)
+    remarks =  models.CharField(max_length=200, default='')
+    vacancy = models.ForeignKey(
+        Vacancy, on_delete=models.CASCADE, related_name='Inviations')
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
