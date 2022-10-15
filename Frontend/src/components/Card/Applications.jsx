@@ -87,9 +87,18 @@ export const Applications = (item) => {
                   {relativeTime(item.created_at)}
                 </div>
                 <div className="flex justify-between ">
-                  <span className="cursor-pointer font-semibold text-green-600 hover:text-green-800 ">
-                    Invite
-                  </span>
+                  {
+                    //Convert status to lower case
+                    item.status.toLowerCase() === "applied" ? (
+                      <span className="cursor-pointer font-semibold text-red-600 hover:text-red-800 ">
+                        Invited
+                      </span>
+                    ) : (
+                      <span className="cursor-pointer font-semibold text-green-600 hover:text-green-800 ">
+                        Invite
+                      </span>
+                    )
+                  }
                   <FaChevronUp
                     className={`${
                       open ? "rotate-180 transform" : "rotate-90 "
@@ -107,7 +116,7 @@ export const Applications = (item) => {
               leaveTo="transform scale-95 opacity-0"
               className="flex"
             >
-              <div className="w-24"></div>
+              <div className="important-for-equal-space w-24"></div>
               <Disclosure.Panel
                 as="div"
                 className="mb-2 w-full select-text rounded-b-md bg-gray-200 p-6 px-4 text-sm text-gray-500 opacity-100 shadow-lg "
