@@ -250,8 +250,9 @@ class RetriveVacancyView(VacancyPublicViewSet):
 class JobApplicationView(viewsets.ModelViewSet):
     # permission_classes = [permissions.IsAuthenticated]
     serializer_class = JobApplicationSerializer
+    queryset = JobApplication.objects.order_by('-created_at')
 
-    def get_object(self, cand_id):
+    def get_object(self, cand_id=None):
         '''
            Helper method to get object by id
         '''
@@ -280,9 +281,8 @@ class JobApplicationView(viewsets.ModelViewSet):
 
         return saved
 
+
 # Jobs for Employer dashboard
-
-
 class JobApplicationPublicViewSet(
         mixins.ListModelMixin,
         mixins.RetrieveModelMixin,
@@ -313,9 +313,23 @@ class InvitationView(viewsets.ModelViewSet):
     serializer_class = InvitationSerializer
 
     def get_queryset(self):
-        job_id = self.request.query_params.get('job_id', None)
+        app_id = self.request.query_params.get('job_application', None)
 
-        if job_id is not None:
-            return Invitation.objects.filter(vacancy_id=job_id)
+        if app_id is not None:
+            return Invitation.objects.filter(job_application=app_id)
 
         return Invitation.objects.order_by('-created_at')
+
+    def perform_create(self, serializer):
+        # Pop status from data
+        status = serializer.validated_data.pop('status')
+
+        # Update application status at application model
+        application = JobApplication.objects.get(
+            id=serializer.validated_data['job_application'])
+        application.status = status
+        application.save()
+
+        serializer.save()
+
+        return serializer.data
