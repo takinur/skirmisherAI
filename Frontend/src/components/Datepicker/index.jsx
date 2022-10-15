@@ -20,6 +20,7 @@ const TimeDatePicker = (props) => {
       placeholder="Select Time and Date"
       onChange={onChange}
       onOk={onOk}
+      className="w-full"
     />
   );
 };
