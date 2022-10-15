@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { relativeTime } from "../../hooks/useRelativeTime";
 
 import { Disclosure, Transition } from "@headlessui/react";
 import { FaChevronUp } from "react-icons/fa";
+import HeadlessModal from "../Modal";
 
 export const Applications = (item) => {
+  const [isModal, setModal] = useState(false);
+
+  const closeModal = () => {
+    setModal(false);
+  };
   // console.log("Applications", item);
 
   const isInvited = item.status.toLowerCase() === "invited";
@@ -142,7 +148,7 @@ export const Applications = (item) => {
                         </button>
                         {!isInvited && (
                           <button
-                            onClick={handleInvite}
+                            onClick={() => setModal(true)}
                             className="mb-1 rounded bg-green-500 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-green-600 sm:mr-2"
                             type="button"
                           >
@@ -378,6 +384,23 @@ export const Applications = (item) => {
           </div>
         )}
       </Disclosure>
+      <HeadlessModal isOpen={isModal} closeModal={closeModal}>
+        <div className="flex-auto justify-center p-5 text-center">
+          <h2 className="py-4 text-xl font-bold ">Are you sure to invite?</h2>
+          <p className="px-8 text-sm text-gray-500">
+            Do you really want to delete your Job posting? This process cannot
+            be undone
+          </p>
+        </div>
+        <div className="mt-2  space-x-4 p-3 text-center md:block">
+          <button
+            onClick={closeModal}
+            className="mb-2 rounded-full border bg-white px-5 py-2 text-sm font-medium tracking-wider text-gray-600 shadow-sm hover:bg-gray-100 hover:shadow-lg md:mb-0"
+          >
+            Confirm
+          </button>
+        </div>
+      </HeadlessModal>
     </>
   );
 };
