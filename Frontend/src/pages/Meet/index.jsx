@@ -2,8 +2,13 @@ import React, { useState, useEffect } from "react";
 import GuestLayout from "../Layout/Guest";
 
 import VideoCall from "../../components/meet/VideoCall";
+import { useParams } from "react-router-dom";
 
 export const VideoMeet = () => {
+  const slug = useParams().slug;
+
+  console.log(slug);
+
   const [inCall, setInCall] = useState(false);
 
   return (

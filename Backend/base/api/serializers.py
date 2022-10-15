@@ -1,4 +1,6 @@
-from ..models import JobApplication, CandidateProfile, Education, EmployerProfile, Experience, FileUpload, Project, Skill, Social, Vacancy
+from ..models import Invitation, JobApplication, CandidateProfile, EmployerProfile, Education
+from ..models import Experience, FileUpload, Project, Skill, Social, Vacancy
+
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from django.contrib.auth.password_validation import validate_password
@@ -206,3 +208,9 @@ class RetriveJobApplicationSerializer(serializers.ModelSerializer):
         data['employer'] = instance.vacancy.employer.company_name
 
         return data
+
+
+class InvitationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Invitation
+        fields = '__all__'
