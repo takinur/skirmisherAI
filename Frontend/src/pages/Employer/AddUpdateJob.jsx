@@ -161,7 +161,6 @@ export const CreateUpdateJob = () => {
     //TODO: Handle errors
     if (addMutation.isError) {
       toast.error("Something went wrong");
-      console.log(updateMutation.error);
     }
     if (updateMutation.isError) {
       toast.error("Something went wrong");
