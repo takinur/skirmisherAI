@@ -70,12 +70,7 @@ export const Applications = (item) => {
     data.job_application = item.id;
     //Generate Invitation Code
     data.meet_url = Math.random().toString(36).substring(2, 15);
-    data.status = "Invited";
     data.schedule = format(dateTime, "yyyy-MM-dd");
-
-    // console.log(dateTime);
-
-    // console.log("Data", data);
 
     addMutation.mutate(data);
   };

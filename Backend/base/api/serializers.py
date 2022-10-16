@@ -215,3 +215,14 @@ class InvitationSerializer(serializers.ModelSerializer):
         model = Invitation
         fields = '__all__'
         extra_kwargs = {'job_application': {'write_only': True}}
+
+    def create(self, validated_data):
+        invitation = Invitation.objects.create(**validated_data)
+
+        # # Update status at JobApplication
+        job_application = JobApplication.objects.get(
+            id=validated_data['job_application'].id)
+        job_application.status = 'Invited'
+        job_application.save()
+
+        return invitation
