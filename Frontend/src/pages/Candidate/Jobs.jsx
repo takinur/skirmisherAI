@@ -5,6 +5,7 @@ import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 import { useCandProfile } from "../../hooks/useProfile";
 import AuthLayout from "../Layout/Auth";
 import { relativeTime } from "../../hooks/useRelativetime";
+import { Link } from "react-router-dom";
 
 export const Jobs = () => {
   const API = useAxiosPrivate();
@@ -37,7 +38,7 @@ export const Jobs = () => {
       <div className="flex flex-col">
         {
           //No jobs found
-          data?.length < 0 || data === undefined ? (
+          data?.length < 1 || data === undefined ? (
             <div className="flex flex-col items-center justify-center ">
               <h2 className="text-2xl font-bold text-gray-500">
                 No Jobs Found
@@ -45,6 +46,10 @@ export const Jobs = () => {
               <p className="text-gray-500">
                 You have not applied to any job yet
               </p>
+              <Link to="/find-work" className="text-teal-600 text-2xl font-bold mt-6 ">
+                {" "}
+                Find Jobs
+              </Link>
             </div>
           ) : (
             //Jobs found
