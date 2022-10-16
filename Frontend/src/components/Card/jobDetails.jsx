@@ -7,21 +7,28 @@ import { relativeTime } from "../../hooks/useRelativetime";
 import { toast } from "react-toastify";
 import { FaCheckCircle } from "react-icons/fa";
 
-export const jobDetails = ({
-  title,
-  company,
-  description,
-  experience,
-  salary,
-  type,
-  posted,
-  qualifications,
-  benefits,
-  location,
-  canApply,
-  applicant,
-  id,
-}) => {
+// {
+//   title,
+//   company,
+//   description,
+//   experience,
+//   salary,
+//   type,
+//   posted,
+//   qualifications,
+//   benefits,
+//   location,
+//   canApply,
+//   applicant,
+//   id,
+// }
+
+export const jobDetails = (props) => {
+  const applicant = props.applicant;
+  const canApply = props.canApply;
+  const job = props.job;
+
+  console.log("Job", job);
   const [saved, setSaved] = useState(false);
   const [isApplied, setIsApplied] = useState(false);
 
@@ -32,18 +39,18 @@ export const jobDetails = ({
     const res = await API.get(`v1/application/?cand_id=${applicant}`);
     return res.data;
   };
-  if (applicant) {
-    useEffect(() => {
-      checkIfApplied().then((res) => {
-        //Filter the list of applied jobs to get the job with the same id
-        const applied = res.filter((job) => job.applied_id === id);
-        //If the job is found in the list of applied jobs, set isApplied to true
-        if (applied.length > 0) {
-          setIsApplied(true);
-        }
-      });
-    }, []);
-  }
+  // if (applicant) {
+  //   useEffect(() => {
+  //     checkIfApplied().then((res) => {
+  //       //Filter the list of applied jobs to get the job with the same id
+  //       const applied = res.filter((job) => job.applied_id === id);
+  //       //If the job is found in the list of applied jobs, set isApplied to true
+  //       if (applied.length > 0) {
+  //         setIsApplied(true);
+  //       }
+  //     });
+  //   }, []);
+  // }
 
   //Apply for Job
   const applyMutation = useMutation(
@@ -51,13 +58,13 @@ export const jobDetails = ({
   );
 
   const handleApply = (jobId) => {
-    const job = {};
-    job.vacancy = jobId;
-    job.candidate = applicant;
-    job.status = "Applied";
+    const data = {};
+    data.vacancy = jobId;
+    data.candidate = applicant;
+    data.status = "Applied";
 
-    // console.log("Appply to this job: ", job);
-    applyMutation.mutate(job);
+    // console.log("Appply to this job: ", data);
+    applyMutation.mutate(data);
   };
 
   const handleWishlist = (jobId) => {
@@ -83,10 +90,10 @@ export const jobDetails = ({
   const isDisabled = applyMutation.isLoading || applyMutation.isSuccess;
 
   const showApplyButton = () => {
-    if (isApplied ) {
+    if (isApplied) {
       return (
-        <div className="float-right -mt-6 ml-4 mr-2  text-base  font-semibold text-green-700  flex ">
-         <span>Applied</span>  <FaCheckCircle className="ml-1 mt-1" />
+        <div className="float-right -mt-6 ml-4 mr-2  flex  text-base font-semibold  text-green-700 ">
+          <span>Applied</span> <FaCheckCircle className="ml-1 mt-1" />
         </div>
       );
     } else if (canApply) {
@@ -115,18 +122,18 @@ export const jobDetails = ({
     <>
       <div className="flex h-40 w-full items-center justify-center rounded-t-md bg-gray-300 ">
         <span className="font-mono font-semibold text-gray-700">
-          {company?.slogan}
+          {job.employer?.slogan}
         </span>
       </div>
       <div className="z-10 -mt-8 h-16 w-16 bg-gray-100 shadow-md">
         {
           // Check if company logo is available
-          company?.logo ? (
-            <img className="h-16 w-16" src={company.logo} alt="company logo" />
+          job.employer?.logo ? (
+            <img className="h-16 w-16" src={job.employer.logo} alt="company logo" />
           ) : (
             <div className="flex h-16 w-16 items-center justify-center  bg-green-700">
               <span className="text-4xl font-semibold text-gray-50">
-                {company?.company_name.charAt(0)}
+                {job.employer.company_name.charAt(0)}
               </span>
             </div>
           )
@@ -136,7 +143,7 @@ export const jobDetails = ({
 
       <div className="px-8 pt-12">
         <div className="flex text-gray-800 ">
-          <div className="text-2xl font-bold">{title}</div>
+          <div className="text-2xl font-bold">{job.title}</div>
           <div className="ml-auto flex items-center">
             {canApply && (
               <div
@@ -183,11 +190,11 @@ export const jobDetails = ({
         </div>
         <div className="mt-2 flex justify-between">
           <div className="font-xs text-gray-700">
-            {company?.company_name},
-            <span className="loc ml-2">{company?.location}</span>
+            {job.employer?.company_name},
+            <span className="loc ml-2">{job.employer?.location}</span>
           </div>
           <div className="font-xs text-gray-700">
-            Posted {relativeTime(posted)}
+            Posted {relativeTime(job.created_at)}
           </div>
         </div>
         <div className="font-xs mt-2 text-gray-700 ">
@@ -206,7 +213,7 @@ export const jobDetails = ({
                 d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z"
               />
             </svg>
-            {company?.size}
+            {job.emplayer?.size}
           </span>
           <span className="loc mt-1 flex">
             <svg
@@ -223,7 +230,7 @@ export const jobDetails = ({
                 d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
               />
             </svg>
-            {company?.website}
+            {job.emplayer?.website}
           </span>
         </div>
         <div className="mt-5 justify-between rounded-2xl bg-gray-300 px-6 py-1 md:flex md:h-16">
@@ -232,7 +239,7 @@ export const jobDetails = ({
               Experience
             </div>
             <div className="hitespace-nowrap font-sans text-gray-900">
-              {experience ? experience : "No Experience"}
+              {job.experience ? job.experience : "No Experience"}
             </div>
           </div>
           <div className="leading-7">
@@ -240,7 +247,7 @@ export const jobDetails = ({
               Employee Type
             </div>
             <div className="hitespace-nowrap font-sans text-gray-900">
-              {type ? type : "Full Time"}
+              {job.type ? job.type : "Full Time"}
             </div>
           </div>
           <div className="leading-7">
@@ -250,22 +257,24 @@ export const jobDetails = ({
             <div className="hitespace-nowrap font-sans text-gray-900">
               {
                 //If dollar sign is not present in salary, add it
-                salary && !salary.includes("$") ? "$" + salary : salary
+                job.salary && !job.salary.includes("$")
+                  ? "$" + job.salary
+                  : job.salary
               }
             </div>
           </div>
         </div>
         <div className="mt-8 w-full ">
           <div className="mb-7 font-semibold">Overview</div>
-          <div className="mb-7 leading-8">{description}</div>
+          <div className="mb-7 leading-8">{job.description}</div>
           <div className="mb-2 font-semibold">Qualifications</div>
           <div className="mt-4 flex w-full flex-col ">
             <div className="mb-7 space-x-1 space-y-2 p-1 text-justify">
               {
                 //If qualifications are not present, show "Not Specified"
-                qualifications
+                job.qualifications
                   ? //extract each skill from skils string
-                    qualifications.split(",").map((skill, index) => (
+                    job.qualifications.split(",").map((skill, index) => (
                       <button
                         key={index}
                         className="rounded-full bg-gray-300 px-3 py-1 text-sm font-medium tracking-wider text-gray-600 shadow-sm hover:bg-gray-400 hover:shadow-2xl"
@@ -282,14 +291,14 @@ export const jobDetails = ({
           <div className="mb-7 leading-8">
             {
               //If benefits are not present, show "Not Specified"
-              benefits ? benefits : "Not Specified"
+              job.benefits ? job.benefits : "Not Specified"
             }
           </div>
           <div className="mb-2 font-semibold">Work Location</div>
           <div className="mb-7 leading-8">
             {
               //If location are not present, show "Not Specified"
-              location ? location : "Not Specified"
+              job.work_location ? job.work_location : "Not Specified"
             }
           </div>
         </div>
