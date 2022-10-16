@@ -1,3 +1,6 @@
+
+
+import datetime
 from ..models import Invitation, JobApplication, CandidateProfile, EmployerProfile, Education
 from ..models import Experience, FileUpload, Project, Skill, Social, Vacancy
 
@@ -222,7 +225,10 @@ class InvitationSerializer(serializers.ModelSerializer):
         # # Update status at JobApplication
         job_application = JobApplication.objects.get(
             id=validated_data['job_application'].id)
+
         job_application.status = 'Invited'
-        job_application.save()
+        job_application.updated_at = datetime.now()
+
+        job_application.save(update_fields=['status', 'updated_at'])
 
         return invitation
