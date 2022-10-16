@@ -7,21 +7,6 @@ import { relativeTime } from "../../hooks/useRelativetime";
 import { toast } from "react-toastify";
 import { FaCheckCircle } from "react-icons/fa";
 
-// {
-//   title,
-//   company,
-//   description,
-//   experience,
-//   salary,
-//   type,
-//   posted,
-//   qualifications,
-//   benefits,
-//   location,
-//   canApply,
-//   applicant,
-//   id,
-// }
 
 export const jobDetails = (props) => {
   const applicant = props.applicant;
@@ -34,23 +19,17 @@ export const jobDetails = (props) => {
 
   const API = useAxiosPrivate();
 
-  //Check if the user has already applied for the job with axios
-  const checkIfApplied = async () => {
-    const res = await API.get(`v1/application/?cand_id=${applicant}`);
-    return res.data;
-  };
-  // if (applicant) {
-  //   useEffect(() => {
-  //     checkIfApplied().then((res) => {
-  //       //Filter the list of applied jobs to get the job with the same id
-  //       const applied = res.filter((job) => job.applied_id === id);
-  //       //If the job is found in the list of applied jobs, set isApplied to true
-  //       if (applied.length > 0) {
-  //         setIsApplied(true);
-  //       }
-  //     });
-  //   }, []);
-  // }
+  // Check if user has applied for this job
+  useEffect(() => {
+    if (applicant) {
+      API.get(`v1/application/?cand_id=${applicant}`).then((res) => {
+        const applied = res.data.filter((app) => app.applied_id === job.id);
+        if (applied.length > 0) {
+          setIsApplied(true);
+        }
+      });
+    }
+  }, [applicant, job.id]);
 
   //Apply for Job
   const applyMutation = useMutation(
@@ -129,7 +108,11 @@ export const jobDetails = (props) => {
         {
           // Check if company logo is available
           job.employer?.logo ? (
-            <img className="h-16 w-16" src={job.employer.logo} alt="company logo" />
+            <img
+              className="h-16 w-16"
+              src={job.employer.logo}
+              alt="company logo"
+            />
           ) : (
             <div className="flex h-16 w-16 items-center justify-center  bg-green-700">
               <span className="text-4xl font-semibold text-gray-50">
