@@ -1,26 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
-import "antd/dist/antd.css";
-import { DatePicker } from "antd";
-
-const onOk = (value) => {
-  console.log("onOk: ", value);
-};
+import { format } from "date-fns";
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/dist/style.css";
 
 const TimeDatePicker = (props) => {
-  const onChange = (value, dateString) => {
-    // console.log("Selected Time: ", value);
-    console.log("Formatted Selected Time: ", dateString);
-    props.SetDateTime(dateString);
-  };
+  const [selected, setSelected] = useState();
+
+  let footer = <p>Please pick a day.</p>;
+  if (selected) {
+    footer = <p>You picked {format(selected, "PP")}.</p>;
+  }
+  //sent value to parent component
+  props.onDateChange(selected);
   return (
-    <DatePicker
-      showTime
-      format="YYYY-MM-DD HH:mm:ss"
-      placeholder="Select Time and Date"
-      onChange={onChange}
-      onOk={onOk}
-      className="w-full"
+    <DayPicker
+      mode="single"
+      selected={selected}
+      onSelect={setSelected}
+      footer={footer}
     />
   );
 };
