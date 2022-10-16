@@ -20,7 +20,7 @@ export const VideoMeet = () => {
           <div className="flex h-screen items-center justify-center">
             <button
               onClick={() => setInCall(true)}
-              class="ripple flex rounded-full bg-green-700 p-3 text-center text-white shadow transition hover:bg-green-800 hover:shadow-lg focus:outline-none"
+              className="ripple flex rounded-full bg-green-700 p-3 text-center text-white shadow transition hover:bg-green-800 hover:shadow-lg focus:outline-none"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

@@ -15,12 +15,17 @@ import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 import { useEffect } from "react";
 
 import TimeDatePicker from "../Datepicker";
+import DateTimePicker from "react-datetime-picker";
+
+import { format } from "date-fns";
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/dist/style.css";
 
 export const Applications = (item) => {
   const API = useAxiosPrivate();
 
   const [isModal, setModal] = useState(false);
-  const [dateTime, SetDateTime] = useState(null);
+  const [dateTime, setDateTime] = useState();
 
   const closeModal = () => {
     setModal(false);
@@ -445,9 +450,18 @@ export const Applications = (item) => {
           <form onSubmit={handleSubmit(handleInvite)} className="">
             <div className="mt-1 w-full text-left">
               <Label className="mb-2" htmlFor="schedule">
-                Schedule Interview{" "}
+                {dateTime !== null || !undefined
+                  ? `Schedule Interview for ${dateTime?.toDateString() || ""}`
+                  : "Schedule Interview"}
               </Label>
-              <TimeDatePicker SetDateTime={SetDateTime} />
+              <div className="flex w-full items-start justify-center ">
+                <DayPicker
+                  mode="single"
+                  selected={dateTime}
+                  onSelect={setDateTime}
+                  className="ml-4"
+                />
+              </div>
             </div>
             <div className="mt-4 w-full text-left">
               <Label htmlFor="remarks">Remarks (Optional) </Label>
