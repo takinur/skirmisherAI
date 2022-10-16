@@ -67,8 +67,7 @@ export const Applications = (item) => {
   );
 
   const handleInvite = (data) => {
-    console.log("Invite", item.id);
-    data.job_application_id = item.id;
+    data.job_application = item.id;
     //Generate Invitation Code
     data.meet_url = Math.random().toString(36).substring(2, 15);
     data.status = "Invited";
