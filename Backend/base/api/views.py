@@ -320,15 +320,3 @@ class InvitationView(viewsets.ModelViewSet):
 
         return Invitation.objects.order_by('-created_at')
 
-    # def perform_create(self, serializer):
-    #     # Status from request
-    #     status = self.request.data.get('status', None)
-    #     serializer.save()
-
-    #     # Update application status at application model
-    #     application = JobApplication.objects.get(
-    #         id=serializer.validated_data['job_application'])
-    #     application.status = status
-    #     application.save()
-
-    #     return Response(serializer.data, status=status.HTTP_201_CREATED)
