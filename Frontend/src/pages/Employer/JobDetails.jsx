@@ -37,8 +37,6 @@ export const JobDetails = () => {
 
   // console.log("Feteched", data);
 
-  //EH? TEST Employer -> "nuxosepil@mailinator.com"
-
   return (
     <AuthLayout title="Job Details">
       <ButtonDefault
