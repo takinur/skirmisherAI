@@ -214,3 +214,4 @@ class InvitationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Invitation
         fields = '__all__'
+        extra_kwargs = {'job_application': {'write_only': True}}

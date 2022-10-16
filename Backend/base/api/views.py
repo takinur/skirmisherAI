@@ -321,8 +321,9 @@ class InvitationView(viewsets.ModelViewSet):
         return Invitation.objects.order_by('-created_at')
 
     def perform_create(self, serializer):
-        # Pop status from data
-        status = serializer.validated_data.pop('status')
+        # Status from request
+        status = self.request.data.get('status', None)
+        serializer.save()
 
         # Update application status at application model
         application = JobApplication.objects.get(
@@ -330,6 +331,4 @@ class InvitationView(viewsets.ModelViewSet):
         application.status = status
         application.save()
 
-        serializer.save()
-
-        return serializer.data
+        return Response(serializer.data, status=status.HTTP_201_CREATED)

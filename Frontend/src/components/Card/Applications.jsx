@@ -14,9 +14,6 @@ import { toast } from "react-toastify";
 import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 import { useEffect } from "react";
 
-import TimeDatePicker from "../Datepicker";
-import DateTimePicker from "react-datetime-picker";
-
 import { format } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
@@ -71,15 +68,11 @@ export const Applications = (item) => {
 
   const handleInvite = (data) => {
     console.log("Invite", item.id);
-    data.job_application = item.id;
+    data.job_application_id = item.id;
     //Generate Invitation Code
     data.meet_url = Math.random().toString(36).substring(2, 15);
     data.status = "Invited";
-    data.schedule = dateTime;
-
-    //Current date and time
-    const now = new Date();
-    console.log("Now", now);
+    data.schedule = format(dateTime, "yyyy-MM-dd");
 
     // console.log(dateTime);
 
@@ -450,8 +443,8 @@ export const Applications = (item) => {
           <form onSubmit={handleSubmit(handleInvite)} className="">
             <div className="mt-1 w-full text-left">
               <Label className="mb-2" htmlFor="schedule">
-                {dateTime !== null || !undefined
-                  ? `Schedule Interview for ${dateTime?.toDateString() || ""}`
+                {dateTime !== undefined
+                  ? `Schedule Interview for ${dateTime.toDateString() || ""}`
                   : "Schedule Interview"}
               </Label>
               <div className="flex w-full items-start justify-center ">
