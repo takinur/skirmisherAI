@@ -30,6 +30,7 @@ const Controls = (props) => {
     tracks[1].close();
     setStart(false);
     setInCall(false);
+    window.location.reload();
   };
 
   return (
