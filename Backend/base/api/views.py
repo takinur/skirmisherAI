@@ -128,8 +128,6 @@ class CandidateProfileView(APIView):
             return CandidateProfile.objects.get(user_id=user_id)
         except CandidateProfile.DoesNotExist:
             return None
-        # Return profile with skills
-        # CandidateProfile.objects.prefetch_related('skills').get(user_id=user_id)
 
     # Retrive profile by user id
     def get(self, request, *args, **kwargs):
@@ -139,8 +137,6 @@ class CandidateProfileView(APIView):
             serializer = CandidateProfileSerializer(profile)
             return Response(serializer.data, status=status.HTTP_200_OK)
 
-        # Return empty profile
-        # return Response(status=status.HTTP_200_OK, data={'message': 'Profile not found'})
         return Response(status=status.HTTP_400_BAD_REQUEST, data={'message': 'Sadge, Profile not found'})
 
     def post(self, request, *args, **kwargs):
@@ -319,4 +315,3 @@ class InvitationView(viewsets.ModelViewSet):
             return Invitation.objects.filter(job_application=app_id)
 
         return Invitation.objects.order_by('-created_at')
-

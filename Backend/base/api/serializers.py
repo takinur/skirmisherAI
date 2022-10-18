@@ -179,6 +179,32 @@ class PublicVacancySerializer(serializers.ModelSerializer):
     class Meta:
         model = Vacancy
         fields = '__all__'
+        
+        
+'''
+Application Shortlist And Interview Serializer
+'''
+
+
+class InvitationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Invitation
+        fields = '__all__'
+        extra_kwargs = {'job_application': {'write_only': True}}
+
+    def create(self, validated_data):
+        invitation = Invitation.objects.create(**validated_data)
+
+        # # Update status at JobApplication
+        job_application = JobApplication.objects.get(
+            id=validated_data['job_application'].id)
+
+        job_application.status = 'Invited'
+        job_application.updated_at = datetime.now()
+
+        job_application.save(update_fields=['status', 'updated_at'])
+
+        return invitation
 
 
 '''
@@ -188,17 +214,17 @@ Job application serializer for candidates
 
 
 class JobApplicationSerializer(serializers.ModelSerializer):
-
+    invitations = InvitationSerializer(many=True, read_only=True)
     class Meta:
         model = JobApplication
-        fields = ['id', 'status', 'created_at', 'invitation']
+        fields = ['id', 'status', 'created_at', 'invitations']
         extra_kwargs = {'candidate': {'write_only': True},
                         'vacancy': {'write_only': True}}
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
         data['candidate'] = instance.candidate.name
-        data['applied_id'] = instance.vacancy.id
+        data['applied_job_id'] = instance.vacancy.id
         data['job_title'] = instance.vacancy.title
         data['employer'] = instance.vacancy.employer.company_name
 
@@ -226,27 +252,4 @@ class RetriveJobApplicationSerializer(serializers.ModelSerializer):
         return data
 
 
-'''
-Application Shortlist And Interview Serializer
-'''
 
-
-class InvitationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Invitation
-        fields = '__all__'
-        extra_kwargs = {'job_application': {'write_only': True}}
-
-    def create(self, validated_data):
-        invitation = Invitation.objects.create(**validated_data)
-
-        # # Update status at JobApplication
-        job_application = JobApplication.objects.get(
-            id=validated_data['job_application'].id)
-
-        job_application.status = 'Invited'
-        job_application.updated_at = datetime.now()
-
-        job_application.save(update_fields=['status', 'updated_at'])
-
-        return invitation
