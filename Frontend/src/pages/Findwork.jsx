@@ -34,7 +34,7 @@ export const Findwork = () => {
       return res.data;
     },
     {
-      refetchOnWindowFocus: false,
+      refetchOnWindowFocus: true,
       retry: 2,
       select: (jobs) =>
         jobs.filter(

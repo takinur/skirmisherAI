@@ -214,7 +214,7 @@ Job application serializer for candidates
 
 
 class JobApplicationSerializer(serializers.ModelSerializer):
-    invitations = InvitationSerializer(many=True, read_only=True)
+    invitations = InvitationSerializer(many=False, read_only=True)
 
     class Meta:
         model = JobApplication
@@ -242,6 +242,7 @@ Job application serializer for Employers
 
 class RetriveJobApplicationSerializer(serializers.ModelSerializer):
     candidate = CandidateProfileSerializer(read_only=True)
+    invitations = InvitationSerializer(many=False, read_only=True)
 
     class Meta:
         model = JobApplication

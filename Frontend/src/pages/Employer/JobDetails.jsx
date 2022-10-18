@@ -19,7 +19,7 @@ export const JobDetails = () => {
 
   const { id } = useParams();
 
-  //Fetch Job Applications
+  //Fetch Job
   const { data: job, isLoading: isJobLoading } = useQuery(
     "job",
     async () => {
@@ -53,7 +53,25 @@ export const JobDetails = () => {
 
   const isLoading = isAppLoading || isJobLoading;
 
-  console.log("Feteched", job);
+  const conditionalRender = () => {
+    if (isLoading) {
+      return (
+        <>
+          <ApplicationsSkeleton />
+          <ApplicationsSkeleton />
+          <ApplicationsSkeleton />
+        </>
+      );
+    } else if (data.length === 0) {
+      return <p className="text-center text-gray-500">No applications yet</p>;
+    } else {
+      return data.map((item, index) => (
+        <Applications key={index} {...item} index={index} />
+      ));
+    }
+  };
+
+  console.log("Feteched applciations", data);
 
   return (
     <AuthLayout title="Job Details">
@@ -92,19 +110,7 @@ export const JobDetails = () => {
               <div className="font-bold text-gray-600"> Action </div>
             </div>
           </div>
-          {isLoading ? (
-            <>
-              <ApplicationsSkeleton />
-              <ApplicationsSkeleton />
-              <ApplicationsSkeleton />
-            </>
-          ) : data && data.length > 0 ? (
-            data.map((item, index) => (
-              <Applications key={index} {...item} index={index} />
-            ))
-          ) : (
-            <div className="text-center text-gray-600">No Applications</div>
-          )}
+          {conditionalRender()}
         </div>
       </div>
     </AuthLayout>
