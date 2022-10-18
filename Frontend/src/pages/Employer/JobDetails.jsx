@@ -11,6 +11,7 @@ import {
   ApplicationsSkeleton,
 } from "../../components/Card/Applications";
 import { FaChevronLeft } from "react-icons/fa";
+import { useEffect } from "react";
 
 export const JobDetails = () => {
   const navigate = useNavigate();
@@ -18,12 +19,27 @@ export const JobDetails = () => {
 
   const { id } = useParams();
 
-  if (!id) {
-    navigate("/employer/jobs");
-  }
+  //Fetch Job Applications
+  const { data: job, isLoading: isJobLoading } = useQuery(
+    "job",
+    async () => {
+      const res = await API.get(`/jobs/${id}/`);
+      return res.data;
+    },
+    {
+      refetchOnWindowFocus: false,
+      retry: 0,
+    }
+  );
+
+  useEffect(() => {
+    if (!job) {
+      navigate("/employer/jobs");
+    }
+  }, [job]);
 
   //Fetch Job Applications
-  const { isLoading, data, refetch } = useQuery(
+  const { isLoading: isAppLoading, data } = useQuery(
     "applications",
     async () => {
       const res = await API.get(`/v1/application-dashboard/?job_id=${id}`);
@@ -35,7 +51,9 @@ export const JobDetails = () => {
     }
   );
 
-  console.log("Feteched", data);
+  const isLoading = isAppLoading || isJobLoading;
+
+  console.log("Feteched", job);
 
   return (
     <AuthLayout title="Job Details">
@@ -49,7 +67,7 @@ export const JobDetails = () => {
       <div className="wrapper pb-20">
         <div className="mt-4 justify-between px-8 md:flex">
           <div className="text-2xl font-bold text-gray-600 md:ml-20">
-            {data && data[0].job_title}
+            {job && job?.title}
           </div>
           <div className=" text-sm font-semibold text-gray-800">
             Sort by: <span className="post-time">Most Suitable</span>
@@ -80,11 +98,12 @@ export const JobDetails = () => {
               <ApplicationsSkeleton />
               <ApplicationsSkeleton />
             </>
-          ) : (
-            data &&
+          ) : data && data.length > 0 ? (
             data.map((item, index) => (
               <Applications key={index} {...item} index={index} />
             ))
+          ) : (
+            <div className="text-center text-gray-600">No Applications</div>
           )}
         </div>
       </div>
