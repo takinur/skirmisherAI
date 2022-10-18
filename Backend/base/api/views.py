@@ -270,6 +270,7 @@ class JobApplicationView(viewsets.ModelViewSet):
     def perform_create(self, serializer):
 
         saved = serializer.save()
+        print('SENDING THIS ID', saved.id)
         # Update Suitability Score
         async_task("base.tasks.update_score", saved.id)
 
