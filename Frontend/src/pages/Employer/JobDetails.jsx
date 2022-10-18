@@ -10,7 +10,7 @@ import {
   Applications,
   ApplicationsSkeleton,
 } from "../../components/Card/Applications";
-import { FaChevronCircleLeft, FaChevronLeft } from "react-icons/fa";
+import { FaChevronLeft } from "react-icons/fa";
 
 export const JobDetails = () => {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ export const JobDetails = () => {
     }
   );
 
-  // console.log("Feteched", data);
+  console.log("Feteched", data);
 
   return (
     <AuthLayout title="Job Details">

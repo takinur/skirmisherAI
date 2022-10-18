@@ -181,10 +181,17 @@ class PublicVacancySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+'''
+Job application serializer for candidates
+
+'''
+
+
 class JobApplicationSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = JobApplication
-        fields = '__all__'
+        fields = ['id', 'status', 'created_at', 'invitation']
         extra_kwargs = {'candidate': {'write_only': True},
                         'vacancy': {'write_only': True}}
 
@@ -196,6 +203,12 @@ class JobApplicationSerializer(serializers.ModelSerializer):
         data['employer'] = instance.vacancy.employer.company_name
 
         return data
+
+
+'''
+Job application serializer for Employers
+
+'''
 
 
 class RetriveJobApplicationSerializer(serializers.ModelSerializer):
@@ -211,6 +224,11 @@ class RetriveJobApplicationSerializer(serializers.ModelSerializer):
         data['employer'] = instance.vacancy.employer.company_name
 
         return data
+
+
+'''
+Application Shortlist And Interview Serializer
+'''
 
 
 class InvitationSerializer(serializers.ModelSerializer):

@@ -54,14 +54,8 @@ export const Applications = (item) => {
   //React hook form
   const { register, handleSubmit } = useForm();
   let isDisabled = false;
-  //React query mutation
-  // const { mutate } = useMutation(async (data) => {
-  //   const res = await API.put("/v1/invitation/", data);
-  //   return res.data;
-  // });
 
   // TODO: Update Job Status
-
   const addMutation = useMutation(
     async (data) => await API.post("/v1/invitation/", data)
   );
