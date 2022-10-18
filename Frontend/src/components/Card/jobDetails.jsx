@@ -12,7 +12,7 @@ export const jobDetails = (props) => {
   const canApply = props.canApply;
   const job = props.job;
 
-  console.log("Job", job);
+  // console.log("Job", job);
   const [saved, setSaved] = useState(false);
   const [isApplied, setIsApplied] = useState(false);
 
@@ -35,9 +35,9 @@ export const jobDetails = (props) => {
     async (data) => await API.post("v1/application/", data)
   );
 
-  const handleApply = (jobId) => {
+  const handleApply = () => {
     const data = {};
-    data.vacancy = jobId;
+    data.vacancy = job.id;
     data.candidate = applicant;
     data.status = "Applied";
 
@@ -78,7 +78,7 @@ export const jobDetails = (props) => {
       return (
         <button
           disabled={isDisabled}
-          onClick={() => handleApply(id)}
+          onClick={handleApply}
           className="float-right -mt-6 ml-4 mr-2 rounded-md bg-blue-700 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-800"
         >
           Apply Now
