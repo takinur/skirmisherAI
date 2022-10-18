@@ -33,10 +33,10 @@ export const JobDetails = () => {
   );
 
   useEffect(() => {
-    if (!job) {
+    if (!id && id !== undefined) {
       navigate("/employer/jobs");
     }
-  }, [job]);
+  }, [id]);
 
   //Fetch Job Applications
   const { isLoading: isAppLoading, data } = useQuery(
