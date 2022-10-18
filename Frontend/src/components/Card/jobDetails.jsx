@@ -7,7 +7,6 @@ import { relativeTime } from "../../hooks/useRelativetime";
 import { toast } from "react-toastify";
 import { FaCheckCircle } from "react-icons/fa";
 
-
 export const jobDetails = (props) => {
   const applicant = props.applicant;
   const canApply = props.canApply;
@@ -23,7 +22,7 @@ export const jobDetails = (props) => {
   useEffect(() => {
     if (applicant) {
       API.get(`v1/application/?cand_id=${applicant}`).then((res) => {
-        const applied = res.data.filter((app) => app.applied_id === job.id);
+        const applied = res.data.filter((app) => app.applied_job_id === job.id);
         if (applied.length > 0) {
           setIsApplied(true);
         }
