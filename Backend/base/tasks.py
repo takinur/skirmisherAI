@@ -56,6 +56,8 @@ def update_score(job_application_id):
 
     score = calculate_score(profile, vacancy)
 
+    print('score here', score)
+    
     # Update score in job application
     application.total_score = score[0]
     application.skill_score = score[1]

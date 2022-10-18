@@ -6,6 +6,7 @@ import { useCandProfile } from "../../hooks/useProfile";
 import AuthLayout from "../Layout/Auth";
 import { relativeTime } from "../../hooks/useRelativetime";
 import { Link } from "react-router-dom";
+import classNames from "classnames";
 
 export const Jobs = () => {
   const API = useAxiosPrivate();
@@ -46,7 +47,10 @@ export const Jobs = () => {
               <p className="text-gray-500">
                 You have not applied to any job yet
               </p>
-              <Link to="/find-work" className="text-teal-600 text-2xl font-bold mt-6 ">
+              <Link
+                to="/find-work"
+                className="mt-6 text-2xl font-bold text-teal-600 "
+              >
                 {" "}
                 Find Jobs
               </Link>
@@ -73,7 +77,14 @@ export const Jobs = () => {
                 key={job.id}
                 className="relative flex items-start rounded-xl bg-white p-4 shadow-lg"
               >
-                <div className="absolute bottom-0 right-0 rounded-tl-xl rounded-br-xl bg-green-600 px-2 py-1 text-white">
+                <div
+                  className={classNames(
+                    "absolute bottom-0 right-0 rounded-tl-xl rounded-br-xl px-2 py-1 text-white",
+                    job.status.toLowerCase() === "applied"
+                      ? "bg-red-600"
+                      : "bg-green-600"
+                  )}
+                >
                   <span className="text-xs">{job.status}</span>
                 </div>
 
