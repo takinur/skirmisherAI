@@ -145,9 +145,7 @@ export const Findwork = () => {
                   }
                 </div>
                 <div className="overflow-y-auto rounded-md bg-gray-50 md:ml-4 md:w-3/5 ">
-                  {jobDetails !== undefined &&
-                  showDetails !== null &&
-                  showDetails !== undefined ? (
+                  {showDetails?.length > 0 ? (
                     <DetailSection
                       job={showDetails[0]}
                       canApply={canApply}
