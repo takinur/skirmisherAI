@@ -145,23 +145,11 @@ export const Findwork = () => {
                   }
                 </div>
                 <div className="overflow-y-auto rounded-md bg-gray-50 md:ml-4 md:w-3/5 ">
-                  {jobDetails &&
-                  jobDetails !== undefined &&
+                  {jobDetails !== undefined &&
                   showDetails !== null &&
                   showDetails !== undefined ? (
                     <DetailSection
-                      job = {showDetails[0]}
-                      // title={showDetails[0]?.title}
-                      // company={showDetails[0]?.employer}
-                      // location={showDetails[0]?.work_location}
-                      // type={showDetails[0]?.type}
-                      // experience={showDetails[0]?.level}
-                      // posted={showDetails[0]?.created_at}
-                      // description={showDetails[0]?.description}
-                      // qualifications={showDetails[0]?.qualifications}
-                      // salary={showDetails[0]?.salary}
-                      // benefits={showDetails[0]?.benefits}
-                      // id={showDetails[0]?.id}
+                      job={showDetails[0]}
                       canApply={canApply}
                       applicant={profile?.id}
                     />
