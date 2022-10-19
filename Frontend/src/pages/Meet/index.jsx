@@ -30,7 +30,7 @@ export const VideoMeet = () => {
           <VideoCall setInCall={setInCall} />
         ) : (
           <div className="grid h-screen items-center justify-center">
-            <div class="m-4 flex">
+            <div className="m-4 flex">
               <input
                 onChange={handleChange}
                 value={joinCode}
