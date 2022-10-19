@@ -17,6 +17,7 @@ import { useEffect } from "react";
 import { format } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
+import { Link } from "react-router-dom";
 
 export const Applications = (item) => {
   const API = useAxiosPrivate();
@@ -29,7 +30,7 @@ export const Applications = (item) => {
   };
   // console.log("Applications", item);
   //Check Status
-  const isInvited = item.status.toLowerCase() === "invited";
+  let isInvited = item.status.toLowerCase() === "invited";
 
   //Resume Download
   const hanldeViewResume = () => {
@@ -78,6 +79,7 @@ export const Applications = (item) => {
     if (addMutation.isSuccess) {
       toast.success("Invitation Sent");
       setModal(false);
+      isInvited = true;
     }
     if (addMutation.isError) {
       toast.error("Something went wrong");
@@ -195,7 +197,20 @@ export const Applications = (item) => {
                         >
                           View Original Resume
                         </button>
-                        {!isInvited && (
+                        {isInvited ? (
+                          <div className="bg-green-300 p-4">
+                            <span className="font-bold">Interview Info:</span>
+                            <span className="mx-2">
+                              {item?.invitation.schedule}
+                            </span>
+                            <Link
+                              className="font-extrabold text-teal-700"
+                              href={item?.invitation.meet_url}
+                            >
+                              Join
+                            </Link>
+                          </div>
+                        ) : (
                           <button
                             onClick={() => setModal(true)}
                             className="mb-1 rounded bg-green-500 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-green-600 sm:mr-2"
