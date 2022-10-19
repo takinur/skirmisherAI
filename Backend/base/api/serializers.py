@@ -218,12 +218,12 @@ Job application serializer for candidates
 
 
 class JobApplicationSerializer(serializers.ModelSerializer):
-    invitations = InvitationSerializer(many=True, read_only=True)
+    invitation = InvitationSerializer( read_only=True)
 
     class Meta:
         model = JobApplication
         fields = ['id', 'status', 'created_at',
-                  'invitations', 'candidate', 'vacancy']
+                  'invitation', 'candidate', 'vacancy']
 
         extra_kwargs = {'candidate': {'write_only': True},
                         'vacancy': {'write_only': True}}
@@ -246,7 +246,7 @@ Job application serializer for Employers
 
 class RetriveJobApplicationSerializer(serializers.ModelSerializer):
     candidate = CandidateProfileSerializer(read_only=True)
-    invitations = InvitationSerializer(many=True, read_only=True)
+    invitation = InvitationSerializer( read_only=True)
 
     class Meta:
         model = JobApplication

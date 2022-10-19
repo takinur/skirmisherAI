@@ -66,7 +66,7 @@ export const JobDetails = () => {
       return <p className="text-center text-gray-500">No applications yet</p>;
     } else {
       return data.map((item, index) => (
-        <Applications key={index} {...item} index={index} />
+        <Applications key={item.id} {...item} index={index} />
       ));
     }
   };
