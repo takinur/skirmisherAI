@@ -210,11 +210,9 @@ class Invitation(models.Model):
     meet_url = models.CharField(max_length=200, blank=True, null=True)
     schedule = models.DateField(blank=True, null=True)
     remarks = models.CharField(max_length=200, blank=True, null=True)
-    job_application = models.ForeignKey(
-        JobApplication, on_delete=models.CASCADE, related_name='invitations')
 
-    user = models.ForeignKey(
-        UserAccount, on_delete=models.CASCADE, related_name='invitations', null=True, blank=True)
+    job_application = models.OneToOneField(
+        JobApplication, on_delete=models.CASCADE, related_name='invitation')
 
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
