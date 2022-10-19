@@ -30,7 +30,7 @@ export const Applications = (item) => {
   };
   // console.log("Applications", item);
   //Check Status
-  let isInvited = item.status.toLowerCase() === "invited";
+  const isInvited = item.status.toLowerCase() === "invited";
 
   //Resume Download
   const hanldeViewResume = () => {
@@ -79,7 +79,7 @@ export const Applications = (item) => {
     if (addMutation.isSuccess) {
       toast.success("Invitation Sent");
       setModal(false);
-      isInvited = true;
+      window.location.reload();
     }
     if (addMutation.isError) {
       toast.error("Something went wrong");
@@ -205,7 +205,7 @@ export const Applications = (item) => {
                             </span>
                             <Link
                               className="font-extrabold text-teal-700"
-                              href={item?.invitation.meet_url}
+                              to={`/meet/${item?.invitation.meet_url}`}
                             >
                               Join
                             </Link>
