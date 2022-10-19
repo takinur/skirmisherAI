@@ -103,6 +103,22 @@ export const Jobs = () => {
                   <p className="mt-2 text-sm text-gray-500">
                     Applied {relativeTime(job.created_at)}
                   </p>
+                  {
+                    // Show Interview button if status is applied
+                    job.status.toLowerCase() === "invited" && (
+                      <div className="mt-2 text-sm text-gray-500">
+                        <div>
+                          <b>Interview at:</b> {job?.invitation.schedule}
+                        </div>
+                        <Link
+                          className="text-xl font-bold text-teal-500"
+                          to={`/meet/${job?.invitation.meet_url}`}
+                        >
+                          Join
+                        </Link>
+                      </div>
+                    )
+                  }
                 </div>
               </div>
             ))
