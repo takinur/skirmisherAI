@@ -77,6 +77,7 @@ export const Applications = (item) => {
   useEffect(() => {
     if (addMutation.isSuccess) {
       toast.success("Invitation Sent");
+      setModal(false);
     }
     if (addMutation.isError) {
       toast.error("Something went wrong");
