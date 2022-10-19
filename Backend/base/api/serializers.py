@@ -1,6 +1,8 @@
 
 
-import datetime
+from datetime import datetime
+from django.utils.timezone import now
+
 from ..models import Invitation, JobApplication, CandidateProfile, EmployerProfile, Education
 from ..models import Experience, FileUpload, Project, Skill, Social, Vacancy
 
@@ -200,6 +202,8 @@ class InvitationSerializer(serializers.ModelSerializer):
             id=validated_data['job_application'].id)
 
         job_application.status = 'Invited'
+
+        # Current date and time to updated field
         job_application.updated_at = datetime.now()
 
         job_application.save(update_fields=['status', 'updated_at'])
@@ -214,7 +218,7 @@ Job application serializer for candidates
 
 
 class JobApplicationSerializer(serializers.ModelSerializer):
-    invitations = InvitationSerializer(many=False, read_only=True)
+    invitations = InvitationSerializer(many=True, read_only=True)
 
     class Meta:
         model = JobApplication
@@ -242,7 +246,7 @@ Job application serializer for Employers
 
 class RetriveJobApplicationSerializer(serializers.ModelSerializer):
     candidate = CandidateProfileSerializer(read_only=True)
-    invitations = InvitationSerializer(many=False, read_only=True)
+    invitations = InvitationSerializer(many=True, read_only=True)
 
     class Meta:
         model = JobApplication
