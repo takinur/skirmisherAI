@@ -53,7 +53,6 @@ export const Applications = (item) => {
 
   //React hook form
   const { register, handleSubmit } = useForm();
-  let isDisabled = false;
 
   // TODO: Update Job Status
   const addMutation = useMutation(
@@ -64,6 +63,12 @@ export const Applications = (item) => {
     data.job_application = item.id;
     //Generate Invitation Code
     data.meet_url = Math.random().toString(36).substring(2, 15);
+
+    if (!dateTime) {
+      toast.error("Please select a date");
+      return;
+    }
+
     data.schedule = format(dateTime, "yyyy-MM-dd");
 
     addMutation.mutate(data);
@@ -78,6 +83,8 @@ export const Applications = (item) => {
       console.log("Error", addMutation.error);
     }
   }, [addMutation.isSuccess, addMutation.isLoading, addMutation.isError]);
+
+  const isDisabled = addMutation.isLoading || addMutation.isSuccess;
 
   return (
     <>
