@@ -58,7 +58,7 @@ export const SinglePost = () => {
 
                 <span className="ml-1 font-sans"> Share on other platforms</span>
               </div>
-              <div className="mt- flex justify-center border-b-2 p-4 ">
+              <div className="mt- flex justify-center p-4 ">
                 <span className="cursor-pointer font-sans hover:text-teal-500">Load Comments</span>
               </div>
             </div>
