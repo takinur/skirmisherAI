@@ -33,10 +33,34 @@ export const SinglePost = () => {
               </div>
             </div>
             <div className="col-span-3">
-              THE post of the century oh no lets check Lorem ipsum dolor sit amet consectetur
-              adipisicing elit. Consequatur sequi accusantium debitis quaerat aspernatur dolores,
-              consequuntur, nostrum, molestiae omnis doloribus ea. Molestiae doloribus consectetur
-              eveniet minima dicta optio nulla temporibus!
+              <article className="prose prose-lg text-gray-600 dark:text-gray-300">
+                THE post of the century oh no lets check Lorem ipsum dolor sit amet consectetur
+                adipisicing elit. Consequatur sequi accusantium debitis quaerat aspernatur dolores,
+                consequuntur, nostrum, molestiae omnis doloribus ea. Molestiae doloribus consectetur
+                eveniet minima dicta optio nulla temporibus!
+              </article>
+              <div className="mt-8 flex border-y-2 p-4 ">
+                <span className="font-sans">Discuss on Twitter</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="mt-1 ml-1 h-5 w-5 text-teal-500"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z"
+                  />
+                </svg>
+
+                <span className="ml-1 font-sans"> Share on other platforms</span>
+              </div>
+              <div className="mt- flex justify-center border-b-2 p-4 ">
+                <span className="cursor-pointer font-sans hover:text-teal-500">Load Comments</span>
+              </div>
             </div>
           </div>
         </div>
