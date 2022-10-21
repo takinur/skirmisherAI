@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom'
 export const BlogCard = ({ title, description, tags, slug }) => {
   return (
     <article>
-      <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0 border-t-2">
+      <div className="space-y-2 border-t-2 pt-12 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
         <dl>
           <dt className="sr-only">Published on</dt>
           <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-            <span className="">date</span>
+            <span className="text">date</span>
           </dd>
         </dl>
         <div className="space-y-5 xl:col-span-3">
@@ -21,7 +21,7 @@ export const BlogCard = ({ title, description, tags, slug }) => {
               </h2>
               <div className="flex flex-wrap">
                 {tags.map((tag) => (
-                  <span className="mr-2 text-xs text-teal-500">{tag}</span>
+                  <span className="mr-2 font-semibold uppercase text-teal-500">{tag}</span>
                 ))}
               </div>
             </div>
@@ -31,11 +31,25 @@ export const BlogCard = ({ title, description, tags, slug }) => {
           </div>
           <div className="text-base font-medium leading-6">
             <Link
-              href={`/blog/${slug}`}
-              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+              to={`/community/${slug}`}
+              className="flex text-teal-500  hover:text-teal-600"
               aria-label={`Read "${title}"`}
             >
-              Read more &rarr;
+              Read more
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="ml-2 mt-0.5 h-6 w-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                />
+              </svg>
             </Link>
           </div>
         </div>
