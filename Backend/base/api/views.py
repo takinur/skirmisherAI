@@ -11,14 +11,14 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework import viewsets
 from rest_framework import mixins
 
-
-from .serializers import CandidateProfileSerializer, FileSerializer, InvitationSerializer, JobApplicationSerializer, PublicVacancySerializer
-from .serializers import RetriveJobApplicationSerializer, UserCreateSerializer, MyTokenObtainPairSerializer, VacancySerializer
-
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from ..models import CandidateProfile, EmployerProfile, Invitation, JobApplication, Vacancy
-from .serializers import EmployerProfileSerializer
+# Serializers from parent folder
+from .serializers import BlogSerializer, CandidateProfileSerializer, FileSerializer, InvitationSerializer, JobApplicationSerializer, PublicVacancySerializer
+from .serializers import RetriveJobApplicationSerializer, UserCreateSerializer, MyTokenObtainPairSerializer, VacancySerializer, EmployerProfileSerializer
+
+# Models from parent folder
+from ..models import Blog, CandidateProfile, EmployerProfile, Invitation, JobApplication, Vacancy
 
 # Machine Leaning Model from
 from ..ml_facade import resumeExtractor
@@ -315,3 +315,16 @@ class InvitationView(viewsets.ModelViewSet):
     #         return Invitation.objects.filter(job_application=app_id)
 
     #     return Invitation.objects.order_by('-created_at')
+
+
+class BlogView(viewsets.ModelViewSet):
+    queryset = Blog.objects.order_by('-created_at')
+    serializer_class = BlogSerializer
+
+    def get_queryset(self):
+        slug = self.request.query_params.get('slug', None)
+
+        if slug is not None:
+            return Blog.objects.filter(id=slug)
+
+        return Blog.objects.order_by('-created_at')

@@ -22,8 +22,11 @@ router.register('v1/application', views.JobApplicationView,
 router.register('v1/application-dashboard',
                 views.RetriveJobApplicationView, basename='applications-dashboard')
 
-# Interview Route
+# Interview Routes
 router.register('v1/invitation', views.InvitationView)
+
+# Blog Routes
+router.register('v1/blog', views.BlogView, basename='blog')
 
 urlpatterns = [
     path('', views.getRoutes, name='getRoutes'),
