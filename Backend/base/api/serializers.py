@@ -3,7 +3,7 @@
 from datetime import datetime
 from django.utils.timezone import now
 
-from ..models import Invitation, JobApplication, CandidateProfile, EmployerProfile, Education
+from ..models import Blog, Invitation, JobApplication, CandidateProfile, EmployerProfile, Education
 from ..models import Experience, FileUpload, Project, Skill, Social, Vacancy
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -218,7 +218,7 @@ Job application serializer for candidates
 
 
 class JobApplicationSerializer(serializers.ModelSerializer):
-    invitation = InvitationSerializer( read_only=True)
+    invitation = InvitationSerializer(read_only=True)
 
     class Meta:
         model = JobApplication
@@ -246,7 +246,7 @@ Job application serializer for Employers
 
 class RetriveJobApplicationSerializer(serializers.ModelSerializer):
     candidate = CandidateProfileSerializer(read_only=True)
-    invitation = InvitationSerializer( read_only=True)
+    invitation = InvitationSerializer(read_only=True)
 
     class Meta:
         model = JobApplication
@@ -257,4 +257,15 @@ class RetriveJobApplicationSerializer(serializers.ModelSerializer):
         data['job_title'] = instance.vacancy.title
         data['employer'] = instance.vacancy.employer.company_name
 
+        return data
+
+
+class BlogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Blog
+        fields = '__all__'
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['author_name'] = instance.author.name
         return data
