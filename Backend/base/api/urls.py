@@ -27,6 +27,9 @@ router.register('v1/invitation', views.InvitationView)
 
 # Blog Routes
 router.register('v1/blog', views.BlogView, basename='blog')
+router.register('v1/blog/:slug', views.BlogView, basename='blog')
+
+# router.register(r'v1/blog', views.BlogView, basename='blog')
 
 urlpatterns = [
     path('', views.getRoutes, name='getRoutes'),
@@ -48,6 +51,8 @@ urlpatterns = [
     path('account/candidate/', views.CandidateProfileView.as_view()),
     path('account/candidate/<int:user_id>',
          views.CandidateProfileView.as_view()),
+
+
 
 ]
 
