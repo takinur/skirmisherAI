@@ -1,13 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Footer from '../../components/Footer'
 import NavBar from '../../components/NavBar'
 
-const GuestLayout = ({ children, title }) => {
-  useEffect(() => {
-    let setTtile = title ? title : ''
-    document.title = `${setTtile} - SkirmisherAI`
-  }, [title])
-
+const GuestLayout = ({ children }) => {
   return (
     <>
       <NavBar />
