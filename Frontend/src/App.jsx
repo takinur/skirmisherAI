@@ -1,30 +1,31 @@
-import react from "react";
-import "./index.css";
-import { Routes, Route } from "react-router-dom";
-import ProtectedRoute from "./hooks/ProtectedRoute";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import react from 'react'
+import './index.css'
+import { Routes, Route } from 'react-router-dom'
+import ProtectedRoute from './hooks/ProtectedRoute'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
-import { HomePage } from "./pages/HomePage";
-import Login from "./pages/Auth/Login";
-import { AboutPage } from "./pages/About";
-import Register from "./pages/Auth/Register";
-import Dashboard from "./pages/Dashboard";
-import { ContactPage } from "./pages/Contact";
-import Logout from "./pages/Auth/Logout";
-import { NotFound } from "./pages/Error";
-import { Findwork } from "./pages/Findwork";
+import { HomePage } from './pages/HomePage'
+import Login from './pages/Auth/Login'
+import { AboutPage } from './pages/About'
+import Register from './pages/Auth/Register'
+import Dashboard from './pages/Dashboard'
+import { ContactPage } from './pages/Contact'
+import Logout from './pages/Auth/Logout'
+import { NotFound } from './pages/Error'
+import { Findwork } from './pages/Findwork'
 
-import { jobs as Empjobs } from "./pages/Employer/jobs";
-import { JobDetails } from "./pages/Employer/JobDetails";
-import { CreateUpdateJob } from "./pages/Employer/AddUpdateJob";
+import { jobs as Empjobs } from './pages/Employer/jobs'
+import { JobDetails } from './pages/Employer/JobDetails'
+import { CreateUpdateJob } from './pages/Employer/AddUpdateJob'
 
-import UserProfile from "./pages/Auth/UserProfile";
+import UserProfile from './pages/Auth/UserProfile'
 
-import { Jobs as CandJobs } from "./pages/Candidate/Jobs";
+import { Jobs as CandJobs } from './pages/Candidate/Jobs'
 
-import { VideoMeet } from "./pages/Meet";
+import { VideoMeet } from './pages/Meet'
 import Blog from './pages/Blog'
+import { SinglePost } from './pages/Blog/single'
 
 function App() {
   return (
@@ -58,13 +59,16 @@ function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/meet" element={<VideoMeet />} />
         <Route path="/meet/:slug" element={<VideoMeet />} />
-        <Route path="/community" element={<Blog />} />
+        <Route path="/community">
+          <Route index element={<Blog />} />
+          <Route path=":slug" element={<SinglePost />} />
+        </Route>
 
         <Route path="*" element={<NotFound />} />
       </Routes>
       <ToastContainer />
     </>
-  );
+  )
 }
 
-export default App;
+export default App
