@@ -6,15 +6,6 @@ import { BlogCard } from '../../components/Card/Blog'
 import { useQuery } from 'react-query'
 import { axiosInstance as API } from '../../api/axiosInstance'
 
-const posts = [
-  {
-    title: 'How to get started with React',
-    description:
-      'React is a JavaScript library for building user interfaces. It is maintained by Facebook and a community of individual developers and companies. React can be used as a base in the development of single-page or mobile applications.',
-    slug: 'how-to-get-started-with-react',
-    tags: ['react', 'javascript'],
-  },
-]
 
 const index = () => {
   useTitle('Community | Blog | Discussions')
