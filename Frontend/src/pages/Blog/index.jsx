@@ -6,7 +6,6 @@ import { BlogCard } from '../../components/Card/Blog'
 import { useQuery } from 'react-query'
 import { axiosInstance as API } from '../../api/axiosInstance'
 
-
 const index = () => {
   useTitle('Community | Blog | Discussions')
 
@@ -38,16 +37,18 @@ const index = () => {
           <h1 className="text-2xl font-bold text-gray-600">No Posts Found</h1>
         </div>
       )
-    return posts.map((post) => (
-      <BlogCard
-        key={post.id}
-        title={post.title}
-        description={post.description}
-        slug={post.slug}
-        tags={post.tags}
-        created_at={post.created_at}
-      />
-    ))
+    if (posts && posts.length > 0) {
+      return posts.map((post) => (
+        <BlogCard
+          key={post.id}
+          title={post.title}
+          description={post.description}
+          slug={post.slug}
+          tags={post.tags}
+          created_at={post.created_at}
+        />
+      ))
+    }
   }
 
   return (

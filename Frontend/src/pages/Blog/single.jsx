@@ -22,9 +22,9 @@ export const SinglePost = () => {
     }
   )
 
-  useTitle(`${post.title} || Blog | Community`)
+  useTitle(`${post?.title} || Blog | Community`)
 
-  const tagsArry = post.tags.split(',')
+  // console.log('From Single Post Data:', post)
 
   return (
     <GuestLayout>
@@ -49,8 +49,8 @@ export const SinglePost = () => {
                 <div className="mt-6 border-t-2 pt-6">
                   <span className="font-sans">Tags</span>
                   <div className="mt-4">
-                    {tagsArry.map((tag) => (
-                      <span className="mr-2 rounded-full bg-gray-200 py-1 px-3 text-sm font-semibold text-gray-700">
+                    {post.tags.split(',').map((tag, index) => (
+                      <span key={index} className="mr-2 rounded-full bg-gray-200 py-1 px-3 text-sm font-semibold text-gray-700">
                         {tag}
                       </span>
                     ))}
@@ -59,7 +59,7 @@ export const SinglePost = () => {
               </div>
               <div className="col-span-3">
                 <article className="prose prose-lg text-gray-600 dark:text-gray-300">
-                    {post.description}
+                  {post.description}
                 </article>
                 <div className="mt-8 flex border-y-2 p-4 ">
                   <span className="font-sans">Discuss on Twitter</span>
