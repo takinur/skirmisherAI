@@ -1,26 +1,35 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export const BlogCard = ({ title, description, tags, slug }) => {
+export const BlogCard = ({ title, description, tags, slug, created_at }) => {
+  //Create a new array of tags
+  const tagsArray = tags.split(',')
+
   return (
     <article>
-      <div className="space-y-2 border-t-2 pt-12 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
+      <div className="space-y-2 pt-12 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
         <dl>
           <dt className="sr-only">Published on</dt>
           <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-            <span className="text">date</span>
+            <span className="text">
+              {new Date(created_at).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </span>
           </dd>
         </dl>
         <div className="space-y-5 xl:col-span-3">
           <div className="space-y-6">
             <div>
               <h2 className="text-2xl font-bold leading-8 tracking-tight">
-                <Link href={`/blog/${slug}`} className="text-gray-900 dark:text-gray-100">
+                <Link to={`/community/${slug}`} className="text-gray-900 dark:text-gray-100">
                   {title}
                 </Link>
               </h2>
               <div className="flex flex-wrap">
-                {tags.map((tag, index) => (
+                {tagsArray.map((tag, index) => (
                   <span key={index} className="mr-2 font-semibold uppercase text-teal-500">
                     {tag}
                   </span>
@@ -28,10 +37,10 @@ export const BlogCard = ({ title, description, tags, slug }) => {
               </div>
             </div>
             <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-              {description.substring(0, 100) + '...'}
+              {description.substring(0, 200) + '...'}
             </div>
           </div>
-          <div className="text-base font-medium leading-6">
+          <div className=" text-base font-medium leading-6">
             <Link
               to={`/community/${slug}`}
               className="flex text-teal-500  hover:text-teal-600"
