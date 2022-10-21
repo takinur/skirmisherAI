@@ -1,60 +1,61 @@
-import { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import { register as authRegister, reset } from "../../features/auth/authSlice";
-import { useForm } from "react-hook-form";
-import Input from "../../components/Input";
-import Label from "../../components/Label";
-import classNames from "classnames";
-import Checkbox from "../../components/Checkbox";
-import AuthRoleSelection from "../../components/AuthRoleSelection";
-import ButtonSecondary from "../../components/ButtonSecondary";
-import Header from "../../components/Header";
+import { useEffect, useState } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
+import { register as authRegister, reset } from '../../features/auth/authSlice'
+import { useForm } from 'react-hook-form'
+import Input from '../../components/Input'
+import Label from '../../components/Label'
+import classNames from 'classnames'
+import Checkbox from '../../components/Checkbox'
+import AuthRoleSelection from '../../components/AuthRoleSelection'
+import ButtonSecondary from '../../components/ButtonSecondary'
+import Header from '../../components/Header'
+import { useTitle } from '../../hooks/useTitle'
 
 const roles = [
   {
-    name: "Employer",
+    name: 'Employer',
     id: 1,
-    title: "Find Talents",
+    title: 'Find Talents',
   },
   {
-    name: "Candidate",
+    name: 'Candidate',
     id: 2,
-    title: "Find Work",
+    title: 'Find Work',
   },
-];
+]
 
 export default function Register() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
-  const { register, handleSubmit } = useForm();
-  const [selectedRole, setSelectedRole] = useState(null);
-  const [step, setStep] = useState(1);
+  useTitle('Sign Up ')
+
+  const { register, handleSubmit } = useForm()
+  const [selectedRole, setSelectedRole] = useState(null)
+  const [step, setStep] = useState(1)
 
   //State
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
-  );
+  const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
 
   const submitForm = (data) => {
     //Override data to add roles
-    data.role = selectedRole.id;
-    dispatch(authRegister(data));
-  };
+    data.role = selectedRole.id
+    dispatch(authRegister(data))
+  }
 
   //Redirect Registered user to Dashboard
   useEffect(() => {
     if (isError) {
-      toast.error(message);
+      toast.error(message)
     }
 
     if (isSuccess || user) {
-      navigate("/dashboard");
+      navigate('/dashboard')
     }
-    dispatch(reset());
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+    dispatch(reset())
+  }, [user, isError, isSuccess, message, navigate, dispatch])
 
   //Conditionally Render form
   const conditionalComponent = () => {
@@ -68,7 +69,7 @@ export default function Register() {
             step={step}
             setStep={setStep}
           />
-        );
+        )
 
       case 2:
         return (
@@ -80,7 +81,7 @@ export default function Register() {
             isLoading={isLoading}
             selectedRole={selectedRole}
           />
-        );
+        )
 
       default:
         return (
@@ -91,9 +92,9 @@ export default function Register() {
             step={step}
             setStep={setStep}
           />
-        );
+        )
     }
-  };
+  }
   //Main return statement
   return (
     <>
@@ -110,7 +111,7 @@ export default function Register() {
           {conditionalComponent()}
           <div className="mt-4 flex justify-center">
             <p>
-              {" "}
+              {' '}
               Already have an account?
               <Link
                 to="/login"
@@ -124,22 +125,15 @@ export default function Register() {
         </div>
       </section>
     </>
-  );
+  )
 }
 
-function RegisterForm({
-  handleSubmit,
-  submitForm,
-  register,
-  classNames,
-  isLoading,
-  selectedRole,
-}) {
+function RegisterForm({ handleSubmit, submitForm, register, classNames, isLoading, selectedRole }) {
   return (
     <>
       <div className="pt-6 text-center">
         <h2 className="font-serif text-3xl">
-          Sign Up to {selectedRole.id === 1 ? "Hire Talent" : "Find work"}
+          Sign Up to {selectedRole.id === 1 ? 'Hire Talent' : 'Find work'}
         </h2>
       </div>
       <form onSubmit={handleSubmit(submitForm)}>
@@ -149,19 +143,19 @@ function RegisterForm({
             id="name"
             type="text"
             className="mt-1 block w-full"
-            {...register("name")}
+            {...register('name')}
             required
           />
         </div>
         <div className="mt-4">
           <Label htmlFor="email">
-            {selectedRole.id === 1 ? "Work Email Address" : "Email Address"}
+            {selectedRole.id === 1 ? 'Work Email Address' : 'Email Address'}
           </Label>
           <Input
             id="email"
             type="email"
             className="mt-1 block w-full"
-            {...register("email")}
+            {...register('email')}
             required
           />
         </div>
@@ -172,7 +166,7 @@ function RegisterForm({
             id="password"
             type="password"
             className="mt-1 block w-full"
-            {...register("password")}
+            {...register('password')}
             required
             autoComplete="current-password"
           />
@@ -213,8 +207,8 @@ function RegisterForm({
         <div className="mt-6">
           <div className="flex items-center justify-center ">
             <ButtonSecondary
-              className={classNames("ml-4 ", {
-                "opacity-25": isLoading,
+              className={classNames('ml-4 ', {
+                'opacity-25': isLoading,
               })}
               disabled={isLoading}
             >
@@ -224,5 +218,5 @@ function RegisterForm({
         </div>
       </form>
     </>
-  );
+  )
 }
