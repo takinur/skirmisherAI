@@ -216,3 +216,34 @@ class Invitation(models.Model):
 
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
+    
+    
+class Blog(models.Model):
+    title = models.CharField(max_length=80)
+    description = models.TextField(null=True)
+    tags = models.TextField(null=True, blank=True)
+    author = models.ForeignKey(UserAccount, on_delete=models.CASCADE, related_name='blogs')
+    slug = models.SlugField(max_length=80, unique=True)
+    created_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
+
+    def __str__(self):
+        return self.title
+    
+class Contact(models.Model):
+    name = models.CharField(max_length=80)
+    email = models.EmailField(max_length=80)
+    message = models.TextField(null=True)
+    created_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+    
+class Newsletter(models.Model):
+    email = models.EmailField(max_length=80)
+    created_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
+
+    def __str__(self):
+        return self.email
