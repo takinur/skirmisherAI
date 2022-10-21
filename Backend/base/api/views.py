@@ -308,14 +308,6 @@ class InvitationView(viewsets.ModelViewSet):
     queryset = Invitation.objects.order_by('-created_at')
     serializer_class = InvitationSerializer
 
-    # def get_queryset(self):
-    #     app_id = self.request.query_params.get('job_application', None)
-
-    #     if app_id is not None:
-    #         return Invitation.objects.filter(job_application=app_id)
-
-    #     return Invitation.objects.order_by('-created_at')
-
 
 class BlogView(viewsets.ModelViewSet):
     queryset = Blog.objects.order_by('-created_at')
