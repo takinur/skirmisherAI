@@ -20,13 +20,15 @@ export const BlogCard = ({ title, description, tags, slug }) => {
                 </Link>
               </h2>
               <div className="flex flex-wrap">
-                {tags.map((tag) => (
-                  <span className="mr-2 font-semibold uppercase text-teal-500">{tag}</span>
+                {tags.map((tag, index) => (
+                  <span key={index} className="mr-2 font-semibold uppercase text-teal-500">
+                    {tag}
+                  </span>
                 ))}
               </div>
             </div>
             <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-              {description.substring(0, 100)}
+              {description.substring(0, 100) + '...'}
             </div>
           </div>
           <div className="text-base font-medium leading-6">
