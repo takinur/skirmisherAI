@@ -1,87 +1,88 @@
-import React, { useState, useEffect } from "react";
-import classNames from "classnames";
-import { NavLink, Link } from "react-router-dom";
-import { Transition } from "@headlessui/react";
+import React, { useState, useEffect } from 'react'
+import classNames from 'classnames'
+import { NavLink, Link } from 'react-router-dom'
+import { Transition } from '@headlessui/react'
 
-import { getUserDetails } from "../features/auth/authSlice";
-import { useSelector, useDispatch } from "react-redux";
-
+import { getUserDetails } from '../features/auth/authSlice'
+import { useSelector, useDispatch } from 'react-redux'
 
 export default function Navbar() {
-  const [navbar, setNavbar] = useState(false);
-  const [atTop, setAtTop] = useState(false);
+  const [navbar, setNavbar] = useState(false)
+  const [atTop, setAtTop] = useState(false)
 
   //Auth state
-  const { user, authToken } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
+  const { user, authToken } = useSelector((state) => state.auth)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (authToken && !user) {
-      dispatch(getUserDetails());
+      dispatch(getUserDetails())
     }
-  }, [authToken, dispatch]);
+  }, [authToken, dispatch])
 
   //Scroll
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll)
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   const handleScroll = () => {
     if (window !== undefined) {
-      let windowHeight = window.scrollY;
-      windowHeight >= 50 ? setAtTop(true) : setAtTop(false);
+      let windowHeight = window.scrollY
+      windowHeight >= 50 ? setAtTop(true) : setAtTop(false)
     }
-  };
-
+  }
 
   const navItems = [
     {
-      name: "Home",
-      path: "/",
+      name: 'Home',
+      path: '/',
     },
     {
-      name: "Feature",
-      path: "/feature",
+      name: 'Feature',
+      path: '/feature',
     },
     {
-      name: "About",
-      path: "/about",
+      name: 'Community',
+      path: '/community',
     },
     {
-      name: "Contact",
-      path: "/contact",
+      name: 'About',
+      path: '/about',
     },
-  ];
+    {
+      name: 'Contact',
+      path: '/contact',
+    },
+  ]
 
   return (
     <header className="header-area">
       <nav
         className={classNames(
-          "navbar h-16 py-4 dark:bg-slate-800 md:top-0 md:left-0 w-full z-[999] md:fixed opacity-100 md:transition-all duration-300 ease-in-out",
-          atTop ? "md:py-4 md:bg-slate-50  md:shadow-2xl" : "md:py-10"
+          'navbar z-[999] h-16 w-full py-4 opacity-100 duration-300 ease-in-out dark:bg-slate-800 md:fixed md:top-0 md:left-0 md:transition-all',
+          atTop ? 'md:bg-slate-50 md:py-4  md:shadow-2xl' : 'md:py-10'
         )}
       >
-        <div className="container px-4 sm:px-8 lg:px-16 xl:px-20 mx-auto max-w-screen-2xl">
+        <div className="container mx-auto max-w-screen-2xl px-4 sm:px-8 lg:px-16 xl:px-20">
           <div className="header-wrapper flex items-center justify-between">
             <div className="header-logo w-12">
               <Link to="/">
                 <img src="" alt="Logo" className="bg-cover" />
               </Link>
             </div>
+            {/* Mobile Nav */}
             <div className="toggle md:hidden">
-              <div className="wrapper flex">               
-                {mobileNav()}
-              </div>
+              <div className="wrapper flex">{mobileNav()}</div>
               <Transition
                 show={navbar}
                 enter="transform transition ease duration-[500ms]"
                 enterFrom="opacity-0 transform -translate-x-full"
                 leaveTo="opacity-0 transform -translate-x-full duration-[600ms]"
-                className="navbar-wrapper fixed md:hidden top-0 left-0 h-full bg-white dark:bg-slate-900 z-30 w-64 shadow-lg p-5"
+                className="navbar-wrapper fixed top-0 left-0 z-30 h-full w-64 bg-white p-5 shadow-lg dark:bg-slate-900 md:hidden"
               >
                 <div className="close">
                   <button
@@ -89,7 +90,7 @@ export default function Navbar() {
                     onClick={() => setNavbar(!navbar)}
                   >
                     <svg
-                      className="w-6 h-6 dark:text-white"
+                      className="h-6 w-6 dark:text-white"
                       fill="none"
                       strokeLinecap="round"
                       strokellinejoin="round"
@@ -105,10 +106,11 @@ export default function Navbar() {
                   {navItems.map((item, index) => (
                     <li key={index}>
                       <NavLink
+                        end
                         to={item.path}
-                        className="my-4 inline-block font-bold mt-8 dark:text-white"
+                        className="my-4 mt-8 inline-block font-bold dark:text-white"
                         style={({ isActive }) => ({
-                          color: isActive ? "green" : "",
+                          color: isActive ? 'green' : '',
                         })}
                       >
                         {item.name}
@@ -118,27 +120,27 @@ export default function Navbar() {
                   <li>
                     <NavLink
                       to="/login"
-                      className="my-4 inline-block font-bold mt-8 dark:text-white"
+                      className="my-4 mt-8 inline-block font-bold dark:text-white"
                       style={({ isActive }) => ({
-                        color: isActive ? "green" : "",
+                        color: isActive ? 'green' : '',
                       })}
                     >
                       Login
                     </NavLink>
                   </li>
                   <li>
-                    <div className="flex items-center justify-center w-full mt-6">
+                    <div className="mt-6 flex w-full items-center justify-center">
                       {user ? (
                         <Link
                           to="/dashboard"
-                          className="mt-2 py-1 px-6 text-[#7510F7] dark:text-slate-100 dark:border-slate-200 rounded-full border-2 border-[#7510F7] shadow-lg block hover:text-white md:inline-block hover:bg-[#7510F7]"
+                          className="mt-2 block rounded-full border-2 border-[#7510F7] py-1 px-6 text-[#7510F7] shadow-lg hover:bg-[#7510F7] hover:text-white dark:border-slate-200 dark:text-slate-100 md:inline-block"
                         >
-                          MY DASHBOARD{" "}
+                          MY DASHBOARD{' '}
                         </Link>
                       ) : (
                         <Link
-                          to="signup"
-                          className="mt-2 py-1 px-6 text-[#7510F7] dark:text-slate-100 dark:border-slate-200 rounded-full border-2 border-[#7510F7] shadow-lg block hover:text-white md:inline-block hover:bg-[#7510F7]"
+                          to="/signup"
+                          className="mt-2 block rounded-full border-2 border-[#7510F7] py-1 px-6 text-[#7510F7] shadow-lg hover:bg-[#7510F7] hover:text-white dark:border-slate-200 dark:text-slate-100 md:inline-block"
                         >
                           Sign Up
                         </Link>
@@ -155,17 +157,14 @@ export default function Navbar() {
                   <li
                     key={index}
                     className={classNames(
-                      "items-center justify-center m-auto hover:text-emerald-600",
-                      atTop
-                        ? "text-slate-800 dark:text-slate-50"
-                        : "text-slate-50"
+                      'm-auto items-center justify-center hover:text-emerald-600',
+                      atTop ? 'text-slate-800 dark:text-slate-50' : 'text-slate-50'
                     )}
                   >
                     <NavLink
+                      end
                       to={item.path}
-                      className={({ isActive }) =>
-                        isActive ? "text-green-500 font-bold" : "b"
-                      }
+                      className={({ isActive }) => (isActive ? 'font-bold text-green-500' : 'b')}
                     >
                       {item.name}
                     </NavLink>
@@ -176,10 +175,8 @@ export default function Navbar() {
                     <Link
                       to="/dashboard"
                       className={classNames(
-                        "-mt-1 py-2 px-6 text-sm font-semibold rounded-full border-2 border-[#7510F7] shadow-md block hover:text-white md:inline-block hover:bg-[#7510F7]",
-                        atTop
-                          ? "text-[#7510F7] dark:text-slate-50"
-                          : "text-slate-50"
+                        '-mt-1 block rounded-full border-2 border-[#7510F7] py-2 px-6 text-sm font-semibold shadow-md hover:bg-[#7510F7] hover:text-white md:inline-block',
+                        atTop ? 'text-[#7510F7] dark:text-slate-50' : 'text-slate-50'
                       )}
                     >
                       My DASHBOARD
@@ -189,29 +186,23 @@ export default function Navbar() {
                   <>
                     <li
                       className={classNames(
-                        "items-center justify-center m-auto hover:text-emerald-600",
-                        atTop
-                          ? "text-slate-800 dark:text-slate-50"
-                          : "text-slate-50"
+                        'm-auto items-center justify-center hover:text-emerald-600',
+                        atTop ? 'text-slate-800 dark:text-slate-50' : 'text-slate-50'
                       )}
                     >
                       <NavLink
                         to="/login"
-                        className={({ isActive }) =>
-                          isActive ? "text-green-500 font-bold" : "b"
-                        }
+                        className={({ isActive }) => (isActive ? 'font-bold text-green-500' : 'b')}
                       >
                         Login
                       </NavLink>
                     </li>
                     <li>
                       <Link
-                        to="/signup"
+                        to={'/signup'}
                         className={classNames(
-                          "-mt-1 py-2 px-6 text-sm font-semibold rounded-full border-2 border-[#7510F7] shadow-md block hover:text-white md:inline-block hover:bg-[#7510F7]",
-                          atTop
-                            ? "text-[#7510F7] dark:text-slate-50"
-                            : "text-slate-50"
+                          '-mt-1 block rounded-full border-2 border-[#7510F7] py-2 px-6 text-sm font-semibold shadow-md hover:bg-[#7510F7] hover:text-white md:inline-block',
+                          atTop ? 'text-[#7510F7] dark:text-slate-50' : 'text-slate-50'
                         )}
                       >
                         Sign Up
@@ -225,7 +216,7 @@ export default function Navbar() {
         </div>
       </nav>
     </header>
-  );
+  )
 
   function mobileNav() {
     return (
@@ -249,7 +240,7 @@ export default function Navbar() {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6"
+            className="h-6 w-6"
           >
             <path
               strokeLinecap="round"
@@ -259,7 +250,6 @@ export default function Navbar() {
           </svg>
         )}
       </button>
-    );
+    )
   }
 }
-
