@@ -1,12 +1,14 @@
 import React from 'react'
+import { useTitle } from '../../hooks/useTitle'
 import GuestLayout from '../Layout/Guest'
 
-
 const index = () => {
+  useTitle('Community | Blog | Discussions')
+
   return (
-    <GuestLayout title="Community Blog">
-    <div>index</div>
-    {/* Page Title 
+    <GuestLayout>
+      <div>index</div>
+      {/* Page Title 
 
     */}
     </GuestLayout>
