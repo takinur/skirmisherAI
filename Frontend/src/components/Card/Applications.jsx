@@ -1,93 +1,88 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { relativeTime } from "../../hooks/useRelativeTime";
+import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { relativeTime } from '../../hooks/useRelativeTime'
 
-import { Disclosure, Transition } from "@headlessui/react";
-import { FaChevronUp } from "react-icons/fa";
-import HeadlessModal from "../Modal";
+import { Disclosure, Transition } from '@headlessui/react'
+import { FaChevronUp } from 'react-icons/fa'
+import HeadlessModal from '../Modal'
 
-import Label from "../Label";
-import Input from "../Input";
-import classNames from "classnames";
-import { useMutation } from "react-query";
-import { toast } from "react-toastify";
-import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
-import { useEffect } from "react";
+import Label from '../Label'
+import Input from '../Input'
+import classNames from 'classnames'
+import { useMutation } from 'react-query'
+import { toast } from 'react-toastify'
+import { useAxiosPrivate } from '../../hooks/useAxiosPrivate'
+import { useEffect } from 'react'
 
-import { format } from "date-fns";
-import { DayPicker } from "react-day-picker";
-import "react-day-picker/dist/style.css";
-import { Link } from "react-router-dom";
+import { format } from 'date-fns'
+import { DayPicker } from 'react-day-picker'
+import 'react-day-picker/dist/style.css'
+import { Link } from 'react-router-dom'
 
 export const Applications = (item) => {
-  const API = useAxiosPrivate();
+  const API = useAxiosPrivate()
 
-  const [isModal, setModal] = useState(false);
-  const [dateTime, setDateTime] = useState();
+  const [isModal, setModal] = useState(false)
+  const [dateTime, setDateTime] = useState()
 
   const closeModal = () => {
-    setModal(false);
-  };
+    setModal(false)
+  }
   // console.log("Applications", item);
   //Check Status
-  const isInvited = item.status.toLowerCase() === "invited";
+  const isInvited = item.status.toLowerCase() === 'invited'
 
   //Resume Download
   const hanldeViewResume = () => {
     // Create Resume URL with Media URL from ENV ~ Remove Double Quotes
-    const media_url = import.meta.env.VITE_MEDIA_URL;
-    const resume_url = `${media_url}${item.candidate.resume_file.replace(
-      /['"]+/g,
-      ""
-    )}`;
+    const media_url = import.meta.env.VITE_MEDIA_URL
+    const resume_url = `${media_url}${item.candidate.resume_file.replace(/['"]+/g, '')}`
 
-    const linkSource = `${resume_url}`;
-    const downloadLink = document.createElement("a");
+    const linkSource = `${resume_url}`
+    const downloadLink = document.createElement('a')
     // const fileName = `${item.candidate.name}_${item.job_title}.pdf`;
-    downloadLink.href = linkSource;
+    downloadLink.href = linkSource
     // downloadLink.download = fileName;
     //Open in new tab
-    downloadLink.target = "_blank";
+    downloadLink.target = '_blank'
 
-    downloadLink.click();
-  };
+    downloadLink.click()
+  }
 
   //React hook form
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm()
 
   // TODO: Update Job Status
-  const addMutation = useMutation(
-    async (data) => await API.post("/v1/invitation/", data)
-  );
+  const addMutation = useMutation(async (data) => await API.post('/v1/invitation/', data))
 
   const handleInvite = (data) => {
-    data.job_application = item.id;
+    data.job_application = item.id
     //Generate Invitation Code
-    data.meet_url = Math.random().toString(36).substring(2, 15);
+    data.meet_url = Math.random().toString(36).substring(2, 15)
 
     if (!dateTime) {
-      toast.error("Please select a date");
-      return;
+      toast.error('Please select a date')
+      return
     }
 
-    data.schedule = format(dateTime, "yyyy-MM-dd");
+    data.schedule = format(dateTime, 'yyyy-MM-dd')
 
-    addMutation.mutate(data);
-  };
+    addMutation.mutate(data)
+  }
   //Status
   useEffect(() => {
     if (addMutation.isSuccess) {
-      toast.success("Invitation Sent");
-      setModal(false);
-      window.location.reload();
+      toast.success('Invitation Sent')
+      setModal(false)
+      window.location.reload()
     }
     if (addMutation.isError) {
-      toast.error("Something went wrong");
-      console.log("Error", addMutation.error);
+      toast.error('Something went wrong')
+      console.log('Error', addMutation.error)
     }
-  }, [addMutation.isSuccess, addMutation.isLoading, addMutation.isError]);
+  }, [addMutation.isSuccess, addMutation.isLoading, addMutation.isError])
 
-  const isDisabled = addMutation.isLoading || addMutation.isSuccess;
+  const isDisabled = addMutation.isLoading || addMutation.isSuccess
 
   return (
     <>
@@ -103,16 +98,14 @@ export const Applications = (item) => {
               <Disclosure.Button
                 as="div"
                 className={`${
-                  open ? "rounded-t-md" : "rounded-md shadow-lg"
+                  open ? 'rounded-t-md' : 'rounded-md shadow-lg'
                 } "relative " grid h-full w-full cursor-pointer grid-cols-7 items-center gap-4  bg-white`}
               >
                 <div className="font-roboto col-span-3 pl-4 font-semibold text-gray-600">
                   {item.candidate.name}
                 </div>
                 <div className="font-mono text-xl font-medium text-gray-600 ">
-                  {item?.skill_score &&
-                    item.skill_score.toString().replace(/\.?0+$/, "")}
-                  %
+                  {item?.skill_score && item.skill_score.toString().replace(/\.?0+$/, '')}%
                 </div>
                 <div className="flex font-mono text-xl font-semibold text-gray-600">
                   {item?.total_score > 55 ? (
@@ -142,13 +135,9 @@ export const Applications = (item) => {
                       />
                     </svg>
                   )}
-                  {item?.total_score &&
-                    item.total_score.toString().replace(/\.?0+$/, "")}
-                  %
+                  {item?.total_score && item.total_score.toString().replace(/\.?0+$/, '')}%
                 </div>
-                <div className="font-semibold text-gray-600">
-                  {relativeTime(item.created_at)}
-                </div>
+                <div className="font-semibold text-gray-600">{relativeTime(item.created_at)}</div>
                 <div className="flex justify-between ">
                   {isInvited ? (
                     <span className="cursor-pointer font-semibold text-red-600 hover:text-red-800 ">
@@ -161,7 +150,7 @@ export const Applications = (item) => {
                   )}
                   <FaChevronUp
                     className={`${
-                      open ? "rotate-180 transform" : "rotate-90 "
+                      open ? 'rotate-180 transform' : 'rotate-90 '
                     } mr-2 h-5 w-5 text-purple-500 `}
                   />
                 </div>
@@ -200,9 +189,7 @@ export const Applications = (item) => {
                         {isInvited ? (
                           <div className="bg-green-300 p-4">
                             <span className="font-bold">Interview Info:</span>
-                            <span className="mx-2">
-                              {item?.invitation.schedule}
-                            </span>
+                            <span className="mx-2">{item?.invitation.schedule}</span>
                             <Link
                               className="font-extrabold text-teal-700"
                               to={`/meet/${item?.invitation.meet_url}`}
@@ -231,26 +218,19 @@ export const Applications = (item) => {
                       <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
                         <p className="font-extrabold">Email</p>
                         <span className="ml-2">
-                          {" "}
-                          {item.candidate.email
-                            ? item.candidate.email
-                            : "Not Provided"}{" "}
+                          {' '}
+                          {item.candidate.email ? item.candidate.email : 'Not Provided'}{' '}
                         </span>
                       </div>
                       <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
                         <p className="font-extrabold">Phone</p>
                         <span className="ml-2">
-                          {item.candidate.phone
-                            ? item.candidate.phone
-                            : "Not Provided"}
+                          {item.candidate.phone ? item.candidate.phone : 'Not Provided'}
                         </span>
                       </div>
                       <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
                         <p className="font-extrabold">Title</p>
-                        <span className="ml-2">
-                          {" "}
-                          {item.candidate.designation}{" "}
-                        </span>
+                        <span className="ml-2"> {item.candidate.designation} </span>
                       </div>
 
                       <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
@@ -259,26 +239,22 @@ export const Applications = (item) => {
                           href={
                             //If link does not contain http:// or https://, add it
                             item.candidate.website
-                              ? item.candidate.website.includes("http")
+                              ? item.candidate.website.includes('http')
                                 ? item.candidate.website
-                                : "http://" + item.candidate.website
-                              : "#"
+                                : 'http://' + item.candidate.website
+                              : '#'
                           }
                           target="_blank"
                           className="ml-2 hover:text-blue-800 "
                         >
-                          {item.candidate.website
-                            ? item.candidate.website
-                            : "Not Provided"}
+                          {item.candidate.website ? item.candidate.website : 'Not Provided'}
                         </a>
                       </div>
                       <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
                         <p className="font-extrabold">Location</p>
                         <span className="ml-2">
-                          {" "}
-                          {item.candidate.location
-                            ? item.candidate.location
-                            : "Not Provided"}{" "}
+                          {' '}
+                          {item.candidate.location ? item.candidate.location : 'Not Provided'}{' '}
                         </span>
                       </div>
                     </div>
@@ -318,27 +294,20 @@ export const Applications = (item) => {
                             <>
                               <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
                                 <p className="font-extrabold">Name</p>
-                                <span className="ml-2">
-                                  {" "}
-                                  {experience.name}{" "}
-                                </span>
+                                <span className="ml-2"> {experience.name} </span>
                               </div>
                               <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
                                 <p className="font-extrabold">Years</p>
                                 <span className="ml-2">
-                                  {" "}
-                                  {experience.total != 0
-                                    ? experience.total
-                                    : "Not Provided"}{" "}
+                                  {' '}
+                                  {experience.total != 0 ? experience.total : 'Not Provided'}{' '}
                                 </span>
                               </div>
                             </>
                           ))
                         ) : (
                           <div className="mb-2 ml-2 text-center text-base font-medium leading-normal text-gray-700">
-                            <p className="font-extrabold">
-                              No Experience Provided !{" "}
-                            </p>
+                            <p className="font-extrabold">No Experience Provided ! </p>
                           </div>
                         )
                       }
@@ -361,18 +330,16 @@ export const Applications = (item) => {
                               {
                                 //Remove parenthesis from name
                                 education.name
-                                  .replace(/[\])}[{(]/g, "")
+                                  .replace(/[\])}[{(]/g, '')
                                   //Remove single quotes from name
-                                  .replace(/'/g, "")
+                                  .replace(/'/g, '')
                               }
                             </span>
                           </div>
                         ))
                       ) : (
                         <div className="mb-2 ml-2 text-center text-base font-medium leading-normal text-gray-700">
-                          <p className="font-extrabold">
-                            No Education Provided !{" "}
-                          </p>
+                          <p className="font-extrabold">No Education Provided ! </p>
                         </div>
                       )}
                     </div>
@@ -391,16 +358,12 @@ export const Applications = (item) => {
                         <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
                           <p className="font-extrabold">Details</p>
                           <span className="ml-2 w-full">
-                            {item.candidate.projects
-                              .map((project) => project.details)
-                              .join(", ")}
+                            {item.candidate.projects.map((project) => project.details).join(', ')}
                           </span>
                         </div>
                       ) : (
                         <div className=" ml-2 text-center text-base font-medium leading-normal text-gray-700">
-                          <p className="font-extrabold">
-                            No Projects Provided !
-                          </p>
+                          <p className="font-extrabold">No Projects Provided !</p>
                         </div>
                       )}
                     </div>
@@ -421,23 +384,21 @@ export const Applications = (item) => {
                               href={
                                 //If link does not contain http:// or https://, add it
                                 social.name
-                                  ? social.name.includes("http")
+                                  ? social.name.includes('http')
                                     ? social.name
-                                    : "http://" + social.name
-                                  : "#"
+                                    : 'http://' + social.name
+                                  : '#'
                               }
                               target="_blank"
                               className="ml-2 hover:text-blue-800 "
                             >
-                              {social.name}{" "}
+                              {social.name}{' '}
                             </a>
                           </div>
                         ))
                       ) : (
                         <div className="mb-2 ml-2 text-center text-base font-medium leading-normal text-gray-700">
-                          <p className="font-extrabold">
-                            No Social Links Provided !
-                          </p>
+                          <p className="font-extrabold">No Social Links Provided !</p>
                         </div>
                       )}
                     </div>
@@ -455,8 +416,8 @@ export const Applications = (item) => {
             <div className="mt-1 w-full text-left">
               <Label className="mb-2" htmlFor="schedule">
                 {dateTime !== undefined
-                  ? `Schedule Interview for ${dateTime.toDateString() || ""}`
-                  : "Schedule Interview"}
+                  ? `Schedule Interview for ${dateTime.toDateString() || ''}`
+                  : 'Schedule Interview'}
               </Label>
               <div className="flex w-full items-start justify-center ">
                 <DayPicker
@@ -473,16 +434,16 @@ export const Applications = (item) => {
                 id="remarks"
                 type="text"
                 className="mt-1 block w-full"
-                {...register("remarks")}
+                {...register('remarks')}
                 placeholder="If any remarks"
               />
             </div>
             <div className="mt-2 space-x-4 p-3 text-center md:block">
               <button
                 className={classNames(
-                  "mb-2 rounded-full border bg-white px-5 py-2 text-sm font-medium tracking-wider text-gray-600 shadow-sm hover:bg-gray-100 hover:shadow-lg md:mb-0",
+                  'mb-2 rounded-full border bg-white px-5 py-2 text-sm font-medium tracking-wider text-gray-600 shadow-sm hover:bg-gray-100 hover:shadow-lg md:mb-0',
                   {
-                    "opacity-25": isDisabled,
+                    'opacity-25': isDisabled,
                   }
                 )}
                 disabled={isDisabled}
@@ -495,8 +456,8 @@ export const Applications = (item) => {
         </div>
       </HeadlessModal>
     </>
-  );
-};
+  )
+}
 
 export const ApplicationsSkeleton = () => {
   return (
@@ -524,10 +485,10 @@ export const ApplicationsSkeleton = () => {
           </div>
         </div>
         <div className="font-semibold text-gray-600">
-          {" "}
+          {' '}
           <div className="flex w-full items-center space-x-2">
             <div className="h-2.5 w-32 rounded-full bg-gray-700"></div>
-          </div>{" "}
+          </div>{' '}
         </div>
         <div className="cursor-pointer font-semibold text-green-600 hover:text-green-800 ">
           <div className="flex w-full items-center space-x-2">
@@ -536,5 +497,5 @@ export const ApplicationsSkeleton = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
