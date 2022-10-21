@@ -24,6 +24,7 @@ import UserProfile from "./pages/Auth/UserProfile";
 import { Jobs as CandJobs } from "./pages/Candidate/Jobs";
 
 import { VideoMeet } from "./pages/Meet";
+import Blog from './pages/Blog'
 
 function App() {
   return (
@@ -57,6 +58,8 @@ function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/meet" element={<VideoMeet />} />
         <Route path="/meet/:slug" element={<VideoMeet />} />
+        <Route path="/community" element={<Blog />} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
       <ToastContainer />
