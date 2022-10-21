@@ -320,11 +320,4 @@ class InvitationView(viewsets.ModelViewSet):
 class BlogView(viewsets.ModelViewSet):
     queryset = Blog.objects.order_by('-created_at')
     serializer_class = BlogSerializer
-
-    def get_queryset(self):
-        slug = self.request.query_params.get('slug', None)
-
-        if slug is not None:
-            return Blog.objects.filter(id=slug)
-
-        return Blog.objects.order_by('-created_at')
+    lookup_field = 'slug'

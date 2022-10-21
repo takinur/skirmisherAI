@@ -264,6 +264,8 @@ class BlogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blog
         fields = '__all__'
+        look_field = 'slug'
+        extra_kwargs = {'url': {'lookup_field': 'slug'}}
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
