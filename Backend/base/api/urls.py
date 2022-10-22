@@ -49,7 +49,11 @@ urlpatterns = [
     path('account/candidate/', views.CandidateProfileView.as_view()),
     path('account/candidate/<int:user_id>',
          views.CandidateProfileView.as_view()),
+    
 
+    # Dashboard Stats
+    path('v1/stats/employer/', views.EmpDashboardStatsView.as_view()),
+    path('v1/stats/employer/<int:emp_id>', views.EmpDashboardStatsView.as_view()),
 ]
 
 urlpatterns += router.urls
