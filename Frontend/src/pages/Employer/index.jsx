@@ -166,15 +166,13 @@ const SummaryStats = ({ data }) => (
   </div>
 )
 
-const ChartsRender = () => {
+const ChartsRender = ({ data }) => {
   return (
     <div className="my-8 grid gap-6 md:grid-cols-2">
-      <ChartCard title="Line Title">
-        <LineChartEmp />
+      <ChartCard title="Job Apllication Status">
+        <LineChartEmp chartData={data} />
       </ChartCard>
-      <ChartCard title="Line Title 2">
-        <LineChartEmp />
-      </ChartCard>
+      <ChartCard title="Overall Total">{/* <LineChartEmp /> */}</ChartCard>
     </div>
   )
 }
