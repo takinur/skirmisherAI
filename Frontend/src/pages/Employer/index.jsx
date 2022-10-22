@@ -8,6 +8,9 @@ import { useProfile } from '../../hooks/useProfile'
 import { useTitle } from '../../hooks/useTitle'
 import { useAxiosPrivate } from '../../hooks/useAxiosPrivate'
 import { useQuery } from 'react-query'
+import { LineChartEmp } from '../../components/Charts'
+
+import ChartCard from '../../components/Charts/ChartCard'
 
 export const EmployerDashboard = () => {
   useTitle('Employer Dashboard')
@@ -163,4 +166,15 @@ const SummaryStats = ({ data }) => (
   </div>
 )
 
-const ChartsRender = () => <>WOO CHARTS</>
+const ChartsRender = () => {
+  return (
+    <div className="mb-8 grid gap-6 md:grid-cols-2">
+      <ChartCard title="Line Title">
+        <LineChartEmp />
+      </ChartCard>
+      <ChartCard title="Line Title 2">
+        <LineChartEmp />
+      </ChartCard>
+    </div>
+  )
+}
