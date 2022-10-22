@@ -342,7 +342,7 @@ class EmpDashboardStatsView(APIView):
             blogs = Blog.objects.filter(author=user_id).count()
 
             # Get Last Week Stats
-            last_week = timezone.now().date() - timedelta(days=7)
+            last_week = timezone.now() - timedelta(days=7)
             # Collect all dates in last week
             week_dates = [last_week + timedelta(days=x) for x in range(0, 7)]
 
@@ -361,7 +361,7 @@ class EmpDashboardStatsView(APIView):
             # Last Week Days in string format
             week_labels = [date.strftime('%A') for date in week_dates]
 
-            # # Convert to List with day and applications
+            # Combine applications and Days to LIST
             # last_app = [[date.strftime('%a'), apps]
             #             for date, apps in zip(week_dates, applications)]
 
