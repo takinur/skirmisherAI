@@ -6,17 +6,36 @@ import { Loading } from '../../components/Loading'
 import { useProfile } from '../../hooks/useProfile'
 
 import { useTitle } from '../../hooks/useTitle'
+import { useAxiosPrivate } from '../../hooks/useAxiosPrivate'
+import { useQuery } from 'react-query'
 
 export const EmployerDashboard = () => {
   useTitle('Employer Dashboard')
+
+  const API = useAxiosPrivate()
   //Custom hook to check if user profile exist
   const { isLoading: empLoading, isError: empErr, data: employer, user } = useProfile() //Pass retry Agument :INT
 
-  console.log('From EMP dashindex Data:', employer)
+  //State to check if profile exist
+  const isEnabled = employer !== undefined || null ? true : false
+
+  // React query to fetch Dashboard Data
+  const { isLoading, data } = useQuery(
+    'dashboardData',
+    async () => {
+      const res = await API.get(`/v1/stats/employer/?emp_id=${employer?.id}`)
+      return res.data
+    },
+    {
+      refetchOnWindowFocus: false,
+      retry: 2,
+      enabled: isEnabled, //Disable query if employer is null / undefined
+    }
+  )
 
   //Conditional rendering
   const renderDetails = () => {
-    if (empLoading) return <Loading />
+    if (empLoading || isLoading) return <Loading />
     if (empErr)
       return (
         <NoExInfo
@@ -24,13 +43,14 @@ export const EmployerDashboard = () => {
           text="It seems that you have not provided additional details! "
         />
       )
-    // if (data) return <Greeting data={data} />;
-    return (
-      <>
-        <SummaryStats />
-        <ChartsRender />
-      </>
-    )
+
+    if (data)
+      return (
+        <>
+          <SummaryStats data={data} />
+          <ChartsRender data={data} />
+        </>
+      )
   }
 
   return (
@@ -44,7 +64,7 @@ export const EmployerDashboard = () => {
   )
 }
 
-const SummaryStats = () => (
+const SummaryStats = ({ data }) => (
   <div className="grid grid-cols-1 gap-4 pt-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
     <div className="flex items-start rounded-xl bg-white p-4 shadow-lg">
       <div className="flex h-12 w-12 items-center justify-center rounded-full border border-green-100 bg-green-200">
@@ -66,7 +86,7 @@ const SummaryStats = () => (
 
       <div className="ml-4">
         <h2 className="font-semibold text-gray-600">Job Posted</h2>
-        <p className="mt-2 font-bold text-gray-800">574 </p>
+        <p className="mt-2 font-bold text-gray-800">{data.jobs} </p>
       </div>
     </div>
 
@@ -90,7 +110,7 @@ const SummaryStats = () => (
 
       <div className="ml-4">
         <h2 className="font-semibold text-gray-600"> Application Received</h2>
-        <p className="mt-2 font-bold text-gray-800">129</p>
+        <p className="mt-2 font-bold text-gray-800">{data.applications}</p>
       </div>
     </div>
 
@@ -114,7 +134,7 @@ const SummaryStats = () => (
 
       <div className="ml-4">
         <h2 className="font-semibold text-gray-600">Applicant Shortlisted</h2>
-        <p className="mt-2 font-bold text-gray-800">1823</p>
+        <p className="mt-2 font-bold text-gray-800">{data.shortlisted}</p>
       </div>
     </div>
     <div className="flex items-start rounded-xl bg-white p-4 shadow-lg">
