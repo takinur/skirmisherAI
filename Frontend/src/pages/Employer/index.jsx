@@ -47,26 +47,26 @@ export const EmployerDashboard = () => {
 const SummaryStats = () => (
   <div className="grid grid-cols-1 gap-4 pt-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
     <div className="flex items-start rounded-xl bg-white p-4 shadow-lg">
-      <div className="flex h-12 w-12 items-center justify-center rounded-full border border-blue-100 bg-blue-50">
+      <div className="flex h-12 w-12 items-center justify-center rounded-full border border-green-100 bg-green-200">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 text-blue-400"
           fill="none"
           viewBox="0 0 24 24"
+          strokeWidth={1.5}
           stroke="currentColor"
-          stroke-width="2"
+          className="h-6 w-6 text-green-700"
         >
           <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 01-1.125-1.125v-3.75zM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-8.25zM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-2.25z"
           />
         </svg>
       </div>
 
       <div className="ml-4">
-        <h2 className="font-semibold">574 Job Posted</h2>
-        <p className="mt-2 text-sm text-gray-500">Last Posted 4 days ago</p>
+        <h2 className="font-semibold text-gray-600">Job Posted</h2>
+        <p className="mt-2 font-bold text-gray-800">574 </p>
       </div>
     </div>
 
@@ -74,70 +74,70 @@ const SummaryStats = () => (
       <div className="flex h-12 w-12 items-center justify-center rounded-full border border-indigo-100 bg-indigo-50">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 text-indigo-400"
           fill="none"
           viewBox="0 0 24 24"
+          strokeWidth={1.5}
           stroke="currentColor"
-          stroke-width="2"
+          className="h-6 w-6 text-indigo-400"
         >
           <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"
           />
         </svg>
       </div>
 
       <div className="ml-4">
-        <h2 className="font-semibold">129 Application Received</h2>
-        <p className="mt-2 text-sm text-gray-500">Last Cheked 8 days ago</p>
+        <h2 className="font-semibold text-gray-600"> Application Received</h2>
+        <p className="mt-2 font-bold text-gray-800">129</p>
       </div>
     </div>
 
     <div className="flex items-start rounded-xl bg-white p-4 shadow-lg">
-      <div className="flex h-12 w-12 items-center justify-center rounded-full border border-orange-100 bg-orange-50">
+      <div className="flex h-12 w-12 items-center justify-center rounded-full border border-teal-100 bg-teal-50">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 text-orange-400"
           fill="none"
           viewBox="0 0 24 24"
+          strokeWidth={1.5}
           stroke="currentColor"
-          stroke-width="2"
+          className="h-6 w-6 text-teal-700"
         >
           <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75"
           />
         </svg>
       </div>
 
       <div className="ml-4">
-        <h2 className="font-semibold">1823 Employee Invited</h2>
-        <p className="mt-2 text-sm text-gray-500">Last checked 3 days ago</p>
+        <h2 className="font-semibold text-gray-600">Applicant Shortlisted</h2>
+        <p className="mt-2 font-bold text-gray-800">1823</p>
       </div>
     </div>
     <div className="flex items-start rounded-xl bg-white p-4 shadow-lg">
       <div className="flex h-12 w-12 items-center justify-center rounded-full border border-red-100 bg-red-50">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 text-red-400"
           fill="none"
           viewBox="0 0 24 24"
+          strokeWidth={1.5}
           stroke="currentColor"
-          stroke-width="2"
+          className="h-6 w-6 text-red-400"
         >
           <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"
           />
         </svg>
       </div>
 
       <div className="ml-4">
-        <h2 className="font-semibold">548 Community Posts</h2>
-        <p className="mt-2 text-sm text-gray-500">Last authored 1 day ago</p>
+        <h2 className="font-semibold text-gray-600">Community Posts</h2>
+        <p className="mt-2 font-bold text-gray-800">548</p>
       </div>
     </div>
   </div>
