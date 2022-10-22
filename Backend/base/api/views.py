@@ -313,3 +313,31 @@ class BlogView(viewsets.ModelViewSet):
     queryset = Blog.objects.order_by('-created_at')
     serializer_class = BlogSerializer
     lookup_field = 'slug'
+
+
+# Dashboard Stats
+class EmpDashboardStatsView(APIView):
+
+    def get(self, request, *args, **kwargs):
+        emp_id = self.request.query_params.get('emp_id', None)
+
+        print('this ID', emp_id)
+        if emp_id is not None:
+            # Get all jobs
+            jobs = Vacancy.objects.filter(employer_id=emp_id).count()
+            # Get all applications
+            applications = JobApplication.objects.filter(
+                vacancy__employer_id=emp_id).count()
+            # Get all shortlisted based on Status
+            shortlisted = JobApplication.objects.filter(
+                vacancy__employer_id=emp_id, status__icontains='invi').count()
+
+            data = {
+                'jobs': jobs,
+                'applications': applications,
+                'shortlisted': shortlisted,
+            }
+
+            return Response(data, status=status.HTTP_200_OK)
+
+        return Response({'message': 'No data found'}, status=status.HTTP_204_NO_CONTENT)
