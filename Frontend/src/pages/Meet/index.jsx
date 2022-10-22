@@ -1,27 +1,29 @@
-import React, { useState, useEffect } from "react";
-import GuestLayout from "../Layout/Guest";
+import React, { useState, useEffect } from 'react'
+import GuestLayout from '../Layout/Guest'
 
-import VideoCall from "../../components/meet/VideoCall";
-import { useNavigate, useParams } from "react-router-dom";
-import ButtonDefault from "../../components/ButtonDefault";
-import { FaChevronLeft } from "react-icons/fa";
-import classNames from "classnames";
+import VideoCall from '../../components/meet/VideoCall'
+import { useNavigate, useParams } from 'react-router-dom'
+import ButtonDefault from '../../components/ButtonDefault'
+import { FaChevronLeft } from 'react-icons/fa'
+import classNames from 'classnames'
 
 export const VideoMeet = () => {
-  const [joinCode, setJoinCode] = useState("");
-  const param = useParams();
+  const [joinCode, setJoinCode] = useState('')
+  const param = useParams()
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
-    setJoinCode(e.target.value);
-  };
+    setJoinCode(e.target.value)
+  }
 
   useEffect(() => {
-    setJoinCode(param.slug);
-  }, [param]);
+    if (param.code) {
+      setJoinCode(param.code)
+    }
+  }, [param])
 
-  const [inCall, setInCall] = useState(false);
+  const [inCall, setInCall] = useState(false)
 
   return (
     <div className="wrapper">
@@ -60,8 +62,8 @@ export const VideoMeet = () => {
               </button>
             </div>
             <ButtonDefault
-              onClick={() => navigate("/")}
-              className={classNames("ml-1 !bg-gray-700 md:mt-2")}
+              onClick={() => navigate('/')}
+              className={classNames('ml-1 !bg-gray-700 md:mt-2')}
             >
               <FaChevronLeft className="mr-1" /> Back to Home Screen
             </ButtonDefault>
@@ -69,5 +71,5 @@ export const VideoMeet = () => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
