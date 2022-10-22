@@ -321,7 +321,6 @@ class EmpDashboardStatsView(APIView):
     def get(self, request, *args, **kwargs):
         emp_id = self.request.query_params.get('emp_id', None)
 
-        print('this ID', emp_id)
         if emp_id is not None:
             # Get all jobs
             jobs = Vacancy.objects.filter(employer_id=emp_id).count()
