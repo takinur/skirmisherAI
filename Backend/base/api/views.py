@@ -1,6 +1,6 @@
 from datetime import timedelta
-from django.db.models import Count
-from django.db.models.functions import TruncDay
+# from django.db.models import Count
+# from django.db.models.functions import TruncDay
 from django.utils import timezone
 from rich import print  # Pretty print
 
@@ -343,29 +343,36 @@ class EmpDashboardStatsView(APIView):
 
             # Get Last Week Stats
             last_week = timezone.now().date() - timedelta(days=7)
+            # Collect all dates in last week
+            week_dates = [last_week + timedelta(days=x) for x in range(0, 7)]
 
             #  Collect Application from each day of last week
             week_applications = JobApplication.objects.filter(
                 vacancy__employer_id=emp_id, created_at__gte=last_week).order_by('-created_at')
 
-            # Collect all dates in last week
-            dates = [last_week + timedelta(days=x) for x in range(0, 7)]
-
             # Collect all applications for each day
-            applications = [week_applications.filter(
-                created_at__date=date).count() for date in dates]
+            last_app = [week_applications.filter(
+                created_at__date=date).count() for date in week_dates]
 
-            # List with day and applications for each day in last week
-            last_app = [[date.strftime('%a'), apps]
-                        for date, apps in zip(dates, applications)]
+            # Collect applications for each day of last week Where status is shortlisted
+            last_invited = [week_applications.filter(
+                status__icontains='invi', created_at__date=date).count() for date in week_dates]
 
+            # Last Week Days in string format
+            week_labels = [date.strftime('%A') for date in week_dates]
+
+            # # Convert to List with day and applications
+            # last_app = [[date.strftime('%a'), apps]
+            #             for date, apps in zip(week_dates, applications)]
 
             data = {
                 'jobs': jobs,
                 'applications': total_applications,
                 'shortlisted': shortlisted,
                 'blogs': blogs,
-                'week_app': last_app
+                'week_app': last_app,
+                'week_invited': last_invited,
+                'week_labels': week_labels
             }
 
             return Response(data, status=status.HTTP_200_OK)
