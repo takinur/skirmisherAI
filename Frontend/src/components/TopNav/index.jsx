@@ -1,33 +1,28 @@
-import React from "react";
-import { 
-  FaHashtag,
-  FaRegBell,
-  FaMoon,
-  FaSun,
-  FaBars,
-} from "react-icons/fa";
+import React from 'react'
+import { FaHashtag, FaRegBell, FaMoon, FaSun, FaBars } from 'react-icons/fa'
 
 import UserMenu from '../UserMenu'
 
-import useDarkMode from "../../hooks/useDarkMode";
+import useDarkMode from '../../hooks/useDarkMode'
 
-const TopNavigation = ({...props}) => {
-  
+const TopNavigation = ({ ...props }) => {
   return (
     <div className="top-navigation">
-      <FaBars className="ml-4 mr-auto md:hidden dark:text-zinc-200" onClick={props.toggleNavbar} />
+      <FaBars className="ml-4 mr-auto dark:text-zinc-200 md:hidden" onClick={props.toggleNavbar} />
       <HashtagIcon />
-      <h5 className="title-text text-zinc-600 dark:text-zinc-200">{props.title ? props.title : 'Wellcome to Dashboard'}</h5>
+      <h5 className="title-text text-zinc-600 dark:text-zinc-200">
+        {props.title ? props.title : 'Welcome to Dashboard'}
+      </h5>
       <ThemeIcon />
       <UserMenu />
       <BellIcon />
     </div>
-  );
-};
+  )
+}
 
 const ThemeIcon = () => {
-  const [darkTheme, setDarkTheme] = useDarkMode();
-  const handleMode = () => setDarkTheme(!darkTheme);
+  const [darkTheme, setDarkTheme] = useDarkMode()
+  const handleMode = () => setDarkTheme(!darkTheme)
   return (
     <span onClick={handleMode}>
       {darkTheme ? (
@@ -36,11 +31,11 @@ const ThemeIcon = () => {
         <FaMoon size="24" className="top-navigation-icon mr-4" />
       )}
     </span>
-  );
-};
+  )
+}
 
-const BellIcon = () => <FaRegBell size="24" className="top-navigation-icon mr-4" />;
+const BellIcon = () => <FaRegBell size="24" className="top-navigation-icon mr-4" />
 
-const HashtagIcon = () => <FaHashtag size="20" className="title-hashtag" />;
+const HashtagIcon = () => <FaHashtag size="20" className="title-hashtag" />
 
-export default TopNavigation;
+export default TopNavigation
