@@ -168,7 +168,7 @@ const SummaryStats = ({ data }) => (
 
 const ChartsRender = () => {
   return (
-    <div className="mb-8 grid gap-6 md:grid-cols-2">
+    <div className="my-8 grid gap-6 md:grid-cols-2">
       <ChartCard title="Line Title">
         <LineChartEmp />
       </ChartCard>

@@ -1,3 +1,7 @@
+from datetime import timedelta
+from django.db.models import Count
+from django.db.models.functions import TruncDay
+from django.utils import timezone
 from rich import print  # Pretty print
 
 import os
@@ -325,23 +329,43 @@ class EmpDashboardStatsView(APIView):
             # Get all jobs
             jobs = Vacancy.objects.filter(employer_id=emp_id).count()
             # Get all applications
-            applications = JobApplication.objects.filter(
+            total_applications = JobApplication.objects.filter(
                 vacancy__employer_id=emp_id).count()
             # Get all shortlisted based on Status
             shortlisted = JobApplication.objects.filter(
                 vacancy__employer_id=emp_id, status__icontains='invi').count()
-            
+
             # User ID for employer
             user_id = EmployerProfile.objects.get(id=emp_id).user_id
-            
+
             # Get all blog posts by employer
             blogs = Blog.objects.filter(author=user_id).count()
 
+            # Get Last Week Stats
+            last_week = timezone.now().date() - timedelta(days=7)
+
+            #  Collect Application from each day of last week
+            week_applications = JobApplication.objects.filter(
+                vacancy__employer_id=emp_id, created_at__gte=last_week).order_by('-created_at')
+
+            # Collect all dates in last week
+            dates = [last_week + timedelta(days=x) for x in range(0, 7)]
+
+            # Collect all applications for each day
+            applications = [week_applications.filter(
+                created_at__date=date).count() for date in dates]
+
+            # List with day and applications for each day in last week
+            last_app = [[date.strftime('%a'), apps]
+                        for date, apps in zip(dates, applications)]
+
+
             data = {
                 'jobs': jobs,
-                'applications': applications,
+                'applications': total_applications,
                 'shortlisted': shortlisted,
-                'blogs': blogs
+                'blogs': blogs,
+                'week_app': last_app
             }
 
             return Response(data, status=status.HTTP_200_OK)
