@@ -15,29 +15,31 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 
 export const lineLegends = [
   { title: 'Application Received', color: 'bg-teal-600' },
-  { title: 'Interviews', color: 'bg-purple-600' },
+  { title: 'Shortlisted', color: 'bg-purple-600' },
 ]
 
-export function LineChartEmp() {
+export function LineChartEmp({ chartData }) {
+  console.log('chartData', chartData)
+
   const lineOptions = {
     data: {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      labels: chartData.week_labels,
       datasets: [
         {
-          label: 'Organic',
+          label: 'Application',
 
           backgroundColor: '#0694a2',
           borderColor: '#0694a2',
-          data: [43, 48, 40, 54, 67, 73, 70],
+          data: chartData.week_app,
           fill: false,
         },
         {
-          label: 'Paid',
+          label: 'Shortlisted',
           fill: false,
 
           backgroundColor: '#7e3af2',
           borderColor: '#7e3af2',
-          data: [24, 50, 64, 74, 52, 51, 65],
+          data: chartData.week_invited,
         },
       ],
     },
