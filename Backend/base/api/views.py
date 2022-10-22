@@ -330,11 +330,18 @@ class EmpDashboardStatsView(APIView):
             # Get all shortlisted based on Status
             shortlisted = JobApplication.objects.filter(
                 vacancy__employer_id=emp_id, status__icontains='invi').count()
+            
+            # User ID for employer
+            user_id = EmployerProfile.objects.get(id=emp_id).user_id
+            
+            # Get all blog posts by employer
+            blogs = Blog.objects.filter(author=user_id).count()
 
             data = {
                 'jobs': jobs,
                 'applications': applications,
                 'shortlisted': shortlisted,
+                'blogs': blogs
             }
 
             return Response(data, status=status.HTTP_200_OK)

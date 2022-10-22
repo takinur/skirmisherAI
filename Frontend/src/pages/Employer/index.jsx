@@ -157,7 +157,7 @@ const SummaryStats = ({ data }) => (
 
       <div className="ml-4">
         <h2 className="font-semibold text-gray-600">Community Posts</h2>
-        <p className="mt-2 font-bold text-gray-800">548</p>
+        <p className="mt-2 font-bold text-gray-800">{data.blogs}</p>
       </div>
     </div>
   </div>
