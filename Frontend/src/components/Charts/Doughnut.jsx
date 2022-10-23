@@ -7,23 +7,17 @@ import ChartLegend from './ChartLegend'
 ChartJS.register(ArcElement, Tooltip, Legend)
 
 export const DoughnutChart = ({ chartData }) => {
-  const doughnutLegends = [
-    { title: 'Shirts', color: 'bg-blue-500' },
-    { title: 'Shoes', color: 'bg-teal-600' },
-    { title: 'Bags', color: 'bg-purple-600' },
-  ]
-
   const doughnutOptions = {
     data: {
       datasets: [
         {
-          data: [33, 33, 33],
+          data: chartData.datasets,
 
-          backgroundColor: ['#0694a2', '#1c64f2', '#7e3af2'],
+          backgroundColor: ['#6875F5', '#1C64F2', '#0E9F6E', '#F05252', '#1F2937'],
           label: 'Dataset 1',
         },
       ],
-      labels: ['Shoes', 'Shirts', 'Bags'],
+      labels: chartData.labels,
     },
     options: {
       responsive: true,
@@ -39,7 +33,7 @@ export const DoughnutChart = ({ chartData }) => {
   return (
     <div className="m-auto max-w-[260px] ">
       <Doughnut {...doughnutOptions} />
-      <ChartLegend legends={doughnutLegends} />
+      <ChartLegend legends={chartData.legends} />
     </div>
   )
 }
