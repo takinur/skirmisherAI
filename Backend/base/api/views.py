@@ -364,6 +364,8 @@ class EmpDashboardStatsView(APIView):
             # Combine applications and Days to LIST
             # last_app = [[date.strftime('%a'), apps]
             #             for date, apps in zip(week_dates, applications)]
+            
+                
 
             data = {
                 'jobs': jobs,
