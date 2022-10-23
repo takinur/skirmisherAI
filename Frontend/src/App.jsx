@@ -18,6 +18,8 @@ import { Findwork } from './pages/Findwork'
 import { jobs as Empjobs } from './pages/Employer/jobs'
 import { JobDetails } from './pages/Employer/JobDetails'
 import { CreateUpdateJob } from './pages/Employer/AddUpdateJob'
+import { Reports as Empreports } from './pages/Employer/Reports'
+
 
 import UserProfile from './pages/Auth/UserProfile'
 
@@ -50,6 +52,7 @@ function App() {
             <Route path="create" element={<CreateUpdateJob />} />
             <Route path=":id/edit" element={<CreateUpdateJob />} />
           </Route>
+          <Route path="/employer/reports" element={<Empreports />} />
 
           <Route path="/logout" element={<Logout />} />
         </Route>
