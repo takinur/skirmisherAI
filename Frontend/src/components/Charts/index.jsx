@@ -11,22 +11,22 @@ import {
 import { Line } from 'react-chartjs-2'
 import ChartLegend from './ChartLegend'
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip)
-
-export const lineLegends = [
-  { title: 'Application Received', color: 'bg-teal-600' },
-  { title: 'Shortlisted', color: 'bg-purple-600' },
-]
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Title)
 
 export function LineChartEmp({ chartData }) {
-  console.log('chartData', chartData)
+  // console.log('chartData', chartData)
+
+  const lineLegends = [
+    { title: 'Application Received', color: 'bg-teal-600' },
+    { title: 'Shortlisted', color: 'bg-purple-600' },
+  ]
 
   const lineOptions = {
     data: {
       labels: chartData.week_labels,
       datasets: [
         {
-          label: 'Application',
+          label: 'Application22',
 
           backgroundColor: '#0694a2',
           borderColor: '#0694a2',
@@ -69,9 +69,9 @@ export function LineChartEmp({ chartData }) {
           },
         },
       },
-    },
-    legend: {
-      display: false,
+      plugins: {
+        legend: false,
+      },
     },
   }
   return (
