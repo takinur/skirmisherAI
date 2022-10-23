@@ -25,55 +25,6 @@ export const Reports = () => {
   //State to check if profile exist
   const isEnabled = employer !== undefined || null ? true : false
 
-  //Columns for the table
-  // const columns = [
-  //   {
-  //     // id: "title",
-  //     header: 'Job Title',
-  //     accessorKey: 'title',
-  //   },
-  //   {
-  //     id: 'type',
-  //     header: 'Type',
-  //     accessorKey: 'type',
-  //   },
-  //   {
-  //     id: 'salary',
-  //     header: 'Salary Info',
-  //     accessorKey: 'salary',
-  //     //Not filterable
-  //     enableColumnFilter: false,
-  //   },
-  //   {
-  //     id: 'location',
-  //     header: 'Location',
-  //     accessorKey: 'work_location',
-  //     //Not filterable
-  //     enableColumnFilter: false,
-  //   },
-  //   {
-  //     id: 'date',
-  //     header: 'Posted',
-  //     accessorKey: 'created_at',
-  //     //Convert django date to readable format
-  //     cell: (row) => {
-  //       return relativeTime(row.getValue())
-  //     },
-  //     //Not filterable
-  //     enableColumnFilter: false,
-  //   },
-  //   {
-  //     id: 'actions',
-  //     header: 'Actions',
-  //     accessorKey: 'id',
-  //     cell: (row) => (
-  //       <Actions row={row.getValue()} employer={employer} setModal={setModal} setJobID={setJobID} />
-  //     ),
-  //     //Not filterable
-  //     enableColumnFilter: false,
-  //   },
-  // ]
-
   // React query to fetch Jobs
   const {
     isLoading,
@@ -94,60 +45,11 @@ export const Reports = () => {
 
   console.log(jobs)
 
-  // Job posted in the last 30 days (30 days = 2592000 seconds)
-  const last30Days = jobs?.filter((job) => {
-    const jobDate = new Date(job.created_at).getTime() / 1000
-    const currentDate = new Date().getTime() / 1000
-    const diff = currentDate - jobDate
-    return diff < 2592000
-  })
+  const conditionalRender = () => {
+    if (empLoading || isLoading) return <div>Loading...</div>
+    if (empErr) return <div>Something went wrong!</div>
 
-  console.log('30Days', last30Days)
-
-  // Count of jobs posted each day in the last 30 days
-  const last30DaysCount = last30Days?.reduce((acc, job) => {
-    const jobDate = new Date(job.created_at).toLocaleDateString()
-    if (acc[jobDate]) {
-      acc[jobDate] += 1
-    } else {
-      acc[jobDate] = 1
-    }
-    return acc
-  }, {})
-  console.log('30DaysCount', last30DaysCount)
-
-  // Format data for chart
-  const last30DaysCountData = Object.entries(last30DaysCount).map((item) => {
-    return {
-      date: item[0],
-      count: item[1],
-    }
-  })
-
-  // const chartLabels = last30DaysCountData?.map((item) => item.date)
-  // Chart labels - All dates in the last 30 days
-  const chartLabels = Array.from({ length: 30 }, (_, i) => {
-    const date = new Date()
-    date.setDate(date.getDate() - i)
-    return date.toLocaleDateString()
-  })
-
-  const chartDataset = last30DaysCountData?.map((item) => item.count)
-
-  console.log('30DaysCountData', last30DaysCountData)
-
-  const lineData = {
-    labels: chartLabels,
-    datasets: [
-      {
-        label: 'Job',
-        backgroundColor: '#0694a2',
-        borderColor: '#0694a2',
-        fill: false,
-        data: chartDataset,
-      },
-    ],
-    legends: [{ title: 'Job Posted', color: 'bg-teal-600' }],
+    if (jobs) return <JobsPosted data={jobs} />
   }
 
   const headers = [
@@ -169,11 +71,74 @@ export const Reports = () => {
         Download me
       </CSVLink>
 
-      <div className="my-8 grid gap-6 md:grid-cols-2">
-        <ChartCard title="Jobs posted in 30 Days">
-          <LineChart chartData={lineData} />
-        </ChartCard>
-      </div>
+      {conditionalRender()}
     </AuthLayout>
   )
+}
+
+const JobsPosted = ({ data }) => {
+  // Job posted in the last 30 days (30 days = 2592000 seconds)
+  const last30Days = data?.filter((job) => {
+    const jobDate = new Date(job.created_at).getTime() / 1000
+    const currentDate = new Date().getTime() / 1000
+    const diff = currentDate - jobDate
+    return diff < 2592000
+  })
+
+  // reverse the array to get the latest job posted
+  const last30DaysReversed = last30Days?.reverse()
+
+  // Count of jobs posted each day in the last 30 days
+  const last30DaysCount = last30DaysReversed?.reduce((acc, job) => {
+    const jobDate = new Date(job.created_at).toLocaleDateString()
+    if (acc[jobDate]) {
+      acc[jobDate] += 1
+    } else {
+      acc[jobDate] = 1
+    }
+    return acc
+  }, {})
+  // console.log('30DaysCount', last30DaysCount)
+
+  // Every date in the last 30 days (30 days = 2592000 seconds)
+  const last30DaysAll = []
+  for (let i = 0; i < 30; i++) {
+    const date = new Date()
+    date.setDate(date.getDate() - i)
+    last30DaysAll.push(date.toLocaleDateString())
+  }
+
+  // Count of jobs posted each day in the last 30 days
+  const last30DaysAllCount = last30DaysAll?.reduce((acc, date) => {
+    if (last30DaysCount[date]) {
+      acc[date] = last30DaysCount[date]
+    } else {
+      acc[date] = 0
+    }
+    return acc
+  }, {})
+  console.log('30DaysAllCount', last30DaysAllCount)
+
+  //All the dates to arrary for chart labels in reverse order
+  const labels = Object.keys(last30DaysAllCount).reverse()
+  //All the counts to arrary for chart data
+  const dataArr = Object.values(last30DaysAllCount).reverse()
+
+  const lineData = {
+    labels: labels,
+    datasets: [
+      {
+        label: 'Job',
+        backgroundColor: '#0694a2',
+        borderColor: '#0694a2',
+        fill: false,
+        data: dataArr,
+      },
+    ],
+    legends: [{ title: 'Job Posted', color: 'bg-teal-600' }],
+  }
+
+  console.log('chartDataset', lineData)
+
+  return <ChartCard title="Jobs Posted">{<LineChart chartData={lineData} />}</ChartCard>
 }
