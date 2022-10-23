@@ -170,7 +170,7 @@ const SummaryStats = ({ data }) => (
 const ChartsRender = ({ data }) => {
   const doughnutData = {
     labels: ['Jobs', 'Applicants', 'Invited', 'Rejected'],
-    datasets: [data.jobs, data.applications, data.shortlisted, 5],
+    datasets: [data.jobs, data.applications, data.shortlisted, Math.floor(Math.random() * 7)],
     legends: [
       {
         title: 'Jobs',
