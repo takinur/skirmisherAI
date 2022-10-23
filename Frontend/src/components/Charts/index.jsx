@@ -14,34 +14,10 @@ import ChartLegend from './ChartLegend'
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Title)
 
 export function LineChartEmp({ chartData }) {
-  // console.log('chartData', chartData)
-
-  const lineLegends = [
-    { title: 'Application Received', color: 'bg-teal-600' },
-    { title: 'Shortlisted', color: 'bg-purple-600' },
-  ]
-
   const lineOptions = {
     data: {
-      labels: chartData.week_labels,
-      datasets: [
-        {
-          label: 'Application22',
-
-          backgroundColor: '#0694a2',
-          borderColor: '#0694a2',
-          data: chartData.week_app,
-          fill: false,
-        },
-        {
-          label: 'Shortlisted',
-          fill: false,
-
-          backgroundColor: '#7e3af2',
-          borderColor: '#7e3af2',
-          data: chartData.week_invited,
-        },
-      ],
+      labels: chartData.labels,
+      datasets: chartData.datasets,
     },
     options: {
       responsive: true,
@@ -53,22 +29,6 @@ export function LineChartEmp({ chartData }) {
         mode: 'nearest',
         intersect: true,
       },
-      scales: {
-        x: {
-          display: true,
-          scaleLabel: {
-            display: true,
-            labelString: 'Month',
-          },
-        },
-        y: {
-          display: true,
-          scaleLabel: {
-            display: true,
-            labelString: 'Value',
-          },
-        },
-      },
       plugins: {
         legend: false,
       },
@@ -77,7 +37,7 @@ export function LineChartEmp({ chartData }) {
   return (
     <>
       <Line {...lineOptions} />
-      <ChartLegend legends={lineLegends} />
+      <ChartLegend legends={chartData.legends} />
     </>
   )
 }
