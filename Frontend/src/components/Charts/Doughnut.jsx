@@ -28,16 +28,18 @@ export const DoughnutChart = ({ chartData }) => {
     options: {
       responsive: true,
       cutoutPercentage: 80,
-    },
-    legend: {
-      display: false,
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
     },
   }
 
   return (
-    <>
+    <div className="m-auto max-w-[260px] ">
       <Doughnut {...doughnutOptions} />
       <ChartLegend legends={doughnutLegends} />
-    </>
+    </div>
   )
 }
