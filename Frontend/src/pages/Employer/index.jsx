@@ -37,7 +37,6 @@ export const EmployerDashboard = () => {
     }
   )
 
-
   //Conditional rendering
   const renderDetails = () => {
     if (empLoading || isLoading) return <Loading />
@@ -169,13 +168,36 @@ const SummaryStats = ({ data }) => (
 )
 
 const ChartsRender = ({ data }) => {
+  const doughnutData = {
+    labels: ['Jobs', 'Applicants', 'Invited', 'Rejected'],
+    datasets: [data.jobs, data.applications, data.shortlisted, 5],
+    legends: [
+      {
+        title: 'Jobs',
+        color: 'bg-indigo-500',
+      },
+      {
+        title: 'Applicants',
+        color: 'bg-blue-600',
+      },
+      {
+        title: 'Invited',
+        color: 'bg-teal-600',
+      },
+      {
+        title: 'Rejected',
+        color: 'bg-red-500',
+      },
+    ],
+  }
+
   return (
     <div className="my-8 grid gap-6 md:grid-cols-2">
       <ChartCard title="Job Apllication Status">
         <LineChartEmp chartData={data} />
       </ChartCard>
       <ChartCard title="Overall Total">
-        <DoughnutChart chartData={data} />
+        <DoughnutChart chartData={doughnutData} />
       </ChartCard>
     </div>
   )
