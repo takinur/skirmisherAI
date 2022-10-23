@@ -13,7 +13,7 @@ import ChartLegend from './ChartLegend'
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Title)
 
-export function LineChartEmp({ chartData }) {
+export function LineChart({ chartData }) {
   const lineOptions = {
     data: {
       labels: chartData.labels,
