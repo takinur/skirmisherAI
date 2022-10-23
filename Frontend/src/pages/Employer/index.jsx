@@ -168,6 +168,30 @@ const SummaryStats = ({ data }) => (
 )
 
 const ChartsRender = ({ data }) => {
+  const lineData = {
+    labels: data.week_labels,
+    datasets: [
+      {
+        label: 'Application',
+        backgroundColor: '#0694a2',
+        borderColor: '#0694a2',
+        fill: false,
+        data: data.week_app,
+      },
+      {
+        label: 'Shortlisted',
+        backgroundColor: '#7e3af2',
+        borderColor: '#7e3af2',
+        fill: false,
+        data: data.week_invited,
+      },
+    ],
+    legends: [
+      { title: 'Application Received', color: 'bg-teal-600' },
+      { title: 'Shortlisted', color: 'bg-purple-600' },
+    ],
+  }
+
   const doughnutData = {
     labels: ['Jobs', 'Applicants', 'Invited', 'Rejected'],
     datasets: [data.jobs, data.applications, data.shortlisted, Math.floor(Math.random() * 7)],
@@ -193,8 +217,8 @@ const ChartsRender = ({ data }) => {
 
   return (
     <div className="my-8 grid gap-6 md:grid-cols-2">
-      <ChartCard title="Job Apllication Status">
-        <LineChartEmp chartData={data} />
+      <ChartCard title="Job Apllications in Week">
+        <LineChartEmp chartData={lineData} />
       </ChartCard>
       <ChartCard title="Overall Total">
         <DoughnutChart chartData={doughnutData} />
