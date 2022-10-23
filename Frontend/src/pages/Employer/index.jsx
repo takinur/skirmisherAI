@@ -8,7 +8,7 @@ import { useProfile } from '../../hooks/useProfile'
 import { useTitle } from '../../hooks/useTitle'
 import { useAxiosPrivate } from '../../hooks/useAxiosPrivate'
 import { useQuery } from 'react-query'
-import { LineChartEmp } from '../../components/Charts'
+import { LineChart } from '../../components/Charts'
 import { DoughnutChart } from '../../components/Charts/Doughnut'
 
 import ChartCard from '../../components/Charts/ChartCard'
@@ -218,7 +218,7 @@ const ChartsRender = ({ data }) => {
   return (
     <div className="my-8 grid gap-6 md:grid-cols-2">
       <ChartCard title="Job Apllications in Week">
-        <LineChartEmp chartData={lineData} />
+        <LineChart chartData={lineData} />
       </ChartCard>
       <ChartCard title="Overall Total">
         <DoughnutChart chartData={doughnutData} />
