@@ -9,6 +9,7 @@ import { useTitle } from '../../hooks/useTitle'
 import { useAxiosPrivate } from '../../hooks/useAxiosPrivate'
 import { useQuery } from 'react-query'
 import { LineChartEmp } from '../../components/Charts'
+import { DoughnutChart } from '../../components/Charts/Doughnut'
 
 import ChartCard from '../../components/Charts/ChartCard'
 
@@ -172,7 +173,9 @@ const ChartsRender = ({ data }) => {
       <ChartCard title="Job Apllication Status">
         <LineChartEmp chartData={data} />
       </ChartCard>
-      <ChartCard title="Overall Total">{/* <LineChartEmp /> */}</ChartCard>
+      <ChartCard title="Overall Total">
+        <DoughnutChart chartData={data} />
+      </ChartCard>
     </div>
   )
 }
