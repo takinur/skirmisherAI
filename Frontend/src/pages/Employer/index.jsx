@@ -37,6 +37,7 @@ export const EmployerDashboard = () => {
     }
   )
 
+
   //Conditional rendering
   const renderDetails = () => {
     if (empLoading || isLoading) return <Loading />
