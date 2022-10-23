@@ -43,37 +43,74 @@ export const Reports = () => {
     }
   )
 
-  console.log(jobs)
-
   const conditionalRender = () => {
     if (empLoading || isLoading) return <div>Loading...</div>
     if (empErr) return <div>Something went wrong!</div>
 
-    if (jobs) return <JobsPosted data={jobs} />
+    if (jobs) {
+      //Remove ID and updated_at from the jobs array
+      const jobsWithoutID = jobs.map(({ id, updated_at, ...rest }) => rest)
+      //Format the date to yyyy-MM-dd HH:mm:ss
+      const jobsFormatted = jobsWithoutID.map((job) => {
+        return {
+          ...job,
+          created_at: format(new Date(job.created_at), 'yyyy-MM-dd'),
+        }
+      })
+
+      const csvHeaders = [
+        { label: 'Job Title', key: 'title' },
+        { label: 'Job Type', key: 'type' },
+        { label: 'Job Category', key: 'level' },
+        { label: 'Job Location', key: 'work_location' },
+        { label: 'Job Salary', key: 'salary' },
+        { label: 'Job Description', key: 'description' },
+        { label: 'Job Requirements', key: 'qualifications' },
+        { label: 'Job Posted Date', key: 'created_at' },
+      ]
+      return (
+        <div className="wrapper">
+          <div className="my-8 grid gap-6 md:grid-cols-4">
+            <div className="col-span-3">
+              <JobsPosted data={jobs} />
+            </div>
+            <div className="col-span-1">
+              <h2 className="border-b-2 border-b-gray-900 py-3 text-2xl font-bold text-gray-700">
+                {' '}
+                Download or Export Jobs{' '}
+              </h2>
+              <div className="mt-6">
+                <CSVLink
+                  data={jobsFormatted}
+                  headers={csvHeaders}
+                  filename={`Jobs_${currentDT}_SkirmisherAI.csv`}
+                  className="focus:shadow-outline flex rounded bg-teal-600 py-2 px-4 font-bold text-gray-100 hover:bg-teal-700 focus:outline-none"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="mr-4 h-12 w-12 text-blue-200"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M7.5 7.5h-.75A2.25 2.25 0 004.5 9.75v7.5a2.25 2.25 0 002.25 2.25h7.5a2.25 2.25 0 002.25-2.25v-7.5a2.25 2.25 0 00-2.25-2.25h-.75m-6 3.75l3 3m0 0l3-3m-3 3V1.5m6 9h.75a2.25 2.25 0 012.25 2.25v7.5a2.25 2.25 0 01-2.25 2.25h-7.5a2.25 2.25 0 01-2.25-2.25v-.75"
+                    />
+                  </svg>{' '}
+                  Last Updated on {currentDT}
+                </CSVLink>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    }
   }
 
-  const headers = [
-    { label: 'First Name', key: 'firstname' },
-    { label: 'Last Name', key: 'lastname' },
-    { label: 'Email', key: 'email' },
-  ]
-
-  const data = [
-    { firstname: 'Ahmed', lastname: 'Tomi', email: 'ah@smthing.co.com' },
-    { firstname: 'Raed', lastname: 'Labes', email: 'rl@smthing.co.com' },
-    { firstname: 'Yezzi', lastname: 'Min l3b', email: 'ymin@cocococo.com' },
-  ]
-
-  return (
-    <AuthLayout title="Reports">
-      <div>Reports</div>
-      <CSVLink data={data} headers={headers} filename={`Jobs_${currentDT}_SkirmisherAI.csv`}>
-        Download me
-      </CSVLink>
-
-      {conditionalRender()}
-    </AuthLayout>
-  )
+  return <AuthLayout title="Reports">{conditionalRender()}</AuthLayout>
 }
 
 const JobsPosted = ({ data }) => {
@@ -137,8 +174,6 @@ const JobsPosted = ({ data }) => {
     ],
     legends: [{ title: 'Job Posted', color: 'bg-teal-600' }],
   }
-
-  console.log('chartDataset', lineData)
 
   return <ChartCard title="Jobs Posted">{<LineChart chartData={lineData} />}</ChartCard>
 }
