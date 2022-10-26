@@ -173,8 +173,7 @@ export default function Navbar() {
                     <Link
                       to="/dashboard"
                       className={classNames(
-                        '-mt-1 block rounded-full border-2 border-[#7510F7] py-2 px-6 text-sm font-semibold shadow-md hover:bg-[#7510F7] hover:text-white md:inline-block',
-                        atTop ? 'text-[#7510F7] dark:text-slate-50' : 'text-slate-50'
+                        '-mt-1 block rounded-full border-2 border-[#7510F7] py-2 px-6 text-sm font-semibold text-[#7510F7] shadow-md hover:bg-[#7510F7] hover:text-white md:inline-block'
                       )}
                     >
                       My DASHBOARD
