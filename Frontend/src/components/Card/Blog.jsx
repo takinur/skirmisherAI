@@ -30,7 +30,7 @@ export const BlogCard = ({ title, description, tags, slug, created_at }) => {
               </h2>
               <div className="flex flex-wrap">
                 {tagsArray.map((tag, index) => (
-                  <span key={index} className="mr-2 font-semibold uppercase text-teal-500">
+                  <span key={index} className="mr-2 text-sm font-semibold uppercase text-teal-500">
                     {tag}
                   </span>
                 ))}
