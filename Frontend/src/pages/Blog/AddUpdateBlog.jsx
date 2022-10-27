@@ -19,8 +19,8 @@ export const CreateUpdateBlog = () => {
   const navigate = useNavigate()
   const API = useAxiosPrivate()
 
-  const { id } = useParams() //Parameter from Route
-  const isAddMode = !id
+  const { slug } = useParams() //Parameter from Route
+  const isAddMode = !slug
 
   const { user } = useSelector((state) => state.auth)
 
@@ -29,11 +29,11 @@ export const CreateUpdateBlog = () => {
 
   //React query mutations
   const addMutation = useMutation(async (data) => await API.post('/v1/blog/', data))
-  const updateMutation = useMutation(async (data) => await API.put(`/v1/blog/${id}/`, data))
+  const updateMutation = useMutation(async (data) => await API.put(`/v1/blog/${slug}/`, data))
 
   //Handle form submit event
   const submitForm = (data) => {
-    return isAddMode ? createPost(data) : updatePost(id, data)
+    return isAddMode ? createPost(data) : updatePost(data)
   }
 
   function createPost(data) {
@@ -50,11 +50,12 @@ export const CreateUpdateBlog = () => {
   }
   function updatePost(data) {
     data.author = user.id
-    // console.log("Update this data: ", data);
     data.slug = data.title
       .toLowerCase()
       .replace(/ /g, '-')
       .replace(/[^\w-]+/g, '')
+
+    // console.log('Update this data: ', data)
 
     return updateMutation.mutate(data)
   }
@@ -63,9 +64,9 @@ export const CreateUpdateBlog = () => {
     if (!isAddMode) {
       //Fetch data with ID
       const fetchJob = async () => {
-        const { data } = await API.get(`/v1/blog/${id}/`)
+        const { data } = await API.get(`/v1/blog/${slug}/`)
 
-        console.log('Data: ', data)
+        // console.log('Data: ', data)
 
         const fields = ['title', 'tags', 'description']
 

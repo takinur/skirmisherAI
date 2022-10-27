@@ -72,14 +72,14 @@ export const BlogList = () => {
     {
       id: 'actions',
       header: 'Actions',
-      accessorKey: 'id',
+      accessorKey: 'slug',
       cell: (row) => <Actions row={row.getValue()} setModal={setModal} setPostID={setPostID} />,
       //Not filterable
       enableColumnFilter: false,
     },
   ]
 
-  console.log('userid:', user.id, 'posts', data)
+  // console.log('userid:', user.id, 'posts', data)
 
   const deleteRow = async () => {
     try {
