@@ -16,7 +16,7 @@ import { useSelector } from 'react-redux'
 export const BlogList = () => {
   const API = useAxiosPrivate()
   const [isModal, setModal] = useState(false)
-  const [jobID, setJobID] = useState(null)
+  const [postID, setPostID] = useState(null)
 
   //User ID from context
   const { user } = useSelector((state) => state.auth)
@@ -26,31 +26,31 @@ export const BlogList = () => {
     setJobID(null)
   }
 
+  // React query to fetch Community posts
+  const { isLoading, data, isError, refetch } = useQuery(
+    'posts',
+    async () => {
+      const res = await API.get(`/v1/blog/?user_id=${user.id}`)
+      return res.data
+    },
+    {
+      refetchOnWindowFocus: false,
+      retry: 1,
+    }
+  )
+
   //Columns for the table
   const columns = [
     {
       // id: "title",
-      header: 'Job Title',
+      header: 'Post Title',
       accessorKey: 'title',
     },
     {
-      id: 'type',
-      header: 'Type',
-      accessorKey: 'type',
-    },
-    {
-      id: 'salary',
-      header: 'Salary Info',
-      accessorKey: 'salary',
-      //Not filterable
-      enableColumnFilter: false,
-    },
-    {
-      id: 'location',
-      header: 'Location',
-      accessorKey: 'work_location',
-      //Not filterable
-      enableColumnFilter: false,
+      id: 'description',
+      header: 'Summary',
+      accessorKey: 'description',
+      accessor: (row) => row.description.substring(0, 50),
     },
     {
       id: 'date',
@@ -67,36 +67,23 @@ export const BlogList = () => {
       id: 'actions',
       header: 'Actions',
       accessorKey: 'id',
-      cell: (row) => (
-        <Actions row={row.getValue()} employer={employer} setModal={setModal} setJobID={setJobID} />
-      ),
+      cell: (row) => <Actions row={row.getValue()} setModal={setModal} setPostID={setPostID} />,
       //Not filterable
       enableColumnFilter: false,
     },
   ]
 
-  // React query to fetch Community posts
-  const { isLoading, data, isError, refetch } = useQuery(
-    'posts',
-    async () => {
-      const res = await API.get(`/v1/blog/?user_id=${user?.id}`)
-      return res.data
-    },
-    {
-      refetchOnWindowFocus: false,
-      retry: 2,
-    }
-  )
+  console.log('userid:', user.id, 'posts', data)
 
   const deleteRow = async () => {
     try {
-      const response = await API.delete(`/jobs/${jobID}`)
+      const response = await API.delete(`/v1/blog/${postID}`)
       // console.log(response);
       if (response.status === 204) {
         closeModal()
         //refetch the data
         refetch()
-        toast.info('Job deleted successfully')
+        toast.info('Post deleted successfully')
       }
     } catch (error) {
       console.log('Delete Error', error)
@@ -106,14 +93,11 @@ export const BlogList = () => {
   //Conditional rendering
   const renderDetails = () => {
     if (isLoading) return <Loading />
-    if (isError)
-      return (
-        <NoExInfo to="/user/blog" text="It seems that you have not provided additional details! " />
-      )
+    if (isError) return <NoExInfo to="/community-blog" text="Spmething went Wrong! " />
     if (data.length === 0)
       return (
         <NoExInfo
-          to="/user/blog/create"
+          to="/community-blog/create"
           text="You have not posted anything to community."
           callto="Publish a new post"
         />
@@ -121,7 +105,7 @@ export const BlogList = () => {
     return (
       <div className="wrapper">
         <Link
-          to={`/user/blog/create`}
+          to={`/community-blog/create`}
           type="button"
           className="mt-4 inline-flex items-center rounded-lg bg-green-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
@@ -234,7 +218,7 @@ function Actions({ row, setModal, setJobID }) {
         </Link>
       </div>
       <div className="mr-2 w-4 transform hover:scale-110 hover:text-purple-500">
-        <Link to={`/user/blog/${row}/edit`}>
+        <Link to={`/community-blog/${row}/edit`}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
