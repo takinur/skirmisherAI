@@ -175,7 +175,7 @@ export const CreateUpdateBlog = () => {
           </div>
           <form onSubmit={handleSubmit(submitForm)}>
             <div className="mt-1 flex-auto">
-              <Label htmlFor="title">Enter the name of your Job post </Label>
+              <Label htmlFor="title">Enter the name of your Community post </Label>
               <Input
                 id="title"
                 type="text"
@@ -184,7 +184,7 @@ export const CreateUpdateBlog = () => {
                 required
               />
               <span className="text-sm text-gray-500 dark:text-slate-400">
-                <b>Example:</b> MERN Stack Developer
+                <b>Example:</b> How to get Started with React
               </span>
             </div>
             <div className="mt-4 flex-auto">
@@ -199,77 +199,6 @@ export const CreateUpdateBlog = () => {
               <span className="text-sm text-gray-500 dark:text-slate-400">
                 <b>Example:</b> Full-Time / Remote / Part-Time
               </span>
-            </div>
-            <div className="wrapper md:flex">
-              <div className="mt-4 flex-auto md:mr-2">
-                <div className="wrapper">
-                  <Label htmlFor="salary">Salary (Optional)</Label>
-                  <Input
-                    id="salary"
-                    type="text"
-                    className="mt-1 block w-full"
-                    {...register('salary')}
-                  />
-                  <span className="text-sm text-gray-500 dark:text-slate-400">
-                    <b>Example:</b> $60000 - $80000 / Year
-                  </span>
-                </div>
-              </div>
-              <div className="mt-4 flex-auto">
-                <Label htmlFor="work_location">Location </Label>
-                <Input
-                  id="work_location"
-                  type="text"
-                  className="mt-1 block w-full"
-                  {...register('work_location')}
-                  required
-                />
-                <span className="text-sm text-gray-500 dark:text-slate-400">
-                  Add regions or Cities
-                </span>
-              </div>
-            </div>
-            <div className="wrapper grid-cols-2 md:grid">
-              <div className="mt-4 md:mr-2">
-                <Label htmlFor="benefits">Benefits</Label>
-                <Input
-                  id="benefits"
-                  type="text"
-                  className="mt-1 block w-full"
-                  {...register('benefits')}
-                />
-                <span className="text-sm text-gray-500 dark:text-slate-400">
-                  <b>Example:</b> 401K, Health Insurance
-                </span>
-              </div>
-              <div className="mt-4 ">
-                <Label htmlFor="expLevel">Experience</Label>
-                <SelectListBox
-                  items={expLevel}
-                  selected={selectedExp}
-                  setSelected={setselectedExp}
-                />
-              </div>
-            </div>
-            <div className="mt-4 ">
-              <Label htmlFor="skills">Qualifications for Job</Label>
-              <SelectListBox
-                items={skills}
-                selected={selectedSkill}
-                setSelected={setselectedSkill}
-                isMultiple={true}
-              />
-            </div>
-
-            <div className="mt-4">
-              <Label htmlFor="description">Other details about the job</Label>
-              <TextArea
-                id="description"
-                rows="4"
-                className="mt-2"
-                {...register('description')}
-                placeholder="Ex: Responsibilites, Skills, etc"
-              />
             </div>
             <div className="mt-4 flex justify-end">
               <ButtonDefault

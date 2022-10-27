@@ -1,38 +1,40 @@
-import React from "react";
-import { useQuery } from "react-query";
-import { Loading } from "../../components/Loading";
-import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
-import { useCandProfile } from "../../hooks/useProfile";
-import AuthLayout from "../Layout/Auth";
-import { relativeTime } from "../../hooks/useRelativetime";
-import { Link } from "react-router-dom";
-import classNames from "classnames";
+import React from 'react'
+import { useQuery } from 'react-query'
+import { Loading } from '../../components/Loading'
+import { useAxiosPrivate } from '../../hooks/useAxiosPrivate'
+import { useCandProfile } from '../../hooks/useProfile'
+import AuthLayout from '../Layout/Auth'
+import { relativeTime } from '../../hooks/useRelativetime'
+import { Link } from 'react-router-dom'
+import classNames from 'classnames'
+import { useTitle } from '../../hooks/useTitle'
 
 export const Jobs = () => {
-  const API = useAxiosPrivate();
+  const API = useAxiosPrivate()
+  useTitle('View applied Jobs ')
 
   //Custom hook to check if user profile exist
-  const { data: profile } = useCandProfile();
+  const { data: profile } = useCandProfile()
   //State to check if profile exist
-  const isEnabled = profile !== undefined || null ? true : false;
+  const isEnabled = profile !== undefined || null ? true : false
 
   // React query to fetch Jobs
   const { isLoading, data } = useQuery(
-    "applications",
+    'applications',
     async () => {
-      const res = await API.get(`/v1/application/?cand_id=${profile?.id}`);
-      return res.data;
+      const res = await API.get(`/v1/application/?cand_id=${profile?.id}`)
+      return res.data
     },
     {
       refetchOnWindowFocus: false,
       retry: 2,
       enabled: isEnabled, //Disable query if Profile is null / undefined
     }
-  );
+  )
 
-  if (isLoading) return <h1> Loading</h1>;
+  if (isLoading) return <h1> Loading</h1>
 
-  console.log("fetched applications", data);
+  console.log('fetched applications', data)
 
   return (
     <AuthLayout title="Jobs that you applied">
@@ -41,25 +43,16 @@ export const Jobs = () => {
           //No jobs found
           data?.length < 1 || data === undefined ? (
             <div className="flex flex-col items-center justify-center ">
-              <h2 className="text-2xl font-bold text-gray-500">
-                No Jobs Found
-              </h2>
-              <p className="text-gray-500">
-                You have not applied to any job yet
-              </p>
-              <Link
-                to="/find-work"
-                className="mt-6 text-2xl font-bold text-teal-600 "
-              >
-                {" "}
+              <h2 className="text-2xl font-bold text-gray-500">No Jobs Found</h2>
+              <p className="text-gray-500">You have not applied to any job yet</p>
+              <Link to="/find-work" className="mt-6 text-2xl font-bold text-teal-600 ">
+                {' '}
                 Find Jobs
               </Link>
             </div>
           ) : (
             //Jobs found
-            <h2 className="mb-4 text-center text-2xl font-bold text-gray-500">
-              Applied Jobs
-            </h2>
+            <h2 className="mb-4 text-center text-2xl font-bold text-gray-500">Applied Jobs</h2>
           )
         }
 
@@ -79,10 +72,8 @@ export const Jobs = () => {
               >
                 <div
                   className={classNames(
-                    "absolute bottom-0 right-0 rounded-tl-xl rounded-br-xl px-2 py-1 text-white",
-                    job.status.toLowerCase() === "applied"
-                      ? "bg-red-600"
-                      : "bg-green-600"
+                    'absolute bottom-0 right-0 rounded-tl-xl rounded-br-xl px-2 py-1 text-white',
+                    job.status.toLowerCase() === 'applied' ? 'bg-red-600' : 'bg-green-600'
                   )}
                 >
                   <span className="text-xs">{job.status}</span>
@@ -105,7 +96,7 @@ export const Jobs = () => {
                   </p>
                   {
                     // Show Interview button if status is applied
-                    job.status.toLowerCase() === "invited" && (
+                    job.status.toLowerCase() === 'invited' && (
                       <div className="mt-2 text-sm text-gray-500">
                         <div>
                           <b>Interview at:</b> {job?.invitation.schedule}
@@ -126,5 +117,5 @@ export const Jobs = () => {
         </div>
       </div>
     </AuthLayout>
-  );
-};
+  )
+}
