@@ -12,7 +12,7 @@ export const BlogCard = ({ title, description, tags, slug, created_at }) => {
           <dt className="sr-only">Published on</dt>
           <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
             <span className="text">
-              {new Date(created_at).toLocaleDateString('en-US', {
+              {new Date(created_at).toLocaleDateString('en-UK', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',
@@ -30,7 +30,10 @@ export const BlogCard = ({ title, description, tags, slug, created_at }) => {
               </h2>
               <div className="flex flex-wrap">
                 {tagsArray.map((tag, index) => (
-                  <span key={index} className="mr-2 text-sm font-semibold uppercase text-teal-500">
+                  <span
+                    key={index}
+                    className="mr-2 font-mono text-sm font-normal uppercase text-teal-500"
+                  >
                     {tag}
                   </span>
                 ))}
