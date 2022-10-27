@@ -18,7 +18,7 @@ export const BlogList = () => {
   const [isModal, setModal] = useState(false)
   const [postID, setPostID] = useState(null)
 
-  //User ID from context
+  //User from State
   const { user } = useSelector((state) => state.auth)
 
   const closeModal = () => {
