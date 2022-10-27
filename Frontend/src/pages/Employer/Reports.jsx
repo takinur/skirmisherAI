@@ -12,6 +12,13 @@ import { useQuery } from 'react-query'
 import { LineChart } from '../../components/Charts'
 import ChartCard from '../../components/Charts/ChartCard'
 
+// TODO: Add 2 more reports to this page
+// 1. Applicants applied in the last 30 days
+// 2. Applicants hired in the last 30 days
+//FIx the chart to show the correct data
+
+// TODO: HELP PAGE next target
+
 export const Reports = () => {
   useTitle('Reports')
   //Current date and time
