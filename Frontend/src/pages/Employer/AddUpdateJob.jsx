@@ -159,6 +159,12 @@ export const CreateUpdateJob = () => {
   const isLoading = addMutation.isLoading || updateMutation.isLoading
   const isDisabled = isLoading || addMutation.isSuccess || updateMutation.isSuccess
 
+  const handleContinue = (e) => {
+    e.preventDefault()
+    //Scroll to next Section
+    const nextSection = document.getElementById('formsection2')
+    nextSection.scrollIntoView({ behavior: 'smooth' })
+  }
   return (
     <AuthLayout title="Post new job for talent hiring">
       <ButtonDefault
@@ -168,17 +174,17 @@ export const CreateUpdateJob = () => {
         <FaChevronLeft className="mr-1" />
         Go Back
       </ButtonDefault>
-      <div className="mt-6 grid-cols-2 pt-6 sm:pt-0 md:grid">
-        <div className="px-2 pt-4 md:px-6">
-          <h3 className="font-mono text-lg font-semibold text-gray-700">General Information</h3>
-          <p className="text-base font-light">
-            Add a interesting title to your post. This will help candidates to find your post
-            easily. Also add what type of job you are offering. You can also add the location of the
-            job and the expected salary range.
-          </p>
-        </div>
-        <div className=" mt-4 w-full overflow-hidden bg-gray-200 px-6  py-4 shadow-md dark:bg-gray-900  sm:max-w-2xl sm:rounded-lg md:mt-0">
-          <form onSubmit={handleSubmit(submitForm)}>
+      <form onSubmit={handleSubmit(submitForm)}>
+        <div className="mt-6 grid-cols-2 pt-6 sm:pt-0 md:grid">
+          <div className="px-2 pt-4 md:px-6">
+            <h3 className="font-mono text-lg font-semibold text-gray-700">General Information</h3>
+            <p className="text-base font-light">
+              Add a interesting title to your post. This will help candidates to find your post
+              easily. Also add what type of job you are offering. You can also add the location of
+              the job and the expected salary range.
+            </p>
+          </div>
+          <div className=" mt-4 w-full overflow-hidden bg-gray-200 px-6  py-4 shadow-md dark:bg-gray-900  sm:max-w-2xl sm:rounded-lg md:mt-0">
             <div className="mt-1 flex-auto">
               <Label htmlFor="title">Enter the name of your Job post </Label>
               <Input
@@ -235,24 +241,26 @@ export const CreateUpdateJob = () => {
               </div>
             </div>
             <div className="mt-4 flex justify-end">
-              <ButtonDefault onClick={handleContinue} className="ml-4">Continue</ButtonDefault>
+              <ButtonDefault onClick={handleContinue} className="ml-4">
+                Continue
+              </ButtonDefault>
             </div>
-          </form>
+          </div>
         </div>
-      </div>
-      <hr className="my-4" />
-      <div className="grid-cols-2 sm:pt-0  md:mt-6 md:grid md:pt-6">
-        <div className="px-2 pt-4 md:px-6">
-          <h3 className="font-mono text-lg font-semibold text-gray-700">Additional Information</h3>
-          <p className="text-base font-light">
-            Benefits are the perks that you offer to your employees. You can add multiple benefits
-            to your post. Experience level is the level of experience that you are looking for in
-            your candidates. Qualifications are the skills that you are looking for in your
-            candidates.
-          </p>
-        </div>
-        <div className="mt-4 w-full overflow-hidden bg-gray-200 px-6  py-4 shadow-md dark:bg-gray-900  sm:max-w-2xl sm:rounded-lg md:mt-0">
-          <form onSubmit={handleSubmit(submitForm)}>
+        <hr className="my-4" />
+        <div id="formsection2" className="grid-cols-2 sm:pt-0  md:mt-6 md:grid md:pt-6">
+          <div className="px-2 pt-4 md:px-6">
+            <h3 className="font-mono text-lg font-semibold text-gray-700">
+              Additional Information
+            </h3>
+            <p className="text-base font-light">
+              Benefits are the perks that you offer to your employees. You can add multiple benefits
+              to your post. Experience level is the level of experience that you are looking for in
+              your candidates. Qualifications are the skills that you are looking for in your
+              candidates.
+            </p>
+          </div>
+          <div className="mt-4 w-full overflow-hidden bg-gray-200 px-6  py-4 shadow-md dark:bg-gray-900  sm:max-w-2xl sm:rounded-lg md:mt-0">
             <div className="wrapper grid-cols-2 md:grid">
               <div className="mt-4 md:mr-2">
                 <Label htmlFor="benefits">Benefits</Label>
@@ -304,9 +312,9 @@ export const CreateUpdateJob = () => {
                 {isAddMode ? 'Post Job' : 'Update Job'}
               </ButtonDefault>
             </div>
-          </form>
+          </div>
         </div>
-      </div>
+      </form>
     </AuthLayout>
   )
 }
