@@ -20,7 +20,6 @@ import { JobDetails } from './pages/Employer/JobDetails'
 import { CreateUpdateJob } from './pages/Employer/AddUpdateJob'
 import { Reports as Empreports } from './pages/Employer/Reports'
 
-
 import UserProfile from './pages/Auth/UserProfile'
 
 import { Jobs as CandJobs } from './pages/Candidate/Jobs'
@@ -28,6 +27,8 @@ import { Jobs as CandJobs } from './pages/Candidate/Jobs'
 import { VideoMeet } from './pages/Meet'
 import Blog from './pages/Blog'
 import { SinglePost } from './pages/Blog/single'
+import { BlogList } from './pages/Blog/BlogList'
+import { CreateUpdateBlog } from './pages/Blog/AddUpdateBlog'
 
 function App() {
   return (
@@ -53,6 +54,13 @@ function App() {
             <Route path=":id/edit" element={<CreateUpdateJob />} />
           </Route>
           <Route path="/employer/reports" element={<Empreports />} />
+
+          <Route path="/user/blog">
+            <Route index element={<BlogList />} />
+            <Route path=":id/view" element={<SinglePost />} />
+            <Route path="create" element={<CreateUpdateBlog />} />
+            <Route path=":id/edit" element={<CreateUpdateBlog />} />
+          </Route>
 
           <Route path="/logout" element={<Logout />} />
         </Route>
