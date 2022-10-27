@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useMutation } from 'react-query'
@@ -14,8 +14,10 @@ import Input from '../../components/Input'
 import ButtonDefault from '../../components/ButtonDefault'
 import TextArea from '../../components/TextArea'
 import { FaChevronLeft } from 'react-icons/fa'
+import { useTitle } from '../../hooks/useTitle'
 
 export const CreateUpdateBlog = () => {
+  useTitle('Create Blog | Update Blog')
   const navigate = useNavigate()
   const API = useAxiosPrivate()
 
@@ -38,6 +40,8 @@ export const CreateUpdateBlog = () => {
 
   function createPost(data) {
     data.author = user.id
+    //Replace Spaces with commas
+    data.tags = data.tags.replace(/ /g, ',')
     //Generate slug from title
     data.slug = data.title
       .toLowerCase()
@@ -50,6 +54,9 @@ export const CreateUpdateBlog = () => {
   }
   function updatePost(data) {
     data.author = user.id
+    //Replace Spaces with commas
+    data.tags = data.tags.replace(/ /g, ',')
+
     data.slug = data.title
       .toLowerCase()
       .replace(/ /g, '-')

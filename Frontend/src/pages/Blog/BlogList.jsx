@@ -12,8 +12,10 @@ import { NoExInfo } from '../../components/Alerts'
 
 import HeadlessModal from '../../components/Modal'
 import { useSelector } from 'react-redux'
+import { useTitle } from '../../hooks/useTitle'
 
 export const BlogList = () => {
+  useTitle('Blogs posted by you')
   const API = useAxiosPrivate()
   const [isModal, setModal] = useState(false)
   const [postID, setPostID] = useState(null)
