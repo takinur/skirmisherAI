@@ -1,150 +1,131 @@
-import React, { useState } from "react";
-import AuthLayout from "../Layout/Auth";
-import { useQuery } from "react-query";
-import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
-import { toast } from "react-toastify";
-import { relativeTime } from "../../hooks/useRelativetime";
+import React, { useState } from 'react'
+import AuthLayout from '../Layout/Auth'
+import { useQuery } from 'react-query'
+import { useAxiosPrivate } from '../../hooks/useAxiosPrivate'
+import { toast } from 'react-toastify'
+import { relativeTime } from '../../hooks/useRelativetime'
 
+import { Loading } from '../../components/Loading'
+import { Table } from '../../components/Table'
+import { Link } from 'react-router-dom'
+import { NoExInfo } from '../../components/Alerts'
 
-import { Loading } from "../../components/Loading";
-import { Table } from "../../components/Table";
-import { Link } from "react-router-dom";
-import { NoExInfo } from "../../components/Alerts";
-
-import { useProfile } from "../../hooks/useProfile";
-import HeadlessModal from "../../components/Modal";
-
+import HeadlessModal from '../../components/Modal'
+import { useSelector } from 'react-redux'
 
 export const jobs = () => {
-  const API = useAxiosPrivate();
-  const [isModal, setModal] = useState(false);
-  const [jobID, setJobID] = useState(null);
+  const API = useAxiosPrivate()
+  const [isModal, setModal] = useState(false)
+  const [jobID, setJobID] = useState(null)
+
+  //User ID from context
+  const { user } = useSelector((state) => state.auth)
 
   const closeModal = () => {
-    setModal(false);
-    setJobID(null);
-  };
-
-  //Custom hook to check if user profile exist
-  const {
-    isLoading: empLoading,
-    isError: empErr,
-    data: employer,
-  } = useProfile();
-  //State to check if profile exist
-  const isEnabled = employer !== undefined || null ? true : false;
+    setModal(false)
+    setJobID(null)
+  }
 
   //Columns for the table
   const columns = [
     {
       // id: "title",
-      header: "Job Title",
-      accessorKey: "title",
+      header: 'Job Title',
+      accessorKey: 'title',
     },
     {
-      id: "type",
-      header: "Type",
-      accessorKey: "type",
+      id: 'type',
+      header: 'Type',
+      accessorKey: 'type',
     },
     {
-      id: "salary",
-      header: "Salary Info",
-      accessorKey: "salary",
+      id: 'salary',
+      header: 'Salary Info',
+      accessorKey: 'salary',
       //Not filterable
       enableColumnFilter: false,
     },
     {
-      id: "location",
-      header: "Location",
-      accessorKey: "work_location",
+      id: 'location',
+      header: 'Location',
+      accessorKey: 'work_location',
       //Not filterable
       enableColumnFilter: false,
     },
     {
-      id: "date",
-      header: "Posted",
-      accessorKey: "created_at",
+      id: 'date',
+      header: 'Posted',
+      accessorKey: 'created_at',
       //Convert django date to readable format
       cell: (row) => {
-        return relativeTime(row.getValue());
+        return relativeTime(row.getValue())
       },
       //Not filterable
       enableColumnFilter: false,
     },
     {
-      id: "actions",
-      header: "Actions",
-      accessorKey: "id",
+      id: 'actions',
+      header: 'Actions',
+      accessorKey: 'id',
       cell: (row) => (
-        <Actions
-          row={row.getValue()}
-          employer={employer}
-          setModal={setModal}
-          setJobID={setJobID}
-        />
+        <Actions row={row.getValue()} employer={employer} setModal={setModal} setJobID={setJobID} />
       ),
       //Not filterable
       enableColumnFilter: false,
     },
-  ];
+  ]
 
-  // React query to fetch Jobs
-  const { isLoading, data, refetch } = useQuery(
-    "jobs",
+  // React query to fetch Community posts
+  const { isLoading, data, isError, refetch } = useQuery(
+    'posts',
     async () => {
-      const res = await API.get(`/jobs?emp_id=${employer?.id}`);
-      return res.data;
+      const res = await API.get(`/v1/blog/?user_id=${user?.id}`)
+      return res.data
     },
     {
       refetchOnWindowFocus: false,
       retry: 2,
-      enabled: isEnabled, //Disable query if employer is null / undefined
     }
-  );
+  )
 
   const deleteRow = async () => {
     try {
-      const response = await API.delete(`/jobs/${jobID}`);
+      const response = await API.delete(`/jobs/${jobID}`)
       // console.log(response);
       if (response.status === 204) {
-        closeModal();
+        closeModal()
         //refetch the data
-        refetch();
-        toast.info("Job deleted successfully");
+        refetch()
+        toast.info('Job deleted successfully')
       }
     } catch (error) {
-      console.log("Delete Error", error);
+      console.log('Delete Error', error)
     }
-  };
+  }
 
   //Conditional rendering
   const renderDetails = () => {
-    if (empLoading || isLoading) return <Loading />;
-    if (empErr)
+    if (isLoading) return <Loading />
+    if (isError)
       return (
-        <NoExInfo
-          to="/user/profile"
-          text="It seems that you have not provided additional details! "
-        />
-      );
+        <NoExInfo to="/user/blog" text="It seems that you have not provided additional details! " />
+      )
     if (data.length === 0)
       return (
         <NoExInfo
-          to="/employer/jobs/create"
-          text="You have not posted any jobs."
-          callto="Post a new Job"
-          state={{ employer: employer.id }}
+          to="/user/blog/create"
+          text="You have not posted anything to community."
+          callto="Publish a new post"
         />
-      );
+      )
     return (
       <div className="wrapper">
         <Link
-          to={`/employer/jobs/create`}
-          state={{ employer: employer.id }}
+          to={`/user/blog/create`}
           type="button"
           className="mt-4 inline-flex items-center rounded-lg bg-green-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
-          Post a new Job
+          Publish a new Community Post
           <svg
             aria-hidden="true"
             className="ml-2 -mr-1 h-5 w-5"
@@ -160,13 +141,13 @@ export const jobs = () => {
           </svg>
         </Link>
 
-        <Table columns={columns} data={data} />
+        {/* <Table columns={columns} data={data} /> */}
       </div>
-    );
-  };
+    )
+  }
 
   return (
-    <AuthLayout title="Manage Job Posting">
+    <AuthLayout title="Manage Community Posting">
       {renderDetails()}
       <HeadlessModal isOpen={isModal} closeModal={closeModal}>
         <div className="flex-auto justify-center p-5 text-center">
@@ -198,8 +179,7 @@ export const jobs = () => {
           </svg>
           <h2 className="py-4 text-xl font-bold ">Are you sure?</h2>
           <p className="px-8 text-sm text-gray-500">
-            Do you really want to delete your Job posting? This process cannot
-            be undone
+            Do you really want to delete your Community post? This process cannot be undone
           </p>
         </div>
 
@@ -219,19 +199,19 @@ export const jobs = () => {
         </div>
       </HeadlessModal>
     </AuthLayout>
-  );
-};
+  )
+}
 
 //Actions column
-function Actions({ row, employer, setModal, setJobID }) {
+function Actions({ row, setModal, setJobID }) {
   const handleDelete = () => {
-    setModal(true);
-    setJobID(row);
-  };
+    setModal(true)
+    setJobID(row)
+  }
   return (
     <div className="item-center flex">
       <div className="mr-2 w-4 transform hover:scale-110 hover:text-purple-500">
-        <Link to={`/employer/jobs/${row}/view`}>
+        <Link to={`/user/blog/${row}/view`}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -254,7 +234,7 @@ function Actions({ row, employer, setModal, setJobID }) {
         </Link>
       </div>
       <div className="mr-2 w-4 transform hover:scale-110 hover:text-purple-500">
-        <Link to={`/employer/jobs/${row}/edit`} state={{ employer: employer.id }}>
+        <Link to={`/employer/jobs/${row}/edit`}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -287,5 +267,5 @@ function Actions({ row, employer, setModal, setJobID }) {
         </svg>
       </div>
     </div>
-  );
+  )
 }
