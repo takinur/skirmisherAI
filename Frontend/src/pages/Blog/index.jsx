@@ -22,8 +22,6 @@ const index = () => {
     }
   )
 
-  console.log('From Blog index Data:', posts)
-
   const conditionalRender = () => {
     if (isLoading)
       return (
