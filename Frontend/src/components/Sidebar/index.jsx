@@ -27,12 +27,12 @@ const SideBar = ({ navbar, toggleNavbar }) => {
       },
       {
         name: 'Community',
-        link: '/user/profile',
+        link: '/community-blog',
         icon: CommunityIcon,
       },
       {
         name: 'Reports',
-        link: '/user/blog',
+        link: '/employer/report',
         icon: IconCards,
       },
 
@@ -63,6 +63,11 @@ const SideBar = ({ navbar, toggleNavbar }) => {
         name: 'Profile',
         link: '/user/profile',
         icon: UserIcon,
+      },
+      {
+        name: 'Community',
+        link: '/community-blog',
+        icon: CommunityIcon,
       },
       {
         name: 'Setting',

@@ -53,9 +53,9 @@ function App() {
             <Route path="create" element={<CreateUpdateJob />} />
             <Route path=":id/edit" element={<CreateUpdateJob />} />
           </Route>
-          <Route path="/employer/reports" element={<Empreports />} />
+          <Route path="/employer/report" element={<Empreports />} />
 
-          <Route path="/user/blog">
+          <Route path="/community-blog">
             <Route index element={<BlogList />} />
             <Route path=":id/view" element={<SinglePost />} />
             <Route path="create" element={<CreateUpdateBlog />} />
