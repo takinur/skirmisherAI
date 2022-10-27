@@ -57,9 +57,9 @@ function App() {
 
           <Route path="/community-blog">
             <Route index element={<BlogList />} />
-            <Route path=":id/view" element={<SinglePost />} />
+            <Route path=":slug/view" element={<SinglePost />} />
             <Route path="create" element={<CreateUpdateBlog />} />
-            <Route path=":id/edit" element={<CreateUpdateBlog />} />
+            <Route path=":slug/edit" element={<CreateUpdateBlog />} />
           </Route>
 
           <Route path="/logout" element={<Logout />} />
