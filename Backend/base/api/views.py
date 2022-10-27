@@ -318,6 +318,14 @@ class BlogView(viewsets.ModelViewSet):
     serializer_class = BlogSerializer
     lookup_field = 'slug'
 
+    def get_queryset(self):
+        user = self.request.query_params.get('user_id', None)
+
+        if user is not None:
+            return Blog.objects.filter(author_id=user).order_by('-created_at')
+
+        return Blog.objects.order_by('-created_at')
+
 
 # Dashboard Stats
 class EmpDashboardStatsView(APIView):
@@ -364,8 +372,6 @@ class EmpDashboardStatsView(APIView):
             # Combine applications and Days to LIST
             # last_app = [[date.strftime('%a'), apps]
             #             for date, apps in zip(week_dates, applications)]
-            
-                
 
             data = {
                 'jobs': jobs,
