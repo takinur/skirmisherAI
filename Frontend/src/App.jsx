@@ -26,9 +26,10 @@ import { Jobs as CandJobs } from './pages/Candidate/Jobs'
 
 import { VideoMeet } from './pages/Meet'
 import Blog from './pages/Blog'
-import { SinglePost } from './pages/Blog/single'
+import { SinglePost as SingleBlogPost } from './pages/Blog/single'
 import { BlogList } from './pages/Blog/BlogList'
 import { CreateUpdateBlog } from './pages/Blog/AddUpdateBlog'
+import { DashSingleBlogPost } from './pages/Blog/DashSingle'
 
 function App() {
   return (
@@ -57,7 +58,7 @@ function App() {
 
           <Route path="/community-blog">
             <Route index element={<BlogList />} />
-            <Route path=":slug/view" element={<SinglePost />} />
+            <Route path=":slug/view" element={<DashSingleBlogPost />} />
             <Route path="create" element={<CreateUpdateBlog />} />
             <Route path=":slug/edit" element={<CreateUpdateBlog />} />
           </Route>
@@ -72,7 +73,7 @@ function App() {
         <Route path="/meet/:code" element={<VideoMeet />} />
         <Route path="/community">
           <Route index element={<Blog />} />
-          <Route path=":slug" element={<SinglePost />} />
+          <Route path=":slug" element={<SingleBlogPost />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />

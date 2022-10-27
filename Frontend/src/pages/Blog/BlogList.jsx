@@ -205,7 +205,7 @@ function Actions({ row, setModal, setPostID }) {
   return (
     <div className="item-center flex">
       <div className="mr-2 w-4 transform hover:scale-110 hover:text-purple-500">
-        <Link to={`/user/blog/${row}/view`}>
+        <Link to={`/community-blog/${row}/view`}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
