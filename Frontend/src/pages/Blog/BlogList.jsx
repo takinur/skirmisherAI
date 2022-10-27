@@ -99,7 +99,8 @@ export const BlogList = () => {
   //Conditional rendering
   const renderDetails = () => {
     if (isLoading) return <Loading />
-    if (isError) return <NoExInfo to="/community-blog" text="Spmething went Wrong! " />
+    if (isError)
+      return <NoExInfo to="/community-blog" text="Something went Wrong! try refreshing the page!" />
     if (data.length === 0)
       return (
         <NoExInfo
@@ -138,6 +139,7 @@ export const BlogList = () => {
 
   return (
     <AuthLayout title="Manage Community Posting">
+      <NoExInfo to="/community" text="See what's happening in your community!" callto="Visit" />
       {renderDetails()}
       <HeadlessModal isOpen={isModal} closeModal={closeModal}>
         <div className="flex-auto justify-center p-5 text-center">
