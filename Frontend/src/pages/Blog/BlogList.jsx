@@ -23,7 +23,7 @@ export const BlogList = () => {
 
   const closeModal = () => {
     setModal(false)
-    setJobID(null)
+    setPostID(null)
   }
 
   // React query to fetch Community posts
@@ -50,7 +50,13 @@ export const BlogList = () => {
       id: 'description',
       header: 'Summary',
       accessorKey: 'description',
-      accessor: (row) => row.description.substring(0, 50),
+      cell: (row) => row.getValue().substring(0, 50) + '...',
+    },
+    {
+      id: 'slug',
+      header: 'URL',
+      accessorKey: 'slug',
+      enableColumnFilter: false,
     },
     {
       id: 'date',
@@ -125,7 +131,7 @@ export const BlogList = () => {
           </svg>
         </Link>
 
-        {/* <Table columns={columns} data={data} /> */}
+        <Table columns={columns} data={data} />
       </div>
     )
   }
@@ -187,10 +193,10 @@ export const BlogList = () => {
 }
 
 //Actions column
-function Actions({ row, setModal, setJobID }) {
+function Actions({ row, setModal, setPostID }) {
   const handleDelete = () => {
     setModal(true)
-    setJobID(row)
+    setPostID(row)
   }
   return (
     <div className="item-center flex">
