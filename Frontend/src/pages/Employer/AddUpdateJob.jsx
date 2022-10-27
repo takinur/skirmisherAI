@@ -175,7 +175,7 @@ export const CreateUpdateJob = () => {
         Go Back
       </ButtonDefault>
       <form onSubmit={handleSubmit(submitForm)}>
-        <div className="mt-6 grid-cols-2 pt-6 sm:pt-0 md:grid">
+        <div className="mt-8 grid-cols-2 pt-6 sm:pt-0 md:grid">
           <div className="px-2 pt-4 md:px-6">
             <h3 className="font-mono text-lg font-semibold text-gray-700">General Information</h3>
             <p className="text-base font-light">
@@ -247,7 +247,7 @@ export const CreateUpdateJob = () => {
             </div>
           </div>
         </div>
-        <hr className="my-4" />
+        <hr className="mb-4 mt-8" />
         <div id="formsection2" className="grid-cols-2 sm:pt-0  md:mt-6 md:grid md:pt-6">
           <div className="px-2 pt-4 md:px-6">
             <h3 className="font-mono text-lg font-semibold text-gray-700">
