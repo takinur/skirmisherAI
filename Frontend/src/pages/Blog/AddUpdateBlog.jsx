@@ -37,21 +37,24 @@ export const CreateUpdateBlog = () => {
   }
 
   function createPost(data) {
-    data.employer = employerId
-    data.level = selectedExp.name
+    data.author = user.id
+    //Generate slug from title
+    data.slug = data.title
+      .toLowerCase()
+      .replace(/ /g, '-')
+      .replace(/[^\w-]+/g, '')
 
-    //Unique skills array
-    let uniqueSkills = [...new Set(selectedSkill.map((item) => item.name))]
-    //Combine skills array
-    data.qualifications = uniqueSkills.join(', ')
-
-    // console.log("Create this data: ", data);
+    // console.log('Create this data: ', data)
 
     return addMutation.mutate(data)
   }
   function updatePost(data) {
-    data.employer = employerId
+    data.author = user.id
     // console.log("Update this data: ", data);
+    data.slug = data.title
+      .toLowerCase()
+      .replace(/ /g, '-')
+      .replace(/[^\w-]+/g, '')
 
     return updateMutation.mutate(data)
   }
@@ -60,11 +63,11 @@ export const CreateUpdateBlog = () => {
     if (!isAddMode) {
       //Fetch data with ID
       const fetchJob = async () => {
-        const { data } = await API.get(`/jobs/${id}/`)
+        const { data } = await API.get(`/v1/blog/${id}/`)
 
         console.log('Data: ', data)
 
-        const fields = ['title', 'type', 'work_location', 'benefits', 'description', 'salary']
+        const fields = ['title', 'tags', 'description']
 
         //Set form values from returned data
         fields.forEach((field) => setValue(field, data[field]))
@@ -108,8 +111,8 @@ export const CreateUpdateBlog = () => {
         <FaChevronLeft className="mr-1" />
         Go Back
       </ButtonDefault>
-      <div className="mt-6 grid grid-cols-2 pt-6 sm:pt-0">
-        <div className="px-6 pt-4">
+      <div className="mt-6 grid-cols-2 pt-6 sm:pt-0 md:grid">
+        <div className="px-2 pt-4 md:px-6">
           <h3 className="font-mono text-lg font-semibold text-gray-700">General Information</h3>
           <p className="text-base font-light">
             Add a interesting title and description to your post. This will help others to find your
@@ -117,10 +120,10 @@ export const CreateUpdateBlog = () => {
           </p>
         </div>
 
-        <div className=" w-full overflow-hidden bg-gray-200 px-6 py-4 shadow-md dark:bg-gray-900 sm:max-w-2xl sm:rounded-lg ">
+        <div className="mt-4 w-full overflow-hidden bg-gray-200 px-6 py-4 shadow-md dark:bg-gray-900 sm:max-w-2xl sm:rounded-lg md:mt-0 ">
           <form onSubmit={handleSubmit(submitForm)}>
             <div className="mt-1 flex-auto">
-              <Label htmlFor="title">Enter the name of your Community post </Label>
+              <Label htmlFor="title">Title </Label>
               <Input
                 id="title"
                 type="text"
@@ -133,17 +136,26 @@ export const CreateUpdateBlog = () => {
               </span>
             </div>
             <div className="mt-4 flex-auto">
-              <Label htmlFor="type">What type of Job you offer </Label>
+              <Label htmlFor="tags">Tags </Label>
               <Input
-                id="type"
+                id="tags"
                 type="text"
                 className="mt-1 block w-full"
-                {...register('type')}
+                {...register('tags')}
                 required
               />
               <span className="text-sm text-gray-500 dark:text-slate-400">
-                <b>Example:</b> Full-Time / Remote / Part-Time
+                <b>Example:</b> react, javascript, frontend (separate by comma)
               </span>
+            </div>
+            <div className="mt-4 flex-auto">
+              <Label htmlFor="description">Description </Label>
+              <TextArea
+                id="description"
+                className="mt-1 block w-full"
+                {...register('description')}
+                required
+              />
             </div>
             <div className="mt-4 flex justify-end">
               <ButtonDefault
