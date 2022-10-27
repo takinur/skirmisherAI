@@ -13,7 +13,7 @@ import { NoExInfo } from '../../components/Alerts'
 import HeadlessModal from '../../components/Modal'
 import { useSelector } from 'react-redux'
 
-export const jobs = () => {
+export const BlogList = () => {
   const API = useAxiosPrivate()
   const [isModal, setModal] = useState(false)
   const [jobID, setJobID] = useState(null)
@@ -234,7 +234,7 @@ function Actions({ row, setModal, setJobID }) {
         </Link>
       </div>
       <div className="mr-2 w-4 transform hover:scale-110 hover:text-purple-500">
-        <Link to={`/employer/jobs/${row}/edit`}>
+        <Link to={`/user/blog/${row}/edit`}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
