@@ -220,20 +220,28 @@ const JobsApplications = ({ data, jobsFormatted, currentDT, API }) => {
 
   console.log('Suitability', suitability, 'Skill Match', skillMatch)
 
-  const dataArr = suitability
-
   const lineData = {
     labels: labels,
     datasets: [
       {
-        label: 'Job',
+        label: 'Suitability',
         backgroundColor: '#0694a2',
         borderColor: '#0694a2',
         fill: false,
-        data: dataArr,
+        data: suitability,
+      },
+      {
+        label: 'Skill Match',
+        backgroundColor: '#7e3af2',
+        borderColor: '#7e3af2',
+        fill: false,
+        data: skillMatch,
       },
     ],
-    legends: [{ title: 'Job Posted', color: 'bg-teal-600' }],
+    legends: [
+      { title: 'Suitability', color: 'bg-teal-600' },
+      { title: 'Skill Match', color: 'bg-purple-600' },
+    ],
   }
 
   //Export to CSV
@@ -251,7 +259,7 @@ const JobsApplications = ({ data, jobsFormatted, currentDT, API }) => {
   return (
     <section className="my-8 gap-6 md:grid md:grid-cols-4">
       <div className="col-span-3">
-        <ChartCard title="Jobs Posted">{<LineChart chartData={lineData} />}</ChartCard>
+        <ChartCard title="Jobs Applications">{<LineChart chartData={lineData} />}</ChartCard>
       </div>
       <div className="mt-4 md:col-span-1 md:mt-0 ">
         <h2 className="border-b-2 border-b-gray-900 py-3 text-2xl font-bold text-gray-700">
