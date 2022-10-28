@@ -12,6 +12,7 @@ import { useQuery } from 'react-query'
 import { LineChart } from '../../components/Charts'
 import ChartCard from '../../components/Charts/ChartCard'
 import { BarChart } from '../../components/Charts/BarChart'
+import { Loading } from '../../components/Loading'
 
 // TODO: Add 2 more reports to this page
 // 1. Applicants applied in the last 30 days
@@ -191,9 +192,9 @@ const JobsPosted = ({ data, jobsFormatted, currentDT }) => {
     </section>
   )
 }
-const JobsApplications = ({ data, jobsFormatted, currentDT, API }) => {
+const JobsApplications = ({ data, currentDT, API }) => {
   const [job, setJob] = useState(data[1].id)
-
+  console.log('Selected Job', job)
   // const isEnbled = job !== undefined ? false : true
   //Fetch Job
   const { data: jobDetail, isLoading } = useQuery(
@@ -208,21 +209,14 @@ const JobsApplications = ({ data, jobsFormatted, currentDT, API }) => {
       // enabled: isEnbled,
     }
   )
+  console.log('Job Detail', jobDetail)
+  if (isLoading) return <Loading />
 
-  console.log('Selected JOB Detail', jobDetail)
-
-  //Select only 5 character of name
-  const jobName = jobDetail?.job?.title?.slice(0, 5)
-
-  //Suitability of each job application
+  //Suitability and Skill Match of each job application
   const suitability = jobDetail?.map((item) => item.total_score)
-  const labels = jobDetail?.map((item) => item.id + '-' + item.candidate.name.slice(0, 5))
-
-  //Skill match and suitability of each job application
   const skillMatch = jobDetail?.map((item) => item.skill_score)
 
-  console.log('Suitability', suitability, 'Skill Match', skillMatch)
-
+  const labels = jobDetail?.map((item) => item.id + '-' + item.candidate.name.slice(0, 5))
   const barData = {
     labels: labels,
     datasets: [
@@ -247,16 +241,25 @@ const JobsApplications = ({ data, jobsFormatted, currentDT, API }) => {
     ],
   }
 
+  //Format the date to yyyy-MM-dd HH:mm:ss
+  const jobFormatted = jobDetail.map((job) => {
+    return {
+      ...job,
+      created_at: format(new Date(job.created_at), 'yyyy-MM-dd'),
+    }
+  })
+
   //Export to CSV
   const csvHeaders = [
-    { label: 'Job Title', key: 'title' },
-    { label: 'Job Type', key: 'type' },
-    { label: 'Job Category', key: 'level' },
-    { label: 'Job Location', key: 'work_location' },
-    { label: 'Job Salary', key: 'salary' },
-    { label: 'Job Description', key: 'description' },
-    { label: 'Job Requirements', key: 'qualifications' },
-    { label: 'Job Posted Date', key: 'created_at' },
+    { label: 'Job Title', key: 'job_title' },
+    { label: 'Candidate Name', key: 'candidate.name' },
+    { label: 'Skills Match', key: 'skill_score' },
+    { label: 'Suitability', key: 'total_score' },
+    { label: 'Applied', key: 'created_at' },
+    { label: 'Candidate Title', key: 'candidate.designation' },
+    { label: 'Email', key: 'candidate.email' },
+    { label: 'Location', key: 'candidate.location' },
+    { label: 'Phone', key: 'candidate.phone' },
   ]
 
   return (
@@ -269,12 +272,12 @@ const JobsApplications = ({ data, jobsFormatted, currentDT, API }) => {
           {' '}
           Export Job Applications{' '}
         </h2>
-        {/* <div className="mt-6">
+        <div className="mt-6">
           <CSVLink
-            data={jobsFormatted}
+            data={jobFormatted}
             headers={csvHeaders}
-            filename={`Jobs_${currentDT}_SkirmisherAI.csv`}
-            className="focus:shadow-outline flex rounded bg-teal-600 py-2 px-4 font-bold text-gray-100 hover:bg-teal-700 focus:outline-none"
+            filename={`${jobFormatted[0].job_title}_Applications_${currentDT}.csv`}
+            className="focus:shadow-outline flex rounded bg-green-700 py-2 px-4 font-bold text-gray-100 hover:bg-green-800 focus:outline-none"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -292,7 +295,7 @@ const JobsApplications = ({ data, jobsFormatted, currentDT, API }) => {
             </svg>{' '}
             Last Updated on {currentDT}
           </CSVLink>
-        </div> */}
+        </div>
         <div className="mt-4">
           <span className="text-gray-700">Total Applications: {jobDetail.length}</span>
 
