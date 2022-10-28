@@ -147,7 +147,7 @@ export const Reports = () => {
 const JobsPosted = ({ data }) => {
   //Jobs Posted per day over time
   const jobsPostedPerDay = data.reduce((acc, job) => {
-    const date = format(new Date(job.created_at), 'yyyy-MM-dd')
+    const date = format(new Date(job.created_at), 'dd-MMM-yyyy')
     if (acc[date]) {
       acc[date] += 1
     } else {
@@ -159,9 +159,9 @@ const JobsPosted = ({ data }) => {
   // console.log('ddd', jobsPostedPerDay)
 
   //All the dates to arrary for chart lables
-  const labels = Object.keys(jobsPostedPerDay)
+  const labels = Object.keys(jobsPostedPerDay).reverse()
   //All the counts to arrary for chart data
-  const dataArr = Object.values(jobsPostedPerDay)
+  const dataArr = Object.values(jobsPostedPerDay).reverse()
 
   const lineData = {
     labels: labels,
