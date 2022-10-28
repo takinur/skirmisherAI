@@ -77,11 +77,11 @@ export const Reports = () => {
       ]
       return (
         <div className="wrapper">
-          <div className="my-8 grid gap-6 md:grid-cols-4">
+          <div className="my-8 gap-6 md:grid md:grid-cols-4">
             <div className="col-span-3">
               <JobsPosted data={jobs} />
             </div>
-            <div className="col-span-1">
+            <div className="mt-4 md:col-span-1 md:mt-0 ">
               <h2 className="border-b-2 border-b-gray-900 py-3 text-2xl font-bold text-gray-700">
                 {' '}
                 Download or Export Jobs{' '}
@@ -115,7 +115,7 @@ export const Reports = () => {
 
                 <button
                   disabled
-                  className="focus:shadow-outline ml-auto mt-4 flex rounded bg-gray-600 py-2 px-4 font-bold text-gray-100  focus:outline-none"
+                  className="focus:shadow-outline mt-4 flex rounded bg-gray-600 py-2 px-4 font-bold text-gray-100 focus:outline-none  md:ml-auto"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
