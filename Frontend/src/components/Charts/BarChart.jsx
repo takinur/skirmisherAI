@@ -1,6 +1,6 @@
 import React from 'react'
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip } from 'chart.js'
-import { Line } from 'react-chartjs-2'
+import { Bar } from 'react-chartjs-2'
 import ChartLegend from './ChartLegend'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Title)

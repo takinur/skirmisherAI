@@ -11,6 +11,7 @@ import { useQuery } from 'react-query'
 
 import { LineChart } from '../../components/Charts'
 import ChartCard from '../../components/Charts/ChartCard'
+import { BarChart } from '../../components/Charts/BarChart'
 
 // TODO: Add 2 more reports to this page
 // 1. Applicants applied in the last 30 days
@@ -210,17 +211,19 @@ const JobsApplications = ({ data, jobsFormatted, currentDT, API }) => {
 
   console.log('Selected JOB Detail', jobDetail)
 
+  //Select only 5 character of name
+  const jobName = jobDetail?.job?.title?.slice(0, 5)
+
   //Suitability of each job application
   const suitability = jobDetail?.map((item) => item.total_score)
-  // const suitabilityData = {
-  const labels = ['Very Low', 'Low', 'Medium', 'High', 'Very High']
+  const labels = jobDetail?.map((item) => item.id + '-' + item.candidate.name.slice(0, 5))
 
   //Skill match and suitability of each job application
   const skillMatch = jobDetail?.map((item) => item.skill_score)
 
   console.log('Suitability', suitability, 'Skill Match', skillMatch)
 
-  const lineData = {
+  const barData = {
     labels: labels,
     datasets: [
       {
@@ -259,12 +262,12 @@ const JobsApplications = ({ data, jobsFormatted, currentDT, API }) => {
   return (
     <section className="my-8 gap-6 md:grid md:grid-cols-4">
       <div className="col-span-3">
-        <ChartCard title="Jobs Applications">{<LineChart chartData={lineData} />}</ChartCard>
+        <ChartCard title="Jobs Applications">{<BarChart chartData={barData} />}</ChartCard>
       </div>
       <div className="mt-4 md:col-span-1 md:mt-0 ">
         <h2 className="border-b-2 border-b-gray-900 py-3 text-2xl font-bold text-gray-700">
           {' '}
-          Download or Export Jobs{' '}
+          Export Job Applications{' '}
         </h2>
         {/* <div className="mt-6">
           <CSVLink
@@ -291,7 +294,7 @@ const JobsApplications = ({ data, jobsFormatted, currentDT, API }) => {
           </CSVLink>
         </div> */}
         <div className="mt-4">
-          <span className="text-gray-700">Total Jobs Posted: {data.length}</span>
+          <span className="text-gray-700">Total Applications: {jobDetail.length}</span>
 
           <button
             disabled
