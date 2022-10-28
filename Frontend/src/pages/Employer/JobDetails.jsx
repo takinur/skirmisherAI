@@ -35,7 +35,7 @@ export const JobDetails = () => {
     if (!id && id !== undefined) {
       navigate('/employer/jobs')
     }
-  }, [id])
+  }, [])
 
   //Fetch Job Applications
   const { isLoading: isAppLoading, data } = useQuery(
