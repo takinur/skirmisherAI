@@ -15,13 +15,6 @@ import { BarChart } from '../../components/Charts/BarChart'
 import { Loading } from '../../components/Loading'
 import { SelectListBox } from '../../components/SelectDropdown'
 
-// TODO: Add 2 more reports to this page
-// 1. Applicants applied in the last 30 days
-// 2. Applicants hired in the last 30 days
-//FIx the chart to show the correct data
-
-// TODO: HELP PAGE next target
-
 export const Reports = () => {
   useTitle('Reports')
   //Current date and time
