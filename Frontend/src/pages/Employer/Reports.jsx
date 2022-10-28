@@ -191,9 +191,9 @@ const JobsPosted = ({ data, jobsFormatted, currentDT }) => {
   )
 }
 const JobsApplications = ({ data, jobsFormatted, currentDT, API }) => {
-  const [job, setJob] = useState(data[3].id)
+  const [job, setJob] = useState(data[1].id)
 
-  const isEnbled = job ? false : true
+  // const isEnbled = job !== undefined ? false : true
   //Fetch Job
   const { data: jobDetail, isLoading } = useQuery(
     'jobDetail',
@@ -204,42 +204,23 @@ const JobsApplications = ({ data, jobsFormatted, currentDT, API }) => {
     {
       refetchOnWindowFocus: false,
       retry: 1,
-      enabled: isEnbled,
+      // enabled: isEnbled,
     }
   )
 
   console.log('Selected JOB Detail', jobDetail)
 
-  //Job Applications Chart Data
-  const jobApplicationsPerDay = jobDetail?.reduce(
-    (acc, curr) => ({
-      ...acc,
-      [curr.created_at]: (acc[curr.created_at] || 0) + 1,
-    }),
-    {}
-  )
+  //Suitability of each job application
+  const suitability = jobDetail?.map((item) => item.total_score)
+  // const suitabilityData = {
+  const labels = ['Very Low', 'Low', 'Medium', 'High', 'Very High']
 
-  console.log('jobApplicationsPerDay', jobApplicationsPerDay)
+  //Skill match and suitability of each job application
+  const skillMatch = jobDetail?.map((item) => item.skill_score)
 
-  //Fetch job details for each job id with react query
+  console.log('Suitability', suitability, 'Skill Match', skillMatch)
 
-  //Jobs Posted per day over time
-  const jobsPostedPerDay = data.reduce((acc, job) => {
-    const date = format(new Date(job.created_at), 'dd-MMM-yyyy')
-    if (acc[date]) {
-      acc[date] += 1
-    } else {
-      acc[date] = 1
-    }
-    return acc
-  }, {})
-
-  // console.log('ddd', jobsPostedPerDay)
-
-  //All the dates to arrary for chart lables
-  const labels = Object.keys(jobsPostedPerDay).reverse()
-  //All the counts to arrary for chart data
-  const dataArr = Object.values(jobsPostedPerDay).reverse()
+  const dataArr = suitability
 
   const lineData = {
     labels: labels,
@@ -270,7 +251,7 @@ const JobsApplications = ({ data, jobsFormatted, currentDT, API }) => {
   return (
     <section className="my-8 gap-6 md:grid md:grid-cols-4">
       <div className="col-span-3">
-        {/* <ChartCard title="Jobs Posted">{<LineChart chartData={lineData} />}</ChartCard> */}
+        <ChartCard title="Jobs Posted">{<LineChart chartData={lineData} />}</ChartCard>
       </div>
       <div className="mt-4 md:col-span-1 md:mt-0 ">
         <h2 className="border-b-2 border-b-gray-900 py-3 text-2xl font-bold text-gray-700">
