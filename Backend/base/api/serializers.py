@@ -239,10 +239,9 @@ class JobApplicationSerializer(serializers.ModelSerializer):
 
 
 '''
-Job application serializer for Employers
+Job application serializer for Employer
 
 '''
-
 
 class RetriveJobApplicationSerializer(serializers.ModelSerializer):
     candidate = CandidateProfileSerializer(read_only=True)
