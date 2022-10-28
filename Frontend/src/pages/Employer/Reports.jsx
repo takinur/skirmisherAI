@@ -201,7 +201,7 @@ const JobsApplications = ({ data, currentDT, API }) => {
 
   const [job, setJob] = useState(applications[1])
 
-  console.log('Selected Job', job)
+  // console.log('Selected Job', job)
 
   //Return the selected job data with react query
   const {
@@ -277,8 +277,9 @@ const JobsApplications = ({ data, currentDT, API }) => {
 
   return (
     <section className="my-8 gap-6 md:grid md:grid-cols-4">
-      <div className="col-span-3">
+      <div className="col-span-3 grid grid-flow-row gap-4">
         <SelectListBox items={applications} selected={job} setSelected={setJob} />
+
         <ChartCard title="Jobs Applications">{<BarChart chartData={barData} />}</ChartCard>
       </div>
       <div className="mt-4 md:col-span-1 md:mt-0 ">
@@ -290,7 +291,7 @@ const JobsApplications = ({ data, currentDT, API }) => {
           <CSVLink
             data={jobFormatted}
             headers={csvHeaders}
-            filename={`${jobFormatted[0].job_title}_Applications_${currentDT}.csv`}
+            filename={`${jobFormatted[0]?.job_title}_Applications_${currentDT}.csv`}
             className="focus:shadow-outline flex rounded bg-green-700 py-2 px-4 font-bold text-gray-100 hover:bg-green-800 focus:outline-none"
           >
             <svg
