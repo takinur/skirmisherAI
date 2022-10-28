@@ -145,52 +145,23 @@ export const Reports = () => {
 }
 
 const JobsPosted = ({ data }) => {
-  // Job posted in the last 30 days (30 days = 2592000 seconds)
-  const last30Days = data?.filter((job) => {
-    const jobDate = new Date(job.created_at).getTime() / 1000
-    const currentDate = new Date().getTime() / 1000
-    const diff = currentDate - jobDate
-    return diff < 2592000
-  })
-
-  // reverse the array to get the latest job posted
-  const last30DaysReversed = last30Days?.reverse()
-
-  // Count of jobs posted each day in the last 30 days
-  const last30DaysCount = last30DaysReversed?.reduce((acc, job) => {
-    const jobDate = new Date(job.created_at).toLocaleDateString()
-    if (acc[jobDate]) {
-      acc[jobDate] += 1
+  //Jobs Posted per day over time
+  const jobsPostedPerDay = data.reduce((acc, job) => {
+    const date = format(new Date(job.created_at), 'yyyy-MM-dd')
+    if (acc[date]) {
+      acc[date] += 1
     } else {
-      acc[jobDate] = 1
+      acc[date] = 1
     }
     return acc
   }, {})
-  // console.log('30DaysCount', last30DaysCount)
 
-  // Every date in the last 30 days (30 days = 2592000 seconds)
-  const last30DaysAll = []
-  for (let i = 0; i < 30; i++) {
-    const date = new Date()
-    date.setDate(date.getDate() - i)
-    last30DaysAll.push(date.toLocaleDateString())
-  }
+  // console.log('ddd', jobsPostedPerDay)
 
-  // Count of jobs posted each day in the last 30 days
-  const last30DaysAllCount = last30DaysAll?.reduce((acc, date) => {
-    if (last30DaysCount[date]) {
-      acc[date] = last30DaysCount[date]
-    } else {
-      acc[date] = 0
-    }
-    return acc
-  }, {})
-  console.log('30DaysAllCount', last30DaysAllCount)
-
-  //All the dates to arrary for chart labels in reverse order
-  const labels = Object.keys(last30DaysAllCount).reverse()
+  //All the dates to arrary for chart lables
+  const labels = Object.keys(jobsPostedPerDay)
   //All the counts to arrary for chart data
-  const dataArr = Object.values(last30DaysAllCount).reverse()
+  const dataArr = Object.values(jobsPostedPerDay)
 
   const lineData = {
     labels: labels,
