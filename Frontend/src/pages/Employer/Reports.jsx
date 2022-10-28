@@ -13,6 +13,7 @@ import { LineChart } from '../../components/Charts'
 import ChartCard from '../../components/Charts/ChartCard'
 import { BarChart } from '../../components/Charts/BarChart'
 import { Loading } from '../../components/Loading'
+import { SelectListBox } from '../../components/SelectDropdown'
 
 // TODO: Add 2 more reports to this page
 // 1. Applicants applied in the last 30 days
@@ -169,7 +170,7 @@ const JobsPosted = ({ data, jobsFormatted, currentDT }) => {
 
           <button
             disabled
-            className="focus:shadow-outline mt-4 flex rounded bg-gray-600 py-2 px-4 font-bold text-gray-100 focus:outline-none  md:ml-auto"
+            className="focus:shadow-outline mt-4 flex rounded bg-gray-600 py-2 px-4 font-bold text-gray-100 focus:outline-none disabled:opacity-50  md:ml-auto"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -193,14 +194,24 @@ const JobsPosted = ({ data, jobsFormatted, currentDT }) => {
   )
 }
 const JobsApplications = ({ data, currentDT, API }) => {
-  const [job, setJob] = useState(data[1].id)
+  //Data to name and ID for select options
+  const applications = data.map((item) => {
+    return { value: item.id, name: item.title }
+  })
+
+  const [job, setJob] = useState(applications[1])
+
   console.log('Selected Job', job)
-  // const isEnbled = job !== undefined ? false : true
-  //Fetch Job
-  const { data: jobDetail, isLoading } = useQuery(
-    'jobDetail',
+
+  //Return the selected job data with react query
+  const {
+    data: jobData,
+    isLoading,
+    isError,
+  } = useQuery(
+    ['jobDetails', job],
     async () => {
-      const res = await API.get(`/v1/application-dashboard/?job_id=${job}`)
+      const res = await API.get(`/v1/application-dashboard/?job_id=${job.value}`)
       return res.data
     },
     {
@@ -209,14 +220,16 @@ const JobsApplications = ({ data, currentDT, API }) => {
       // enabled: isEnbled,
     }
   )
-  console.log('Job Detail', jobDetail)
+
+  // console.log(`Returned Job Data for ${job.value}`, jobData)
+
   if (isLoading) return <Loading />
 
-  //Suitability and Skill Match of each job application
-  const suitability = jobDetail?.map((item) => item.total_score)
-  const skillMatch = jobDetail?.map((item) => item.skill_score)
+  // //Suitability and Skill Match of each job application
+  const suitability = jobData?.map((item) => item.total_score)
+  const skillMatch = jobData?.map((item) => item.skill_score)
 
-  const labels = jobDetail?.map((item) => item.id + '-' + item.candidate.name.slice(0, 5))
+  const labels = jobData?.map((item) => item.id + '-' + item.candidate.name.slice(0, 5))
   const barData = {
     labels: labels,
     datasets: [
@@ -242,7 +255,7 @@ const JobsApplications = ({ data, currentDT, API }) => {
   }
 
   //Format the date to yyyy-MM-dd HH:mm:ss
-  const jobFormatted = jobDetail.map((job) => {
+  const jobFormatted = jobData.map((job) => {
     return {
       ...job,
       created_at: format(new Date(job.created_at), 'yyyy-MM-dd'),
@@ -265,6 +278,7 @@ const JobsApplications = ({ data, currentDT, API }) => {
   return (
     <section className="my-8 gap-6 md:grid md:grid-cols-4">
       <div className="col-span-3">
+        <SelectListBox items={applications} selected={job} setSelected={setJob} />
         <ChartCard title="Jobs Applications">{<BarChart chartData={barData} />}</ChartCard>
       </div>
       <div className="mt-4 md:col-span-1 md:mt-0 ">
@@ -297,11 +311,11 @@ const JobsApplications = ({ data, currentDT, API }) => {
           </CSVLink>
         </div>
         <div className="mt-4">
-          <span className="text-gray-700">Total Applications: {jobDetail.length}</span>
+          <span className="text-gray-700">Total Applications: {jobData.length}</span>
 
           <button
             disabled
-            className="focus:shadow-outline mt-4 flex rounded bg-gray-600 py-2 px-4 font-bold text-gray-100 focus:outline-none  md:ml-auto"
+            className="focus:shadow-outline mt-4 flex rounded bg-gray-600 py-2 px-4 font-bold text-gray-100 focus:outline-none disabled:opacity-50  md:ml-auto"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
