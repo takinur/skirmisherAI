@@ -32,7 +32,15 @@ class EmployerProfileAdmin(admin.ModelAdmin):
     exculude = ('password', 'last_login', 'updated_at',)
 
     list_filter = ('company_name', 'location', 'phone',)
-    fieldsets = ()
+    fieldsets = (
+        (None, {
+            'fields': ('company_name', 'location', 'phone', 'size', 'website', 'user')
+        }),
+        ('Further Details', {
+            'fields': ('slogan', 'logo', 'about')
+        }
+        ),
+    )
 
 
 admin.site.register(UserAccount, UserAccountAdmin)
