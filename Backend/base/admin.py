@@ -22,9 +22,6 @@ class UserAccountAdmin(admin.ModelAdmin):
         ),
     )
 
-    ('name', 'email', 'is_superuser',
-     'is_staff', 'role', 'is_active',)
-
 
 class EmployerProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'company_name', 'slogan',
@@ -34,7 +31,7 @@ class EmployerProfileAdmin(admin.ModelAdmin):
 
     exculude = ('password', 'last_login', 'updated_at',)
 
-    list_filter = ('user',)
+    list_filter = ('company_name', 'location', 'phone',)
     fieldsets = ()
 
 
