@@ -1,3 +1,11 @@
-.main-footer {
+footer > div > b {
+  display: none;
+}
+
+.sidebar > .user-panel > .image > i {
+  display: none;
+}
+
+#jazzy-navbar > form {
   display: none;
 }

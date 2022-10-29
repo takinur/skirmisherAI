@@ -181,7 +181,7 @@ class Project(models.Model):
 
 class Vacancy(models.Model):
     class Meta:
-        verbose_name_plural = '4. Vacancies'
+        verbose_name_plural = '4. Manage Vacancies'
 
     title = models.CharField(max_length=80)
     type = models.CharField(max_length=80, blank=True, null=True)
