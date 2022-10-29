@@ -39,7 +39,7 @@ class UserManager(BaseUserManager):
 
 class UserAccount(AbstractBaseUser, PermissionsMixin):
     class Meta:
-        verbose_name_plural = '1. Users'
+        verbose_name_plural = '1. Manage Users'
 
     ROLE_CHOICES = (
         (1, 'EMPLOYER'),
