@@ -15,4 +15,5 @@ class UserAccountAdmin(admin.ModelAdmin):
     fieldsets = ()
 
 
+
 admin.site.register(UserAccount, UserAccountAdmin)
