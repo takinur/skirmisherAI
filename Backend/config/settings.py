@@ -183,6 +183,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 # Actual Directory user files go to
 MEDIA_ROOT = os.path.join(BASE_DIR, 'resources')
 # Url used to access the media
@@ -303,7 +306,7 @@ JAZZMIN_SETTINGS = {
     # UI Tweaks #
     #############
     # Relative paths to custom CSS/JS scripts (must be present in static files)
-    "custom_css": None,
+    "custom_css": '/assets/style.css',
     "custom_js": None,
     # Whether to show the UI customizer on the sidebar
     "show_ui_builder": False,
@@ -321,4 +324,5 @@ JAZZMIN_SETTINGS = {
     "changeform_format_overrides": {"auth.user": "collapsible", "auth.group": "vertical_tabs"},
     # Add a language dropdown into the admin
     "language_chooser": False,
+
 }
