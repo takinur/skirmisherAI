@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # UserAccount model
-from .models import CandidateProfile, EmployerProfile, UserAccount
+from .models import CandidateProfile, EmployerProfile, UserAccount, Vacancy
 
 
 class UserAccountAdmin(admin.ModelAdmin):
@@ -26,6 +26,7 @@ class UserAccountAdmin(admin.ModelAdmin):
 class EmployerProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'company_name', 'slogan',
                     'website', 'phone', 'location', 'created_at')
+
     search_fields = ('user', 'company_name', 'website',
                      'phone', 'location',)
 
@@ -46,6 +47,7 @@ class EmployerProfileAdmin(admin.ModelAdmin):
 class CandidateProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'email', 'phone',
                     'website', 'designation', 'location', 'resume_file', 'created_at')
+
     search_fields = ('user', 'email', 'location',
                      'phone', 'designation',)
 
@@ -58,6 +60,26 @@ class CandidateProfileAdmin(admin.ModelAdmin):
     )
 
 
+class VacancyAdmin(admin.ModelAdmin):
+    list_display = ('title', 'type', 'level', 'salary', 'benefits',
+                    'qualifications', 'work_location', 'employer', 'created_at')
+
+    search_fields = ('title', 'type', 'qualifications',
+                     'work_location', 'employer',)
+
+    list_filter = ('type', 'work_location', 'employer', 'created_at',)
+    fieldsets = (
+        (None, {
+            'fields': ('title', 'level', 'salary', 'qualifications', 'employer')
+        }),
+        ('Additional Details', {
+            'fields': ('work_location', 'type', 'benefits', 'description')
+        }
+        ),
+    )
+
+
 admin.site.register(UserAccount, UserAccountAdmin)
 admin.site.register(EmployerProfile, EmployerProfileAdmin)
 admin.site.register(CandidateProfile, CandidateProfileAdmin)
+admin.site.register(Vacancy, VacancyAdmin)
