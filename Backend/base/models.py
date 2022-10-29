@@ -58,7 +58,7 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['name']
 
     def __str__(self):
-        return self.email
+        return self.name
 
 
 # Explicitly set upload path and filename
