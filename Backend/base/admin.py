@@ -1,6 +1,5 @@
 from django.contrib import admin
 
-# UserAccount model
 from .models import CandidateProfile, EmployerProfile, UserAccount, Vacancy
 
 
@@ -77,6 +76,13 @@ class VacancyAdmin(admin.ModelAdmin):
         }
         ),
     )
+
+
+# TODO: Job Applications, 
+# Invitations, 
+# Blog Posts,
+# Newsletters, 
+# contact messages, 
 
 
 admin.site.register(UserAccount, UserAccountAdmin)
