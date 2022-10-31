@@ -305,6 +305,8 @@ JAZZMIN_SETTINGS = {
         "django_q.ormq": "fas fa-tasks",
         "django_q.schedule": "fas fa-calendar-alt",
         "django_q.success": "fas fa-check",
+        "token_blacklist.blacklistedtoken": "fas fa-ban",
+        "token_blacklist.outstandingtoken": "fas fa-clipboard-check",
 
     },
     # Icons that are used when one is not manually specified
