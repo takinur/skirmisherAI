@@ -236,7 +236,7 @@ JAZZMIN_SETTINGS = {
     # Copyright on the footer
     "copyright": "SkirmisherAI LLC",
     # The model admin to search from the search bar, search bar omitted if excluded
-    "search_model": "auth.User",
+    # "search_model": "auth.User",
     # Field name on user model that contains avatar ImageField/URLField/Charfield or a callable that receives the user
     "user_avatar": None,
     ############
@@ -276,7 +276,7 @@ JAZZMIN_SETTINGS = {
     # Hide these models when generating side menu (e.g auth.user)
     "hide_models": [],
     # List of apps (and/or models) to base side menu ordering off of (does not need to contain all apps/models)
-    "order_with_respect_to": ["auth", "base", "books.useraccounts"],
+    "order_with_respect_to": ["base.employerprofile", "base.useraccount", "books.useraccounts"],
     # Custom links to append to app groups, keyed on app name
     # "custom_links": {
     #     "base": [{
@@ -293,6 +293,8 @@ JAZZMIN_SETTINGS = {
         "auth.user": "fas fa-user",
         "auth.Group": "fas fa-users",
         "base.useraccount": "fas fa-user",
+        "base.employerprofile": "fas fa-building",
+
     },
     # Icons that are used when one is not manually specified
     "default_icon_parents": "fas fa-chevron-circle-right",
