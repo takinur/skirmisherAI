@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import CandidateProfile, EmployerProfile, Invitation, JobApplication, UserAccount, Vacancy
+from .models import Blog, CandidateProfile, EmployerProfile, Invitation, JobApplication, UserAccount, Vacancy
 
 
 class UserAccountAdmin(admin.ModelAdmin):
@@ -126,6 +126,22 @@ class InvitationAdmin(admin.ModelAdmin):
         }),
     )
 
+
+class BlogAdmin(admin.ModelAdmin):
+    list_display = ('title', 'tags', 'author', 'slug',
+                    'description', 'created_at')
+
+    search_fields = ('title', 'tags', 'author',
+                     'slug', )
+
+    list_filter = ('tags', 'author', 'created_at',)
+    fieldsets = (
+        (None, {
+            'fields': ('title', 'tags', 'author', 'slug',
+                       'description',)
+        }),
+    )
+
 # Blog Posts,
 # Newsletters,
 # contact messages,
@@ -137,3 +153,4 @@ admin.site.register(CandidateProfile, CandidateProfileAdmin)
 admin.site.register(Vacancy, VacancyAdmin)
 admin.site.register(JobApplication, ApplicationAdmin)
 admin.site.register(Invitation, InvitationAdmin)
+admin.site.register(Blog, BlogAdmin)
