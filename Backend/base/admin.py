@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import CandidateProfile, EmployerProfile, UserAccount, Vacancy
+from .models import CandidateProfile, EmployerProfile, JobApplication, UserAccount, Vacancy
 
 
 class UserAccountAdmin(admin.ModelAdmin):
@@ -78,14 +78,30 @@ class VacancyAdmin(admin.ModelAdmin):
     )
 
 
-# TODO: Job Applications, 
-# Invitations, 
+class ApplicationAdmin(admin.ModelAdmin):
+    list_display = ('vacancy', 'candidate', 'status',
+                    'skill_score', 'total_score', 'created_at')
+
+    search_fields = ('vacancy', 'candidate', 'status',
+                     'created_at',)
+
+    list_filter = ('vacancy', 'status', 'created_at',)
+    fieldsets = (
+        (None, {
+            'fields': ('vacancy', 'candidate', 'status', 'skill_score', 'total_score', 'created_at')
+        }),
+    )
+
+
+# TODO: Job Applications,
+# Invitations,
 # Blog Posts,
-# Newsletters, 
-# contact messages, 
+# Newsletters,
+# contact messages,
 
 
 admin.site.register(UserAccount, UserAccountAdmin)
 admin.site.register(EmployerProfile, EmployerProfileAdmin)
 admin.site.register(CandidateProfile, CandidateProfileAdmin)
 admin.site.register(Vacancy, VacancyAdmin)
+admin.site.register(JobApplication, ApplicationAdmin)
