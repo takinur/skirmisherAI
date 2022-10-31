@@ -300,6 +300,11 @@ JAZZMIN_SETTINGS = {
         "base.blog": "fas fa-blog",
         "base.contact": "fas fa-phone",
         "base.newsletter": "fas fa-envelope",
+        # Django Q
+        "django_q.failure": "fas fa-exclamation-triangle",
+        "django_q.ormq": "fas fa-tasks",
+        "django_q.schedule": "fas fa-calendar-alt",
+        "django_q.success": "fas fa-check",
 
     },
     # Icons that are used when one is not manually specified
