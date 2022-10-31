@@ -142,9 +142,23 @@ class BlogAdmin(admin.ModelAdmin):
         }),
     )
 
-# Blog Posts,
-# Newsletters,
-# contact messages,
+
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'subject',
+                    'message', 'created_at')
+
+    search_fields = ('name', 'email', 'subject',
+                     'message',)
+
+    list_filter = ('subject', 'created_at',)
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'email', 'subject', 'message',)
+        }),
+    )
+
+
+
 
 
 admin.site.register(UserAccount, UserAccountAdmin)
