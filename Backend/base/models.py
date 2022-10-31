@@ -120,6 +120,9 @@ class CandidateProfile(models.Model):
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
 
+    def __str__(self):
+        return self.user and self.user.name or ''
+
 
 class Skill(models.Model):
     name = models.CharField(max_length=80)
