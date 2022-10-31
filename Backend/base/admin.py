@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import CandidateProfile, EmployerProfile, JobApplication, UserAccount, Vacancy
+from .models import CandidateProfile, EmployerProfile, Invitation, JobApplication, UserAccount, Vacancy
 
 
 class UserAccountAdmin(admin.ModelAdmin):
@@ -88,13 +88,44 @@ class ApplicationAdmin(admin.ModelAdmin):
     list_filter = ('vacancy', 'status', 'created_at',)
     fieldsets = (
         (None, {
-            'fields': ('vacancy', 'candidate', 'status', 'skill_score', 'total_score', 'created_at')
+            'fields': ('vacancy', 'candidate', 'status', 'skill_score', 'total_score', )
         }),
     )
 
 
-# TODO: Job Applications,
-# Invitations,
+class VacancyAdmin(admin.ModelAdmin):
+    list_display = ('title', 'type', 'level', 'salary', 'benefits',
+                    'qualifications', 'work_location', 'employer', 'created_at')
+
+    search_fields = ('title', 'type', 'qualifications',
+                     'work_location', 'employer',)
+
+    list_filter = ('type', 'work_location', 'employer', 'created_at',)
+    fieldsets = (
+        (None, {
+            'fields': ('title', 'level', 'salary', 'qualifications', 'employer')
+        }),
+        ('Additional Details', {
+            'fields': ('work_location', 'type', 'benefits', 'description')
+        }
+        ),
+    )
+
+
+class InvitationAdmin(admin.ModelAdmin):
+    list_display = ('job_application', 'meet_url',
+                    'schedule', 'remarks', 'created_at')
+
+    search_fields = ('job_application', 'meet_url', 'schedule',
+                     'created_at',)
+
+    list_filter = ('schedule', 'created_at',)
+    fieldsets = (
+        (None, {
+            'fields': ('job_application', 'meet_url', 'schedule', 'remarks',)
+        }),
+    )
+
 # Blog Posts,
 # Newsletters,
 # contact messages,
@@ -105,3 +136,4 @@ admin.site.register(EmployerProfile, EmployerProfileAdmin)
 admin.site.register(CandidateProfile, CandidateProfileAdmin)
 admin.site.register(Vacancy, VacancyAdmin)
 admin.site.register(JobApplication, ApplicationAdmin)
+admin.site.register(Invitation, InvitationAdmin)
