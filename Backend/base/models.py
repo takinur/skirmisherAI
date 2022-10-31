@@ -265,6 +265,7 @@ class Contact(models.Model):
 
     name = models.CharField(max_length=80)
     email = models.EmailField(max_length=80)
+    subject = models.CharField(max_length=80)
     message = models.TextField(null=True)
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
