@@ -121,7 +121,7 @@ class CandidateProfile(models.Model):
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
 
     def __str__(self):
-        return self.user and self.user.name or ''
+        return self.user.name or ''
 
 
 class Skill(models.Model):
