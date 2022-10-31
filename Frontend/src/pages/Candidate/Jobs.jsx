@@ -32,9 +32,7 @@ export const Jobs = () => {
     }
   )
 
-  if (isLoading) return <h1> Loading</h1>
-
-  console.log('fetched applications', data)
+  // console.log('fetched applications', data)
 
   return (
     <AuthLayout title="Jobs that you applied">
