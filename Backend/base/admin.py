@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Blog, CandidateProfile, EmployerProfile, Invitation, JobApplication, UserAccount, Vacancy
+from .models import Blog, CandidateProfile, Contact, EmployerProfile, Invitation, JobApplication, Newsletter, UserAccount, Vacancy
 
 
 class UserAccountAdmin(admin.ModelAdmin):
@@ -158,7 +158,12 @@ class ContactAdmin(admin.ModelAdmin):
     )
 
 
+class NewsletterAdmin(admin.ModelAdmin):
+    list_display = ('email', 'created_at')
 
+    search_fields = ('email',)
+
+    list_filter = ('created_at',)
 
 
 admin.site.register(UserAccount, UserAccountAdmin)
@@ -168,3 +173,5 @@ admin.site.register(Vacancy, VacancyAdmin)
 admin.site.register(JobApplication, ApplicationAdmin)
 admin.site.register(Invitation, InvitationAdmin)
 admin.site.register(Blog, BlogAdmin)
+admin.site.register(Contact, ContactAdmin)
+admin.site.register(Newsletter, NewsletterAdmin)
