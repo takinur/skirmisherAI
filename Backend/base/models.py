@@ -223,6 +223,9 @@ class JobApplication(models.Model):
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
 
+    def __str__(self) -> str:
+        return self.candidate.name + ' - ' + self.vacancy.title
+
 
 class Invitation(models.Model):
     class Meta:
