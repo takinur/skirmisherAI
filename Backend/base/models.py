@@ -39,7 +39,7 @@ class UserManager(BaseUserManager):
 
 class UserAccount(AbstractBaseUser, PermissionsMixin):
     class Meta:
-        verbose_name_plural = '1. Manage Users'
+        verbose_name_plural = 'Manage Users'
 
     ROLE_CHOICES = (
         (1, 'EMPLOYER'),
@@ -71,7 +71,7 @@ def upload_to(instance, filename):
 
 class EmployerProfile(models.Model):
     class Meta:
-        verbose_name_plural = '2. Employer Profiles'
+        verbose_name_plural = 'Employer Profiles'
 
     company_name = models.CharField(max_length=80)
     slogan = models.CharField(max_length=200, blank=True, null=True)
@@ -102,7 +102,7 @@ class FileUpload(models.Model):
 
 class CandidateProfile(models.Model):
     class Meta:
-        verbose_name_plural = '3. Candidate Profiles'
+        verbose_name_plural = 'Candidate Profiles'
 
     designation = models.CharField(max_length=80, blank=True, null=True)
     location = models.CharField(max_length=100, blank=True, null=True)
@@ -184,7 +184,7 @@ class Project(models.Model):
 
 class Vacancy(models.Model):
     class Meta:
-        verbose_name_plural = '4. Manage Vacancies'
+        verbose_name_plural = 'Manage Vacancies'
 
     title = models.CharField(max_length=80)
     type = models.CharField(max_length=80, blank=True, null=True)
@@ -207,7 +207,7 @@ class Vacancy(models.Model):
 
 class JobApplication(models.Model):
     class Meta:
-        verbose_name_plural = '5. Job Applications'
+        verbose_name_plural = 'Job Applications'
 
     total_score = models.DecimalField(
         max_digits=5, decimal_places=2, default=0)
@@ -229,7 +229,7 @@ class JobApplication(models.Model):
 
 class Invitation(models.Model):
     class Meta:
-        verbose_name_plural = '6. Interview Invitations'
+        verbose_name_plural = 'Interview Invitations'
 
     meet_url = models.CharField(max_length=200, blank=True, null=True)
     schedule = models.DateField(blank=True, null=True)
@@ -244,7 +244,7 @@ class Invitation(models.Model):
 
 class Blog(models.Model):
     class Meta:
-        verbose_name_plural = '7. Community Posts'
+        verbose_name_plural = 'Community Posts'
 
     title = models.CharField(max_length=80)
     description = models.TextField(null=True)
@@ -261,7 +261,7 @@ class Blog(models.Model):
 
 class Contact(models.Model):
     class Meta:
-        verbose_name_plural = '8. Contact Messages'
+        verbose_name_plural = 'Contact Messages'
 
     name = models.CharField(max_length=80)
     email = models.EmailField(max_length=80)
@@ -276,7 +276,7 @@ class Contact(models.Model):
 
 class Newsletter(models.Model):
     class Meta:
-        verbose_name_plural = '9. Newsletter Subscribers'
+        verbose_name_plural = 'Newsletter Subscribers'
 
     email = models.EmailField(max_length=80)
     created_at = models.DateTimeField(auto_now=True)
