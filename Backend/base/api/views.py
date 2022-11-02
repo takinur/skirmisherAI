@@ -277,8 +277,6 @@ class JobApplicationView(viewsets.ModelViewSet):
         # Update Suitability Score
         async_task("base.tasks.update_score", saved.id)
 
-        # Return first then call task
-
         return saved
 
 
