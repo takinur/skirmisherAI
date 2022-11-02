@@ -1,46 +1,43 @@
-import React from "react";
-import { CandProfileForm } from "../../components/Forms/Candidate";
-import { Loading } from "../../components/Loading";
-import { FaGlobe, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
+import React from 'react'
+import { CandProfileForm } from '../../components/Forms/Candidate'
+import { Loading } from '../../components/Loading'
+import { FaGlobe, FaMapMarkerAlt, FaPhoneAlt } from 'react-icons/fa'
 
-import { useCandProfile } from "../../hooks/useProfile";
+import { useCandProfile } from '../../hooks/useProfile'
+import { useTitle } from '../../hooks/useTitle'
 
 // TODO: Add Other Sections
 // TODO: Add Resume Download Function
 
 export const Profile = () => {
+  useTitle('User Profile | Candidate')
   //React query to fetch profile
-  const { isLoading, isError, error, data, user } = useCandProfile();
+  const { isLoading, isError, error, data, user } = useCandProfile()
 
-  console.log("Data from cand profile: ", user);
+  console.log('Data from cand profile: ', user)
 
-  if (isLoading) return <Loading />;
-  if (isError && error.request.status === 400)
-    return <CandProfileForm user={user} />;
+  if (isLoading) return <Loading />
+  if (isError && error.request.status === 400) return <CandProfileForm user={user} />
   //Return detailed profile view
-  if (data) return DetailedProfileView(data, user);
-};
+  if (data) return DetailedProfileView(data, user)
+}
 
 function DetailedProfileView(profileData, user) {
-
   const hanldeViewResume = () => {
     // Create Resume URL with Media URL from ENV ~ Remove Double Quotes
-    const media_url = import.meta.env.VITE_MEDIA_URL;
-    const resume_url = `${media_url}${profileData.resume_file.replace(
-      /['"]+/g,
-      ""
-    )}`;
+    const media_url = import.meta.env.VITE_MEDIA_URL
+    const resume_url = `${media_url}${profileData.resume_file.replace(/['"]+/g, '')}`
 
-    const linkSource = `${resume_url}`;
-    const downloadLink = document.createElement("a");
+    const linkSource = `${resume_url}`
+    const downloadLink = document.createElement('a')
     // const fileName = `${item.candidate.name}_${item.job_title}.pdf`;
-    downloadLink.href = linkSource;
+    downloadLink.href = linkSource
     // downloadLink.download = fileName;
     //Open in new tab
-    downloadLink.target = "_blank";
+    downloadLink.target = '_blank'
 
-    downloadLink.click();
-  };
+    downloadLink.click()
+  }
   return (
     <>
       <section className="relative py-8">
@@ -68,7 +65,7 @@ function DetailedProfileView(profileData, user) {
                 <div className="w-full md:px-4 lg:order-3 lg:w-4/12 lg:self-center lg:text-right">
                   <div className="float-right sm:mt-0 md:py-6 md:px-3">
                     <button
-                    onClick={hanldeViewResume}
+                      onClick={hanldeViewResume}
                       className="mb-1 rounded bg-green-500 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-green-600 sm:mr-2"
                       type="button"
                     >
@@ -92,7 +89,7 @@ function DetailedProfileView(profileData, user) {
 
                 <div className="mt-4 mb-2 flex justify-center text-sm font-bold leading-normal text-gray-500">
                   <FaPhoneAlt className="mr-2 text-lg text-gray-500" />
-                  {profileData.phone ? profileData.phone : "Not Provided"}
+                  {profileData.phone ? profileData.phone : 'Not Provided'}
                 </div>
               </div>
 
@@ -111,16 +108,14 @@ function DetailedProfileView(profileData, user) {
                     <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
                       <p className="font-extrabold">Email</p>
                       <span className="ml-2">
-                        {" "}
-                        {profileData.email
-                          ? profileData.email
-                          : "Not Provided"}{" "}
+                        {' '}
+                        {profileData.email ? profileData.email : 'Not Provided'}{' '}
                       </span>
                     </div>
                     <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
                       <p className="font-extrabold">Phone</p>
                       <span className="ml-2">
-                        {profileData.phone ? profileData.phone : "Not Provided"}
+                        {profileData.phone ? profileData.phone : 'Not Provided'}
                       </span>
                     </div>
                     <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
@@ -133,26 +128,22 @@ function DetailedProfileView(profileData, user) {
                         href={
                           //If link does not contain http:// or https://, add it
                           profileData.website
-                            ? profileData.website.includes("http")
+                            ? profileData.website.includes('http')
                               ? profileData.website
-                              : "http://" + profileData.website
-                            : "#"
+                              : 'http://' + profileData.website
+                            : '#'
                         }
                         target="_blank"
                         className="ml-2 hover:text-blue-800 "
                       >
-                        {profileData.website
-                          ? profileData.website
-                          : "Not Provided"}
+                        {profileData.website ? profileData.website : 'Not Provided'}
                       </a>
                     </div>
                     <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
                       <p className="font-extrabold">Location</p>
                       <span className="ml-2">
-                        {" "}
-                        {profileData.location
-                          ? profileData.location
-                          : "Not Provided"}{" "}
+                        {' '}
+                        {profileData.location ? profileData.location : 'Not Provided'}{' '}
                       </span>
                     </div>
                   </div>
@@ -197,19 +188,15 @@ function DetailedProfileView(profileData, user) {
                             <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
                               <p className="font-extrabold">Years</p>
                               <span className="ml-2">
-                                {" "}
-                                {experience.total != 0
-                                  ? experience.total
-                                  : "Not Provided"}{" "}
+                                {' '}
+                                {experience.total != 0 ? experience.total : 'Not Provided'}{' '}
                               </span>
                             </div>
                           </>
                         ))
                       ) : (
                         <div className="mb-2 ml-2 text-center text-base font-medium leading-normal text-gray-700">
-                          <p className="font-extrabold">
-                            No Experience Provided !{" "}
-                          </p>
+                          <p className="font-extrabold">No Experience Provided ! </p>
                         </div>
                       )
                     }
@@ -232,18 +219,16 @@ function DetailedProfileView(profileData, user) {
                             {
                               //Remove parenthesis from name
                               education.name
-                                .replace(/[\])}[{(]/g, "")
+                                .replace(/[\])}[{(]/g, '')
                                 //Remove single quotes from name
-                                .replace(/'/g, "")
+                                .replace(/'/g, '')
                             }
                           </span>
                         </div>
                       ))
                     ) : (
                       <div className="mb-2 ml-2 text-center text-base font-medium leading-normal text-gray-700">
-                        <p className="font-extrabold">
-                          No Education Provided !{" "}
-                        </p>
+                        <p className="font-extrabold">No Education Provided ! </p>
                       </div>
                     )}
                   </div>
@@ -262,9 +247,7 @@ function DetailedProfileView(profileData, user) {
                       <div className="mb-2 ml-2 flex text-base font-medium leading-normal text-gray-700">
                         <p className="font-extrabold">Details</p>
                         <span className="ml-2 w-full">
-                          {profileData.projects
-                            .map((project) => project.details)
-                            .join(", ")}
+                          {profileData.projects.map((project) => project.details).join(', ')}
                         </span>
                       </div>
                     ) : (
@@ -290,23 +273,21 @@ function DetailedProfileView(profileData, user) {
                             href={
                               //If link does not contain http:// or https://, add it
                               social.name
-                                ? social.name.includes("http")
+                                ? social.name.includes('http')
                                   ? social.name
-                                  : "http://" + social.name
-                                : "#"
+                                  : 'http://' + social.name
+                                : '#'
                             }
                             target="_blank"
                             className="ml-2 hover:text-blue-800 "
                           >
-                            {social.name}{" "}
+                            {social.name}{' '}
                           </a>
                         </div>
                       ))
                     ) : (
                       <div className="mb-2 ml-2 text-center text-base font-medium leading-normal text-gray-700">
-                        <p className="font-extrabold">
-                          No Social Links Provided !
-                        </p>
+                        <p className="font-extrabold">No Social Links Provided !</p>
                       </div>
                     )}
                   </div>
@@ -317,5 +298,5 @@ function DetailedProfileView(profileData, user) {
         </div>
       </section>
     </>
-  );
+  )
 }
