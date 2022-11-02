@@ -162,9 +162,7 @@ const SummaryStats = ({ data }) => (
 )
 
 const ChartsRender = ({ data }) => {
-  //Show only from the date data is available
-
-  console.log
+  //Remove empty counts till a data is available
 
   const barData = {
     labels: data.month_labels,
