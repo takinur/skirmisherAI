@@ -34,6 +34,8 @@ export const CandidateDashboard = () => {
     }
   )
 
+  console.log(data)
+
   //Conditional rendering
   const renderDetails = () => {
     if (isLoading || candLoading) return <Loading />
