@@ -17,12 +17,12 @@ const HomePage = () => {
 
       <div className="hero-section min:h-screen relative  bg-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-rose-100 to-teal-100 py-28">
         <div className="container grid-cols-2 gap-4 md:grid">
-          <div className=" main bg-teal-500">
+          <div className=" main order-last bg-teal-500 md:order-first">
             <h1>SkirmisherAI</h1>
           </div>
           <div className="image-section">
             <div className="image-container relative flex h-full w-full justify-center ">
-              <div className="hero-img-bg absolute left-1/2 top-1/2 h-[320px] w-[320px] border-2 border-red-400 "></div>
+              <div className="absolute left-1/2 top-1/2 h-[320px] w-[320px] -translate-y-1/2 -translate-x-1/2  bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-teal-400 to-indigo-600 blur-3xl "></div>
               <img
                 className="w-max-[320px] z-10  w-[320px] "
                 src="https://vitejs.dev/logo-with-shadow.png"
