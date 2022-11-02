@@ -218,11 +218,11 @@ const ChartsRender = ({ data }) => {
 
   return (
     <div className="my-8 grid gap-6 md:grid-cols-2">
-      <ChartCard title="Job Apllications in Week">
-        <BarChart chartData={barData} />
-      </ChartCard>
-      <ChartCard title="Overall Total">
+      <ChartCard title="Activity Overview">
         <DoughnutChart chartData={doughnutData} />
+      </ChartCard>
+      <ChartCard title="Job Apllications in Month">
+        <BarChart chartData={barData} />
       </ChartCard>
     </div>
   )
