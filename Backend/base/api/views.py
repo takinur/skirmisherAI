@@ -410,25 +410,27 @@ class CandDashboardStatsView(APIView):
             # Get all blog posts by employer
             blogs = Blog.objects.filter(author=user_id).count()
 
-            # Get Last Week Stats
-            last_week = timezone.now() - timedelta(days=7)
-            # Collect all dates in last week
-            week_dates = [last_week + timedelta(days=x) for x in range(0, 7)]
+            # Get Last 30 days
+            last_30_days = timezone.now() - timedelta(days=30)
 
-            #  Collect Application from each day of last week
-            week_applications = JobApplication.objects.filter(
-                candidate_id=cand_id, created_at__gte=last_week).order_by('-created_at')
+            # Collect all dates in last month
+            month_dates = [last_30_days +
+                           timedelta(days=x) for x in range(0, 30)]
+
+            #  Collect Application from each day of last month
+            month_applications = JobApplication.objects.filter(
+                candidate_id=cand_id, created_at__gte=last_30_days).order_by('-created_at')
 
             # Collect all applications for each day
-            last_app = [week_applications.filter(
-                created_at__date=date).count() for date in week_dates]
+            last_app = [month_applications.filter(
+                created_at__date=date).count() for date in month_dates]
 
-            # Collect applications for each day of last week Where status is shortlisted
-            last_invited = [week_applications.filter(
-                status__icontains='invi', created_at__date=date).count() for date in week_dates]
+            # Collect applications for each day of last month Where status is shortlisted/invited
+            last_invited = [month_applications.filter(
+                status__icontains='invi', created_at__date=date).count() for date in month_dates]
 
             # Last Week Days in string format
-            week_labels = [date.strftime('%A') for date in week_dates]
+            month_labels = [date.strftime('%A') for date in month_dates]
 
             # Combine applications and Days to LIST
             # last_app = [[date.strftime('%a'), apps]
@@ -438,9 +440,9 @@ class CandDashboardStatsView(APIView):
                 'applications': total_applications,
                 'invitations': invitation_received,
                 'blogs': blogs,
-                'week_app': last_app,
-                'week_invited': last_invited,
-                'week_labels': week_labels
+                'month_app': last_app,
+                'month_invited': last_invited,
+                'month_labels': month_labels
             }
 
             return Response(data, status=status.HTTP_200_OK)
