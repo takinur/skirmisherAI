@@ -55,6 +55,10 @@ urlpatterns = [
     path('v1/stats/employer/', views.EmpDashboardStatsView.as_view()),
     path('v1/stats/employer/<int:emp_id>',
          views.EmpDashboardStatsView.as_view()),
+
+    path('v1/stats/candidate/', views.CandDashboardStatsView.as_view()),
+    path('v1/stats/candidate/<int:cand_id>',
+         views.CandDashboardStatsView.as_view()),
 ]
 
 urlpatterns += router.urls
