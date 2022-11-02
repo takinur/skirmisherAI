@@ -24,7 +24,7 @@ export const CandidateDashboard = () => {
   const { isLoading, data } = useQuery(
     'dashboardData',
     async () => {
-      const res = await API.get(`/v1/stats/employer/?emp_id=${candidate?.id}`)
+      const res = await API.get(`/v1/stats/candidate/?cand_id=${candidate?.id}`)
       return res.data
     },
     {
@@ -34,7 +34,7 @@ export const CandidateDashboard = () => {
     }
   )
 
-  console.log(data)
+  console.log('Wait a min:', data)
 
   //Conditional rendering
   const renderDetails = () => {
