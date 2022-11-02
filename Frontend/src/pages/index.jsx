@@ -17,9 +17,9 @@ const HomePage = () => {
             <h1 className="t mt-12 bg-gradient-to-bl from-blue-300 to-purple-700 bg-clip-text text-6xl font-bold text-transparent">
               SkirmisherAI
             </h1>
-            <p className="mt-2 pr-4 text-2xl text-gray-300">
-              It is a platform that helps employers to find the right talent for their organization
-              and helps job seekers to find the right job for them.
+            <p className="mt-2 pr-4 font-roboto text-2xl text-gray-300">
+              A platform that helps employers to find the right talent for their organization and
+              helps job seekers to find the right job for them.
             </p>
           </div>
           <div className="image-section">
