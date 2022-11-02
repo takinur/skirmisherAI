@@ -384,3 +384,65 @@ class EmpDashboardStatsView(APIView):
             return Response(data, status=status.HTTP_200_OK)
 
         return Response({'message': 'No data found'}, status=status.HTTP_204_NO_CONTENT)
+
+
+class CandDashboardStatsView(APIView):
+
+    def get(self, request, *args, **kwargs):
+        cand_id = self.request.query_params.get('cand_id', None)
+
+        if cand_id is not None:
+            # Get all job applications by candidate
+            total_applications = JobApplication.objects.filter(
+                candidate_id=cand_id).count()
+
+            # Get all invited based on Status
+            invitation_received = JobApplication.objects.filter(
+                candidate_id=cand_id, status__icontains='invi').count()
+
+            # Upcoming Interviews
+            upcoming_interviews = Invitation.objects.filter(
+                job_application__candidate_id=cand_id, created_at__gte=timezone.now()).count()
+
+            # User ID for employer
+            user_id = CandidateProfile.objects.get(id=cand_id).user_id
+
+            # Get all blog posts by employer
+            blogs = Blog.objects.filter(author=user_id).count()
+
+            # Get Last Week Stats
+            last_week = timezone.now() - timedelta(days=7)
+            # Collect all dates in last week
+            week_dates = [last_week + timedelta(days=x) for x in range(0, 7)]
+
+            #  Collect Application from each day of last week
+            week_applications = JobApplication.objects.filter(
+                candidate_id=cand_id, created_at__gte=last_week).order_by('-created_at')
+
+            # Collect all applications for each day
+            last_app = [week_applications.filter(
+                created_at__date=date).count() for date in week_dates]
+
+            # Collect applications for each day of last week Where status is shortlisted
+            last_invited = [week_applications.filter(
+                status__icontains='invi', created_at__date=date).count() for date in week_dates]
+
+            # Last Week Days in string format
+            week_labels = [date.strftime('%A') for date in week_dates]
+
+            # Combine applications and Days to LIST
+            # last_app = [[date.strftime('%a'), apps]
+            #             for date, apps in zip(week_dates, applications)]
+
+            data = {
+                'applications': total_applications,
+                'invitations': invitation_received,
+                'blogs': blogs,
+                'week_app': last_app,
+                'week_invited': last_invited,
+                'week_labels': week_labels
+            }
+
+            return Response(data, status=status.HTTP_200_OK)
+
+        return Response({'message': 'No data found'}, status=status.HTTP_204_NO_CONTENT)
