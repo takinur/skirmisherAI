@@ -12,17 +12,8 @@ const HomePage = () => {
       <ScrollToTop />
 
       <div className="hero-section min:h-screen relative  bg-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-slate-700 to-gray-900 py-28">
-        <div className="container grid-cols-2 gap-4 md:grid">
-          <div className=" main order-last grid grid-flow-row gap-2 pl-20 md:order-first">
-            <h1 className="t mt-12 bg-gradient-to-bl from-blue-300 to-purple-700 bg-clip-text text-6xl font-bold text-transparent">
-              SkirmisherAI
-            </h1>
-            <p className="mt-2 pr-4 font-roboto text-2xl text-gray-300">
-              A platform that helps employers to find the right talent for their organization and
-              helps job seekers to find the right job for them.
-            </p>
-          </div>
-          <div className="image-section">
+        <div className="container gap-4 px-8 md:flex">
+          <div className="image-section md:flex-1">
             <div className="image-container relative flex h-full w-full justify-center ">
               <div className="absolute left-1/2 top-1/2 h-[320px] w-[320px] -translate-y-1/2 -translate-x-1/2  bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-teal-400 to-indigo-600 blur-3xl "></div>
               <img
@@ -31,6 +22,15 @@ const HomePage = () => {
                 alt="Vite Logo"
               />
             </div>
+          </div>
+          <div className="main mt-4 grid grid-flow-row gap-2 md:order-first md:mt-0 md:flex-1 md:pl-20">
+            <h1 className="mx-auto bg-gradient-to-bl from-blue-300 to-purple-700 bg-clip-text text-5xl font-bold text-transparent md:mx-0 md:mt-12 md:text-6xl">
+              SkirmisherAI
+            </h1>
+            <p className="mx-auto mt-2 pr-4 pl-6 font-roboto text-2xl text-gray-300 md:mx-0 md:pl-0">
+              A platform that helps employers to find the right talent for their organization and
+              helps job seekers to find the right job for them.
+            </p>
           </div>
         </div>
       </div>
