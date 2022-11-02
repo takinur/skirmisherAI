@@ -9,6 +9,7 @@ import { useAxiosPrivate } from '../../hooks/useAxiosPrivate'
 import ChartCard from '../../components/Charts/ChartCard'
 import { DoughnutChart } from '../../components/Charts/Doughnut'
 import { LineChart } from '../../components/Charts'
+import { BarChart } from '../../components/Charts/BarChart'
 
 export const CandidateDashboard = () => {
   useTitle('Candidate Dashboard')
@@ -161,27 +162,31 @@ const SummaryStats = ({ data }) => (
 )
 
 const ChartsRender = ({ data }) => {
-  const lineData = {
-    labels: data.week_labels,
+  //Show only from the date data is available
+
+  console.log
+
+  const barData = {
+    labels: data.month_labels,
     datasets: [
       {
         label: 'Application',
         backgroundColor: '#0694a2',
         borderColor: '#0694a2',
         fill: false,
-        data: data.week_app,
+        data: data.month_app,
       },
       {
-        label: 'Shortlisted',
+        label: 'Invited',
         backgroundColor: '#7e3af2',
         borderColor: '#7e3af2',
         fill: false,
-        data: data.week_invited,
+        data: data.month_invited,
       },
     ],
     legends: [
-      { title: 'Application Received', color: 'bg-teal-600' },
-      { title: 'Shortlisted', color: 'bg-purple-600' },
+      { title: 'Job Applied', color: 'bg-teal-600' },
+      { title: 'Received Invitation', color: 'bg-purple-600' },
     ],
   }
 
@@ -216,7 +221,7 @@ const ChartsRender = ({ data }) => {
   return (
     <div className="my-8 grid gap-6 md:grid-cols-2">
       <ChartCard title="Job Apllications in Week">
-        <LineChart chartData={lineData} />
+        <BarChart chartData={barData} />
       </ChartCard>
       <ChartCard title="Overall Total">
         <DoughnutChart chartData={doughnutData} />
