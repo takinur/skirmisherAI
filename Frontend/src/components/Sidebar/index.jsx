@@ -55,7 +55,12 @@ const SideBar = ({ navbar, toggleNavbar }) => {
         icon: MenuIcon,
       },
       {
-        name: 'Jobs',
+        name: 'Find Work',
+        link: '/find-work',
+        icon: IconCards,
+      },
+      {
+        name: 'Vacancies',
         link: '/applicant/jobs',
         icon: ListIcon,
       },
@@ -95,7 +100,7 @@ const SideBar = ({ navbar, toggleNavbar }) => {
     >
       <div className="py-4 text-gray-500 dark:text-gray-400">
         <div className="flex w-full justify-between pr-2">
-          <Link className="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" to="/dashboard">
+          <Link className="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" to="/">
             SkirmisherAI
           </Link>
           <svg

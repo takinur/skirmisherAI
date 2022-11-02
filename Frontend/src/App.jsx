@@ -5,7 +5,7 @@ import ProtectedRoute from './hooks/ProtectedRoute'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-import { HomePage } from './pages/HomePage'
+import HomePage from './pages'
 import Login from './pages/Auth/Login'
 import { AboutPage } from './pages/About'
 import Register from './pages/Auth/Register'

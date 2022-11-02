@@ -4,12 +4,35 @@ import GuestLayout from './Layout/Guest'
 import ScrollToTop from '../components/ScrollToTop'
 import { useTitle } from '../hooks/useTitle'
 
-export const HomePage = () => {
-  useTitle('Welcome to Talent Hunt')
+const HomePage = () => {
+  useTitle('Welcome to Job Portal')
+
+  // Talent Hunt is a platform that connects employers and job seekers. It is a
+  //                 platform that helps employers to find the right talent for their organization and
+  //                 helps job seekers to find the right job for them.
 
   return (
     <GuestLayout>
       <ScrollToTop />
+
+      <div className="hero-section min:h-screen relative  bg-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-rose-100 to-teal-100 py-28">
+        <div className="container grid-cols-2 gap-4 md:grid">
+          <div className=" main bg-teal-500">
+            <h1>SkirmisherAI</h1>
+          </div>
+          <div className="image-section">
+            <div className="image-container relative flex h-full w-full justify-center ">
+              <div className="hero-img-bg absolute left-1/2 top-1/2 h-[320px] w-[320px] border-2 border-red-400 "></div>
+              <img
+                className="w-max-[320px] z-10  w-[320px] "
+                src="https://vitejs.dev/logo-with-shadow.png"
+                alt="Vite Logo"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
       <h1 className="text-center font-mono text-5xl text-green-600">HomePage</h1>
       <div className="main">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus orci mi, venenatis ac nisl
@@ -198,3 +221,5 @@ export const HomePage = () => {
     </GuestLayout>
   )
 }
+
+export default HomePage
