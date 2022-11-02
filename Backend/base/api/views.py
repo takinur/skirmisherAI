@@ -403,6 +403,9 @@ class CandDashboardStatsView(APIView):
             # Upcoming Interviews
             upcoming_interviews = Invitation.objects.filter(
                 job_application__candidate_id=cand_id, created_at__gte=timezone.now()).count()
+            # All Interviews
+            interview_count = Invitation.objects.filter(
+                job_application__candidate_id=cand_id).count()
 
             # User ID for employer
             user_id = CandidateProfile.objects.get(id=cand_id).user_id
@@ -439,7 +442,8 @@ class CandDashboardStatsView(APIView):
             data = {
                 'applications': total_applications,
                 'invitations': invitation_received,
-                'interviews': upcoming_interviews,
+                'upcoming_interviews': upcoming_interviews,
+                'interview_count': interview_count,
                 'blogs': blogs,
                 'month_app': last_app,
                 'month_invited': last_invited,

@@ -131,7 +131,7 @@ const SummaryStats = ({ data }) => (
 
       <div className="ml-4">
         <h2 className="font-semibold text-gray-600">Upcoming Interviews</h2>
-        <p className="mt-2 font-bold text-gray-800">{data.interviews}</p>
+        <p className="mt-2 font-bold text-gray-800">{data.upcoming_interviews}</p>
       </div>
     </div>
     <div className="flex items-start rounded-xl bg-white p-4 shadow-lg">
@@ -186,23 +186,28 @@ const ChartsRender = ({ data }) => {
   }
 
   const doughnutData = {
-    labels: ['Jobs', 'Applicants', 'Invited', 'Rejected'],
-    datasets: [data.jobs, data.applications, data.shortlisted, Math.floor(Math.random() * 7)],
+    labels: ['Applications', 'Invited', 'Interviews', 'Pending'],
+    datasets: [
+      data.applications,
+      data.invitations,
+      data.interview_count,
+      data.applications - data.invitations,
+    ],
     legends: [
       {
-        title: 'Jobs',
+        title: 'Applications',
         color: 'bg-indigo-500',
       },
       {
-        title: 'Applicants',
+        title: 'Invited',
         color: 'bg-blue-600',
       },
       {
-        title: 'Invited',
+        title: 'Interviews',
         color: 'bg-teal-600',
       },
       {
-        title: 'Rejected',
+        title: 'Pending',
         color: 'bg-red-500',
       },
     ],
