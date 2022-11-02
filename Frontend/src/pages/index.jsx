@@ -7,18 +7,20 @@ import { useTitle } from '../hooks/useTitle'
 const HomePage = () => {
   useTitle('Welcome to Job Portal')
 
-  // Talent Hunt is a platform that connects employers and job seekers. It is a
-  //                 platform that helps employers to find the right talent for their organization and
-  //                 helps job seekers to find the right job for them.
-
   return (
     <GuestLayout>
       <ScrollToTop />
 
-      <div className="hero-section min:h-screen relative  bg-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-rose-100 to-teal-100 py-28">
+      <div className="hero-section min:h-screen relative  bg-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-slate-700 to-gray-900 py-28">
         <div className="container grid-cols-2 gap-4 md:grid">
-          <div className=" main order-last bg-teal-500 md:order-first">
-            <h1>SkirmisherAI</h1>
+          <div className=" main order-last grid grid-flow-row gap-2 pl-20 md:order-first">
+            <h1 className="t mt-12 bg-gradient-to-bl from-blue-300 to-purple-700 bg-clip-text text-6xl font-bold text-transparent">
+              SkirmisherAI
+            </h1>
+            <p className="mt-2 pr-4 text-2xl text-gray-300">
+              It is a platform that helps employers to find the right talent for their organization
+              and helps job seekers to find the right job for them.
+            </p>
           </div>
           <div className="image-section">
             <div className="image-container relative flex h-full w-full justify-center ">
