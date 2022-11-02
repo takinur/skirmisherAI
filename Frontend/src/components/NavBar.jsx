@@ -156,8 +156,10 @@ export default function Navbar() {
                 {navItems.map((item, index) => (
                   <li
                     key={index}
-                    className="
-                      m-auto items-center justify-center text-slate-800 hover:text-emerald-600 dark:text-slate-50"
+                    className={classNames(
+                      'm-auto items-center justify-center  hover:text-emerald-600 dark:text-slate-50',
+                      !atTop ? 'text-slate-50' : 'text-slate-800'
+                    )}
                   >
                     <NavLink
                       end
@@ -173,7 +175,8 @@ export default function Navbar() {
                     <Link
                       to="/dashboard"
                       className={classNames(
-                        '-mt-1 block rounded-full border-2 border-[#7510F7] py-2 px-6 text-sm font-semibold text-[#7510F7] shadow-md hover:bg-[#7510F7] hover:text-white md:inline-block'
+                        '-mt-1 block rounded-full border-2 border-[#7510F7] py-2 px-6 text-sm font-semibold  shadow-md hover:bg-[#7510F7] hover:text-white md:inline-block',
+                        !atTop ? 'text-slate-200' : 'text-[#7510F7]'
                       )}
                     >
                       My DASHBOARD
