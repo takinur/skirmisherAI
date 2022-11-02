@@ -1,28 +1,24 @@
-import React from "react";
-import { useQuery } from "react-query";
-import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
+import React from 'react'
+import { useQuery } from 'react-query'
+import { useAxiosPrivate } from '../../hooks/useAxiosPrivate'
 
-import { EmpProfileForm } from "../../components/Forms";
-import { Loading } from "../../components/Loading";
-import {
-  FaBuilding,
-  FaGlobe,
-  FaMapMarkerAlt,
-  FaPhoneAlt,
-  FaUsers,
-} from "react-icons/fa";
-import { useProfile } from "../../hooks/useProfile";
+import { EmpProfileForm } from '../../components/Forms'
+import { Loading } from '../../components/Loading'
+import { FaBuilding, FaGlobe, FaMapMarkerAlt, FaPhoneAlt, FaUsers } from 'react-icons/fa'
+import { useProfile } from '../../hooks/useProfile'
+import { useTitle } from '../../hooks/useTitle'
 
 export const Profile = () => {
-  const API = useAxiosPrivate();
+  useTitle('User Profile| Employer')
+  const API = useAxiosPrivate()
 
-  const { isLoading, isError, data, user } = useProfile();
+  const { isLoading, isError, data, user } = useProfile()
 
-  if (isLoading) return <Loading />;
-  if (isError) return <EmpProfileForm user={user} />;
+  if (isLoading) return <Loading />
+  if (isError) return <EmpProfileForm user={user} />
   //Return detailed profile view
-  if (data) return DetailedProfileView(data, user);
-};
+  if (data) return DetailedProfileView(data, user)
+}
 
 function DetailedProfileView(company, user) {
   return (
@@ -33,7 +29,7 @@ function DetailedProfileView(company, user) {
             <div className="px-6">
               <div className="flex flex-wrap justify-center">
                 <div className="flex w-full justify-center px-4 lg:order-2 lg:w-3/12">
-                <div className="relative">
+                  <div className="relative">
                     {company?.logo ? (
                       <img
                         alt="..."
@@ -94,9 +90,7 @@ function DetailedProfileView(company, user) {
                   <FaMapMarkerAlt className="mr-2 text-xl text-gray-400" />
                   {company.location}
                 </div>
-                <div className="mb-2 mt-10 text-xl text-green-700">
-                  {company.slogan}
-                </div>
+                <div className="mb-2 mt-10 text-xl text-green-700">{company.slogan}</div>
                 <div className="mt-2 grid items-center justify-center">
                   <div className="flex">
                     <FaGlobe className="mr-2 mt-1 font-bold text-zinc-500" />
@@ -121,9 +115,7 @@ function DetailedProfileView(company, user) {
               <div className="mt-10 border-t border-gray-200 py-10 text-center">
                 <div className="flex flex-wrap justify-center">
                   <div className="w-full px-4 lg:w-9/12">
-                    <p className="mb-4 text-lg leading-relaxed text-gray-700">
-                      {company.about}
-                    </p>
+                    <p className="mb-4 text-lg leading-relaxed text-gray-700">{company.about}</p>
                   </div>
                 </div>
               </div>
@@ -132,5 +124,5 @@ function DetailedProfileView(company, user) {
         </div>
       </section>
     </>
-  );
+  )
 }
