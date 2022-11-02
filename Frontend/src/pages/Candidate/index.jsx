@@ -82,8 +82,8 @@ const SummaryStats = ({ data }) => (
       </div>
 
       <div className="ml-4">
-        <h2 className="font-semibold text-gray-600">Job Posted</h2>
-        <p className="mt-2 font-bold text-gray-800">{data.jobs} </p>
+        <h2 className="font-semibold text-gray-600">Job Applied</h2>
+        <p className="mt-2 font-bold text-gray-800">{data.applications} </p>
       </div>
     </div>
 
@@ -106,8 +106,8 @@ const SummaryStats = ({ data }) => (
       </div>
 
       <div className="ml-4">
-        <h2 className="font-semibold text-gray-600"> Application Received</h2>
-        <p className="mt-2 font-bold text-gray-800">{data.applications}</p>
+        <h2 className="font-semibold text-gray-600"> Inivitation Received</h2>
+        <p className="mt-2 font-bold text-gray-800">{data.invitations}</p>
       </div>
     </div>
 
@@ -130,8 +130,8 @@ const SummaryStats = ({ data }) => (
       </div>
 
       <div className="ml-4">
-        <h2 className="font-semibold text-gray-600">Applicant Shortlisted</h2>
-        <p className="mt-2 font-bold text-gray-800">{data.shortlisted}</p>
+        <h2 className="font-semibold text-gray-600">Upcoming Interviews</h2>
+        <p className="mt-2 font-bold text-gray-800">{data.interviews}</p>
       </div>
     </div>
     <div className="flex items-start rounded-xl bg-white p-4 shadow-lg">

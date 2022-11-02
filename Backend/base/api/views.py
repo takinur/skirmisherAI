@@ -429,8 +429,8 @@ class CandDashboardStatsView(APIView):
             last_invited = [month_applications.filter(
                 status__icontains='invi', created_at__date=date).count() for date in month_dates]
 
-            # Last Week Days in string format
-            month_labels = [date.strftime('%A') for date in month_dates]
+            # Last month full dates in string format
+            month_labels = [date.strftime('%d %b') for date in month_dates]
 
             # Combine applications and Days to LIST
             # last_app = [[date.strftime('%a'), apps]
@@ -439,6 +439,7 @@ class CandDashboardStatsView(APIView):
             data = {
                 'applications': total_applications,
                 'invitations': invitation_received,
+                'interviews': upcoming_interviews,
                 'blogs': blogs,
                 'month_app': last_app,
                 'month_invited': last_invited,
