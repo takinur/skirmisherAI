@@ -98,7 +98,7 @@ export default function Register() {
   //Main return statement
   return (
     <GuestLayout>
-      <section className="register flex min-h-screen flex-col items-center bg-gray-100 pt-6 sm:justify-center sm:pt-0">
+      <section className="register bg-secondary-gradient flex min-h-screen flex-col items-center pt-6 sm:justify-center sm:pt-0">
         <div className="mt-6 w-full overflow-hidden bg-white px-12 py-4 shadow-md sm:rounded-lg md:max-w-2xl">
           {conditionalComponent()}
           <div className="mt-4 flex justify-center">
