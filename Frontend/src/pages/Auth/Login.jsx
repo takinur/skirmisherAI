@@ -40,31 +40,31 @@ export default function Login() {
   return (
     <GuestLayout>
       <AuthenticationCard>
-        <div className="bg-blue-500 p-4 py-6  md:flex md:w-80 md:flex-shrink-0 md:flex-col md:items-center md:justify-evenly">
+        <div className="bg-primary-gradient p-4 py-6  md:flex md:w-80 md:flex-shrink-0 md:flex-col md:items-center md:justify-evenly">
           <div className="my-3 text-center text-4xl font-bold tracking-wider">
             <Link to="/" className="text-primary-gradient">
               SkirmisherAI
             </Link>
           </div>
           <p className="mt-6 text-center font-normal text-gray-300 md:mt-0">
-            With the power of K-WD, you can now focus only on functionaries for your digital
-            products, while leaving the UI design on us!
+            SkirmisherAI is a platform for employers and candidates to connect and find the best
+            talent. Sign up to get started.
           </p>
-          <p className="mt-10 flex flex-col items-center justify-center text-center">
+          <p className="mt-10 flex flex-col items-center justify-center text-center text-gray-400">
             <span>Don't have an account?</span>
-            <a href="#" className="underline">
+            <Link to="/signup" className="underline">
               Get Started!
-            </a>
+            </Link>
           </p>
           <p className="mt-6 text-center text-sm text-gray-300">
             Read our{' '}
-            <a href="#" className="underline">
+            <Link to="/terms-and-condition" className="underline">
               terms
-            </a>{' '}
+            </Link>{' '}
             and{' '}
-            <a href="#" className="underline">
+            <Link to="/terms-and-condition" className="underline">
               conditions
-            </a>
+            </Link>
           </p>
         </div>
         <div className="bg-white p-5 md:flex-1">
@@ -102,13 +102,15 @@ export default function Login() {
               />
             </div>
             <div className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                id="remember"
-                className="h-4 w-4 rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:ring-offset-0"
-              />
-              <label for="remember" className="text-sm font-semibold text-gray-500">
-                Remember me
+              <label className="flex items-center">
+                <Checkbox
+                  name="remember"
+                  // checked={form.data.remember === "on"}
+                  // onChange={(e) =>
+                  //   form.setData("remember", e.currentTarget.checked ? "on" : "")
+                  // }
+                />
+                <span className="ml-2 text-sm text-gray-600">Remember me</span>
               </label>
             </div>
             <div className="w-full ">
