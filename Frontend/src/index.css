@@ -49,6 +49,9 @@
   .bg-primary-gradient {
     @apply bg-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-slate-700 to-gray-900;
   }
+  .bg-secondary-gradient {
+    @apply bg-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-slate-500 to-gray-800;
+  }
 
   .title-primary-gradient {
     @apply bg-gradient-to-bl from-blue-300 to-purple-700 bg-clip-text text-transparent;

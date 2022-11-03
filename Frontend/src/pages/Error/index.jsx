@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom'
 export const NotFound = () => {
   return (
     <>
-      <div className="min-w-screen relative flex min-h-screen items-center overflow-hidden bg-blue-100 p-5 lg:p-20">
-        <div className="relative min-h-full min-w-full flex-1 items-center rounded-3xl bg-white p-10 text-center text-gray-800 shadow-xl md:flex md:text-left lg:p-20">
+      <div className="min-w-screen bg-primary-gradient relative flex min-h-screen items-center overflow-hidden p-5 lg:p-20">
+        <div className="relative mt-4 min-h-full min-w-full flex-1 items-center rounded-3xl bg-white p-10 text-center text-gray-800 shadow-xl md:flex md:text-left lg:p-20">
           <div className="w-full md:w-1/2">
             <div className="mb-10 lg:mb-20">LOGO</div>
             <div className="mb-10 font-light text-gray-600 md:mb-20">
