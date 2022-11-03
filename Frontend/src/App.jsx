@@ -30,6 +30,7 @@ import { SinglePost as SingleBlogPost } from './pages/Blog/single'
 import { BlogList } from './pages/Blog/BlogList'
 import { CreateUpdateBlog } from './pages/Blog/AddUpdateBlog'
 import { DashSingleBlogPost } from './pages/Blog/DashSingle'
+import GuestLayout from './pages/Layout/Guest'
 
 function App() {
   return (
@@ -76,7 +77,14 @@ function App() {
           <Route path=":slug" element={<SingleBlogPost />} />
         </Route>
 
-        <Route path="*" element={<NotFound />} />
+        <Route
+          path="*"
+          element={
+            <GuestLayout>
+              <NotFound />
+            </GuestLayout>
+          }
+        />
       </Routes>
       <ToastContainer />
     </>

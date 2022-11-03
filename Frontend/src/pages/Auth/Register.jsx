@@ -10,8 +10,8 @@ import classNames from 'classnames'
 import Checkbox from '../../components/Checkbox'
 import AuthRoleSelection from '../../components/AuthRoleSelection'
 import ButtonSecondary from '../../components/ButtonSecondary'
-import Header from '../../components/Header'
 import { useTitle } from '../../hooks/useTitle'
+import GuestLayout from '../Layout/Guest'
 
 const roles = [
   {
@@ -97,15 +97,7 @@ export default function Register() {
   }
   //Main return statement
   return (
-    <>
-      <Header>
-        <Link
-          to="/login"
-          className="-mt-1 block rounded-full border-2 border-[#7510F7] py-2 px-6 text-sm font-semibold text-[#7510F7] shadow-md hover:bg-[#7510F7] hover:text-white md:inline-block"
-        >
-          Sign In
-        </Link>
-      </Header>
+    <GuestLayout>
       <section className="register flex min-h-screen flex-col items-center bg-gray-100 pt-6 sm:justify-center sm:pt-0">
         <div className="mt-6 w-full overflow-hidden bg-white px-12 py-4 shadow-md sm:rounded-lg md:max-w-2xl">
           {conditionalComponent()}
@@ -124,7 +116,7 @@ export default function Register() {
           {/*TODO: same to greenwich update pass <p>Other password stuff</p> */}
         </div>
       </section>
-    </>
+    </GuestLayout>
   )
 }
 
