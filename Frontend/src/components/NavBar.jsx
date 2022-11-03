@@ -82,7 +82,7 @@ export default function Navbar() {
                 enter="transform transition ease duration-[500ms]"
                 enterFrom="opacity-0 transform -translate-x-full"
                 leaveTo="opacity-0 transform -translate-x-full duration-[600ms]"
-                className="navbar-wrapper fixed top-0 left-0 z-30 h-full w-64 bg-white p-5 shadow-lg dark:bg-slate-900 md:hidden"
+                className="navbar-wrapper fixed top-0 left-0 z-30 h-full w-64 bg-white p-5 shadow-lg md:hidden"
               >
                 <div className="close">
                   <button
@@ -90,7 +90,7 @@ export default function Navbar() {
                     onClick={() => setNavbar(!navbar)}
                   >
                     <svg
-                      className="h-6 w-6 dark:text-white"
+                      className="h-6 w-6 "
                       fill="none"
                       strokeLinecap="round"
                       strokellinejoin="round"
@@ -108,7 +108,7 @@ export default function Navbar() {
                       <NavLink
                         end
                         to={item.path}
-                        className="my-4 mt-8 inline-block font-bold dark:text-white"
+                        className="my-4 mt-8 inline-block font-bold "
                         style={({ isActive }) => ({
                           color: isActive ? 'green' : '',
                         })}
@@ -120,7 +120,7 @@ export default function Navbar() {
                   <li>
                     <NavLink
                       to="/login"
-                      className="my-4 mt-8 inline-block font-bold dark:text-white"
+                      className="my-4 mt-8 inline-block font-bold "
                       style={({ isActive }) => ({
                         color: isActive ? 'green' : '',
                       })}
@@ -133,14 +133,14 @@ export default function Navbar() {
                       {user ? (
                         <Link
                           to="/dashboard"
-                          className="mt-2 block rounded-full border-2 border-[#7510F7] py-1 px-6 text-[#7510F7] shadow-lg hover:bg-[#7510F7] hover:text-white dark:border-slate-200 dark:text-slate-100 md:inline-block"
+                          className="mt-2 block rounded-full border-2 border-[#7510F7] py-1 px-6 text-[#7510F7] shadow-lg hover:bg-[#7510F7] hover:text-white md:inline-block"
                         >
                           MY DASHBOARD{' '}
                         </Link>
                       ) : (
                         <Link
                           to="/signup"
-                          className="mt-2 block rounded-full border-2 border-[#7510F7] py-1 px-6 text-[#7510F7] shadow-lg hover:bg-[#7510F7] hover:text-white dark:border-slate-200 dark:text-slate-100 md:inline-block"
+                          className="mt-2 block rounded-full border-2 border-[#7510F7] py-1 px-6 text-[#7510F7] shadow-lg hover:bg-[#7510F7] hover:text-white md:inline-block"
                         >
                           Sign Up
                         </Link>
@@ -157,7 +157,7 @@ export default function Navbar() {
                   <li
                     key={index}
                     className={classNames(
-                      'm-auto items-center justify-center  hover:text-emerald-600 dark:text-slate-50',
+                      'm-auto items-center justify-center  hover:text-emerald-600 ',
                       !atTop ? 'text-slate-50' : 'text-slate-800'
                     )}
                   >
@@ -186,7 +186,7 @@ export default function Navbar() {
                   <>
                     <li
                       className={classNames(
-                        'm-auto items-center justify-center text-slate-800 hover:text-emerald-600 dark:text-slate-50'
+                        'm-auto items-center justify-center text-slate-800 hover:text-emerald-600 '
                       )}
                     >
                       <NavLink
@@ -200,7 +200,7 @@ export default function Navbar() {
                       <Link
                         to={'/signup'}
                         className={classNames(
-                          '-mt-1 block rounded-full border-2 border-[#7510F7] py-2 px-6 text-sm font-semibold shadow-md hover:bg-[#7510F7] hover:text-white dark:text-slate-50 md:inline-block',
+                          '-mt-1 block rounded-full border-2 border-[#7510F7] py-2 px-6 text-sm font-semibold shadow-md hover:bg-[#7510F7] hover:text-white md:inline-block',
                           !atTop ? 'text-slate-200' : 'text-[#7510F7]'
                         )}
                       >
