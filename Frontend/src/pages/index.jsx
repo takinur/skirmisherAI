@@ -34,11 +34,14 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div className="container mx-auto mt-16 grid grid-cols-3 grid-rows-2 gap-8 px-32">
-          <div className="mx-4 h-48 rounded-md bg-gray-700 ">
-            <h2>Easy to use</h2>
+        <div className="container mx-auto mt-16 grid grid-cols-1 gap-8 md:grid-cols-3 md:px-32">
+          <div className="mx-4 h-48 rounded-md bg-gray-700 px-8 ">
+            <h2 className="font-roboto text-xl text-slate-200">Easy to use</h2>
+            <p className="mt-1 font-roboto text-base text-slate-400"> Oh no blah blah</p>
           </div>
           <div className="mx-4 h-48 rounded-md bg-gray-700">W1</div>
+          <div className="mx-4 h-48 rounded-md bg-gray-700">s</div>
+          <div className="mx-4 h-48 rounded-md bg-gray-700">d</div>
           <div className="mx-4 h-48 rounded-md bg-gray-700">s</div>
           <div className="mx-4 h-48 rounded-md bg-gray-700">d</div>
         </div>
