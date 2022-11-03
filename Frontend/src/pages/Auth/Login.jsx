@@ -1,52 +1,44 @@
-import { useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import { login, reset } from "../../features/auth/authSlice";
-import { useForm } from "react-hook-form";
-import Input from "../../components/Input";
-import Label from "../../components/Label";
-import classNames from "classnames";
-import AuthenticationCard from "../../components/AuthenticationCard";
-import ButtonDefault from "../../components/ButtonDefault";
-import Checkbox from "../../components/Checkbox";
-import Header from "../../components/Header";
+import { useEffect } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
+import { login, reset } from '../../features/auth/authSlice'
+import { useForm } from 'react-hook-form'
+import Input from '../../components/Input'
+import Label from '../../components/Label'
+import classNames from 'classnames'
+import AuthenticationCard from '../../components/AuthenticationCard'
+import ButtonDefault from '../../components/ButtonDefault'
+import Checkbox from '../../components/Checkbox'
+import GuestLayout from '../Layout/Guest'
+import { useTitle } from '../../hooks/useTitle'
 
 export default function Login() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  useTitle('Sign In')
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm()
 
   const submitForm = (data) => {
-    dispatch(login(data));
-  };
+    dispatch(login(data))
+  }
 
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
-  );
+  const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
   //Redirect authenticated user to Dashboard
   useEffect(() => {
     if (isSuccess || user) {
-      navigate("/dashboard");
+      navigate('/dashboard')
     }
     if (isError) {
-      toast.error(message);
+      toast.error(message)
     }
 
-    dispatch(reset());
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+    dispatch(reset())
+  }, [user, isError, isSuccess, message, navigate, dispatch])
 
   return (
-    <>
-      <Header>
-        <Link
-          to="/signup"
-          className="-mt-1 block rounded-full border-2 border-[#7510F7] py-2 px-6 text-sm font-semibold text-[#7510F7] shadow-md hover:bg-[#7510F7] hover:text-white md:inline-block"
-        >
-          Sign Up
-        </Link>
-      </Header>
+    <GuestLayout>
       <AuthenticationCard>
         <div className="mb-7 text-center">
           <h2 className="text-3xl">Log in to SkirmisherAI</h2>
@@ -58,7 +50,7 @@ export default function Login() {
               id="email"
               type="email"
               className="mt-1 block w-full"
-              {...register("email")}
+              {...register('email')}
               required
               autoFocus
             />
@@ -70,7 +62,7 @@ export default function Login() {
               id="password"
               type="password"
               className="mt-1 block w-full"
-              {...register("password")}
+              {...register('password')}
               required
               autoComplete="current-password"
             />
@@ -87,15 +79,12 @@ export default function Login() {
               <span className="ml-2 text-sm text-gray-600">Remember me</span>
             </label>
             <div className="flex items-center justify-end">
-              <Link
-                to="/signup"
-                className="text-sm text-gray-600 underline hover:text-gray-900"
-              >
+              <Link to="/signup" className="text-sm text-gray-600 underline hover:text-gray-900">
                 Need an account?
               </Link>
 
               <ButtonDefault
-                className={classNames("ml-4", { "opacity-25": isLoading })}
+                className={classNames('ml-4', { 'opacity-25': isLoading })}
                 disabled={isLoading}
               >
                 Log in
@@ -112,6 +101,6 @@ export default function Login() {
           </Link>
         </div>
       </AuthenticationCard>
-    </>
-  );
+    </GuestLayout>
+  )
 }

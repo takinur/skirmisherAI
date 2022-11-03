@@ -1,5 +1,4 @@
 import React from 'react'
-import { ChatWindow } from '../../components/Message'
 import notFound from '../../assets/images/404.svg'
 import { FaChevronCircleLeft } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
