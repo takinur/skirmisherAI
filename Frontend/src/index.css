@@ -45,9 +45,15 @@
     @apply inline-flex w-full items-center text-sm font-semibold text-gray-800 transition-colors
   duration-150 hover:text-gray-800 dark:text-gray-100 dark:hover:text-gray-200;
   }
-}
 
-@tailwind utilities;
+  .bg-primary-gradient {
+    @apply bg-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-slate-700 to-gray-900;
+  }
+
+  .title-primary-gradient {
+    @apply bg-gradient-to-bl from-blue-300 to-purple-700 bg-clip-text text-transparent;
+  }
+}
 
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
