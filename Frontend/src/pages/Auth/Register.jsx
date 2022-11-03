@@ -177,21 +177,21 @@ function RegisterForm({ handleSubmit, submitForm, register, classNames, isLoadin
 
               <div className="ml-2">
                 I agree to the
-                <a
+                <Link
                   target="_blank"
-                  href="/terms"
+                  to="/terms-and-condition"
                   className="mx-1 text-sm text-gray-600 underline hover:text-gray-900"
                 >
                   Terms of Service
-                </a>
+                </Link>
                 and
-                <a
+                <Link
                   target="_blank"
-                  href="/"
+                  to="/terms-and-condition"
                   className="mx-1 text-sm text-gray-600 underline hover:text-gray-900"
                 >
                   Privacy Policy
-                </a>
+                </Link>
               </div>
             </div>
           </Label>
