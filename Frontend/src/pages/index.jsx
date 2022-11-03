@@ -24,7 +24,7 @@ const HomePage = () => {
             </div>
           </div>
           <div className="main mt-4 grid grid-flow-row gap-2 md:order-first md:mt-0 md:flex-1 md:pl-20">
-            <h1 className="title-primary-gradient  mx-auto text-5xl font-bold md:mx-0 md:mt-12 md:text-6xl">
+            <h1 className="text-primary-gradient  mx-auto text-5xl font-bold md:mx-0 md:mt-12 md:text-6xl">
               SkirmisherAI
             </h1>
             <p className="mx-auto mt-2 pr-4 pl-6 font-roboto text-2xl text-gray-300 md:mx-0 md:pl-0">

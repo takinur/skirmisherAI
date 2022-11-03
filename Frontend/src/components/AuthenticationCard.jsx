@@ -2,10 +2,8 @@ import React from 'react'
 
 export default function AuthenticationCard({ children }) {
   return (
-    <div className="bg-secondary-gradient flex flex-col items-center  pt-6 sm:justify-center sm:pt-0 md:min-h-screen">
-      <div>LOGO</div>
-
-      <div className="mt-6 w-full overflow-hidden bg-white px-6 py-4 shadow-md sm:max-w-md sm:rounded-lg">
+    <div className="bg-secondary-gradient flex min-h-screen items-center p-4 lg:justify-center">
+      <div className="container-main max mt-12 flex flex-col overflow-hidden rounded-md bg-white shadow-lg md:flex-1 md:flex-row lg:max-w-screen-md">
         {children}
       </div>
     </div>
