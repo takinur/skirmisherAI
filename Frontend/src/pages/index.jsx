@@ -11,8 +11,8 @@ const HomePage = () => {
     <GuestLayout>
       <ScrollToTop />
 
-      <div className="hero-section min:h-screen bg-primary-gradient relative py-28">
-        <div className="container gap-4 px-8 md:flex">
+      <div className="hero-section bg-primary-gradient relative min-h-screen py-28">
+        <div className="container mx-auto gap-4 px-8 md:flex">
           <div className="image-section md:flex-1">
             <div className="image-container relative flex h-full w-full justify-center ">
               <div className="absolute left-1/2 top-1/2 h-[320px] w-[320px] -translate-y-1/2 -translate-x-1/2  bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-teal-400 to-indigo-600 blur-3xl "></div>
@@ -32,6 +32,15 @@ const HomePage = () => {
               helps job seekers to find the right job for them.
             </p>
           </div>
+        </div>
+
+        <div className="container mx-auto mt-16 grid grid-cols-3 grid-rows-2 gap-8 px-32">
+          <div className="mx-4 h-48 rounded-md bg-gray-700 ">
+            <h2>Easy to use</h2>
+          </div>
+          <div className="mx-4 h-48 rounded-md bg-gray-700">W1</div>
+          <div className="mx-4 h-48 rounded-md bg-gray-700">s</div>
+          <div className="mx-4 h-48 rounded-md bg-gray-700">d</div>
         </div>
       </div>
 
