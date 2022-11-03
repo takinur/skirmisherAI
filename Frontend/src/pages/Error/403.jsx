@@ -1,10 +1,9 @@
 import React from 'react'
-import { ChatWindow } from '../../components/Message'
 import notFound from '../../assets/images/404.svg'
 import { FaChevronCircleLeft } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
-export const NotFound = () => {
+const UnauthorizedAccess = () => {
   return (
     <>
       <div className="min-w-screen relative flex min-h-screen items-center overflow-hidden bg-blue-100 p-5 lg:p-20">
@@ -12,20 +11,21 @@ export const NotFound = () => {
           <div className="w-full md:w-1/2">
             <div className="mb-10 lg:mb-20">LOGO</div>
             <div className="mb-10 font-light text-gray-600 md:mb-20">
-              <h1 className="mb-10 text-3xl font-black uppercase text-yellow-500 lg:text-5xl">
-                You seem to be lost!
+              <h1 className="mb-10 text-3xl font-black uppercase text-red-500 lg:text-5xl">
+                Unauthorized Access!
               </h1>
-              <p className="text-lg">The page you're looking for isn't available.</p>
-              <p>You can find plenty of other things on our homepage.</p>
+              <p className="text-lg">
+                The page you're looking for is absolutly forbidden for some reason.
+              </p>
             </div>
             <div className="mb-20 md:mb-0">
               <Link
-                to="/"
+                to="/login"
                 type="button"
-                className="mr-2 inline-flex items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="mr-2 inline-flex items-center rounded-lg bg-green-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 <FaChevronCircleLeft className="mr-2" />
-                Back to Home Page
+                Navigate to Login
               </Link>
             </div>
           </div>
@@ -39,3 +39,5 @@ export const NotFound = () => {
     </>
   )
 }
+
+export default UnauthorizedAccess
