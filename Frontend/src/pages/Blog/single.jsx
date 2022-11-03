@@ -101,6 +101,7 @@ export const SinglePost = () => {
 
   return (
     <GuestLayout>
+      <div className="bg-secondary-gradient container hidden h-24 w-full md:block "></div>
       <div className="wrapper mx-auto mb-auto max-w-screen-2xl bg-slate-50 px-20 pt-32 pb-10">
         {conditionalRender()}
       </div>
