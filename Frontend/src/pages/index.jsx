@@ -11,7 +11,7 @@ const HomePage = () => {
     <GuestLayout>
       <ScrollToTop />
 
-      <div className="hero-section min:h-screen relative  bg-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-slate-700 to-gray-900 py-28">
+      <div className="hero-section min:h-screen relative bg-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-slate-700 to-gray-900 py-28">
         <div className="container gap-4 px-8 md:flex">
           <div className="image-section md:flex-1">
             <div className="image-container relative flex h-full w-full justify-center ">
