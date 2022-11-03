@@ -51,9 +51,10 @@ const index = () => {
 
   return (
     <GuestLayout>
-      <div className="wrapper mx-auto mb-auto max-w-screen-2xl bg-slate-50 px-20 pt-32 pb-10">
+      <div className="bg-secondary-gradient container hidden h-24 w-full md:block "></div>
+      <div className="wrapper mx-auto mb-auto max-w-screen-2xl px-20 pt-32 pb-10">
         <div className="main-section">
-          <h1 className="md:leading-14 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl">
+          <h1 className="md:leading-14 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-5xl">
             Latest Community Posts
           </h1>
           <h4 className="mt-2 text-gray-600"> Engage and Explore our Community</h4>
