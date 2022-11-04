@@ -80,6 +80,7 @@ export default function Register() {
             classNames={classNames}
             isLoading={isLoading}
             selectedRole={selectedRole}
+            setStep={setStep}
           />
         )
 
@@ -120,11 +121,24 @@ export default function Register() {
   )
 }
 
-function RegisterForm({ handleSubmit, submitForm, register, classNames, isLoading, selectedRole }) {
+function RegisterForm({
+  setStep,
+  handleSubmit,
+  submitForm,
+  register,
+  classNames,
+  isLoading,
+  selectedRole,
+}) {
   return (
     <>
-      <div className="pt-6 text-center">
-        <h2 className="font-serif text-3xl">
+      <div className="relative pt-6">
+        <div className="absolute -right-6 top-0 text-teal-500 underline md:right-0">
+          <span className="cursor-pointer" onClick={() => setStep(1)}>
+            Go Back
+          </span>
+        </div>
+        <h2 className=" text-center font-roboto text-3xl">
           Sign Up to {selectedRole.id === 1 ? 'Hire Talent' : 'Find work'}
         </h2>
       </div>
