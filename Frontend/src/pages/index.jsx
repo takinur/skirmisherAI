@@ -43,7 +43,7 @@ const HomePage = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="h-24 w-24 text-slate-300"
+                className="h-20 w-20 text-slate-300"
               >
                 <path
                   strokeLinecap="round"
@@ -54,10 +54,136 @@ const HomePage = () => {
             </div>
             <div className="content-wrapper ml-6">
               <h2 className="mt-1 font-roboto text-3xl text-indigo-300">
-                IT & Software Development
+                Most Demand Job Categories
               </h2>
               <span id="numberAnimate" className=" font-roboto text-base text-slate-300">
-                New 126 Jobs Posted
+                10,000+ Jobs Posted
+              </span>
+            </div>
+          </div>
+          <div className="mx-4 flex h-44 content-center items-center rounded-md bg-gray-700 px-2 ">
+            <div className="icons ">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="h-20 w-20 text-slate-300"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 01-1.125-1.125v-3.75zM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-8.25zM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-2.25z"
+                />
+              </svg>
+            </div>
+            <div className="content-wrapper ml-6">
+              <h2 className="mt-1 font-roboto text-3xl text-indigo-300">Equitable Hiring</h2>
+              <span id="numberAnimate" className=" font-roboto text-base text-slate-300">
+                Enables recruiter to focus only on skills
+              </span>
+            </div>
+          </div>
+          <div className="mx-4 flex h-44 content-center items-center rounded-md bg-gray-700 px-2 ">
+            <div className="icons ">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="h-20 w-20 text-slate-300"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 01-1.125-1.125v-3.75zM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-8.25zM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-2.25z"
+                />
+              </svg>
+            </div>
+            <div className="content-wrapper ml-6">
+              <h2 className="mt-1 font-roboto text-3xl text-indigo-300">
+                Delightful User Experience
+              </h2>
+              <span id="numberAnimate" className=" font-roboto text-base text-slate-300">
+                Easy to use and understand for both recruiters and job seekers
+              </span>
+            </div>
+          </div>
+          <div className="mx-4 flex h-44 content-center items-center rounded-md bg-gray-700 px-2 ">
+            <div className="icons ">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="h-20 w-20 text-slate-300"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 01-1.125-1.125v-3.75zM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-8.25zM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-2.25z"
+                />
+              </svg>
+            </div>
+            <div className="content-wrapper ml-6">
+              <h2 className="mt-1 font-roboto text-3xl text-indigo-300">
+                Quick setup & onboarding
+              </h2>
+              <span id="numberAnimate" className=" font-roboto text-base text-slate-300">
+                Fast, tidy, adn efficient onboarding process
+              </span>
+            </div>
+          </div>
+          <div className="mx-4 flex h-44 content-center items-center rounded-md bg-gray-700 px-2 ">
+            <div className="icons ">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="h-20 w-20 text-slate-300"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 01-1.125-1.125v-3.75zM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-8.25zM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-2.25z"
+                />
+              </svg>
+            </div>
+            <div className="content-wrapper ml-6">
+              <h2 className="mt-1 font-roboto text-3xl text-indigo-300">Predictive Analytics</h2>
+              <span id="numberAnimate" className=" font-roboto text-base text-slate-300">
+                Get hiring process insights for data-driven decisions
+              </span>
+            </div>
+          </div>
+          <div className="mx-4 flex h-44 content-center items-center rounded-md bg-gray-700 px-2 ">
+            <div className="icons ">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="h-20 w-20 text-slate-300"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 01-1.125-1.125v-3.75zM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-8.25zM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-2.25z"
+                />
+              </svg>
+            </div>
+            <div className="content-wrapper ml-6">
+              <h2 className="mt-1 font-roboto text-3xl text-indigo-300">
+                Exceptional customer support
+              </h2>
+              <span id="numberAnimate" className=" font-roboto text-base text-slate-300">
+                Our outstanding customer support team is always ready to help
               </span>
             </div>
           </div>
