@@ -35,9 +35,31 @@ const HomePage = () => {
         </div>
 
         <div className="container mx-auto mt-16 grid grid-cols-1 gap-8 md:grid-cols-3 md:px-32">
-          <div className="mx-4 h-48 rounded-md bg-gray-700 px-8 ">
-            <h2 className="font-roboto text-xl text-slate-200">Easy to use</h2>
-            <p className="mt-1 font-roboto text-base text-slate-400"> Oh no blah blah</p>
+          <div className="mx-4 flex h-44 content-center items-center rounded-md bg-gray-700 px-2 ">
+            <div className="icons ">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="h-24 w-24 text-slate-300"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 01-1.125-1.125v-3.75zM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-8.25zM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-2.25z"
+                />
+              </svg>
+            </div>
+            <div className="content-wrapper ml-6">
+              <h2 className="mt-1 font-roboto text-3xl text-indigo-300">
+                IT & Software Development
+              </h2>
+              <span id="numberAnimate" className=" font-roboto text-base text-slate-300">
+                New 126 Jobs Posted
+              </span>
+            </div>
           </div>
           <div className="mx-4 h-48 rounded-md bg-gray-700">W1</div>
           <div className="mx-4 h-48 rounded-md bg-gray-700">s</div>
