@@ -4,6 +4,13 @@ import GuestLayout from './Layout/Guest'
 import ScrollToTop from '../components/ScrollToTop'
 import { useTitle } from '../hooks/useTitle'
 
+import spotify from '../assets/images/spotify.svg'
+import google from '../assets/images/google.svg'
+import microsoft from '../assets/images/microsoft-logo.svg'
+import netflix from '../assets/images/netflix-2.svg'
+import asus from '../assets/images/local-idk.svg'
+import csgo from '../assets/images/counter-logo.svg'
+
 const HomePage = () => {
   useTitle('Welcome to Job Portal')
 
@@ -33,7 +40,6 @@ const HomePage = () => {
             </p>
           </div>
         </div>
-
         <div className="container mx-auto mt-16 grid grid-cols-1 gap-8 md:grid-cols-3 md:px-12 2xl:px-32">
           <div className="mx-4 flex h-44 content-center items-center rounded-md bg-gray-700 px-2 ">
             <div className="icons ">
@@ -138,7 +144,7 @@ const HomePage = () => {
                 Quick setup & onboarding
               </h2>
               <p className="mt-4 font-roboto text-base text-slate-300">
-                Fast, tidy, adn efficient onboarding process
+                Fast, tidy, and efficient onboarding process
               </p>
             </div>
           </div>
@@ -194,6 +200,32 @@ const HomePage = () => {
           </div>
         </div>
       </div>
+
+      <section className="brand-feed p-6 md:p-20 ">
+        <h2 className="text-center font-roboto text-2xl text-gray-700">
+          Used By 100+ Companies From Startups To Large Enterprises
+        </h2>
+        <div className="dgap-4 container grid grid-cols-6 px-8 grayscale">
+          <div className="brand-wrapper">
+            <img src={spotify} alt="brand-1" className="w-48  " />
+          </div>
+          <div className="brand-wrapper">
+            <img src={csgo} alt="brand-1" className="w-48" />
+          </div>
+          <div className="brand-wrapper">
+            <img src={google} alt="brand-1" className="w-48" />
+          </div>
+          <div className="brand-wrapper">
+            <img src={asus} alt="brand-1" className="w-48" />
+          </div>
+          <div className="brand-wrapper">
+            <img src={netflix} alt="brand-1" className="w-48" />
+          </div>
+          <div className="brand-wrapper">
+            <img src={microsoft} alt="brand-1" className="w-48" />
+          </div>
+        </div>
+      </section>
 
       <h1 className="text-center font-mono text-5xl text-green-600">HomePage</h1>
       <div className="main">
