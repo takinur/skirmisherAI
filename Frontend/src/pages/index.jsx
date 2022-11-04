@@ -8,7 +8,7 @@ import spotify from '../assets/images/spotify.svg'
 import google from '../assets/images/google.svg'
 import microsoft from '../assets/images/microsoft-logo.svg'
 import netflix from '../assets/images/netflix-2.svg'
-import asus from '../assets/images/local-idk.svg'
+import tailwind from '../assets/images/tailwindcss.svg'
 import csgo from '../assets/images/counter-logo.svg'
 
 const HomePage = () => {
@@ -205,9 +205,9 @@ const HomePage = () => {
         <h2 className="text-center font-roboto text-2xl text-gray-700">
           Used By 100+ Companies From Startups To Large Enterprises
         </h2>
-        <div className="dgap-4 container grid grid-cols-6 px-8 grayscale">
+        <div className="container grid grid-cols-3 gap-4 px-8 grayscale md:grid-cols-6">
           <div className="brand-wrapper">
-            <img src={spotify} alt="brand-1" className="w-48  " />
+            <img src={spotify} alt="brand-1" className="w-48 " />
           </div>
           <div className="brand-wrapper">
             <img src={csgo} alt="brand-1" className="w-48" />
@@ -215,14 +215,98 @@ const HomePage = () => {
           <div className="brand-wrapper">
             <img src={google} alt="brand-1" className="w-48" />
           </div>
-          <div className="brand-wrapper">
-            <img src={asus} alt="brand-1" className="w-48" />
+          <div className="brand-wrapper flex content-center justify-center">
+            <img src={tailwind} alt="brand-1" className="w-48" />
           </div>
           <div className="brand-wrapper">
             <img src={netflix} alt="brand-1" className="w-48" />
           </div>
           <div className="brand-wrapper">
             <img src={microsoft} alt="brand-1" className="w-48" />
+          </div>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-3">
+          <div className="quote-wrapper px-8">
+            <div className="quote">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-10 w-10 rotate-180 text-gray-500 "
+              >
+                <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path>
+                <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"></path>
+              </svg>
+              <p className="mt-4 font-roboto text-base text-gray-700">
+                I love the way it's so easy to use and the customer support is outstanding. I would
+                recommend it to anyone.
+              </p>
+            </div>
+            <div className="author mt-4">
+              <p className="font-roboto text-lg font-bold text-gray-800">Sunam Dikenson</p>
+              <p className="font-roboto text-sm text-gray-600">CEO, MILITARY INCLUSION</p>
+            </div>
+          </div>
+          <div className="quote-wrapper px-8">
+            <div className="quote">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-10 w-10 rotate-180 text-gray-500 "
+              >
+                <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path>
+                <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"></path>
+              </svg>
+              <p className="mt-4 font-roboto text-base text-gray-700">
+                SkirmisherAI has helped us to organize and streamline our recruitment process. It
+                has various intelligent features that helps in hiring. Sourcing resumes from
+                platforms like GitHub really helped. Resume screening feature helps in ranking the
+                candidate profiles which helps in effective hiring.
+              </p>
+            </div>
+            <div className="author mt-4">
+              <p className="font-roboto text-lg font-bold text-gray-800"> Edwardo Silverhand </p>
+              <p className="font-roboto text-sm text-gray-600">HR, AXIE SOLUTIONS LLC</p>
+            </div>
+          </div>
+          <div className="quote-wrapper px-8">
+            <div className="quote">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-10 w-10 rotate-180 text-gray-500 "
+              >
+                <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path>
+                <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"></path>
+              </svg>
+              <p className="mt-4 font-roboto text-base text-gray-700">
+                Intelligent ,simple, gets the work done. Clean user interface with right workflow
+                for recruiters.We were able to bring down the time required for screening of resumes
+                and scheduling of the right candidates and this intern helped us with placing more
+                candidates with our clients.
+              </p>
+            </div>
+            <div className="author mt-4">
+              <p className="font-roboto text-lg font-bold text-gray-800"> Aiden Pearce </p>
+              <p className="font-roboto text-sm uppercase text-gray-600">
+                RECRUITMENT LEAD, Respawn Entertainment
+              </p>
+            </div>
           </div>
         </div>
       </section>
