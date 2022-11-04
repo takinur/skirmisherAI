@@ -34,7 +34,7 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div className="container mx-auto mt-16 grid grid-cols-1 gap-8 md:grid-cols-3 md:px-32">
+        <div className="container mx-auto mt-16 grid grid-cols-1 gap-8 md:grid-cols-3 md:px-12 2xl:px-32">
           <div className="mx-4 flex h-44 content-center items-center rounded-md bg-gray-700 px-2 ">
             <div className="icons ">
               <svg
@@ -56,9 +56,9 @@ const HomePage = () => {
               <h2 className="mt-1 font-roboto text-3xl text-indigo-300">
                 Most Demand Job Categories
               </h2>
-              <span id="numberAnimate" className=" font-roboto text-base text-slate-300">
+              <p id="numberAnimate" className=" mt-4 font-roboto text-base text-slate-300">
                 10,000+ Jobs Posted
-              </span>
+              </p>
             </div>
           </div>
           <div className="mx-4 flex h-44 content-center items-center rounded-md bg-gray-700 px-2 ">
@@ -80,9 +80,9 @@ const HomePage = () => {
             </div>
             <div className="content-wrapper ml-6">
               <h2 className="mt-1 font-roboto text-3xl text-indigo-300">Equitable Hiring</h2>
-              <span id="numberAnimate" className=" font-roboto text-base text-slate-300">
+              <p className="mt-4 font-roboto text-base text-slate-300">
                 Enables recruiter to focus only on skills
-              </span>
+              </p>
             </div>
           </div>
           <div className="mx-4 flex h-44 content-center items-center rounded-md bg-gray-700 px-2 ">
@@ -106,9 +106,9 @@ const HomePage = () => {
               <h2 className="mt-1 font-roboto text-3xl text-indigo-300">
                 Delightful User Experience
               </h2>
-              <span id="numberAnimate" className=" font-roboto text-base text-slate-300">
+              <p className="mt-4 font-roboto text-base text-slate-300">
                 Easy to use and understand for both recruiters and job seekers
-              </span>
+              </p>
             </div>
           </div>
           <div className="mx-4 flex h-44 content-center items-center rounded-md bg-gray-700 px-2 ">
@@ -132,9 +132,9 @@ const HomePage = () => {
               <h2 className="mt-1 font-roboto text-3xl text-indigo-300">
                 Quick setup & onboarding
               </h2>
-              <span id="numberAnimate" className=" font-roboto text-base text-slate-300">
+              <p className="mt-4 font-roboto text-base text-slate-300">
                 Fast, tidy, adn efficient onboarding process
-              </span>
+              </p>
             </div>
           </div>
           <div className="mx-4 flex h-44 content-center items-center rounded-md bg-gray-700 px-2 ">
@@ -156,9 +156,9 @@ const HomePage = () => {
             </div>
             <div className="content-wrapper ml-6">
               <h2 className="mt-1 font-roboto text-3xl text-indigo-300">Predictive Analytics</h2>
-              <span id="numberAnimate" className=" font-roboto text-base text-slate-300">
+              <p className="mt-4 font-roboto text-base text-slate-300">
                 Get hiring process insights for data-driven decisions
-              </span>
+              </p>
             </div>
           </div>
           <div className="mx-4 flex h-44 content-center items-center rounded-md bg-gray-700 px-2 ">
@@ -179,19 +179,14 @@ const HomePage = () => {
               </svg>
             </div>
             <div className="content-wrapper ml-6">
-              <h2 className="mt-1 font-roboto text-3xl text-indigo-300">
+              <h2 className="mt-1 font-roboto text-3xl text-indigo-300 lg:text-2xl 2xl:text-3xl">
                 Exceptional customer support
               </h2>
-              <span id="numberAnimate" className=" font-roboto text-base text-slate-300">
+              <p className="mt-4 font-roboto text-base text-slate-300">
                 Our outstanding customer support team is always ready to help
-              </span>
+              </p>
             </div>
           </div>
-          <div className="mx-4 h-48 rounded-md bg-gray-700">W1</div>
-          <div className="mx-4 h-48 rounded-md bg-gray-700">s</div>
-          <div className="mx-4 h-48 rounded-md bg-gray-700">d</div>
-          <div className="mx-4 h-48 rounded-md bg-gray-700">s</div>
-          <div className="mx-4 h-48 rounded-md bg-gray-700">d</div>
         </div>
       </div>
 
