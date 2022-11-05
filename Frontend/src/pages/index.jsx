@@ -92,7 +92,7 @@ const HomePage = () => {
               </svg>
             </div>
             <div className="content-wrapper ml-6">
-              <h2 className="mt-1 font-roboto text-3xl text-indigo-300">
+              <h2 className="mt-1 font-roboto text-2xl text-indigo-300">
                 Most Demand Job Categories
               </h2>
               <p id="numberAnimate" className=" mt-4 font-roboto text-base text-slate-300">
@@ -121,7 +121,7 @@ const HomePage = () => {
               </svg>
             </div>
             <div className="content-wrapper ml-6">
-              <h2 className="mt-1 font-roboto text-3xl text-indigo-300">Equitable Hiring</h2>
+              <h2 className="mt-1 font-roboto text-2xl text-indigo-300">Equitable Hiring</h2>
               <p className="mt-4 font-roboto text-base text-slate-300">
                 Enables recruiter to focus only on skills
               </p>
@@ -145,7 +145,7 @@ const HomePage = () => {
               </svg>
             </div>
             <div className="content-wrapper ml-6">
-              <h2 className="mt-1 font-roboto text-3xl text-indigo-300">
+              <h2 className="mt-1 font-roboto text-2xl text-indigo-300">
                 Delightful User Experience
               </h2>
               <p className="mt-4 font-roboto text-base text-slate-300">
@@ -173,7 +173,7 @@ const HomePage = () => {
               </svg>
             </div>
             <div className="content-wrapper ml-6">
-              <h2 className="mt-1 font-roboto text-3xl text-indigo-300">
+              <h2 className="mt-1 font-roboto text-2xl text-indigo-300">
                 Quick setup & onboarding
               </h2>
               <p className="mt-4 font-roboto text-base text-slate-300">
@@ -199,7 +199,7 @@ const HomePage = () => {
               </svg>
             </div>
             <div className="content-wrapper ml-6">
-              <h2 className="mt-1 font-roboto text-3xl text-indigo-300">Predictive Analytics</h2>
+              <h2 className="mt-1 font-roboto text-2xl text-indigo-300">Predictive Analytics</h2>
               <p className="mt-4 font-roboto text-base text-slate-300">
                 Get hiring process insights for data-driven decisions
               </p>
@@ -223,7 +223,7 @@ const HomePage = () => {
               </svg>
             </div>
             <div className="content-wrapper ml-6">
-              <h2 className="mt-1 font-roboto text-3xl text-indigo-300 lg:text-2xl 2xl:text-3xl">
+              <h2 className="mt-1 font-roboto text-2xl text-indigo-300 lg:text-2xl 2xl:text-3xl">
                 Exceptional customer support
               </h2>
               <p className="mt-4 font-roboto text-base text-slate-300">
@@ -237,28 +237,28 @@ const HomePage = () => {
         <h2 className="text-center font-roboto text-2xl text-gray-700">
           Used By 100+ Companies From Startups To Large Enterprises
         </h2>
-        <div className="container grid grid-cols-3 gap-4 px-8 grayscale md:grid-cols-6">
-          <div className="brand-wrapper">
-            <img src={spotify} alt="brand-1" className="w-48 " />
+        <div className="container grid grid-cols-3 grayscale md:grid-cols-6 md:gap-4 md:px-8">
+          <div className="brand-wrapper h-24 w-24 md:w-32">
+            <img src={spotify} alt="brand-spotify" className="w-full " />
           </div>
-          <div className="brand-wrapper">
-            <img src={csgo} alt="brand-1" className="w-48" />
+          <div className="brand-wrapper h-24 w-24 md:w-32 ">
+            <img src={csgo} alt="brand-csgo" className="w-full" />
           </div>
-          <div className="brand-wrapper">
-            <img src={google} alt="brand-1" className="w-48" />
+          <div className="brand-wrapper h-24 md:w-32">
+            <img src={google} alt="brand-google" className="w-full" />
           </div>
-          <div className="brand-wrapper flex content-center justify-center">
-            <img src={tailwind} alt="brand-1" className="w-48" />
+          <div className="brand-wrapper flex h-24 w-24 content-end justify-end md:w-36 md:pt-6">
+            <img src={tailwind} alt="brand-tailwind" className="w-full" />
           </div>
-          <div className="brand-wrapper">
-            <img src={netflix} alt="brand-1" className="w-48" />
+          <div className="brand-wrapper h-24 w-24 md:w-32">
+            <img src={netflix} alt="brand-nflix" className="w-full" />
           </div>
-          <div className="brand-wrapper">
-            <img src={microsoft} alt="brand-1" className="w-48" />
+          <div className="brand-wrapper h-24 w-24 md:w-32">
+            <img src={microsoft} alt="brand-microsoft" className="w-full" />
           </div>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="mt-20 grid gap-4 md:grid-cols-3">
           <div className="quote-wrapper px-8">
             <div className="quote">
               <svg
