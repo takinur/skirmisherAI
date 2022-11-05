@@ -6,6 +6,8 @@ import { Transition } from '@headlessui/react'
 import { getUserDetails } from '../features/auth/authSlice'
 import { useSelector, useDispatch } from 'react-redux'
 
+import logo from '../assets/images/skirmisher-logo.png'
+
 export default function Navbar() {
   const [navbar, setNavbar] = useState(false)
   const [atTop, setAtTop] = useState(false)
@@ -42,15 +44,15 @@ export default function Navbar() {
       path: '/',
     },
     {
-      name: 'Feature',
-      path: '/feature',
+      name: 'Find Work',
+      path: '/find-work',
     },
     {
       name: 'Community',
       path: '/community',
     },
     {
-      name: 'About',
+      name: 'Company',
       path: '/about',
     },
     {
@@ -71,7 +73,7 @@ export default function Navbar() {
           <div className="header-wrapper flex items-center justify-between">
             <div className="header-logo w-12">
               <Link to="/">
-                <img src="" alt="Logo" className="bg-cover" />
+                <img src={logo} aalt="SkirmisherAI Logo" className="w-10 bg-cover" />
               </Link>
             </div>
             {/* Mobile Nav */}
