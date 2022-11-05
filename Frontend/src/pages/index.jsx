@@ -10,6 +10,9 @@ import microsoft from '../assets/images/microsoft-logo.svg'
 import netflix from '../assets/images/netflix-2.svg'
 import tailwind from '../assets/images/tailwindcss.svg'
 import csgo from '../assets/images/counter-logo.svg'
+import screening from '../assets/images/screening.png'
+import toptalent from '../assets/images/team.png'
+import workflow from '../assets/images/wokrflow.svg'
 
 const HomePage = () => {
   useTitle('Welcome to Job Portal')
@@ -24,7 +27,7 @@ const HomePage = () => {
             <div className="image-container relative flex h-full w-full justify-center ">
               <div className="absolute left-1/2 top-1/2 h-[320px] w-[320px] -translate-y-1/2 -translate-x-1/2  bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-teal-400 to-indigo-600 blur-3xl "></div>
               <img
-                className="w-max-[320px] z-10  w-[320px] "
+                className="w-max-[320px] z-10  w-80 "
                 src="https://vitejs.dev/logo-with-shadow.png"
                 alt="Vite Logo"
               />
@@ -249,7 +252,7 @@ const HomePage = () => {
             </div>
             <div className="author mt-4">
               <p className="font-roboto text-lg font-bold text-gray-800">Sunam Dikenson</p>
-              <p className="font-roboto text-sm text-gray-600">CEO, MILITARY INCLUSION</p>
+              <p className="font-roboto text-sm text-gray-600">CEO, MILITECH INCLUSION</p>
             </div>
           </div>
           <div className="quote-wrapper px-8">
@@ -295,18 +298,33 @@ const HomePage = () => {
                 <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"></path>
               </svg>
               <p className="mt-4 font-roboto text-base text-gray-700">
-                Intelligent ,simple, gets the work done. Clean user interface with right workflow
-                for recruiters.We were able to bring down the time required for screening of resumes
-                and scheduling of the right candidates and this intern helped us with placing more
-                candidates with our clients.
+                Intelligent, simple, gets the work done. Clean user interface with right workflow
+                for recruiters. We were able to bring down the time required for screening of
+                resumes and scheduling of the right candidates and this intern helped us with
+                placing more candidates with our clients.
               </p>
             </div>
             <div className="author mt-4">
               <p className="font-roboto text-lg font-bold text-gray-800"> Aiden Pearce </p>
               <p className="font-roboto text-sm uppercase text-gray-600">
-                RECRUITMENT LEAD, Respawn Entertainment
+                RECRUITMENT LEAD, Arasaka Corporation
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+      <section className="wrapper-app bg-white p-6 md:p-20 ">
+        <h2 className="mx-auto text-center font-roboto text-4xl font-semibold text-blue-900 md:max-w-2xl ">
+          Hire the right person for every job with our advanced Applicant Tracking System.
+        </h2>
+        <div className="container-image-tagline mt-8 grid-cols-2 items-center justify-center md:grid">
+          <div className="text-wrapper md:ml-auto md:mr-20">
+            <h3 className="font-roboto text-2xl font-semibold text-gray-800">
+              Get the right candidate for the right job
+            </h3>
+          </div>
+          <div className="image-wrapper mt-8 border-2 border-red-500 md:mt-0">
+            <img className="ww-max-[320px]w-[320px] ml-auto  w-11/12  " src={screening} alt="app" />
           </div>
         </div>
       </section>
