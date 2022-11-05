@@ -3,6 +3,7 @@ import notFound from '../../assets/images/404.svg'
 import { FaChevronCircleLeft } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import GuestLayout from '../Layout/Guest'
+import logo from '../../assets/images/skirmisher-logo.png'
 
 export const NotFound = () => {
   return (
@@ -10,7 +11,9 @@ export const NotFound = () => {
       <div className="min-w-screen bg-primary-gradient relative flex min-h-screen items-center overflow-hidden p-5 lg:p-20">
         <div className="relative mt-4 min-h-full min-w-full flex-1 items-center rounded-3xl bg-white p-10 text-center text-gray-800 shadow-xl md:flex md:text-left lg:p-20">
           <div className="w-full md:w-1/2">
-            <div className="mb-10 lg:mb-20">LOGO</div>
+            <div className="mb-10 lg:mb-20">
+              <img src={logo} alt="SkirmisherAI Logo" className=" mx-auto w-48" />
+            </div>
             <div className="mb-10 font-light text-gray-600 md:mb-20">
               <h1 className="mb-10 text-3xl font-black uppercase text-yellow-500 lg:text-5xl">
                 You seem to be lost!
