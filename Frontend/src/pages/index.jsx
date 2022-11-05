@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import GuestLayout from './Layout/Guest'
 
 import ScrollToTop from '../components/ScrollToTop'
@@ -15,13 +15,19 @@ import toptalent from '../assets/images/team.png'
 import workflow from '../assets/images/wokrflow.svg'
 import nokeyword from '../assets/images/keyword-search.png'
 import { Link } from 'react-router-dom'
+import { useMutation } from 'react-query'
+import { axiosInstance as API } from '../api/axiosInstance'
 
 const HomePage = () => {
   useTitle('Welcome to Job Portal')
 
-  const handleClick = () => {
-    // save to Server
-    // TODO:ADD mutation to save to server
+  const [email, setEmail] = useState('')
+
+  const newsLetterMutation = useMutation(async (data) => await API.post('v1/newsletter/', data))
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    newsLetterMutation.mutate({ email })
   }
 
   return (
@@ -397,16 +403,11 @@ const HomePage = () => {
                 </p>
               </div>
               <div className="grid w-full place-items-center md:w-1/3">
-                {/* <div className="mx-auto items-center space-y-10 md:space-x-20 md:space-y-0">
-                  <button className="block rounded-full border-2 border-[#7510F7] py-3 px-6 text-white shadow-lg hover:bg-[#7510F7] md:inline-block">
-                    Subscribe
-                  </button>
-                </div> */}
-                <form action="#">
+                <form onSubmit={handleSubmit}>
                   <div className="mx-auto mb-3 max-w-screen-sm items-center space-y-4 sm:flex sm:space-y-0">
                     <div className="relative w-full">
                       <label
-                        for="email"
+                        htmlFor="email"
                         className="ddark:text-gray-300 mb-2 hidden text-sm font-medium text-gray-900"
                       >
                         Email address
@@ -427,16 +428,18 @@ const HomePage = () => {
                         placeholder="Enter your email"
                         type="email"
                         id="email"
-                        required=""
+                        required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                       />
                     </div>
                     <div>
                       <button
-                        onClick={handleClick}
+                        disabled={newsLetterMutation.isLoading}
                         type="submit"
-                        className="ddark:bg-primary-600 ddark:hover:bg-primary-700 w-full cursor-pointer rounded-lg 
-                         border border-purple-600 bg-purple-600 py-3 px-5 text-center text-sm font-medium text-white hover:bg-purple-800
-                        focus:ring-4 focus:ring-purple-300 sm:rounded-none sm:rounded-r-lg"
+                        className="ddark:bg-primary-600 ddark:hover:bg-primary-700 w-full cursor-pointer rounded-lg border border-purple-600 
+                         bg-purple-600 py-3 px-5 text-center text-sm font-medium text-white hover:bg-purple-800 focus:ring-4 focus:ring-purple-300
+                        disabled:opacity-30 disabled:hover:bg-purple-600 sm:rounded-none sm:rounded-r-lg"
                       >
                         Subscribe
                       </button>
