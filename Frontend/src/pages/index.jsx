@@ -20,6 +20,8 @@ import { axiosInstance as API } from '../api/axiosInstance'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 
+import logo from '../assets/images/skirmisher-logo.png'
+
 const HomePage = () => {
   useTitle('Welcome to Job Portal')
 
@@ -56,11 +58,7 @@ const HomePage = () => {
           <div className="image-section md:flex-1">
             <div className="image-container relative flex h-full w-full justify-center ">
               <div className="absolute left-1/2 top-1/2 h-[320px] w-[320px] -translate-y-1/2 -translate-x-1/2  bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-teal-400 to-indigo-600 blur-3xl "></div>
-              <img
-                className="w-max-[320px] z-10  w-80 "
-                src="https://vitejs.dev/logo-with-shadow.png"
-                alt="Vite Logo"
-              />
+              <img className="w-max-[320px] z-10  w-80 " src={logo} alt="Vite Logo" />
             </div>
           </div>
           <div className="main mt-4 grid grid-flow-row gap-2 md:order-first md:mt-0 md:flex-1 md:pl-20">
