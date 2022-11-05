@@ -13,7 +13,7 @@ const TopNavigation = ({ ...props }) => {
       <h5 className="title-text text-zinc-600 dark:text-zinc-200">
         {props.title ? props.title : 'Welcome to Dashboard'}
       </h5>
-      <ThemeIcon />
+      {/* <ThemeIcon /> */}
       <UserMenu />
       <BellIcon />
     </div>

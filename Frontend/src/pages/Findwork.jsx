@@ -1,37 +1,34 @@
-import React, { useState } from "react";
-import { JobCard, JobLoading } from "../components/Card";
-import GuestLayout from "./Layout/Guest";
-import {
-  jobDetails as DetailSection,
-  JobDetailsLoading,
-} from "../components/Card/jobDetails";
-import { useQuery } from "react-query";
-import { axiosInstance as API } from "../api/axiosInstance";
-import classNames from "classnames";
+import React, { useState } from 'react'
+import { JobCard, JobLoading } from '../components/Card'
+import GuestLayout from './Layout/Guest'
+import { jobDetails as DetailSection, JobDetailsLoading } from '../components/Card/jobDetails'
+import { useQuery } from 'react-query'
+import { axiosInstance as API } from '../api/axiosInstance'
+import classNames from 'classnames'
 
-import { SearchJobs } from "../components/Search/SearchJobs";
-import { useCandProfile } from "../hooks/useProfile";
-import { useEffect } from "react";
+import { SearchJobs } from '../components/Search/SearchJobs'
+import { useCandProfile } from '../hooks/useProfile'
+import { useEffect } from 'react'
 
 //EH? Check for user role
 //Apply for Job model Confirmation
 //Wishlist Job
 
 export const Findwork = () => {
-  const [searchValue, SetSearchValue] = useState("");
-  const [jobDetails, setJobDetails] = useState(null);
+  const [searchValue, SetSearchValue] = useState('')
+  const [jobDetails, setJobDetails] = useState(null)
 
-  const { data: profile } = useCandProfile();
+  const { data: profile } = useCandProfile()
 
-  const canApply = profile !== undefined || null ? true : false;
+  const canApply = profile !== undefined || null ? true : false
   // const canApply = false;
 
   // React query to fetch Jobs and filter them
   const { isLoading, data, refetch } = useQuery(
-    ["jobs"],
+    ['jobs'],
     async () => {
-      const res = await API.get(`jobs-public/`);
-      return res.data;
+      const res = await API.get(`jobs-public/`)
+      return res.data
     },
     {
       refetchOnWindowFocus: true,
@@ -40,42 +37,32 @@ export const Findwork = () => {
         jobs.filter(
           (job) =>
             job.title.toLowerCase().includes(searchValue.toLowerCase()) ||
-            job.employer?.company_name
-              .toLowerCase()
-              .includes(searchValue.toLowerCase()) ||
+            job.employer?.company_name.toLowerCase().includes(searchValue.toLowerCase()) ||
             (job.work_location &&
-              job.work_location
-                .toLowerCase()
-                .includes(searchValue.toLowerCase())) ||
+              job.work_location.toLowerCase().includes(searchValue.toLowerCase())) ||
             (job.qualifications &&
-              job.qualifications
-                .toLowerCase()
-                .includes(searchValue.toLowerCase())) ||
-            (job.type &&
-              job.type.toLowerCase().includes(searchValue.toLowerCase()))
+              job.qualifications.toLowerCase().includes(searchValue.toLowerCase())) ||
+            (job.type && job.type.toLowerCase().includes(searchValue.toLowerCase()))
         ),
     }
-  );
+  )
 
   //View detials of a job with id
-  const showDetails = data?.filter((job) => job.id === jobDetails);
+  const showDetails = data?.filter((job) => job.id === jobDetails)
   // console.log("Detials", showDetails);
 
   //HACK: Set state to first job after 4 seconds only for Desktop
-  const isMobile = window.innerWidth < 768;
+  const isMobile = window.innerWidth < 768
 
   useEffect(() => {
     if (data && jobDetails === null && !isMobile) {
-      setJobDetails(data[0]?.id);
+      setJobDetails(data[0]?.id)
     }
-  }, [data]);
+  }, [data])
 
   return (
     <GuestLayout>
-      <div>
-        <h1>HEHE</h1>
-        Jobs
-      </div>
+      <div className="bg-secondary-gradient container hidden h-24 w-full md:block "></div>
 
       <div className="wrapper bg-gray-200 px-4 pt-14 md:px-40">
         <div className="w-full flex-shrink-0 items-center whitespace-nowrap rounded-lg bg-gray-50 md:flex md:h-14 md:pl-5 ">
@@ -95,8 +82,8 @@ export const Findwork = () => {
                   <br />
                   <button
                     className={classNames(
-                      "block font-bold text-blue-700 md:hidden",
-                      jobDetails === null ? "hidden" : ""
+                      'block font-bold text-blue-700 md:hidden',
+                      jobDetails === null ? 'hidden' : ''
                     )}
                     onClick={() => setJobDetails(null)}
                   >
@@ -111,8 +98,8 @@ export const Findwork = () => {
               <div className="mt-4 md:flex md:max-h-screen md:flex-grow">
                 <div
                   className={classNames(
-                    "wrapper overflow-y-auto md:block md:w-2/5",
-                    jobDetails !== null ? "hidden" : ""
+                    'wrapper overflow-y-auto md:block md:w-2/5',
+                    jobDetails !== null ? 'hidden' : ''
                   )}
                 >
                   {
@@ -161,5 +148,5 @@ export const Findwork = () => {
         </div>
       </div>
     </GuestLayout>
-  );
-};
+  )
+}
