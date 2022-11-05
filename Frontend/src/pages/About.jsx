@@ -9,15 +9,16 @@ export const AboutPage = () => {
     <GuestLayout>
       <div className="flex min-h-screen w-full flex-col bg-white font-sans">
         <div>
-          <div className="bg-gray-200 md:overflow-hidden">
+          <div className="bg-gray-700 md:overflow-hidden">
             <div className="px-4 py-16">
               <div className="relative w-full text-center md:mx-auto md:max-w-2xl">
-                <h1 className="mb-6 text-xl font-bold leading-tight text-gray-700 sm:text-2xl md:text-5xl">
-                  A simple and smart tool that will help grow your business
+                <h1 className="mb-6 text-xl font-bold leading-tight text-gray-300 sm:text-2xl md:mt-20 md:text-5xl">
+                  About Us - Skirmisher LLC
                 </h1>
 
-                <p className="md:px-18 text-gray-600 md:text-xl">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit hello.
+                <p className="md:px-18 text-gray-400 md:text-xl">
+                  A simple and smart solution that will help allocating human resources as well as
+                  improving both business growth and productivity
                 </p>
 
                 <div className="absolute right-0 bottom-0 -mb-64 -mr-48 hidden h-40 w-40 rounded-full bg-blue-800 md:block"></div>
@@ -27,7 +28,7 @@ export const AboutPage = () => {
             </div>
 
             <svg
-              className="hidden bg-gray-200 fill-current text-white md:block"
+              className="hidden bg-gray-700 fill-current text-white md:block"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 1440 320"
             >
