@@ -21,7 +21,6 @@ const HomePage = () => {
   return (
     <GuestLayout>
       <ScrollToTop />
-
       <div className="hero-section bg-primary-gradient relative min-h-screen py-28">
         <div className="container mx-auto gap-4 px-8 md:flex">
           <div className="image-section md:flex-1">
@@ -204,7 +203,6 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-
       <section className="brand-feed p-6 md:p-20 ">
         <h2 className="text-center font-roboto text-2xl text-gray-700">
           Used By 100+ Companies From Startups To Large Enterprises
@@ -314,7 +312,7 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-      <section className="wrapper-app bg-white p-6 md:p-20 ">
+      <section className="wrapper-app bg-white p-6  md:p-20 ">
         <div className="flex w-full items-center justify-center">
           <h2 className="font-roboto text-4xl font-semibold text-blue-900 md:max-w-2xl ">
             Hire the right person for every job with our advanced Applicant Recruiting System.
@@ -379,11 +377,29 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-
-      <section className="wrapper-app bg-white p-6 md:p-20 ">
-        <h2 className="mx-auto text-center font-roboto text-4xl font-semibold text-blue-900 md:max-w-2xl ">
-          Okay what the hell is this?
-        </h2>
+      <section className="section-newsletter bg-white   pt-20 ">
+        <div className=" container-newsletter relative z-0  w-full border-t-2 border-slate-200 bg-slate-200 md:h-28 ">
+          <div className="mx-auto -mt-20 w-4/5 rounded-2xl bg-[#141c3a] px-6 py-10 pb-9 shadow-lg ">
+            <div className=" mx-auto flex flex-col space-y-5 p-3 md:h-20 md:flex-row md:space-x-5 md:space-y-0">
+              <div className="grid w-full place-items-center md:w-1/3">
+                <p className="text-3xl font-semibold text-white">Newsletter </p>
+              </div>
+              <div className="grid w-full place-items-center md:w-1/3">
+                <p className="text-white">
+                  Subscribe to our newsletter and get the latest updates on our products and
+                  services directly in your inbox.
+                </p>
+              </div>
+              <div className="grid w-full place-items-center md:w-1/3">
+                <div className="mx-auto items-center space-y-10 md:space-x-20 md:space-y-0">
+                  <button className="block rounded-full border-2 border-[#7510F7] py-3 px-6 text-white shadow-lg hover:bg-[#7510F7] md:inline-block">
+                    Subscribe
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
     </GuestLayout>
   )
