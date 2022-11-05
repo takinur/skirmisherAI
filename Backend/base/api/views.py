@@ -1,6 +1,4 @@
 from datetime import timedelta
-# from django.db.models import Count
-# from django.db.models.functions import TruncDay
 from django.utils import timezone
 from rich import print  # Pretty print
 
@@ -18,11 +16,12 @@ from rest_framework import mixins
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 # Serializers from parent folder
-from .serializers import BlogSerializer, CandidateProfileSerializer, FileSerializer, InvitationSerializer, JobApplicationSerializer, PublicVacancySerializer
-from .serializers import RetriveJobApplicationSerializer, UserCreateSerializer, MyTokenObtainPairSerializer, VacancySerializer, EmployerProfileSerializer
+from .serializers import BlogSerializer, CandidateProfileSerializer, FileSerializer, InvitationSerializer, JobApplicationSerializer
+from .serializers import RetriveJobApplicationSerializer, UserCreateSerializer, NewsletterSerializer, PublicVacancySerializer
+from .serializers import MyTokenObtainPairSerializer, VacancySerializer, EmployerProfileSerializer
 
 # Models from parent folder
-from ..models import Blog, CandidateProfile, EmployerProfile, Invitation, JobApplication, Vacancy
+from ..models import Blog, CandidateProfile, EmployerProfile, Invitation, JobApplication, Vacancy, Newsletter
 
 # Machine Leaning Model from
 from ..ml_facade import resumeExtractor
@@ -438,8 +437,6 @@ class CandDashboardStatsView(APIView):
             # Combine applications and Days to LIST
             # last_app = [[date.strftime('%a'), apps]
             #             for date, apps in zip(week_dates, applications)]
-            
-            
 
             data = {
                 'applications': total_applications,
@@ -455,3 +452,8 @@ class CandDashboardStatsView(APIView):
             return Response(data, status=status.HTTP_200_OK)
 
         return Response({'message': 'No data found'}, status=status.HTTP_204_NO_CONTENT)
+
+
+class NewsletterView(viewsets.ModelViewSet):
+    queryset = Newsletter.objects.order_by('-created_at')
+    serializer_class = NewsletterSerializer
