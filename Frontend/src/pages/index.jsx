@@ -17,6 +17,8 @@ import nokeyword from '../assets/images/keyword-search.png'
 import { Link } from 'react-router-dom'
 import { useMutation } from 'react-query'
 import { axiosInstance as API } from '../api/axiosInstance'
+import { useEffect } from 'react'
+import { toast } from 'react-toastify'
 
 const HomePage = () => {
   useTitle('Welcome to Job Portal')
@@ -27,8 +29,24 @@ const HomePage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    //Validate email with regex
+    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
+    if (!regex.test(email)) {
+      return toast.error('Please enter a valid email address')
+    }
+
     newsLetterMutation.mutate({ email })
   }
+
+  useEffect(() => {
+    if (newsLetterMutation.isSuccess) {
+      setEmail('')
+      toast.success('You have successfully subscribed to our newsletter')
+    }
+    if (newsLetterMutation.isError) {
+      toast.info('Something went wrong')
+    }
+  }, [newsLetterMutation.isSuccess, newsLetterMutation.isError])
 
   return (
     <GuestLayout>
