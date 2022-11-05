@@ -1,4 +1,4 @@
 /venv
-/front-skirmisher/.env
+/Frontend/.env
 .env
 .env.backup
