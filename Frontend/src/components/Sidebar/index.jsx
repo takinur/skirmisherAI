@@ -2,6 +2,7 @@ import React from 'react'
 import ClassNames from 'classnames'
 import { Link, NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import logo from '../../assets/images/skirmisher-logo.png'
 
 const SideBar = ({ navbar, toggleNavbar }) => {
   const { user } = useSelector((state) => state.auth)
@@ -36,11 +37,11 @@ const SideBar = ({ navbar, toggleNavbar }) => {
         icon: IconCards,
       },
 
-      {
-        name: 'Setting',
-        link: '/user/setting',
-        icon: CogIcon,
-      },
+      // {
+      //   name: 'Setting',
+      //   link: '/user/setting',
+      //   icon: CogIcon,
+      // },
       {
         name: 'Help',
         link: '/help',
@@ -74,11 +75,11 @@ const SideBar = ({ navbar, toggleNavbar }) => {
         link: '/community-blog',
         icon: CommunityIcon,
       },
-      {
-        name: 'Setting',
-        link: '/user/setting',
-        icon: CogIcon,
-      },
+      // {
+      //   name: 'Setting',
+      //   link: '/user/setting',
+      //   icon: CogIcon,
+      // },
       {
         name: 'Help',
         link: '/help',
@@ -86,10 +87,6 @@ const SideBar = ({ navbar, toggleNavbar }) => {
       },
     ]
   }
-
-  // console.log(MenuItems);
-  // console.log("from sidebar", menu);
-  //TODO:Change icons
 
   return (
     <aside
@@ -100,8 +97,9 @@ const SideBar = ({ navbar, toggleNavbar }) => {
     >
       <div className="py-4 text-gray-500 dark:text-gray-400">
         <div className="flex w-full justify-between pr-2">
-          <Link className="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" to="/">
-            SkirmisherAI
+          <Link className="ml-6 flex text-lg font-bold text-gray-800 dark:text-gray-200" to="/">
+            <img src={logo} alt="" className="w-12" />
+            <span className="text-primary-gradient mt-3 ml-2 ">SkirmisherAI</span>
           </Link>
           <svg
             onClick={toggleNavbar}
