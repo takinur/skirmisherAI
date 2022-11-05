@@ -23,7 +23,7 @@ import { toast } from 'react-toastify'
 import logo from '../assets/images/skirmisher-logo.png'
 
 const HomePage = () => {
-  useTitle('Welcome to Job Portal')
+  useTitle('Talent screening that is accurate, fast, and fair')
 
   const [email, setEmail] = useState('')
 
