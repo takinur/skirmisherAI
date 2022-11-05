@@ -29,6 +29,9 @@ router.register('v1/invitation', views.InvitationView)
 router.register('v1/blog', views.BlogView, basename='blog')
 router.register('v1/blog/:slug', views.BlogView, basename='blog')
 
+# Newsletter
+router.register('v1/newsletter', views.NewsletterView, basename='newsletter')
+
 urlpatterns = [
     path('', views.getRoutes, name='getRoutes'),
 
