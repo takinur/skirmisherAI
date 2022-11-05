@@ -10,9 +10,8 @@ const Footer = () => {
           <img src={logo} alt="SkirmisherAI Logo" className="h-24" />
         </div>
 
-        <p className="mx-auto mt-6 max-w-md text-center leading-relaxed text-gray-500 dark:text-zinc-300">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt consequuntur amet culpa
-          cum itaque neque.
+        <p className="mx-auto mt-6 max-w-md text-center text-lg leading-relaxed text-gray-500 dark:text-zinc-300">
+          Talent screening that is accurate, fast, and fair.
         </p>
 
         <nav className="mt-12" aria-labelledby="footer-navigation">
