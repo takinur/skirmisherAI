@@ -2,10 +2,11 @@ import React from 'react'
 import notFound from '../../assets/images/404.svg'
 import { FaChevronCircleLeft } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
+import GuestLayout from '../Layout/Guest'
 
 export const NotFound = () => {
   return (
-    <>
+    <GuestLayout>
       <div className="min-w-screen bg-primary-gradient relative flex min-h-screen items-center overflow-hidden p-5 lg:p-20">
         <div className="relative mt-4 min-h-full min-w-full flex-1 items-center rounded-3xl bg-white p-10 text-center text-gray-800 shadow-xl md:flex md:text-left lg:p-20">
           <div className="w-full md:w-1/2">
@@ -35,6 +36,6 @@ export const NotFound = () => {
         <div className="pointer-events-none absolute -top-64 right-20 h-96 w-64 -rotate-45 transform rounded-full bg-blue-200 bg-opacity-30 md:-top-96 md:right-32 md:h-full md:w-96"></div>
         <div className="pointer-events-none absolute -bottom-96 right-64 h-full w-96 -rotate-45 transform rounded-full bg-yellow-200 bg-opacity-20"></div>
       </div>
-    </>
+    </GuestLayout>
   )
 }
