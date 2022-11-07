@@ -59,19 +59,19 @@ function DetailedProfileView(company, user) {
                   <div className="flex justify-center py-4 pt-8 lg:pt-4">
                     <div className="mr-4 p-3 text-center">
                       <span className="block text-xl font-bold uppercase tracking-wide text-blue-600">
-                        22
+                        2
                       </span>
                       <span className="text-sm text-gray-400">Job Posted</span>
                     </div>
                     <div className="mr-4 p-3 text-center">
                       <span className="text-bluey-600 block text-xl font-bold uppercase tracking-wide">
-                        10
+                        5
                       </span>
-                      <span className="text-sm text-gray-400">Photos</span>
+                      <span className="text-sm text-gray-400">Community Posts</span>
                     </div>
                     <div className="p-3 text-center lg:mr-4">
                       <span className="block text-xl font-bold uppercase tracking-wide text-blue-600">
-                        89
+                        1
                       </span>
                       <span className="text-sm text-gray-400">Comments</span>
                     </div>
