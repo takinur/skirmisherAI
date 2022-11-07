@@ -1,71 +1,69 @@
-import classNames from "classnames";
-import React, { useEffect, useState } from "react";
-import { useMutation } from "react-query";
-import { Link } from "react-router-dom";
-import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
-import { relativeTime } from "../../hooks/useRelativetime";
-import { toast } from "react-toastify";
-import { FaCheckCircle } from "react-icons/fa";
+import classNames from 'classnames'
+import React, { useEffect, useState } from 'react'
+import { useMutation } from 'react-query'
+import { Link } from 'react-router-dom'
+import { useAxiosPrivate } from '../../hooks/useAxiosPrivate'
+import { relativeTime } from '../../hooks/useRelativetime'
+import { toast } from 'react-toastify'
+import { FaCheckCircle } from 'react-icons/fa'
 
 export const jobDetails = (props) => {
-  const applicant = props.applicant;
-  const canApply = props.canApply;
-  const job = props.job;
+  const applicant = props.applicant
+  const canApply = props.canApply
+  const job = props.job
 
   // console.log("Job", job);
-  const [saved, setSaved] = useState(false);
-  const [isApplied, setIsApplied] = useState(false);
+  const [saved, setSaved] = useState(false)
+  const [isApplied, setIsApplied] = useState(false)
 
-  const API = useAxiosPrivate();
+  const API = useAxiosPrivate()
 
   // Check if user has applied for this job
   useEffect(() => {
     if (applicant) {
       API.get(`v1/application/?cand_id=${applicant}`).then((res) => {
-        const applied = res.data.filter((app) => app.applied_job_id === job.id);
+        const applied = res.data.filter((app) => app.applied_job_id === job.id)
         if (applied.length > 0) {
-          setIsApplied(true);
+          setIsApplied(true)
         }
-      });
+      })
     }
-  }, [applicant, job.id]);
+  }, [applicant, job.id])
 
   //Apply for Job
-  const applyMutation = useMutation(
-    async (data) => await API.post("v1/application/", data)
-  );
+  const applyMutation = useMutation(async (data) => await API.post('v1/application/', data))
 
   const handleApply = () => {
-    const data = {};
-    data.vacancy = job.id;
-    data.candidate = applicant;
-    data.status = "Applied";
+    const data = {}
+    data.vacancy = job.id
+    data.candidate = applicant
+    data.status = 'Applied'
 
     // console.log("Appply to this job: ", data);
-    applyMutation.mutate(data);
-  };
+    applyMutation.mutate(data)
+  }
 
   const handleWishlist = (jobId) => {
-    console.log("Wishlisted", jobId);
-    setSaved(!saved);
-  };
+    console.log('Wishlisted', jobId)
+    setSaved(!saved)
+  }
 
   //Show success message if the user has applied for the job
   useEffect(() => {
     if (applyMutation.isSuccess) {
-      toast.success("Applied Successfully.");
-      setIsApplied(true);
+      toast.success('Applied Successfully.')
+      setIsApplied(true)
     }
     if (applyMutation.error) {
-      let err = applyMutation.error.response.data;
+      let err = applyMutation.error.response.data
 
-      toast.error("Something went wrong.");
+      toast.error('Something went wrong.')
 
-      console.log("Error updating Profile", err);
+      console.log('Error updating Profile', err)
     }
-  }, [applyMutation.isSuccess, applyMutation.error]);
+  }, [applyMutation.isSuccess, applyMutation.error])
 
-  const isDisabled = applyMutation.isLoading || applyMutation.isSuccess;
+  const isDisabled = applyMutation.isLoading || applyMutation.isSuccess
 
   const showApplyButton = () => {
     if (isApplied) {
@@ -73,8 +71,8 @@ export const jobDetails = (props) => {
         <div className="float-right -mt-6 ml-4 mr-2  flex  text-base font-semibold  text-green-700 ">
           <span>Applied</span> <FaCheckCircle className="ml-1 mt-1" />
         </div>
-      );
-    } else if (canApply) {
+      )
+    } else if (canApply === 'CAN_APPLY') {
       return (
         <button
           disabled={isDisabled}
@@ -83,35 +81,44 @@ export const jobDetails = (props) => {
         >
           Apply Now
         </button>
-      );
-    } else {
+      )
+    } else if (canApply === 'PROFILE_NOT_COMPLETE') {
       return (
         <Link
-          to={"/user/profile"}
-          className="float-right -mt-6 ml-4 mr-2 rounded-md bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700"
+          to={'/user/profile'}
+          className="float-right -mt-6 ml-4 mr-2 rounded-md bg-red-500 px-4 py-2 text-sm font-semibold text-white hover:bg-red-600"
         >
           Complete your Profile to Apply
         </Link>
-      );
+      )
+    } else if (canApply === 'NOT_CANDIDATE') {
+      return (
+        <div className="float-right -mt-6 ml-4 mr-2 rounded-md px-4 py-2 text-sm font-semibold text-red-500  ">
+          You can't apply for this job!
+        </div>
+      )
+    } else {
+      return (
+        <Link
+          to="/login"
+          className="float-right -mt-6 ml-4 mr-2 rounded-md bg-green-500 px-4 py-2 text-sm font-semibold text-white hover:bg-green-600 "
+        >
+          Login to Apply
+        </Link>
+      )
     }
-  };
+  }
 
   return (
     <>
       <div className="flex h-40 w-full items-center justify-center rounded-t-md bg-gray-300 ">
-        <span className="font-mono font-semibold text-gray-700">
-          {job.employer?.slogan}
-        </span>
+        <span className="font-mono font-semibold text-gray-700">{job.employer?.slogan}</span>
       </div>
       <div className="z-10 -mt-8 h-16 w-16 bg-gray-100 shadow-md">
         {
           // Check if company logo is available
           job.employer?.logo ? (
-            <img
-              className="h-16 w-16"
-              src={job.employer.logo}
-              alt="company logo"
-            />
+            <img className="h-16 w-16" src={job.employer.logo} alt="company logo" />
           ) : (
             <div className="flex h-16 w-16 items-center justify-center  bg-green-700">
               <span className="text-4xl font-semibold text-gray-50">
@@ -128,18 +135,12 @@ export const jobDetails = (props) => {
           <div className="text-2xl font-bold">{job.title}</div>
           <div className="ml-auto flex items-center">
             {canApply && (
-              <div
-                className="save-icon z-20 cursor-pointer "
-                onClick={() => handleWishlist(2)}
-              >
+              <div className="save-icon z-20 cursor-pointer " onClick={() => handleWishlist(2)}>
                 <svg
-                  className={classNames(
-                    "h-6 w-6 hover:fill-gray-800 hover:text-gray-800 ",
-                    {
-                      "text-gray-500": !saved,
-                      "fill-gray-500 text-gray-500": saved,
-                    }
-                  )}
+                  className={classNames('h-6 w-6 hover:fill-gray-800 hover:text-gray-800 ', {
+                    'text-gray-500': !saved,
+                    'fill-gray-500 text-gray-500': saved,
+                  })}
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="none"
@@ -172,12 +173,9 @@ export const jobDetails = (props) => {
         </div>
         <div className="mt-2 flex justify-between">
           <div className="font-xs text-gray-700">
-            {job.employer?.company_name},
-            <span className="loc ml-2">{job.employer?.location}</span>
+            {job.employer?.company_name},<span className="loc ml-2">{job.employer?.location}</span>
           </div>
-          <div className="font-xs text-gray-700">
-            Posted {relativeTime(job.created_at)}
-          </div>
+          <div className="font-xs text-gray-700">Posted {relativeTime(job.created_at)}</div>
         </div>
         <div className="font-xs mt-2 text-gray-700 ">
           <span className="loc flex">
@@ -217,31 +215,23 @@ export const jobDetails = (props) => {
         </div>
         <div className="mt-5 justify-between rounded-2xl bg-gray-300 px-6 py-1 md:flex md:h-16">
           <div className="leading-7">
-            <div className="whitespace-nowrap font-semibold text-gray-800">
-              Experience
-            </div>
+            <div className="whitespace-nowrap font-semibold text-gray-800">Experience</div>
             <div className="hitespace-nowrap font-sans text-gray-900">
-              {job.experience ? job.experience : "No Experience"}
+              {job.experience ? job.experience : 'No Experience'}
             </div>
           </div>
           <div className="leading-7">
-            <div className="whitespace-nowrap font-semibold text-gray-800">
-              Employee Type
-            </div>
+            <div className="whitespace-nowrap font-semibold text-gray-800">Employee Type</div>
             <div className="hitespace-nowrap font-sans text-gray-900">
-              {job.type ? job.type : "Full Time"}
+              {job.type ? job.type : 'Full Time'}
             </div>
           </div>
           <div className="leading-7">
-            <div className="whitespace-nowrap font-semibold text-gray-800">
-              Salary
-            </div>
+            <div className="whitespace-nowrap font-semibold text-gray-800">Salary</div>
             <div className="hitespace-nowrap font-sans text-gray-900">
               {
                 //If dollar sign is not present in salary, add it
-                job.salary && !job.salary.includes("$")
-                  ? "$" + job.salary
-                  : job.salary
+                job.salary && !job.salary.includes('$') ? '$' + job.salary : job.salary
               }
             </div>
           </div>
@@ -256,7 +246,7 @@ export const jobDetails = (props) => {
                 //If qualifications are not present, show "Not Specified"
                 job.qualifications
                   ? //extract each skill from skils string
-                    job.qualifications.split(",").map((skill, index) => (
+                    job.qualifications.split(',').map((skill, index) => (
                       <button
                         key={index}
                         className="rounded-full bg-gray-300 px-3 py-1 text-sm font-medium tracking-wider text-gray-600 shadow-sm hover:bg-gray-400 hover:shadow-2xl"
@@ -264,7 +254,7 @@ export const jobDetails = (props) => {
                         {skill}
                       </button>
                     ))
-                  : "Not Specified"
+                  : 'Not Specified'
               }
             </div>
           </div>
@@ -273,21 +263,21 @@ export const jobDetails = (props) => {
           <div className="mb-7 leading-8">
             {
               //If benefits are not present, show "Not Specified"
-              job.benefits ? job.benefits : "Not Specified"
+              job.benefits ? job.benefits : 'Not Specified'
             }
           </div>
           <div className="mb-2 font-semibold">Work Location</div>
           <div className="mb-7 leading-8">
             {
               //If location are not present, show "Not Specified"
-              job.work_location ? job.work_location : "Not Specified"
+              job.work_location ? job.work_location : 'Not Specified'
             }
           </div>
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
 export const JobDetailsLoading = () => {
   return (
@@ -339,5 +329,5 @@ export const JobDetailsLoading = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
