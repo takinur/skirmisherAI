@@ -10,18 +10,23 @@ import { SearchJobs } from '../components/Search/SearchJobs'
 import { useCandProfile } from '../hooks/useProfile'
 import { useEffect } from 'react'
 
-//EH? Check for user role
-//Apply for Job model Confirmation
-//Wishlist Job
-
 export const Findwork = () => {
   const [searchValue, SetSearchValue] = useState('')
   const [jobDetails, setJobDetails] = useState(null)
+  const [canApplyState, setCanAppyState] = useState(null)
 
-  const { data: profile } = useCandProfile()
+  const { data: profile, user } = useCandProfile()
 
-  const canApply = profile !== undefined || null ? true : false
-  // const canApply = false;
+  useEffect(() => {
+    if (!user) return setCanAppyState('NOT_LOGGED_IN')
+
+    if (user?.role !== 'CANDIDATE') return setCanAppyState('NOT_CANDIDATE')
+
+    if (user?.role === 'CANDIDATE' && !profile) return setCanAppyState('PROFILE_NOT_COMPLETE')
+    setCanAppyState('CAN_APPLY')
+  }, [profile, user])
+
+  // console.log(canApplyState, 'canApply')
 
   // React query to fetch Jobs and filter them
   const { isLoading, data, refetch } = useQuery(
@@ -63,7 +68,6 @@ export const Findwork = () => {
   return (
     <GuestLayout>
       <div className="bg-secondary-gradient container hidden h-24 w-full md:block "></div>
-
       <div className="wrapper bg-gray-200 px-4 pt-14 md:px-40">
         <div className="w-full flex-shrink-0 items-center whitespace-nowrap rounded-lg bg-gray-50 md:flex md:h-14 md:pl-5 ">
           <SearchJobs SetSearchValue={SetSearchValue} />
@@ -125,7 +129,7 @@ export const Findwork = () => {
                           id={job.id}
                           qualifications={job.qualifications}
                           setJobDetails={setJobDetails}
-                          canApply={canApply}
+                          canApply={canApplyState}
                         />
                       ))
                     )
@@ -135,7 +139,7 @@ export const Findwork = () => {
                   {showDetails?.length > 0 ? (
                     <DetailSection
                       job={showDetails[0]}
-                      canApply={canApply}
+                      canApply={canApplyState}
                       applicant={profile?.id}
                     />
                   ) : (
