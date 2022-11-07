@@ -14,6 +14,7 @@ import ChartCard from '../../components/Charts/ChartCard'
 import { BarChart } from '../../components/Charts/BarChart'
 import { Loading } from '../../components/Loading'
 import { SelectListBox } from '../../components/SelectDropdown'
+import { NoExInfo } from '../../components/Alerts'
 
 export const Reports = () => {
   useTitle('Reports')
@@ -47,10 +48,17 @@ export const Reports = () => {
   )
 
   const conditionalRender = () => {
-    if (empLoading || isLoading) return <div>Loading...</div>
-    if (empErr) return <div>Something went wrong!</div>
+    if (empLoading || isLoading) return <Loading />
+    if (empErr)
+      return (
+        <NoExInfo
+          to="/user/profile"
+          text="You have not added additional details!."
+          callto="Add now"
+        />
+      )
 
-    if (jobs) {
+    if (jobs.length !== 0) {
       //Remove ID and updated_at from the jobs array
       const jobsWithoutID = jobs.map(({ id, updated_at, ...rest }) => rest)
       //Format the date to yyyy-MM-dd HH:mm:ss
@@ -73,7 +81,10 @@ export const Reports = () => {
           />
         </div>
       )
-    }
+    } else
+      return (
+        <NoExInfo to="/jobs/create" text="Not enough Data for Reports." callto="Post a job now" />
+      )
   }
 
   return <AuthLayout title="Reports">{conditionalRender()}</AuthLayout>
