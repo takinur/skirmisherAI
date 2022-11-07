@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react'
 
-export const SearchJobs = ({SetSearchValue}) => {
+export const SearchJobs = ({ SetSearchValue }) => {
   const handleSearch = (e) => {
-    if (!e.target.value) return SetSearchValue("");
-    SetSearchValue(e.target.value);
-  };
+    if (!e.target.value) return SetSearchValue('')
+    SetSearchValue(e.target.value)
+  }
 
   return (
     <div className="relative h-14 w-full border-b-2 border-slate-200 md:border-b-0 md:border-none">
@@ -16,7 +16,7 @@ export const SearchJobs = ({SetSearchValue}) => {
           type="text"
           name="search"
           onChange={handleSearch}
-          className="w-full  border-none bg-transparent py-2 font-bold text-gray-700 outline-none focus:outline-none"
+          className="w-full border-none  bg-transparent py-2 font-bold text-gray-600 outline-none placeholder:text-gray-400 focus:outline-none"
           placeholder="Job title, keywords or company"
         />
         <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
@@ -37,5 +37,5 @@ export const SearchJobs = ({SetSearchValue}) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
