@@ -223,6 +223,13 @@ class VacancyView(viewsets.ModelViewSet):
         # Data not found return empty queryset
         return Vacancy.objects.order_by('-created_at')
 
+    # Instead of delete, set is_published to false
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.is_published = False
+        instance.save()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 # Custom Viewset for Job Views
 class VacancyPublicViewSet(
