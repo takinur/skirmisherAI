@@ -61,15 +61,16 @@ class CandidateProfileAdmin(admin.ModelAdmin):
 
 class VacancyAdmin(admin.ModelAdmin):
     list_display = ('title', 'type', 'level', 'salary', 'benefits',
-                    'qualifications', 'work_location', 'employer', 'created_at')
+                    'qualifications', 'work_location', 'employer', 'created_at', 'is_published')
 
     search_fields = ('title', 'type', 'qualifications',
                      'work_location', 'employer',)
 
-    list_filter = ('type', 'work_location', 'employer', 'created_at',)
+    list_filter = ('type', 'work_location', 'employer',
+                   'created_at', 'is_published')
     fieldsets = (
         (None, {
-            'fields': ('title', 'level', 'salary', 'qualifications', 'employer')
+            'fields': ('title', 'level', 'salary', 'qualifications', 'employer', 'is_published')
         }),
         ('Additional Details', {
             'fields': ('work_location', 'type', 'benefits', 'description')
