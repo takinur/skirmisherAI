@@ -94,6 +94,7 @@ export const jobs = () => {
   )
 
   const deleteRow = async () => {
+    //TODO: IDK gotta figure out how to unpublish a job
     try {
       const response = await API.delete(`/jobs/${jobID}`)
       // console.log(response);
