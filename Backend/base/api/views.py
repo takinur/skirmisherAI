@@ -241,7 +241,8 @@ class VacancyPublicViewSet(
 
 class RetriveVacancyView(VacancyPublicViewSet):
     #Authentication is not required
-    queryset = Vacancy.objects.order_by('-created_at')
+    queryset = Vacancy.objects.filter(
+        is_published=True).order_by('-created_at')
     serializer_class = PublicVacancySerializer
 
 
