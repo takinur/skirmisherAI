@@ -60,7 +60,7 @@ class CandidateProfileAdmin(admin.ModelAdmin):
 
 
 class VacancyAdmin(admin.ModelAdmin):
-    list_display = ('title', 'type', 'level', 'salary', 'benefits',
+    list_display = ('title', 'type', 'level', 'salary',
                     'qualifications', 'work_location', 'employer', 'created_at', 'is_published')
 
     search_fields = ('title', 'type', 'qualifications',
