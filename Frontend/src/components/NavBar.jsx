@@ -137,7 +137,7 @@ export default function Navbar() {
                           to="/dashboard"
                           className="mt-2 block rounded-full border-2 border-[#7510F7] py-1 px-6 text-[#7510F7] shadow-lg hover:bg-[#7510F7] hover:text-white md:inline-block"
                         >
-                          MY DASHBOARD{' '}
+                          {`Howdy, ${user.name.split(' ')[0]}`}
                         </Link>
                       ) : (
                         <Link
@@ -181,7 +181,7 @@ export default function Navbar() {
                         !atTop ? 'text-slate-200' : 'text-[#7510F7]'
                       )}
                     >
-                      My DASHBOARD
+                      {`Howdy, ${user.name.split(' ')[0]}`}
                     </Link>
                   </li>
                 ) : (
