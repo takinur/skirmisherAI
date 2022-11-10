@@ -465,3 +465,6 @@ class CandDashboardStatsView(APIView):
 class NewsletterView(viewsets.ModelViewSet):
     queryset = Newsletter.objects.order_by('-created_at')
     serializer_class = NewsletterSerializer
+
+
+# Authentication with Google and Facebook
