@@ -1,6 +1,4 @@
 import React from 'react'
-import { useQuery } from 'react-query'
-import { useAxiosPrivate } from '../../hooks/useAxiosPrivate'
 
 import { EmpProfileForm } from '../../components/Forms'
 import { Loading } from '../../components/Loading'
@@ -9,8 +7,7 @@ import { useProfile } from '../../hooks/useProfile'
 import { useTitle } from '../../hooks/useTitle'
 
 export const Profile = () => {
-  useTitle('User Profile| Employer')
-  const API = useAxiosPrivate()
+  useTitle('User Profile | Employer')
 
   const { isLoading, isError, data, user } = useProfile()
 
