@@ -1,27 +1,35 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
+import { useMutation } from 'react-query'
+import { Link } from 'react-router-dom'
+import classNames from 'classnames'
 import GuestLayout from './Layout/Guest'
 import { axiosInstance as API } from '../api/axiosInstance'
 import { useEffect } from 'react'
+import Input from '../components/Input'
+import Button from '../components/ButtonDefault'
+import Label from '../components/Label'
+import TextArea from '../components/TextArea'
+import Checkbox from '../components/Checkbox'
 
 export const ContactPage = () => {
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit, reset } = useForm()
 
   //Apply for Job
   const contactMutation = useMutation(async (data) => await API.post('v1/contact/', data))
 
   const submitForm = (data) => {
-    if (data.name === '' || data.email === '' || data.message === '') {
+    if (data.name === '' || data.email === '' || data.message === '' || data.subject === '') {
       return toast.error('Please fill all the fields')
     }
     //Name less than 4 characters is not allowed
     if (data.name.length < 4) {
       return toast.error('Name must be at least 4 characters')
     }
-    //Email must be valid
-    if (!validateEmail(data.email)) {
-      return toast.error('Email is not valid')
+    // Validate email with regex
+    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(data.email)) {
+      return toast.error('Invalid email address')
     }
     //Message must be at least 10 characters
     if (data.message.length < 10) {
@@ -33,11 +41,14 @@ export const ContactPage = () => {
   useEffect(() => {
     if (contactMutation.isSuccess) {
       toast.success('Message sent successfully')
+      //Reset Hook Form after 5 seconds
+      setTimeout(() => {
+        reset()
+      }, 5000)
     }
   }, [contactMutation.isSuccess])
 
-  const isDisabled =
-    contactMutation.isLoading || contactMutation.isSuccess || contactMutation.isError
+  const isDisabled = contactMutation.isLoading || contactMutation.isSuccess
 
   return (
     <GuestLayout>
@@ -47,15 +58,15 @@ export const ContactPage = () => {
             <div className="px-4 py-16">
               <div className="relative w-full text-center md:mx-auto md:max-w-2xl">
                 <h1 className="mb-6 text-xl font-bold leading-tight text-gray-300 sm:text-2xl md:mt-20 md:text-5xl">
-                  Help - Contact Us - Support - FAQ - Terms and Conditions
+                  We are here to help you with any questions or concerns you may have.
                 </h1>
-                <p className="mb-6 text-base text-gray-300 sm:text-lg md:text-xl">
-                  We are here to help you. Please contact us if you have any questions or concerns.
-                </p>
-
-                <p className="md:px-18 text-gray-400 md:text-xl">
-                  A simple and smart solution that will help allocating human resources as well as
-                  improving both business growth and productivity
+                <p className="mb-6 text-base text-gray-400 sm:text-lg md:text-xl">
+                  Before contacting us, please check our
+                  <a className="mx-1 text-teal-500 underline hover:text-teal-700" href="#faq">
+                    F.A.Q
+                  </a>
+                  to see if your question is already answered. If not, please contact us using the
+                  form below.
                 </p>
 
                 <div className="absolute right-0 bottom-0 -mb-64 -mr-48 hidden h-40 w-40 rounded-full bg-blue-800 md:block"></div>
@@ -76,20 +87,16 @@ export const ContactPage = () => {
             </svg>
           </div>
 
-          <div className="relative z-20 mx-auto -mt-80 hidden max-w-4xl rounded-3xl bg-white shadow-lg md:block">
+          <div className="relative z-20 mx-auto max-w-4xl  rounded-3xl bg-white shadow-lg md:-mt-80 md:block">
             <div className="absolute top-0 left-0 -z-10 -ml-10 -mt-10 h-20 w-20 rounded-full bg-yellow-500"></div>
 
             <div className="absolute top-0 left-0 -z-10 -ml-32 mt-12 h-5 w-5 rounded-full bg-blue-500"></div>
 
             <div className="h-10 rounded-t-lg border-b border-gray-100 bg-white"></div>
-            <div className="flex h-[550px] border-2 border-red-500 ">
-              <div className="px-8 text-lg text-gray-700">
-                Before you contacting us, please check our <a href="#faq"> FAQ </a> to see if your
-                question is already answered. If not, please contact us using the form below.
-              </div>
-              <form onSubmit={handleSubmit(submitForm)}>
+            <div className="h-[550px] ">
+              <form onSubmit={handleSubmit(submitForm)} className="mx-auto w-3/5">
                 <div className="mt-4">
-                  <Label htmlFor="name">Full Name</Label>
+                  <Label htmlFor="name">Name</Label>
                   <Input
                     id="name"
                     type="text"
@@ -99,9 +106,7 @@ export const ContactPage = () => {
                   />
                 </div>
                 <div className="mt-4">
-                  <Label htmlFor="email">
-                    {selectedRole.id === 1 ? 'Work Email Address' : 'Email Address'}
-                  </Label>
+                  <Label htmlFor="email">Email Address</Label>
                   <Input
                     id="email"
                     type="email"
@@ -110,29 +115,32 @@ export const ContactPage = () => {
                     required
                   />
                 </div>
+                <div className="mt-4">
+                  <Label htmlFor="subject">Subject</Label>
+                  <Input
+                    id="subject"
+                    type="text"
+                    className="mt-1 block w-full"
+                    {...register('subject')}
+                    required
+                  />
+                </div>
 
                 <div className="mt-4">
-                  <Label htmlFor="password">Password</Label>
-                  <Input
-                    id="password"
-                    type="password"
+                  <Label htmlFor="message">Details</Label>
+                  <TextArea
+                    id="message"
+                    type="text"
                     className="mt-1 block w-full"
-                    {...register('password')}
+                    {...register('message')}
                     required
-                    autoComplete="current-password"
                   />
                 </div>
 
                 <div className="mt-4">
                   <Label htmlFor="terms">
                     <div className="flex items-center">
-                      <Checkbox
-                        name="terms"
-                        id="terms"
-                        required
-                        // checked={form.data.terms}
-                        // onChange={e => form.setData('terms', e.currentTarget.checked)}
-                      />
+                      <Checkbox name="terms" id="terms" required />
 
                       <div className="ml-2">
                         I agree to the
@@ -157,14 +165,14 @@ export const ContactPage = () => {
                 </div>
                 <div className="mt-6">
                   <div className="flex items-center justify-center ">
-                    <ButtonPrimary
+                    <Button
                       className={classNames('ml-4 ', {
-                        'opacity-25': isLoading,
+                        'opacity-25': isDisabled,
                       })}
-                      disabled={isLoading}
+                      disabled={isDisabled}
                     >
-                      Create my Account
-                    </ButtonPrimary>
+                      Send Message
+                    </Button>
                   </div>
                 </div>
               </form>
