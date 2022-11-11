@@ -48,10 +48,11 @@ function DetailedProfileView(company, user) {
                 <div className="w-full px-4 lg:order-3 lg:w-4/12 lg:self-center lg:text-right">
                   <div className="mt-32 py-6 px-3 sm:mt-0">
                     <button
-                      className="mb-1 rounded bg-blue-500 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-blue-600 sm:mr-2"
+                      disabled
+                      className="mb-1 rounded bg-blue-500 px-4 py-2 text-xs font-bold uppercase text-white opacity-0 shadow outline-none transition-all duration-150 ease-linear hover:shadow-md focus:outline-none active:bg-blue-600 sm:mr-2"
                       type="button"
                     >
-                      Connect
+                      Edit Profile
                     </button>
                   </div>
                 </div>
