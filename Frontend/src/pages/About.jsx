@@ -17,8 +17,7 @@ export const AboutPage = () => {
                 </h1>
 
                 <p className="md:px-18 text-gray-400 md:text-xl">
-                  A simple and smart solution that will help allocating human resources as well as
-                  improving both business growth and productivity
+                  Helping you being great at hiring
                 </p>
 
                 <div className="absolute right-0 bottom-0 -mb-64 -mr-48 hidden h-40 w-40 rounded-full bg-blue-800 md:block"></div>
@@ -98,31 +97,19 @@ export const AboutPage = () => {
                     </div>
 
                     <div className="percentage mb-10 h-32 pt-2">
-                      <div className="mb-4 block h-4 w-64 bg-gray-200"></div>
-                      <div className="mb-4 block h-4 w-32 bg-gray-200"></div>
-                      <div className="mb-4 block h-4 w-40 bg-gray-200"></div>
-                      <div className="mb-4 block h-4 w-20 bg-gray-200"></div>
+                      We are dedicated to providing outstanding technology to improve talent
+                      acquisition
+                      <p className="mt-2">
+                        With fresh perspectives and novel techniques, we aim to add value and
+                        improve the lives of our clients. We are inherently innovative, and it
+                        permeates everything we do. For our clients, our staff works hard to make
+                        hiring success a reality.
+                      </p>
                     </div>
 
                     <div className="mb-6 flex w-full flex-wrap">
-                      <div className="w-1/2">
-                        <div className="flex items-center">
-                          <div className="mr-4 h-8 w-8 rounded-full bg-gray-200"></div>
-                          <div>
-                            <div className="mb-1 h-2 w-16 rounded-full bg-gray-200"></div>
-                            <div className="h-2 w-10 rounded-full bg-gray-100"></div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="w-1/2">
-                        <div className="flex items-center">
-                          <div className="mr-4 h-8 w-8 rounded-full bg-gray-200"></div>
-                          <div>
-                            <div className="mb-1 h-2 w-16 rounded-full bg-gray-200"></div>
-                            <div className="h-2 w-10 rounded-full bg-gray-100"></div>
-                          </div>
-                        </div>
-                      </div>
+                      Our amazing journey started in 2022 and it's already full of extraordinary
+                      milestones and achievements. Yet, there's still much more to come!
                     </div>
 
                     <div className="flex w-full flex-wrap">
