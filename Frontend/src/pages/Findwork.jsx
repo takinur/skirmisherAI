@@ -85,7 +85,7 @@ export const Findwork = () => {
 
   return (
     <GuestLayout>
-      <div className="bg-secondary-gradient container hidden h-24 w-full md:block "></div>
+      <div className="bg-secondary-gradient  hidden h-24 w-full md:block "></div>
       <div className="wrapper bg-gray-200 px-4 pt-14 md:px-40">
         <div className="w-full flex-shrink-0 items-center whitespace-nowrap rounded-lg bg-gray-50 md:flex md:h-14 md:pl-5 ">
           <SearchJobs SetSearchValue={SetSearchValue} />
