@@ -2,6 +2,7 @@ import React from 'react'
 import GuestLayout from './Layout/Guest'
 
 export const ContactPage = () => {
+  //TODO: Add Contact Form
   return (
     <GuestLayout>
       <div className="flex min-h-screen w-full flex-col bg-white font-sans">

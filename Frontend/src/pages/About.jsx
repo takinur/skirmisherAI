@@ -97,8 +97,11 @@ export const AboutPage = () => {
                     </div>
 
                     <div className="percentage mb-10 h-32 pt-2">
-                      We are dedicated to providing outstanding technology to improve talent
-                      acquisition
+                      <h4 className="font-bold text-gray-700">
+                        {' '}
+                        We are dedicated to providing outstanding technology to improve talent
+                        acquisition{' '}
+                      </h4>
                       <p className="mt-2">
                         With fresh perspectives and novel techniques, we aim to add value and
                         improve the lives of our clients. We are inherently innovative, and it
