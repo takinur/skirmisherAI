@@ -12,6 +12,7 @@ import AuthRoleSelection from '../../components/AuthRoleSelection'
 import ButtonSecondary from '../../components/ButtonSecondary'
 import { useTitle } from '../../hooks/useTitle'
 import GuestLayout from '../Layout/Guest'
+import AuthenticationCard from '../../components/AuthenticationCard'
 
 const roles = [
   {
@@ -40,6 +41,14 @@ export default function Register() {
   const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
 
   const submitForm = (data) => {
+    if (data.name === '' || data.email === '' || data.password === '') {
+      return toast.error('Please fill all the fields')
+    }
+    //Name less than 4 characters is not allowed
+    if (data.name.length < 4) {
+      return toast.error('Name must be at least 4 characters')
+    }
+
     //Override data to add roles
     data.role = selectedRole.id
     dispatch(authRegister(data))
@@ -99,24 +108,36 @@ export default function Register() {
   //Main return statement
   return (
     <GuestLayout>
-      <section className="register bg-secondary-gradient flex min-h-screen flex-col items-center pt-6 sm:justify-center sm:pt-0">
-        <div className="mt-6 w-full overflow-hidden bg-white px-12 py-4 shadow-md sm:rounded-lg md:max-w-2xl">
-          {conditionalComponent()}
-          <div className="mt-4 flex justify-center">
-            <p>
-              {' '}
-              Already have an account?
-              <Link
-                to="/login"
-                className="ml-1 text-sm text-green-600 underline hover:text-gray-900"
-              >
-                Login
-              </Link>
-            </p>
+      <AuthenticationCard>
+        <div className="bg-primary-gradient p-4 py-6  md:flex md:w-80 md:flex-shrink-0 md:flex-col md:items-center md:justify-evenly">
+          <div className="my-3 text-center text-4xl font-bold tracking-wider">
+            <Link to="/" className="text-primary-gradient">
+              SkirmisherAI
+            </Link>
           </div>
-          {/*TODO: same to greenwich update pass <p>Other password stuff</p> */}
+          <p className="mt-6 text-center font-normal text-gray-300 md:mt-0">
+            A platform that helps employers to find the right talent for their organization and
+            helps job seekers to find the right job for them. Sign up to get started.
+          </p>
+          <p className="mt-10 flex flex-col items-center justify-center text-center text-gray-400">
+            <span>Already have an account?</span>
+            <Link to="/login" className="underline">
+              Sign In
+            </Link>
+          </p>
+          <p className="mt-6 text-center text-sm text-gray-300">
+            Read our{' '}
+            <Link to="/terms-and-condition" className="underline">
+              terms
+            </Link>{' '}
+            and{' '}
+            <Link to="/terms-and-condition" className="underline">
+              conditions
+            </Link>
+          </p>
         </div>
-      </section>
+        <div className="bg-white p-5 md:flex-1">{conditionalComponent()}</div>
+      </AuthenticationCard>
     </GuestLayout>
   )
 }
@@ -134,13 +155,14 @@ function RegisterForm({
     <>
       <div className="relative pt-6">
         <div className="absolute -right-6 top-0 text-teal-500 underline md:right-0">
-          <span className="cursor-pointer" onClick={() => setStep(1)}>
-            Go Back
+          <span className="cursor-pointer text-sm" onClick={() => setStep(1)}>
+            Back to Role Selection
           </span>
         </div>
-        <h2 className=" text-center font-roboto text-3xl">
+
+        <h3 className="my-4 text-2xl font-semibold text-gray-700">
           Sign Up to {selectedRole.id === 1 ? 'Hire Talent' : 'Find work'}
-        </h2>
+        </h3>
       </div>
       <form onSubmit={handleSubmit(submitForm)}>
         <div className="mt-4">
