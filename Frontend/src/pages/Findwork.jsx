@@ -112,8 +112,8 @@ export const Findwork = () => {
                     Back to List
                   </button>
                 </div>
-                <div className="flex justify-start text-sm font-semibold text-gray-800">
-                  Sort by:{' '}
+                <div className="grid grid-cols-2 content-start justify-start gap-1 text-sm font-semibold text-gray-800">
+                  <span className="text-end">Sort by:</span>
                   <button onClick={handleSort} className="post-time ml-1 flex cursor-pointer ">
                     {sort === 'desc' ? 'Most Recent' : 'Oldest First'}
                     {sort === 'desc' ? <SortIconDesc /> : <SortIconAsc />}
