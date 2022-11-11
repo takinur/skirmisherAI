@@ -18,6 +18,7 @@ import { format } from 'date-fns'
 import { DayPicker } from 'react-day-picker'
 import 'react-day-picker/dist/style.css'
 import { Link } from 'react-router-dom'
+import ProgressCircle from '../ProgressCircle'
 
 export const Applications = (item) => {
   const API = useAxiosPrivate()
@@ -101,11 +102,13 @@ export const Applications = (item) => {
                   open ? 'rounded-t-md' : 'rounded-md shadow-lg'
                 } "relative " grid h-full w-full cursor-pointer grid-cols-7 items-center gap-4  bg-white`}
               >
-                <div className="font-roboto col-span-3 pl-4 font-semibold text-gray-600">
+                <div className="col-span-3 pl-4 font-roboto font-semibold text-gray-600">
                   {item.candidate.name}
                 </div>
                 <div className="font-mono text-xl font-medium text-gray-600 ">
-                  {item?.skill_score && item.skill_score.toString().replace(/\.?0+$/, '')}%
+                  {item?.skill_score && (
+                    <ProgressCircle value={item.skill_score.toString().replace(/\.?0+$/, '')} />
+                  )}
                 </div>
                 <div className="flex font-mono text-xl font-semibold text-gray-600">
                   {item?.total_score > 55 ? (
