@@ -102,8 +102,11 @@ export const Applications = (item) => {
                   open ? 'rounded-t-md' : 'rounded-md shadow-lg'
                 } "relative " grid h-full w-full cursor-pointer grid-cols-7 items-center gap-4  bg-white`}
               >
-                <div className="col-span-3 pl-4 font-roboto font-semibold text-gray-600">
+                <div className="col-span-2 pl-4 font-roboto font-semibold text-gray-600">
                   {item.candidate.name}
+                </div>
+                <div className="col-span-1 text-left font-roboto text-sm font-medium text-gray-500">
+                  {item.candidate.email}
                 </div>
                 <div className="font-mono text-xl font-medium text-gray-600 ">
                   {item?.skill_score && (
@@ -148,7 +151,7 @@ export const Applications = (item) => {
                     </span>
                   ) : (
                     <span className=" cursor-pointer font-semibold text-green-600 hover:text-green-800 ">
-                      Invite
+                      Shortlist
                     </span>
                   )}
                   <FaChevronUp
