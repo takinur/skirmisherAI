@@ -4,7 +4,7 @@ from datetime import datetime
 from django.utils.timezone import now
 
 from ..models import Blog, Invitation, JobApplication, CandidateProfile, EmployerProfile, Education
-from ..models import Experience, FileUpload, Project, Skill, Social, Vacancy, Newsletter
+from ..models import Experience, FileUpload, Project, Skill, Social, Vacancy, Newsletter, Contact
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
@@ -277,4 +277,10 @@ class BlogSerializer(serializers.ModelSerializer):
 class NewsletterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Newsletter
+        fields = '__all__'
+
+
+class ContactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contact
         fields = '__all__'
