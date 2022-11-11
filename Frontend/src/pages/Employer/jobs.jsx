@@ -107,8 +107,8 @@ export const jobs = () => {
     },
     {
       id: 'date',
-      header: 'Posted',
-      accessorKey: 'created_at',
+      header: 'Unpublished',
+      accessorKey: 'updated_at',
       //Convert django date to readable format
       cell: (row) => {
         return relativeTime(row.getValue())
@@ -121,7 +121,28 @@ export const jobs = () => {
       header: 'Actions',
       accessorKey: 'id',
       cell: (row) => (
-        <Actions row={row.getValue()} employer={employer} setModal={setModal} setJobID={setJobID} />
+        <Link to={`/employer/jobs/${row.getValue()}/view`}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="mx-auto h-8 w-8 hover:text-indigo-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+            />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+            />
+          </svg>
+        </Link>
       ),
       //Not filterable
       enableColumnFilter: false,
@@ -154,7 +175,7 @@ export const jobs = () => {
         closeModal()
         //refetch the data
         refetch()
-        toast.info('Job deleted successfully')
+        toast.info('Job Ubpublished successfully')
       }
     } catch (error) {
       console.log('Delete Error', error)
@@ -213,7 +234,7 @@ export const jobs = () => {
           <p className=" mt-1 pl-6 text-sm text-gray-500 dark:text-gray-400">
             Archived jobs are not visible to the public.
           </p>
-          <Table columns={columns} data={unpublishedJobs} />
+          <Table columns={unpublishedColumns} data={unpublishedJobs} />
         </div>
       </div>
     )
@@ -250,9 +271,9 @@ export const jobs = () => {
               clipRule="evenodd"
             />
           </svg>
-          <h2 className="py-4 text-xl font-bold ">Are you sure?</h2>
+          <h2 className="py-4 text-xl font-bold ">Unpublishing Job, Are you sure?</h2>
           <p className="px-8 text-sm text-gray-500">
-            Do you really want to delete your Job posting? This process cannot be undone
+            Do you really want to withdraw your job posting? This process cannot be undone.
           </p>
         </div>
 
@@ -267,7 +288,7 @@ export const jobs = () => {
             onClick={deleteRow}
             className="mb-2 rounded-full border border-red-500 bg-red-500 px-5 py-2 text-sm font-medium tracking-wider text-white shadow-sm hover:bg-red-600 hover:shadow-lg md:mb-0"
           >
-            Delete
+            Unpublish
           </button>
         </div>
       </HeadlessModal>
@@ -323,20 +344,23 @@ function Actions({ row, employer, setModal, setJobID }) {
           </svg>
         </Link>
       </div>
-      <div className="mr-2 w-4 transform hover:scale-110 hover:text-purple-500">
+      <div className="mr-2 w-4 transform cursor-pointer hover:scale-110 hover:text-purple-500">
         <svg
-          onClick={handleDelete}
           xmlns="http://www.w3.org/2000/svg"
-          fill="none"
+          onClick={handleDelete}
           viewBox="0 0 24 24"
+          fill="none"
           stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-          />
+          <path d="M4.18 4.18A2 2 0 0 0 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 1.82-1.18"></path>
+          <path d="M21 15.5V6a2 2 0 0 0-2-2H9.5"></path>
+          <path d="M16 2v4"></path>
+          <path d="M3 10h7"></path>
+          <path d="M21 10h-5.5"></path>
+          <line x1="2" y1="2" x2="22" y2="22"></line>
         </svg>
       </div>
     </div>
