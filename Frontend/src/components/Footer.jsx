@@ -52,6 +52,14 @@ const Footer = () => {
                 Community
               </Link>
             </li>
+            <li>
+              <Link
+                className="text-gray-700 transition hover:text-gray-700/75"
+                to="/terms-and-condition"
+              >
+                Terms & Conditions
+              </Link>
+            </li>
           </ul>
         </nav>
 
@@ -139,7 +147,7 @@ const Footer = () => {
         </ul>
         <div className="mt-12 items-center text-center text-sm text-gray-400 md:justify-center">
           <p className="mt-8 md:mt-0">
-            SkirmisherAI &copy; {new Date().getFullYear()} All right Reserved
+            SkirmisherAI &copy; {new Date().getFullYear()} All right Reserved.
           </p>
         </div>
       </div>

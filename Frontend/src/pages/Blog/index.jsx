@@ -51,7 +51,7 @@ const index = () => {
 
   return (
     <GuestLayout>
-      <div className="bg-secondary-gradient container hidden h-24 w-full md:block "></div>
+      <div className="bg-secondary-gradient  hidden h-24 w-full md:block "></div>
       <div className="wrapper mx-auto mb-auto max-w-screen-2xl px-20 pt-32 pb-10">
         <div className="main-section">
           <h1 className="md:leading-14 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-5xl">

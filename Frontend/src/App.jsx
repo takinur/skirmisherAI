@@ -31,6 +31,7 @@ import { BlogList } from './pages/Blog/BlogList'
 import { CreateUpdateBlog } from './pages/Blog/AddUpdateBlog'
 import { DashSingleBlogPost } from './pages/Blog/DashSingle'
 import UserSetting from './pages/Auth/UserSetting'
+import TermsPolicy from './pages/TermsPolicy'
 
 function App() {
   return (
@@ -72,6 +73,7 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/help" element={<ContactPage />} />
+        <Route path="/terms-and-condition" element={<TermsPolicy />} />
         <Route path="/meet" element={<VideoMeet />} />
         <Route path="/meet/:code" element={<VideoMeet />} />
         <Route path="/community">
