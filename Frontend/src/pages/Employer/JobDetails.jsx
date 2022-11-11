@@ -83,19 +83,20 @@ export const JobDetails = () => {
         <div className="mt-4 justify-between px-8 md:flex">
           <div className="text-2xl font-bold text-gray-600 md:ml-20">{job && job?.title}</div>
           <div className=" text-sm font-semibold text-gray-800">
-            Sort by: <span className="post-time">Most Suitable</span>
+            Sort by: <span className="post-time cursor-pointer ">Most Suitable</span>
             <span className="menu-icon">▼</span>
           </div>
         </div>
 
-        <div className="mt-1 grid grid-cols-1 gap-4">
+        <div className=" mt-1 grid grid-cols-1 gap-4 ">
           <div className="wrapper flex w-full px-5 md:h-20 ">
             <div className="has-rank my-auto flex w-24 items-center justify-center">
               <span className="font-serif text-3xl font-bold text-gray-600">{/* # */}</span>
             </div>
             <div className="relative grid w-full grid-cols-7 items-center gap-4">
-              <div className="col-span-3 pl-4 font-bold text-gray-600">Candidate Name</div>
-              <div className="font-bold text-gray-600 ">Skill Match</div>
+              <div className="col-span-2 pl-4 font-bold text-gray-600">Candidate Name</div>
+              <div className="font-bold text-gray-600">Email</div>
+              <div className="pl-6 font-bold text-gray-600 ">Skill Match</div>
               <div className=" font-bold text-gray-600">Suitability</div>
               <div className="font-bold text-gray-600"> Applied </div>
               <div className="font-bold text-gray-600"> Action </div>
