@@ -112,9 +112,12 @@ export const Findwork = () => {
                     Back to List
                   </button>
                 </div>
-                <div className="text-sm font-semibold text-gray-800">
-                  Sort by: <span className="post-time">Newest Job </span>
-                  <span className="menu-icon">▼</span>
+                <div className="flex justify-start text-sm font-semibold text-gray-800">
+                  Sort by:{' '}
+                  <button onClick={handleSort} className="post-time ml-1 flex cursor-pointer ">
+                    {sort === 'desc' ? 'Most Recent' : 'Oldest First'}
+                    {sort === 'desc' ? <SortIconDesc /> : <SortIconAsc />}
+                  </button>
                 </div>
               </div>
               <div className="mt-4 md:flex md:max-h-screen md:flex-grow">
@@ -172,3 +175,41 @@ export const Findwork = () => {
     </GuestLayout>
   )
 }
+
+const SortIconDesc = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={`h-5 w-5`}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M11 5h10"></path>
+    <path d="M11 9h7"></path>
+    <path d="M11 13h4"></path>
+    <path d="m3 17 3 3 3-3"></path>
+    <path d="M6 18V4"></path>
+  </svg>
+)
+
+const SortIconAsc = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={`h-5 w-5`}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M11 11H15"></path>
+    <path d="M11 15H18"></path>
+    <path d="M11 19H21"></path>
+    <path d="M9 7L6 4L3 7"></path>
+    <path d="M6 6L6 20"></path>
+  </svg>
+)
