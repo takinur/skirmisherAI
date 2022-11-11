@@ -71,7 +71,7 @@ export const JobDetails = () => {
   console.log('Feteched applciations', data)
 
   return (
-    <AuthLayout title="Job Details">
+    <AuthLayout title="View Job Details">
       <ButtonDefault
         onClick={() => navigate(-1)}
         className={classNames('ml-1 !bg-gray-700 md:mt-2')}
