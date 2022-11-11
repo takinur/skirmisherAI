@@ -30,6 +30,7 @@ import { SinglePost as SingleBlogPost } from './pages/Blog/single'
 import { BlogList } from './pages/Blog/BlogList'
 import { CreateUpdateBlog } from './pages/Blog/AddUpdateBlog'
 import { DashSingleBlogPost } from './pages/Blog/DashSingle'
+import UserSetting from './pages/Auth/UserSetting'
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
         {/* ProtectedRoutes */}
         <Route element={<ProtectedRoute />}>
           <Route path="/user/profile" element={<UserProfile />} />
+          <Route path="/user/setting" element={<UserSetting />} />
           <Route path="/dashboard" element={<Dashboard />} />
 
           <Route path="applicant/jobs" element={<CandJobs />} />
