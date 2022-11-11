@@ -69,6 +69,7 @@ function App() {
 
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/help" element={<ContactPage />} />
         <Route path="/meet" element={<VideoMeet />} />
         <Route path="/meet/:code" element={<VideoMeet />} />
         <Route path="/community">
