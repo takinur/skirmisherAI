@@ -58,7 +58,7 @@ const UserSetting = () => {
     <AuthLayout title=" Change your Password ">
       <ButtonDefault
         onClick={() => navigate(-1)}
-        className={classNames('ml-5 !bg-gray-700 md:mt-2 md:mt-6')}
+        className={classNames('ml-5 !bg-gray-700  md:mt-6')}
       >
         <FaChevronLeft className="mr-1" />
         Go Back
