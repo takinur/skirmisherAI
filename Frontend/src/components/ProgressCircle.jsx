@@ -14,7 +14,7 @@ const ProgressCircle = ({ value, className }) => {
       ? 'text-indigo-500'
       : 'text-green-500'
 
-  const circumference = 20 * 2 * Math.PI // 50 is the radius of the circle
+  const circumference = 22 * 2 * Math.PI // 50 is the radius of the circle
 
   return (
     <div className="relative">
@@ -25,7 +25,7 @@ const ProgressCircle = ({ value, className }) => {
             strokeWidth="6"
             stroke="currentColor"
             fill="transparent"
-            r="20"
+            r="22"
             cx="30"
             cy="30"
           />
@@ -37,12 +37,12 @@ const ProgressCircle = ({ value, className }) => {
             strokeLinecap="round"
             stroke="currentColor"
             fill="transparent"
-            r="20"
+            r="22"
             cx="30"
             cy="30"
           />
         </svg>
-        <span className="absolute mt-1.5 ml-1.5 text-sm text-gray-700">{value}%</span>
+        <span className="absolute mt-1.5 ml-1.5 text-xs text-gray-700">{value}%</span>
       </div>
     </div>
   )
