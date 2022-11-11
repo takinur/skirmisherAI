@@ -12,13 +12,16 @@ from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework import viewsets
 from rest_framework import mixins
+from rest_framework import generics
+
+from django.contrib.auth.models import User
 
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 # Serializers from parent folder
 from .serializers import BlogSerializer, CandidateProfileSerializer, FileSerializer, InvitationSerializer, JobApplicationSerializer
 from .serializers import RetriveJobApplicationSerializer, UserCreateSerializer, NewsletterSerializer, PublicVacancySerializer
-from .serializers import MyTokenObtainPairSerializer, VacancySerializer, EmployerProfileSerializer, ContactSerializer
+from .serializers import MyTokenObtainPairSerializer, VacancySerializer, EmployerProfileSerializer, ContactSerializer, ChangePasswordSerializer
 
 # Models from parent folder
 from ..models import Blog, CandidateProfile, EmployerProfile, Invitation, JobApplication, Vacancy, Newsletter, Contact
@@ -84,7 +87,7 @@ class RetriveUserView(APIView):
 
 
 class EmployerProfileView(APIView):
-    # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
     def get_object(self, user_id):
         '''
@@ -117,7 +120,7 @@ class EmployerProfileView(APIView):
 
 
 class CandidateProfileView(APIView):
-    # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = CandidateProfileSerializer
     parser_classes = (MultiPartParser, FormParser)
 
@@ -211,7 +214,7 @@ class FileUploadView(APIView):
 
 
 class VacancyView(viewsets.ModelViewSet):
-    # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     queryset = Vacancy.objects.order_by('-created_at')
     serializer_class = VacancySerializer
 
@@ -256,7 +259,7 @@ class RetriveVacancyView(VacancyPublicViewSet):
 
 # Job Application Views
 class JobApplicationView(viewsets.ModelViewSet):
-    # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = JobApplicationSerializer
     queryset = JobApplication.objects.order_by('-created_at')
 
@@ -471,3 +474,32 @@ class NewsletterView(viewsets.ModelViewSet):
 class ContactView(viewsets.ModelViewSet):
     queryset = Contact.objects.order_by('-created_at')
     serializer_class = ContactSerializer
+
+
+class ChangePasswordView (generics.UpdateAPIView):
+
+    """
+    An endpoint for changing password.
+    """
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = ChangePasswordSerializer
+    model = User
+
+    def get_object(self, queryset=None):
+        obj = self.request.user
+        return obj
+
+    def update(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        serializer = self.get_serializer(data=request.data)
+
+        if serializer.is_valid():
+            # Check old password
+            if not self.object.check_password(serializer.data.get("old_password")):
+                return Response({"old_password": ["Wrong password."]}, status=status.HTTP_400_BAD_REQUEST)
+            # set_password also hashes the password that the user will get
+            self.object.set_password(serializer.data.get("new_password"))
+            self.object.save()
+            return Response({"status": "password set"}, status=status.HTTP_200_OK)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

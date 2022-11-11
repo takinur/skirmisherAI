@@ -284,3 +284,22 @@ class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
         fields = '__all__'
+
+
+class ChangePasswordSerializer(serializers.Serializer):
+    model = User
+
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
+
+    def validate(self, data):
+        user = self.context['request'].user
+        if not user.check_password(data['old_password']):
+            raise serializers.ValidationError("Old password is not correct")
+        return data
+
+    def create(self, validated_data):
+        user = self.context['request'].user
+        user.set_password(validated_data['new_password'])
+        user.save()
+        return user

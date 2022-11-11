@@ -40,6 +40,7 @@ urlpatterns = [
 
     path('auth/register/', views.RegisterView.as_view()),
     path('auth/user/', views.RetriveUserView.as_view()),
+    path('auth/change-password/', views.ChangePasswordView.as_view()),
 
     path('auth/login/', views.MyTokenObtainPairView.as_view()),
     path('auth/token/refresh/', TokenRefreshView.as_view()),
