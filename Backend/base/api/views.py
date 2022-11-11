@@ -18,10 +18,10 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 # Serializers from parent folder
 from .serializers import BlogSerializer, CandidateProfileSerializer, FileSerializer, InvitationSerializer, JobApplicationSerializer
 from .serializers import RetriveJobApplicationSerializer, UserCreateSerializer, NewsletterSerializer, PublicVacancySerializer
-from .serializers import MyTokenObtainPairSerializer, VacancySerializer, EmployerProfileSerializer
+from .serializers import MyTokenObtainPairSerializer, VacancySerializer, EmployerProfileSerializer, ContactSerializer
 
 # Models from parent folder
-from ..models import Blog, CandidateProfile, EmployerProfile, Invitation, JobApplication, Vacancy, Newsletter
+from ..models import Blog, CandidateProfile, EmployerProfile, Invitation, JobApplication, Vacancy, Newsletter, Contact
 
 # Machine Leaning Model from
 from ..ml_facade import resumeExtractor
@@ -468,4 +468,6 @@ class NewsletterView(viewsets.ModelViewSet):
     serializer_class = NewsletterSerializer
 
 
-# Authentication with Google and Facebook
+class ContactView(viewsets.ModelViewSet):
+    queryset = Contact.objects.order_by('-created_at')
+    serializer_class = ContactSerializer

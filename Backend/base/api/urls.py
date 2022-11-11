@@ -32,6 +32,9 @@ router.register('v1/blog/:slug', views.BlogView, basename='blog')
 # Newsletter
 router.register('v1/newsletter', views.NewsletterView, basename='newsletter')
 
+# Contact - Support
+router.register('v1/contact', views.ContactView, basename='contact')
+
 urlpatterns = [
     path('', views.getRoutes, name='getRoutes'),
 
