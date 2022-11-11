@@ -227,6 +227,7 @@ class VacancyView(viewsets.ModelViewSet):
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
         instance.is_published = False
+        instance.updated_at = timezone.now()
         instance.save()
         return Response(status=status.HTTP_204_NO_CONTENT)
 

@@ -79,6 +79,55 @@ export const jobs = () => {
     },
   ]
 
+  //Columns for the table when Job is Unpublished
+  const unpublishedColumns = [
+    {
+      // id: "title",
+      header: 'Job Title',
+      accessorKey: 'title',
+    },
+    {
+      id: 'type',
+      header: 'Type',
+      accessorKey: 'type',
+    },
+    {
+      id: 'salary',
+      header: 'Salary Info',
+      accessorKey: 'salary',
+      //Not filterable
+      enableColumnFilter: false,
+    },
+    {
+      id: 'location',
+      header: 'Location',
+      accessorKey: 'work_location',
+      //Not filterable
+      enableColumnFilter: false,
+    },
+    {
+      id: 'date',
+      header: 'Posted',
+      accessorKey: 'created_at',
+      //Convert django date to readable format
+      cell: (row) => {
+        return relativeTime(row.getValue())
+      },
+      //Not filterable
+      enableColumnFilter: false,
+    },
+    {
+      id: 'actions',
+      header: 'Actions',
+      accessorKey: 'id',
+      cell: (row) => (
+        <Actions row={row.getValue()} employer={employer} setModal={setModal} setJobID={setJobID} />
+      ),
+      //Not filterable
+      enableColumnFilter: false,
+    },
+  ]
+
   // React query to fetch Jobs
   const { isLoading, data, refetch } = useQuery(
     'jobs',
@@ -92,6 +141,9 @@ export const jobs = () => {
       enabled: isEnabled, //Disable query if employer is null / undefined
     }
   )
+
+  const publishedJobs = data?.filter((job) => job.is_published === true)
+  const unpublishedJobs = data?.filter((job) => job.is_published === false)
 
   const deleteRow = async () => {
     //TODO: IDK gotta figure out how to unpublish a job
@@ -152,7 +204,17 @@ export const jobs = () => {
           </svg>
         </Link>
 
-        <Table columns={columns} data={data} />
+        <Table columns={columns} data={publishedJobs} />
+
+        <div className="mt-12 ">
+          <h2 className="pl-6 text-2xl font-medium leading-6 text-gray-900 dark:text-gray-100">
+            Un-Published Jobs
+          </h2>
+          <p className=" mt-1 pl-6 text-sm text-gray-500 dark:text-gray-400">
+            Archived jobs are not visible to the public.
+          </p>
+          <Table columns={columns} data={unpublishedJobs} />
+        </div>
       </div>
     )
   }
