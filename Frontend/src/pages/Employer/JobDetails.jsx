@@ -13,6 +13,11 @@ import { useTitle } from '../../hooks/useTitle'
 import { useState } from 'react'
 
 export const JobDetails = () => {
+  // Scroll to top on mount
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   useTitle('Job Details')
   const navigate = useNavigate()
   const API = useAxiosPrivate()
@@ -87,7 +92,7 @@ export const JobDetails = () => {
     }
   }
 
-  console.log('Feteched applciations', data)
+  // console.log('Feteched applciations', data)
 
   return (
     <AuthLayout title="View Job Details">
