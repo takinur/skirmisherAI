@@ -235,7 +235,7 @@ function RegisterForm({
         <div className="mt-6">
           <div className="flex items-center justify-center ">
             <ButtonSecondary
-              className={classNames('ml-4 ', {
+              className={classNames('ml-4 uppercase ', {
                 'opacity-25': isLoading,
               })}
               disabled={isLoading}
