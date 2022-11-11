@@ -1,40 +1,29 @@
-import React from "react";
-import { RadioGroup } from "@headlessui/react";
-import classNames from "classnames";
-import ButtonDefault from "./ButtonDefault";
-import { FaChalkboardTeacher, FaRegNewspaper } from "react-icons/fa";
+import React from 'react'
+import { RadioGroup } from '@headlessui/react'
+import classNames from 'classnames'
+import ButtonDefault from './ButtonDefault'
+import { FaChalkboardTeacher, FaRegNewspaper } from 'react-icons/fa'
 
-export default function AuthRoleSelection({
-  selectedRole,
-  setSelectedRole,
-  roles,
-  setStep,
-  step,
-}) {
+export default function AuthRoleSelection({ selectedRole, setSelectedRole, roles, setStep, step }) {
   return (
     <>
-      <h2 className="font-serif text-[#001e00] mt-6 text-3xl w-full text-center">
-        Join as a Employer or Job Seeker
-      </h2>
-      <div className="mx-auto sm:flex justify-center w-full my-10 ">
+      <h3 className="my-4 text-2xl font-semibold text-gray-700"> Onboard with Us! </h3>
+      <h5 className="my-4 text-lg font-normal text-gray-500"> Sign up as Employer or Candidate</h5>
+      <div className="mx-auto my-10 w-full justify-center sm:flex ">
         <RadioGroup value={selectedRole} onChange={setSelectedRole}>
           <RadioGroup.Label className="sr-only">Choose Role</RadioGroup.Label>
-          <div className="space-y-2 md:space-y-0 md:space-x-4 md:flex">
+          <div className="space-y-2">
             {roles.map((role) => (
               <RadioGroup.Option
                 key={role.name}
                 value={role}
                 className={({ active, checked }) => `${
                   active
-                    ? "ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-sky-300"
-                    : ""
+                    ? 'ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-sky-300'
+                    : ''
                 }
-                ${
-                  checked
-                    ? "bg-green-600 bg-opacity-75 text-white"
-                    : "bg-gray-200 "
-                }
-                  relative flex mx-auto cursor-pointer rounded-sm px-5 py-4 shadow-md focus:outline-none h-48 w-60`}
+                ${checked ? 'bg-green-600 bg-opacity-75 text-white' : 'bg-gray-200 '}
+                  relative mx-auto flex h-40 w-60 cursor-pointer rounded-sm px-5 py-4 shadow-md focus:outline-none`}
               >
                 {({ checked }) => (
                   <>
@@ -43,19 +32,17 @@ export default function AuthRoleSelection({
                         <div className="text-sm">
                           <RadioGroup.Label
                             as="p"
-                            className={`font-medium  ${
-                              checked ? "text-white" : "text-gray-900"
-                            }`}
+                            className={`font-medium  ${checked ? 'text-white' : 'text-gray-900'}`}
                           >
-                            <span className="w-full flex justify-center h-full">
+                            <span className="flex h-full w-full justify-center">
                               {role.id === 1 ? (
-                                <FaChalkboardTeacher className="w-10 h-10" />
+                                <FaChalkboardTeacher className="h-10 w-10" />
                               ) : (
-                                <FaRegNewspaper className={`w-10 h-10`} />
+                                <FaRegNewspaper className={`h-10 w-10`} />
                               )}
                             </span>
-                            <span className="text-lg mt-5 ml-5">
-                              {role.id === 1 ? "Employer" : "Job Seeker"}
+                            <span className="mt-5 ml-5 text-lg">
+                              {role.id === 1 ? 'Employer' : 'Job Seeker'}
                             </span>
                           </RadioGroup.Label>
                         </div>
@@ -73,17 +60,17 @@ export default function AuthRoleSelection({
           </div>
         </RadioGroup>
       </div>
-      <div className="flex items-center text-center justify-center">
+      <div className="flex items-center justify-center text-center">
         <ButtonDefault
-          className={classNames("ml-4")}
+          className={classNames('ml-4')}
           disabled={selectedRole === null}
           onClick={() => setStep(step + 1)}
         >
-          {selectedRole ? `Join as a ${selectedRole.name}` : "Create account"}
+          {selectedRole ? `Join as a ${selectedRole.name}` : 'Create account'}
         </ButtonDefault>
       </div>
     </>
-  );
+  )
 }
 
 function CheckIcon(props) {
@@ -98,5 +85,5 @@ function CheckIcon(props) {
         strokeLinejoin="round"
       />
     </svg>
-  );
+  )
 }

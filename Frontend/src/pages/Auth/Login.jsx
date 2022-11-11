@@ -47,8 +47,8 @@ export default function Login() {
             </Link>
           </div>
           <p className="mt-6 text-center font-normal text-gray-300 md:mt-0">
-            SkirmisherAI is a platform for employers and candidates to connect and find the best
-            talent. Sign up to get started.
+            A platform that helps employers to find the right talent for their organization and
+            helps job seekers to find the right job for them.
           </p>
           <p className="mt-10 flex flex-col items-center justify-center text-center text-gray-400">
             <span>Don't have an account?</span>
