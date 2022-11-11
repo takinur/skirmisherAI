@@ -295,7 +295,18 @@ class ChangePasswordSerializer(serializers.Serializer):
     def validate(self, data):
         user = self.context['request'].user
         if not user.check_password(data['old_password']):
-            raise serializers.ValidationError("Old password is not correct")
+            raise serializers.ValidationError(
+                "Current password did not matched.")
+
+        if data['old_password'] == data['new_password']:
+            raise serializers.ValidationError(
+                "New password must be different from current password.")
+
+        try:
+            validate_password(data['new_password'])
+        except serializers.ValidationError as e:
+            raise serializers.ValidationError({'password': e.messages})
+
         return data
 
     def create(self, validated_data):

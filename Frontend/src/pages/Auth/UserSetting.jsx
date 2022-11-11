@@ -36,11 +36,7 @@ const UserSetting = () => {
   useEffect(() => {
     if (updateMutation.isError) {
       let message = updateMutation.error.response.data
-      //Show first error message from object
-      const err = message.non_field_errors
-        ? 'Current password did not matched'
-        : Object.values(message)[0][0]
-      toast.error(err)
+      toast.error(Object.values(message)[0][0])
     }
 
     if (updateMutation.isSuccess) {
@@ -97,7 +93,7 @@ const UserSetting = () => {
               <Label htmlFor="npass">New Password </Label>
               <Input
                 id="npass"
-                type="text"
+                type="password"
                 className="mt-1 block w-full"
                 {...register('new_password')}
                 required
