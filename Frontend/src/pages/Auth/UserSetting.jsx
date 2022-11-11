@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useMutation } from 'react-query'
 import { toast } from 'react-toastify'
@@ -12,7 +12,6 @@ import AuthLayout from '../Layout/Auth'
 import Label from '../../components/Label'
 import Input from '../../components/Input'
 import ButtonDefault from '../../components/ButtonDefault'
-import TextArea from '../../components/TextArea'
 import { FaChevronLeft } from 'react-icons/fa'
 import { useTitle } from '../../hooks/useTitle'
 
@@ -27,7 +26,7 @@ const UserSetting = () => {
   const { register, handleSubmit } = useForm()
 
   //React query mutation
-  const updateMutation = useMutation(async (data) => await API.put(`/v1/blog/${slug}/`, data))
+  const updateMutation = useMutation(async (data) => await API.put(`/auth/change-password/`, data))
 
   //Handle form submit event
   const submitForm = (data) => {
@@ -35,27 +34,31 @@ const UserSetting = () => {
   }
 
   useEffect(() => {
+    if (updateMutation.isError) {
+      let message = updateMutation.error.response.data
+      //Show first error message from object
+      const err = message.non_field_errors
+        ? 'Current password did not matched'
+        : Object.values(message)[0][0]
+      toast.error(err)
+    }
+
     if (updateMutation.isSuccess) {
       toast.success('Password updated successfully')
       //Navigate after 2 seconds
       setTimeout(() => {
-        navigate(-1)
+        navigate('/dashboard')
       }, 1000)
-    }
-    //TODO: Handle errors
-    if (updateMutation.isError) {
-      toast.error('Something went wrong')
-      console.log(updateMutation.error)
     }
   }, [updateMutation.isError, updateMutation.isSuccess])
 
   const isDisabled = updateMutation.isSuccess || updateMutation.isLoading
 
   return (
-    <AuthLayout title="Publish New Community Post">
+    <AuthLayout title=" Change your Password ">
       <ButtonDefault
         onClick={() => navigate(-1)}
-        className={classNames('ml-5 !bg-gray-700 md:mt-2')}
+        className={classNames('ml-5 !bg-gray-700 md:mt-2 md:mt-6')}
       >
         <FaChevronLeft className="mr-1" />
         Go Back
@@ -84,9 +87,9 @@ const UserSetting = () => {
               <Label htmlFor="cpass">Current Password </Label>
               <Input
                 id="cpass"
-                type="text"
+                type="password"
                 className="mt-1 block w-full"
-                {...register('current_password')}
+                {...register('old_password')}
                 required
               />
             </div>
