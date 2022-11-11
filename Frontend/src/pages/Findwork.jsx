@@ -9,11 +9,13 @@ import classNames from 'classnames'
 import { SearchJobs } from '../components/Search/SearchJobs'
 import { useCandProfile } from '../hooks/useProfile'
 import { useEffect } from 'react'
+import { useMemo } from 'react'
 
 export const Findwork = () => {
   const [searchValue, SetSearchValue] = useState('')
   const [jobDetails, setJobDetails] = useState(null)
   const [canApplyState, setCanAppyState] = useState(null)
+  const [sort, setSort] = useState('desc')
 
   const { data: profile, user } = useCandProfile()
 
@@ -52,6 +54,14 @@ export const Findwork = () => {
     }
   )
 
+  const filteredJobs = useMemo(() => {
+    if (sort === 'desc') {
+      return data?.sort((a, b) => b.created_at.localeCompare(a.created_at))
+    } else {
+      return data?.sort((a, b) => a.created_at.localeCompare(b.created_at))
+    }
+  }, [data, sort])
+
   //View detials of a job with id
   const showDetails = data?.filter((job) => job.id === jobDetails)
   // console.log("Detials", showDetails);
@@ -64,6 +74,14 @@ export const Findwork = () => {
       setJobDetails(data[0]?.id)
     }
   }, [data])
+
+  const handleSort = () => {
+    if (sort === 'desc') {
+      setSort('asc')
+    } else {
+      setSort('desc')
+    }
+  }
 
   return (
     <GuestLayout>
@@ -117,7 +135,7 @@ export const Findwork = () => {
                       </>
                     ) : (
                       data &&
-                      data.map((job) => (
+                      filteredJobs.map((job) => (
                         <JobCard
                           key={job.id}
                           title={job.title}
