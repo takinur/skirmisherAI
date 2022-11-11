@@ -13,6 +13,7 @@ import { NoExInfo } from '../../components/Alerts'
 import { useProfile } from '../../hooks/useProfile'
 import HeadlessModal from '../../components/Modal'
 import { useTitle } from '../../hooks/useTitle'
+import { useMemo } from 'react'
 
 export const jobs = () => {
   useTitle('Manage Jobs - Dashboard ')
@@ -162,8 +163,13 @@ export const jobs = () => {
     }
   )
 
-  const publishedJobs = data?.filter((job) => job.is_published === true)
-  const unpublishedJobs = data?.filter((job) => job.is_published === false)
+  const publishedJobs = useMemo(() => {
+    return data?.filter((job) => job.is_published === true)
+  }, [data])
+
+  const unpublishedJobs = useMemo(() => {
+    return data?.filter((job) => job.is_published === false)
+  }, [data])
 
   const deleteRow = async () => {
     //TODO: IDK gotta figure out how to unpublish a job
@@ -174,7 +180,7 @@ export const jobs = () => {
         closeModal()
         //refetch the data
         refetch()
-        toast.info('Job Ubpublished successfully')
+        toast.info('Job Unpublished successfully')
       }
     } catch (error) {
       console.log('Delete Error', error)
