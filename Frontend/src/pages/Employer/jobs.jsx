@@ -109,7 +109,6 @@ export const jobs = () => {
       id: 'date',
       header: 'Unpublished',
       accessorKey: 'updated_at',
-      //Convert django date to readable format
       cell: (row) => {
         return relativeTime(row.getValue())
       },
