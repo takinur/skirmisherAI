@@ -42,7 +42,7 @@ export const JobCard = ({
           ) : (
             <div className="flex h-16 w-16 items-center justify-center  bg-gray-700">
               <span className="text-4xl font-semibold text-gray-50">
-                {company?.company_name && company.company_name.charAt(0)}
+                {company?.company_name !==  undefined ? company.company_name.charAt(0) : 'T'}
               </span>
             </div>
           )
