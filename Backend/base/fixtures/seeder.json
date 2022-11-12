@@ -1,0 +1,928 @@
+[
+  {
+    "model": "base.useraccount",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$wYiT7btxiPBBgwDta9EY7U$ZXM9iLI+F5r4tuhvkEqD4AIMVUFwiImQ00H76wrqILw=",
+      "last_login": "2022-10-29T18:56:04.899Z",
+      "name": "Takinur M",
+      "email": "admin@gmail.com",
+      "is_active": true,
+      "is_staff": true,
+      "is_superuser": true,
+      "role": 69,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "base.useraccount",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$wYiT7btxiPBBgwDta9EY7U$ZXM9iLI+F5r4tuhvkEqD4AIMVUFwiImQ00H76wrqILw=",
+      "last_login": null,
+      "name": "Renee Blasey",
+      "email": "employer@gmail.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "role": 1,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "base.useraccount",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$wYiT7btxiPBBgwDta9EY7U$ZXM9iLI+F5r4tuhvkEqD4AIMVUFwiImQ00H76wrqILw=",
+      "last_login": null,
+      "name": "Johnny Silverhand",
+      "email": "candidate@gmail.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "role": 2,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "base.useraccount",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$wYiT7btxiPBBgwDta9EY7U$ZXM9iLI+F5r4tuhvkEqD4AIMVUFwiImQ00H76wrqILw=",
+      "last_login": null,
+      "name": "Upton Elliott",
+      "email": "ruqasif@mailinator.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "role": 2,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "base.useraccount",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$wYiT7btxiPBBgwDta9EY7U$ZXM9iLI+F5r4tuhvkEqD4AIMVUFwiImQ00H76wrqILw=",
+      "last_login": null,
+      "name": "Gretchen Tillman",
+      "email": "xyqilate@mailinator.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "role": 2,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "base.useraccount",
+    "pk": 6,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$vtcJnfWSyEcsZMF7qTgDRL$aYq1IZJHjl//w8l9pCHmlufTusHHJ0rqWCul0rx1Nnc=",
+      "last_login": null,
+      "name": "Ariel Walter",
+      "email": "sypogyjiz@mailinator.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "role": 1,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "base.useraccount",
+    "pk": 7,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$CgLnKeecQWxxNbVkBPfpl5$g2AXIk6N5Ajz4kSaE6e68+KvxxY1+0OCi1QJtFnTyrY=",
+      "last_login": null,
+      "name": "Stephen Cooley",
+      "email": "temacu@mailinator.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "role": 2,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "base.useraccount",
+    "pk": 8,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$11W0bAbv56Ib1WNS87yQpT$xbcpoemrZWTAsU0Wrgisa2tdGslf+nDl+H4Z7u+6DDk=",
+      "last_login": null,
+      "name": "Timon Baldwin",
+      "email": "sajeca@mailinator.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "role": 1,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "base.useraccount",
+    "pk": 9,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$FlxxUe0Po7E5OTfuI7W1Dx$yYWGRlo8N4yNrubl/zWy3H+h2NoUl5uIz5NSQU7qbbk=",
+      "last_login": null,
+      "name": "Fatima Bolton",
+      "email": "faqedily@mailinator.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "role": 1,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "base.useraccount",
+    "pk": 10,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$R3NtXqzCK6rXaPP6iREk78$EO1lEVPvHXJVKyfEHC+HNZ9nmHuLWZ1VSOTmZAza3aU=",
+      "last_login": null,
+      "name": "Bryar Lewis",
+      "email": "zotapyzop@mailinator.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "role": 2,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "base.useraccount",
+    "pk": 11,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$2APQwLeDT8icL4DMnWKCeu$YS/leIGlIVnz6jhMqcak7dyY8UTJ2d7V+S8cMjb9chQ=",
+      "last_login": null,
+      "name": "Jessamine Gonzalez",
+      "email": "zyfonydil@mailinator.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "role": 2,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "base.useraccount",
+    "pk": 12,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$4L6Ne396OsFYyta7TrGa1j$Ams0t9RgDKSCeNiT5sd3KmmHmGhz7nADpol65k7AfXo=",
+      "last_login": "2022-11-09T20:36:41.439Z",
+      "name": "Skirmisher Admin",
+      "email": "root@skirmisher.com",
+      "is_active": true,
+      "is_staff": true,
+      "is_superuser": true,
+      "role": 69,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "base.useraccount",
+    "pk": 13,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$j6JjTHw7Gq2Qeb1DHtPw41$Qo5k31kiUZVfD2xa/v/nlFw8o4+Je/K9dtYBgsQF4WU=",
+      "last_login": null,
+      "name": "w",
+      "email": "jyxel@mailinator.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "role": 2,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "base.useraccount",
+    "pk": 14,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$nVBJiDOwRl6v9Ks1J8nxp5$mhU5jHD7JRmT/da/4PYmhaphH+gpKC2h2KNNuy8h24A=",
+      "last_login": null,
+      "name": "Althea Randolph",
+      "email": "rotukyriq@mailinator.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "role": 2,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "base.useraccount",
+    "pk": 15,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$y5MJ8i4GOnbqS35Poz2ifA$1jA2yW7RFgzh4rrBtB+DOD/KRlCMcK68Sz8qGBUk8ho=",
+      "last_login": null,
+      "name": "HMMm",
+      "email": "wdwdwd@mail.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "role": 1,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "base.useraccount",
+    "pk": 16,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$qyLDvLQEivOOkisSpyj8Lq$ajfXh4IlpsKqeLagLbTjsZjprzfA2yhZ4GCdZ/MhhOk=",
+      "last_login": null,
+      "name": "Desiree Owens WWWWWW",
+      "email": "habo@mailinator.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "role": 2,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "base.useraccount",
+    "pk": 21,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$wYiT7btxiPBBgwDta9EY7U$ZXM9iLI+F5r4tuhvkEqD4AIMVUFwiImQ00H76wrqILw=",
+      "last_login": null,
+      "name": "Mark Zukerburg",
+      "email": "facebook@gmail.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "role": 1,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "base.useraccount",
+    "pk": 22,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$wYiT7btxiPBBgwDta9EY7U$ZXM9iLI+F5r4tuhvkEqD4AIMVUFwiImQ00H76wrqILw=",
+      "last_login": null,
+      "name": "Elon Musk",
+      "email": "elon@tesla.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "role": 1,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "base.useraccount",
+    "pk": 23,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$wYiT7btxiPBBgwDta9EY7U$ZXM9iLI+F5r4tuhvkEqD4AIMVUFwiImQ00H76wrqILw=",
+      "last_login": null,
+      "name": "Jeff Bezos",
+      "email": "jeff@amazon.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "role": 1,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "base.useraccount",
+    "pk": 24,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$wYiT7btxiPBBgwDta9EY7U$ZXM9iLI+F5r4tuhvkEqD4AIMVUFwiImQ00H76wrqILw=",
+      "last_login": null,
+      "name": "Bill Gates",
+      "email": "bill@microsoft.uk",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "role": 1,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "base.useraccount",
+    "pk": 25,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$wYiT7btxiPBBgwDta9EY7U$ZXM9iLI+F5r4tuhvkEqD4AIMVUFwiImQ00H76wrqILw=",
+      "last_login": null,
+      "name": "Steve Jobs",
+      "email": "steve@apple.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "role": 1,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "base.useraccount",
+    "pk": 26,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$wYiT7btxiPBBgwDta9EY7U$ZXM9iLI+F5r4tuhvkEqD4AIMVUFwiImQ00H76wrqILw=",
+      "last_login": null,
+      "name": "Mark Zukerburg",
+      "email": "zuck@meta.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "role": 1,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "base.useraccount",
+    "pk": 27,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$wYiT7btxiPBBgwDta9EY7U$ZXM9iLI+F5r4tuhvkEqD4AIMVUFwiImQ00H76wrqILw=",
+      "last_login": null,
+      "name": "Weeb Musk",
+      "email": "elon@twiiter.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "role": 1,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "base.useraccount",
+    "pk": 28,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$wYiT7btxiPBBgwDta9EY7U$ZXM9iLI+F5r4tuhvkEqD4AIMVUFwiImQ00H76wrqILw=",
+      "last_login": null,
+      "name": "Mande Dzukerburg",
+      "email": "mande@twitch.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "role": 1,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "base.useraccount",
+    "pk": 29,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$wYiT7btxiPBBgwDta9EY7U$ZXM9iLI+F5r4tuhvkEqD4AIMVUFwiImQ00H76wrqILw=",
+      "last_login": null,
+      "name": "Thompson Richard",
+      "email": "richard@netflix.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "role": 1,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "base.useraccount",
+    "pk": 30,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$wYiT7btxiPBBgwDta9EY7U$ZXM9iLI+F5r4tuhvkEqD4AIMVUFwiImQ00H76wrqILw=",
+      "last_login": null,
+      "name": "Bradd Pitt",
+      "email": "bradd@pitt.info",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "role": 1,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+
+  {
+    "model": "base.employerprofile",
+    "pk": 1,
+    "fields": {
+      "company_name": "Alphabet Inc",
+      "slogan": "On the Shoulder of Giants",
+      "website": "https://www.google.com",
+      "phone": "+1 (127) 819-8212",
+      "location": "Mountainview CA 94043 ",
+      "about": "Google LLC is an American multinational technology company focusing on search engine technology, online advertising, cloud computing, computer software, quantum computing, e-commerce, artificial intelligence, and consumer electronics.",
+      "logo": "/assets/images/employers/google.png",
+      "size": "More than 10000 People",
+      "created_at": "2022-10-16T08:04:08.354Z",
+      "updated_at": null,
+      "user": 2
+    }
+  },
+  {
+    "model": "base.employerprofile",
+    "pk": 2,
+    "fields": {
+      "company_name": "Meta LLC",
+      "slogan": "The future is now, Old Man.",
+      "website": "https://www.facebook.com",
+      "phone": "+1 (472) 583-6182",
+      "location": "1 Hacker way, Silicon Valley, California",
+      "about": "Meta Platforms, Inc., doing business as Meta and formerly named Facebook, Inc., and TheFacebook, Inc., is an American multinational technology conglomerate based in Menlo Park, California. The company owns Facebook, Instagram, and WhatsApp, among other products and services",
+      "logo": "/assets/images/employers/meta.png",
+      "size": "8000-10000 People",
+      "created_at": "2022-11-07T13:58:06.566Z",
+      "updated_at": null,
+      "user": 21
+    }
+  },
+  {
+    "model": "base.employerprofile",
+    "pk": 3,
+    "fields": {
+      "company_name": "Twitter Inc",
+      "slogan": "What's happening?",
+      "website": "https://www.twitter.com",
+      "phone": "+1 (472) 583-6182",
+      "location": "1355 Market St, San Francisco, CA 94103",
+      "about": "Twitter is an American microblogging and social networking service on which users post and interact with messages known as tweets. Registered users can post, like, and retweet tweets, but unregistered users can only read them.",
+      "logo": "/assets/images/employers/twitter.png",
+      "size": "1000-2000 People",
+      "created_at": "2022-11-07T13:58:06.566Z",
+      "updated_at": null,
+      "user": 27
+    }
+  },
+  {
+    "model": "base.employerprofile",
+    "pk": 4,
+    "fields": {
+      "company_name": "Twitch Interactive",
+      "slogan": "Watch and chat now with millions of other fans from around the world",
+      "website": "https://www.twitch.com",
+      "phone": "+1 (472) 583-6182",
+      "location": "San Francisco, CA",
+      "about": "Twitch is an American live streaming video platform owned by Twitch Interactive, a subsidiary of Amazon. The service primarily focuses on video gaming, including playthroughs of video games, broadcasts of esports competitions, creative content, and more recently, music broadcasts.",
+      "logo": "/assets/images/employers/twitch.png",
+      "size": "1000-2000 People",
+      "created_at": "2022-11-07T13:58:06.566Z",
+      "updated_at": null,
+      "user": 28
+    }
+  },
+  {
+    "model": "base.employerprofile",
+    "pk": 5,
+    "fields": {
+      "company_name": "Netflix Inc",
+      "slogan": "Watch TV Shows Online, Watch Movies Online",
+      "website": "https://www.netflix.com",
+      "phone": "+1 (472) 583-6182",
+      "location": "Los Gatos, CA",
+      "about": "Netflix is an American streaming service provider headquartered in Los Gatos, California. It was founded in 1997 by Reed Hastings and Marc Randolph in Scotts Valley, California. The company's primary business is its subscription-based streaming service which offers online streaming of a library of films and television programs, including those produced in-house.",
+      "logo": "/assets/images/employers/netflix.png",
+      "size": "1000-2000 People",
+      "created_at": "2022-11-07T13:58:06.566Z",
+      "updated_at": null,
+      "user": 29
+    }
+  },
+  {
+    "model": "base.employerprofile",
+    "pk": 6,
+    "fields": {
+      "company_name": "Pitt Productions",
+      "slogan": "We make movies",
+      "website": "https://www.pittproductions.com",
+      "phone": "+1 (472) 583",
+      "location": "Los Angeles, CA",
+      "about": "Pitt Productions is an American film production company founded by Bradd Pitt in 1991. The company is best known for producing the Academy Award-winning films 12 Years a Slave, Moonlight, and The Shape of Water.",
+      "logo": "/assets/images/employers/pitt.png",
+      "size": "1000-2000 People",
+      "created_at": "2022-11-07T13:58:06.566Z",
+      "updated_at": null,
+      "user": 30
+    }
+  },
+  {
+    "model": "base.employerprofile",
+    "pk": 7,
+    "fields": {
+      "company_name": "Apple Inc",
+      "slogan": "Think Different",
+      "website": "https://www.apple.com",
+      "phone": "+1 (472) 583-6182",
+      "location": "Cupertino, CA",
+      "about": "Apple Inc. is an American multinational technology company headquartered in Cupertino, California, that designs, develops, and sells consumer electronics, computer software, and online services. It is considered one of the Big Four of technology along with Amazon, Google, and Facebook.",
+      "logo": "/assets/images/employers/apple.png",
+      "size": "1000-2000 People",
+      "created_at": "2022-11-07T13:58:06.566Z",
+      "updated_at": null,
+      "user": 22
+    }
+  },
+  {
+    "model": "base.employerprofile",
+    "pk": 8,
+    "fields": {
+      "company_name": "Microsoft Corporation",
+      "slogan": "Empowering every person and every organization on the planet to achieve more.",
+      "website": "https://www.microsoft.com",
+      "phone": "+1 (472) 583-6182",
+      "location": "Redmond, WA",
+      "about": "Microsoft Corporation is an American multinational technology company with headquarters in Redmond, Washington. It develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers, and related services.",
+      "logo": "/assets/images/employers/microsoft.png",
+      "size": "1000-2000 People",
+      "created_at": "2022-11-07T13:58:06.566Z",
+      "updated_at": null,
+      "user": 23
+    }
+  },
+  {
+    "model": "base.employerprofile",
+    "pk": 9,
+    "fields": {
+      "company_name": "Amazon.com",
+      "slogan": "Work hard. Have fun. Make history.",
+      "website": "https://www.amazon.com",
+      "phone": "+1 (472) 583-6182",
+      "location": "Seattle, WA",
+      "about": "Amazon.com, Inc. is an American multinational technology company based in Seattle, Washington, which focuses on e-commerce, cloud computing, digital streaming, and artificial intelligence.",
+      "logo": "/assets/images/employers/amazon.png",
+      "size": "1000-2000 People",
+      "created_at": "2022-11-07T13:58:06.566Z",
+      "updated_at": null,
+      "user": 24
+    }
+  },
+  {
+    "model": "base.employerprofile",
+    "pk": 10,
+    "fields": {
+      "company_name": "Google LLC",
+      "slogan": "Don't be evil",
+      "website": "https://www.google.com",
+      "phone": "+1 (472) 583-6182",
+      "location": "Mountain View, CA",
+      "about": "Google LLC is an American multinational technology company that specializes in Internet-related services and products, which include online advertising technologies, search engine, cloud computing, software, and hardware.",
+      "logo": "/assets/images/employers/google.png",
+      "size": "1000-2000 People",
+      "created_at": "2022-11-07T13:58:06.566Z",
+      "updated_at": null,
+      "user": 25
+    }
+  },
+  {
+    "model": "base.employerprofile",
+    "pk": 11,
+    "fields": {
+      "company_name": "Facebook",
+      "slogan": "Connect with friends and the world around you on Facebook.",
+      "website": "https://www.facebook.com",
+      "phone": "+1 (472) 583-6182",
+      "location": "Menlo Park, CA",
+      "about": "Facebook is an American online social media and social networking service based in Menlo Park, California, and a flagship service of the namesake company Facebook, Inc. It was founded by Mark Zuckerberg, along with fellow Harvard College students and roommates Eduardo Saverin, Andrew McCollum, Dustin Moskovitz, and Chris Hughes.",
+      "logo": "/assets/images/employers/facebook.png",
+      "size": "1000-2000 People",
+      "created_at": "2022-11-07T13:58:06.566Z",
+      "updated_at": null,
+      "user": 26
+    }
+  },
+
+  {
+    "model": "base.blog",
+    "pk": 1,
+    "fields": {
+      "title": "How to get a job in 2022",
+      "description": "Finding a job is in itself a full-time job. It is not easy to get hired if you want to build a career in your chosen field. Endless days of researching the job, finding vacancies, applying for jobs, hoping for a response, interviewing- everything can be overwhelming. If you are seeking employment, the chances are high that you would want to speed up the hiring process. While every organization has its hiring process, which takes time, there are some steps you can leverage to get a job fast. Here we will discuss the most frequently asked questions about how to get a job fast and some tips that can help you get hired quickly.",
+      "tags": "job, career, hiring",
+      "author": 1,
+      "slug": "how-to-get-a-job-in-2022",
+      "created_at": "2022-10-18T14:58:32.647Z",
+      "updated_at": null
+    }
+  },
+  {
+    "model": "base.blog",
+    "pk": 2,
+    "fields": {
+      "title": "Tech companies that are hiring right now",
+      "description": "The tech industry is booming and there are many tech companies that are hiring right now. If you are looking for a job in the tech industry, you are in luck. There are many tech companies that are hiring right now. Here we will discuss some of the top tech companies that are hiring right now.",
+      "tags": "tech, job, career, hiring",
+      "author": 1,
+      "slug": "tech-companies-that-are-hiring-right-now",
+      "created_at": "2022-09-18T14:58:32.647Z",
+      "updated_at": null
+    }
+  },
+  {
+    "model": "base.blog",
+    "pk": 3,
+    "fields": {
+      "title": "Inertia a modern Monolith",
+      "description": "Build single-page apps, without building an API. Inertia.js lets you quickly build modern single-page React, Vue and Svelte apps using classic server-side routing and controllers.",
+      "tags": "Javascript, Intertia, React",
+      "author": 22,
+      "slug": "inertia-js-review",
+      "created_at": "2022-10-20T18:02:34.898Z",
+      "updated_at": null
+    }
+  },
+  {
+    "model": "base.blog",
+    "pk": 4,
+    "fields": {
+      "title": "Why Tech Jobs are Better than Other Jobs",
+      "description": "Tech jobs are better than other jobs. There are many reasons why tech jobs are better than other jobs. Here we will discuss some of the reasons why tech jobs are better than other jobs.",
+      "tags": "skill, tech, job, career",
+      "author": 24,
+      "slug": "tech-jobs-supremacy",
+      "created_at": "2022-10-27T15:28:06.582Z",
+      "updated_at": null
+    }
+  },
+  {
+    "model": "base.blog",
+    "pk": 5,
+    "fields": {
+      "title": "React or Vue which JavaScript Framework to choose",
+      "description": " React or Vue which JavaScript Framework to choose. There are many JavaScript frameworks to choose from. Here we will discuss some of the reasons why React or Vue which JavaScript Framework to choose.",
+      "tags": "js, react, vue, framework",
+      "author": 29,
+      "slug": "react-vs-vue-review",
+      "created_at": "2022-10-29T15:39:13.067Z",
+      "updated_at": null
+    }
+  },
+  {
+    "model": "base.blog",
+    "pk": 8,
+    "fields": {
+      "title": "Wat a min who are you?",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "tags": "career, resume, skill ",
+      "author": 1,
+      "slug": "wat-a-min-who-are-you",
+      "created_at": "2022-10-22T15:39:58.767Z",
+      "updated_at": null
+    }
+  },
+  {
+    "model": "base.contact",
+    "pk": 1,
+    "fields": {
+      "name": "Maile Coleman",
+      "email": "gyrejel@mailinator.com",
+      "subject": "I want to work with you",
+      "message": "Hey, I am loooking for a job. Can you help me?",
+      "created_at": "2022-10-15T13:23:39.228Z",
+      "updated_at": null
+    }
+  },
+  {
+    "model": "base.contact",
+    "pk": 2,
+    "fields": {
+      "name": "Sydney Ochoa",
+      "email": "fosyz@mailinator.com",
+      "subject": "Found a Bug ",
+      "message": "I found a bug on your website. Please fix it.",
+      "created_at": "2022-10-19T13:25:34.530Z",
+      "updated_at": null
+    }
+  },
+  {
+    "model": "base.contact",
+    "pk": 3,
+    "fields": {
+      "name": "Abel Bruce",
+      "email": "zima@mailinator.com",
+      "subject": "Quod ea recusandae",
+      "message": "Dolores aut iusto do",
+      "created_at": "2022-11-11T13:26:04.410Z",
+      "updated_at": null
+    }
+  },
+  {
+    "model": "base.newsletter",
+    "pk": 1,
+    "fields": {
+      "email": "newsletter@tailwind.com",
+      "created_at": "2022-10-25T13:25:18.459Z",
+      "updated_at": null
+    }
+  },
+  {
+    "model": "base.vacancy",
+    "pk": 1,
+    "fields": {
+      "title": "Web Developer React and Django",
+      "type": "Full-Time, Remote",
+      "level": "1+ Years of Experience Required",
+      "salary": "$115,000 - $120,000",
+      "qualifications": "JavaScript, React, HTML, Python, Django",
+      "benefits": "Flexiable Working Hours",
+      "work_location": "Silicon Valley",
+      "description": "We are searching for an experienced full stack software engineer to help us build and support various APIs, front-ends, and tools at STEM Sims. The ideal candidate should be capable of engineering at all levels of the stack, communicating with customers, and building scalable/robust applications. Required Qualifications Bachelor’s degree in computer science, engineering, or other scientific degrees or 4+ years of experience building software 1+ years of experience in a full stack environment Excellent communication and interpersonal skills Experience with JavaScript",
+      "employer": 1,
+      "created_at": "2022-11-05T09:36:54.683Z",
+      "updated_at": null,
+      "is_published": true
+    }
+  },
+  {
+    "model": "base.vacancy",
+    "pk": 2,
+    "fields": {
+      "title": "Entry Level React Developer",
+      "type": "Fill-Time, Part-Time",
+      "level": "Freshers are encourged",
+      "salary": "$60,000 - $70,000",
+      "qualifications": "HTML, CSS, Git, Database, React",
+      "benefits": "401K",
+      "work_location": "Nirthern Illinois",
+      "description": "With a growing number of A-List clients, our small team of designers, marketing strategists and communication experts is expanding. We’re searching for a talented WordPress Website Developer with a passion for all things support and helping the customer and rock-solid knowledge. Experience at a high-level is essential, as is the ability to deftly manage multiple projects.",
+      "employer": 10,
+      "created_at": "2022-10-11T10:07:39.085Z",
+      "updated_at": null,
+      "is_published": true
+    }
+  },
+  {
+    "model": "base.vacancy",
+    "pk": 3,
+    "fields": {
+      "title": "Senior Frontend Developer",
+      "type": "Full-Time, Remote",
+      "level": "5+ Years of Experience Required",
+      "salary": "$115,000 - $120,000",
+      "qualifications": "JavaScript, React, HTML, Python, Django",
+      "benefits": "Flexiable Working Hours",
+      "work_location": "Silicon Valley",
+      "description": "We are searching for an experienced full stack software engineer to help us build and support various APIs, front-ends, and tools at STEM Sims. The ideal candidate should be capable of engineering at all levels of the stack, communicating with customers, and building scalable/robust applications. Required Qualifications Bachelor’s degree in computer science, engineering, or other scientific degrees or 4+ years of experience building software 1+ years of experience in a full stack environment Excellent communication and interpersonal skills Experience with JavaScript",
+      "employer": 9,
+      "created_at": "2022-10-05T09:36:54.683Z",
+      "updated_at": null,
+      "is_published": true
+    }
+  },
+  {
+    "model": "base.vacancy",
+    "pk": 4,
+    "fields": {
+      "title": "Senior Backend Developer",
+      "type": "Full-Time, Remote",
+      "level": "5+ Years of Experience Required",
+      "salary": "$115,000 - $120,000",
+      "qualifications": "JavaScript, React, HTML, Python, Django",
+      "benefits": "401K, Health Insurance",
+      "work_location": "Silicon Valley",
+      "description": "We are searching for an experienced full stack software engineer to help us build and support various APIs, front-ends, and tools at STEM Sims. The ideal candidate should be capable of engineering at all levels of the stack, communicating with customers, and building scalable/robust applications. Required Qualifications Bachelor’s degree in computer science, engineering, or other scientific degrees or 4+ years of experience building software 1+ years of experience in a full stack environment Excellent communication and interpersonal skills Experience with JavaScript",
+      "employer": 8,
+      "created_at": "2022-10-04T09:36:54.683Z",
+      "updated_at": null,
+      "is_published": true
+    }
+  },
+  {
+    "model": "base.vacancy",
+    "pk": 5,
+    "fields": {
+      "title": "Senior Python Developer",
+      "type": "Full-Time, Remote, Part-Time",
+      "level": "3+ Years of Experience Required",
+      "salary": "$115,000 - $120,000",
+      "qualifications": "JavaScript, React, HTML, Python, Django",
+      "benefits": "Health Insurance, 401K",
+      "work_location": "Silicon Valley",
+      "description": "We are searching for an experienced full stack software engineer to help us build and support various APIs, front-ends, and tools at STEM Sims. The ideal candidate should be capable of engineering at all levels of the stack, communicating with customers, and building scalable/robust applications. Required Qualifications Bachelor’s degree in computer science, engineering, or other scientific degrees or 4+ years of experience building software 1+ years of experience in a full stack environment Excellent communication and interpersonal skills Experience with JavaScript",
+      "employer": 7,
+      "created_at": "2022-10-03T09:36:54.683Z",
+      "updated_at": null,
+      "is_published": true
+    }
+  },
+  {
+    "model": "base.vacancy",
+    "pk": 6,
+    "fields": {
+      "title": "Django Rest Framework Developer",
+      "type": "Full-Time, Remote",
+      "level": "1+ Years of Experience Required",
+      "salary": "$115,000 - $120,000",
+      "qualifications": " Django, RestAPI, JavaScript, React, HTML, Python,",
+      "benefits": "Health Insurance, 401K",
+      "work_location": "Silicon Valley",
+      "description": "We are searching for an experienced full stack software engineer to help us build and support various APIs, front-ends, and tools at STEM Sims. The ideal candidate should be capable of engineering at all levels of the stack, communicating with customers, and building scalable/robust applications. Required Qualifications Bachelor’s degree in computer science, engineering, or other scientific degrees or 4+ years of experience building software 1+ years of experience in a full stack environment Excellent communication and interpersonal skills Experience with JavaScript",
+      "employer": 1,
+      "created_at": "2022-10-21T09:36:54.683Z",
+      "updated_at": null,
+      "is_published": true
+    }
+  },
+  {
+    "model": "base.vacancy",
+    "pk": 7,
+    "fields": {
+      "title": "Senior Javascript (React) Developer",
+      "type": "Full-Time, Remote",
+      "level": "5+ Years of Experience Required",
+      "salary": "$115,000 - $120,000",
+      "qualifications": "JavaScript, React, HTML, Python, Django",
+      "benefits": "Health Insurance, 401K",
+      "work_location": "Silicon Valley",
+      "description": "We are searching for an experienced full stack software engineer to help us build and support various APIs, front-ends, and tools at STEM Sims. The ideal candidate should be capable of engineering at all levels of the stack, communicating with customers, and building scalable/robust applications. Required Qualifications Bachelor’s degree in computer science, engineering, or other scientific degrees or 4+ years of experience building software 1+ years of experience in a full stack environment Excellent communication and interpersonal skills Experience with JavaScript",
+      "employer": 1,
+      "created_at": "2022-10-22T09:36:54.683Z",
+      "updated_at": null,
+      "is_published": true
+    }
+  },
+  {
+    "model": "base.vacancy",
+    "pk": 8,
+    "fields": {
+      "title": "Senior Python Developer",
+      "type": "Full-Time, Remote",
+      "level": "5+ Years of Experience Required",
+      "salary": "$115,000 - $120,000",
+      "qualifications": "JavaScript, React, HTML, Python, Django",
+      "benefits": "Health Insurance, 401K",
+      "work_location": "Silicon Valley",
+      "description": "We are searching for an experienced full stack software engineer to help us build and support various APIs, front-ends, and tools at STEM Sims. The ideal candidate should be capable of engineering at all levels of the stack, communicating with customers, and building scalable/robust applications. Required Qualifications Bachelor’s degree in computer science, engineering, or other scientific degrees or 4+ years of experience building software 1+ years of experience in a full stack environment Excellent communication and interpersonal skills Experience with JavaScript",
+      "employer": 1,
+      "created_at": "2022-10-23T09:36:54.683Z",
+      "updated_at": null,
+      "is_published": true
+    }
+  },
+  {
+    "model": "base.vacancy",
+    "pk": 9,
+    "fields": {
+      "title": "Node.JS and React Developer",
+      "type": "Full-Time, Remote",
+      "level": "5+ Years of Experience Required",
+      "salary": "$115,000 - $120,000",
+      "qualifications": "Node, Git, React",
+      "benefits": "Health Insurance, 401K",
+      "work_location": "Silicon Valley",
+      "description": "We are searching for an experienced full stack software engineer to help us build and support various APIs, front-ends, and tools at STEM Sims. The ideal candidate should be capable of engineering at all levels of the stack, communicating with customers, and building scalable/robust applications. Required Qualifications Bachelor’s degree in computer science, engineering, or other scientific degrees or 4+ years of experience building software 1+ years of experience in a full stack environment Excellent communication and interpersonal skills Experience with JavaScript",
+      "employer": 1,
+      "created_at": "2022-10-24T09:36:54.683Z",
+      "updated_at": null,
+      "is_published": true
+    }
+  },
+  {
+    "model": "base.vacancy",
+    "pk": 10,
+    "fields": {
+      "title": "Next JS Developer",
+      "type": "Part-Time Full-Time, Remote",
+      "level": "No Experience Required ",
+      "salary": "$80,000 - $90,000",
+      "qualifications": "NextJS, Git, Postgres",
+      "benefits": "Paid Vacation, Health Insurance, 401K",
+      "work_location": "Silicon Valley",
+      "description": "We are searching for an experienced full stack software engineer to help us build and support various APIs, front-ends, and tools at STEM Sims. The ideal candidate should be capable of engineering at all levels of the stack, communicating with customers, and building scalable/robust applications. Required Qualifications Bachelor’s degree in computer science, engineering, or other scientific degrees or 4+ years of experience building software 1+ years of experience in a full stack environment Excellent communication and interpersonal skills Experience with JavaScript",
+      "employer": 1,
+      "created_at": "2022-10-25T09:36:54.683Z",
+      "updated_at": null,
+      "is_published": true
+    }
+  },
+  {
+    "model": "base.vacancy",
+    "pk": 11,
+    "fields": {
+      "title": "Python FastAPI Engineer",
+      "type": "Full-Time, Remote",
+      "level": "Freshers are encourged",
+      "salary": "$110,000 - $120,000",
+      "qualifications": "Python, JS, HTML, RestAPI, MongoDB",
+      "benefits": "Health Insurance, 401K, Paid Vacation",
+      "work_location": "Silicon Valley",
+      "description": "We are searching for an experienced full stack software engineer to help us build and support various APIs, front-ends, and tools at STEM Sims. The ideal candidate should be capable of engineering at all levels of the stack, communicating with customers, and building scalable/robust applications. Required Qualifications Bachelor’s degree in computer science, engineering, or other scientific degrees or 4+ years of experience building software 1+ years of experience in a full stack environment Excellent communication and interpersonal skills Experience with JavaScript",
+      "employer": 1,
+      "created_at": "2022-10-26T09:36:54.683Z",
+      "updated_at": null,
+      "is_published": true
+    }
+  }
+]
