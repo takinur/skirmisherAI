@@ -70,7 +70,7 @@ export const JobDetails = () => {
     if (sort === 'asc') {
       return new Date(b.created_at) - new Date(a.created_at)
     } else {
-      return new Date(a.created_at) - new Date(b.created_at)
+      return b.total_score - a.total_score
     }
   })
 
@@ -95,7 +95,7 @@ export const JobDetails = () => {
   // console.log('Feteched applciations', data)
 
   return (
-    <AuthLayout title="View Job Details">
+    <AuthLayout title="View Job Details - Applications">
       <ButtonDefault
         onClick={() => navigate(-1)}
         className={classNames('ml-1 !bg-gray-700 md:mt-2')}
@@ -105,9 +105,7 @@ export const JobDetails = () => {
 
       <div className="wrapper pb-20">
         <div className="mt-4 justify-between px-8 md:flex">
-          <div className="text-2xl font-bold text-gray-600 md:ml-20">
-            {job && job?.title} - Applications
-          </div>
+          <div className="text-2xl font-bold text-gray-600 md:ml-20">{job && job?.title}</div>
           <div className="flex justify-start text-sm font-semibold text-gray-800">
             Sort by:{' '}
             <button onClick={handleSort} className="post-time ml-1 flex cursor-pointer ">
