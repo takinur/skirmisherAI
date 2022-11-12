@@ -67,7 +67,7 @@ export const JobDetails = () => {
   }
 
   const sortedData = data?.sort((a, b) => {
-    if (sort === 'desc') {
+    if (sort === 'asc') {
       return new Date(b.created_at) - new Date(a.created_at)
     } else {
       return new Date(a.created_at) - new Date(b.created_at)
@@ -105,11 +105,13 @@ export const JobDetails = () => {
 
       <div className="wrapper pb-20">
         <div className="mt-4 justify-between px-8 md:flex">
-          <div className="text-2xl font-bold text-gray-600 md:ml-20">{job && job?.title}</div>
+          <div className="text-2xl font-bold text-gray-600 md:ml-20">
+            {job && job?.title} - Applications
+          </div>
           <div className="flex justify-start text-sm font-semibold text-gray-800">
             Sort by:{' '}
             <button onClick={handleSort} className="post-time ml-1 flex cursor-pointer ">
-              {sort === 'desc' ? 'Most Suitable' : 'Least Suitable'}
+              {sort === 'desc' ? 'Most Suitable' : 'Applied Date'}
               {sort === 'desc' ? <SortIconDesc /> : <SortIconAsc />}
             </button>
           </div>
