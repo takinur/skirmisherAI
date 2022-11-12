@@ -143,7 +143,12 @@ export const Applications = (item) => {
                   )}
                   {item?.total_score && item.total_score.toString().replace(/\.?0+$/, '')}%
                 </div>
-                <div className="font-semibold text-gray-600">{relativeTime(item.created_at)}</div>
+                <div className="grid grid-rows-2 font-semibold text-gray-600">
+                  {relativeTime(item.created_at)}{' '}
+                  <span className="text-xs text-slate-500">
+                    {format(new Date(item.created_at), 'dd MMM yyyy')}
+                  </span>
+                </div>
                 <div className="flex justify-between ">
                   {isInvited ? (
                     <span className="cursor-pointer font-semibold text-red-600 hover:text-red-800 ">
