@@ -73,7 +73,7 @@ export default function Navbar() {
           <div className="header-wrapper flex items-center justify-between">
             <div className="header-logo w-12">
               <Link to="/">
-                <img src={logo} aalt="SkirmisherAI Logo" className="w-10 bg-cover" />
+                <img src={logo} alt="SkirmisherAI Logo" className="w-10 bg-cover" />
               </Link>
             </div>
             {/* Mobile Nav */}
