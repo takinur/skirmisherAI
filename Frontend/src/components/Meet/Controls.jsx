@@ -1,45 +1,45 @@
-import classNames from "classnames";
-import React, { useState } from "react";
-import { useClient } from "../../hooks/Meet/settings";
+import classNames from 'classnames'
+import React, { useState } from 'react'
+import { useClient } from '../../hooks/Meet/settings'
 
 const Controls = (props) => {
-  const client = useClient();
+  const client = useClient()
 
-  const { tracks, setStart, setInCall } = props;
+  const { tracks, setStart, setInCall } = props
 
-  const [trackState, setTrackState] = useState({ video: true, audio: true });
+  const [trackState, setTrackState] = useState({ video: true, audio: true })
 
   const mute = async (type) => {
-    if (type === "audio") {
-      await tracks[0].setEnabled(!trackState.audio);
+    if (type === 'audio') {
+      await tracks[0].setEnabled(!trackState.audio)
       setTrackState((ps) => {
-        return { ...ps, audio: !ps.audio };
-      });
-    } else if (type === "video") {
-      await tracks[1].setEnabled(!trackState.video);
+        return { ...ps, audio: !ps.audio }
+      })
+    } else if (type === 'video') {
+      await tracks[1].setEnabled(!trackState.video)
       setTrackState((ps) => {
-        return { ...ps, video: !ps.video };
-      });
+        return { ...ps, video: !ps.video }
+      })
     }
-  };
+  }
 
   const leaveChannel = async () => {
-    await client.leave();
-    client.removeAllListeners();
-    tracks[0].close();
-    tracks[1].close();
-    setStart(false);
-    setInCall(false);
-    window.location.reload();
-  };
+    await client.leave()
+    client.removeAllListeners()
+    tracks[0].close()
+    tracks[1].close()
+    setStart(false)
+    setInCall(false)
+    window.location.reload()
+  }
 
   return (
     <div className="mt-3 flex items-center justify-center gap-2">
       <button
-        onClick={() => mute("audio")}
+        onClick={() => mute('audio')}
         className={classNames(
-          "ripple inline-block rounded-full p-3 text-center text-white shadow transition hover:bg-opacity-90 hover:shadow-lg focus:outline-none",
-          trackState.audio ? "bg-green-700" : "bg-red-600"
+          'ripple inline-block rounded-full p-3 text-center text-white shadow transition hover:bg-opacity-90 hover:shadow-lg focus:outline-none',
+          trackState.audio ? 'bg-green-700' : 'bg-red-600'
         )}
       >
         {trackState.audio ? (
@@ -70,10 +70,10 @@ const Controls = (props) => {
         )}
       </button>
       <button
-        onClick={() => mute("video")}
+        onClick={() => mute('video')}
         className={classNames(
-          "ripple inline-block rounded-full p-3 text-center text-white shadow transition hover:bg-opacity-90 hover:shadow-lg focus:outline-none",
-          trackState.video ? "bg-green-700" : "bg-red-600"
+          'ripple inline-block rounded-full p-3 text-center text-white shadow transition hover:bg-opacity-90 hover:shadow-lg focus:outline-none',
+          trackState.video ? 'bg-green-700' : 'bg-red-600'
         )}
       >
         {trackState.video ? (
@@ -127,7 +127,7 @@ const Controls = (props) => {
         </svg>
       </button>
     </div>
-  );
-};
+  )
+}
 
-export default Controls;
+export default Controls
