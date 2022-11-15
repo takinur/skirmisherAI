@@ -80,7 +80,6 @@ function App() {
           <Route index element={<Blog />} />
           <Route path=":slug" element={<SingleBlogPost />} />
         </Route>
-        {/* terms-and-condition */}
         <Route path="*" element={<NotFound />} />
       </Routes>
       <ToastContainer />
