@@ -1,47 +1,50 @@
-import { AgoraVideoPlayer } from "agora-rtc-react";
-import classNames from "classnames";
-import { useState, useEffect } from "react";
+import { AgoraVideoPlayer } from 'agora-rtc-react'
+import classNames from 'classnames'
+import { useState, useEffect } from 'react'
 
 export default function Video(props) {
-  const { users, tracks } = props;
-  const [isMultiple, setIsmultiple] = useState(false);
+  const { users, tracks } = props
+  const [isMultiple, setIsmultiple] = useState(false)
 
   useEffect(() => {
     if (users.length > 0) {
-      setIsmultiple(true);
+      setIsmultiple(true)
     } else {
-      setIsmultiple(false);
+      setIsmultiple(false)
     }
-  }, [users]);
+  }, [users])
 
-  console.log(users);
+  console.log(users)
+
   return (
-    <div
-      className={classNames(
-        "relative grid h-5/6 gap-2 md:grid-flow-col",
-        !isMultiple ? "w-[600px]" : "w-screen"
-      )}
-    >
-      <div className="mx-6 border-8 border-green-600 ">
-        <AgoraVideoPlayer
-          videoTrack={tracks[1]}
-          style={{ height: "100%", width: "100%" }}
-        />
+    <div className={classNames('relative grid h-[400px]  gap-4 md:grid-flow-col')}>
+      <div
+        className={classNames(
+          'border-4 border-green-600',
+          isMultiple ? ' w-[700px]' : ' w-[750px]'
+        )}
+      >
+        <AgoraVideoPlayer videoTrack={tracks[1]} style={{ height: '100%', width: '100%' }} />
       </div>
       {users.length > 0 &&
         users.map((user) => {
           if (user.videoTrack) {
             return (
-              <div className="mx-6 border-8 border-green-600">
+              <div
+                className={classNames(
+                  'border-4 border-green-600',
+                  isMultiple ? ' w-[700px]' : ' w-[750px]'
+                )}
+              >
                 <AgoraVideoPlayer
                   videoTrack={user.videoTrack}
                   key={user.uid}
-                  style={{ height: "100%", width: "100%" }}
+                  style={{ height: '100%', width: '100%' }}
                 />
               </div>
-            );
-          } else return null;
+            )
+          } else return null
         })}
     </div>
-  );
+  )
 }
