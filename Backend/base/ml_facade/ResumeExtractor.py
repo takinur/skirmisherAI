@@ -2,13 +2,18 @@ import spacy
 from spacy.matcher import Matcher
 import re
 import pandas as pd
-import sys, os, io
+import sys
+import os
+import io
 import fitz
 import nltk
+
+# CRUCIAL:If nltk word tokenizer is not downloaded, download it using the following command
 # nltk.download('stopwords')
 # nltk.download('wordnet')
 # nltk.download('omw-1.4')
 # nltk.download('punkt')
+
 from nltk.corpus import stopwords
 import docx2txt
 from datetime import datetime
@@ -47,8 +52,9 @@ class resumeExtraction:
             'leadership'
         ]
         # self.data = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data\skillsDB.csv')) #EH?: SKILLS FILE PATH
-        
-        self.data = pd.read_csv(os.path.join(os.path.dirname(__file__), 'assets/data/skillsDB.csv'))
+
+        self.data = pd.read_csv(os.path.join(
+            os.path.dirname(__file__), 'assets/data/skillsDB.csv'))
 
         self.SKILLS_DB = list(self.data.columns.values)
         # Natural Language and vocabulary
@@ -107,10 +113,10 @@ class resumeExtraction:
         self.__details['phone'] = self.__extract_mobile_number(text)
         self.__details['email'] = self.__extract_email(text)
         self.__details['skills'] = self.__extract_skills(text)
-        self.__details['education'] = self.__extract_education(text)        
+        self.__details['education'] = self.__extract_education(text)
         self.__details['social_links'] = self.__extract_social_links(text)
         # CRUCIAL: Text that is essential for further processing
-        self.__details['text'] = text #EH?:Uncomment this line
+        self.__details['text'] = text  # EH?:Uncomment this line
         raw_entity = self.__extract_entity_sections(raw_text)
         try:
             self.__details['experience'] = raw_entity['experience']
@@ -120,7 +126,6 @@ class resumeExtraction:
         except KeyError:
             pass
         # if no education section is found, then try to extract education again
-      
 
         return self.__details
 
@@ -264,7 +269,7 @@ class resumeExtraction:
             )
             if experience:
                 exp_.append(experience.groups())
-        
+
         total_exp = sum(
             [self.__get_number_of_months_from_dates(i[0], i[2]) for i in exp_]
         )
@@ -293,29 +298,26 @@ class resumeExtraction:
         except ValueError:
             return 0
         return months_of_experience
-    
+
     def __extract_social_links(self, text):
-        regex= r'\b((?:https?://)?(?:(?:www\.)?(?:[\da-z\.-]+)\.(?:[a-z]{2,6})|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|(?:(?:[0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,7}:|(?:[0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,5}(?::[0-9a-fA-F]{1,4}){1,2}|(?:[0-9a-fA-F]{1,4}:){1,4}(?::[0-9a-fA-F]{1,4}){1,3}|(?:[0-9a-fA-F]{1,4}:){1,3}(?::[0-9a-fA-F]{1,4}){1,4}|(?:[0-9a-fA-F]{1,4}:){1,2}(?::[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:(?:(?::[0-9a-fA-F]{1,4}){1,6})|:(?:(?::[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(?::[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(?:ffff(?::0{1,4}){0,1}:){0,1}(?:(?:25[0-5]|(?:2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(?:25[0-5]|(?:2[0-4]|1{0,1}[0-9]){0,1}[0-9])|(?:[0-9a-fA-F]{1,4}:){1,4}:(?:(?:25[0-5]|(?:2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(?:25[0-5]|(?:2[0-4]|1{0,1}[0-9]){0,1}[0-9])))(?::[0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])?(?:/[\w\.-]*)*/?)\b'
+        regex = r'\b((?:https?://)?(?:(?:www\.)?(?:[\da-z\.-]+)\.(?:[a-z]{2,6})|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|(?:(?:[0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,7}:|(?:[0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|(?:[0-9a-fA-F]{1,4}:){1,5}(?::[0-9a-fA-F]{1,4}){1,2}|(?:[0-9a-fA-F]{1,4}:){1,4}(?::[0-9a-fA-F]{1,4}){1,3}|(?:[0-9a-fA-F]{1,4}:){1,3}(?::[0-9a-fA-F]{1,4}){1,4}|(?:[0-9a-fA-F]{1,4}:){1,2}(?::[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:(?:(?::[0-9a-fA-F]{1,4}){1,6})|:(?:(?::[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(?::[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(?:ffff(?::0{1,4}){0,1}:){0,1}(?:(?:25[0-5]|(?:2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(?:25[0-5]|(?:2[0-4]|1{0,1}[0-9]){0,1}[0-9])|(?:[0-9a-fA-F]{1,4}:){1,4}:(?:(?:25[0-5]|(?:2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(?:25[0-5]|(?:2[0-4]|1{0,1}[0-9]){0,1}[0-9])))(?::[0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])?(?:/[\w\.-]*)*/?)\b'
         social_links = re.findall(regex, text)
-        
+
         # Exclude gmail and yahoo mail from the list of social links
-        social_links = [link for link in social_links if 'gmail' not in link and 'yahoo' not in link]
-        
+        social_links = [
+            link for link in social_links if 'gmail' not in link and 'yahoo' not in link]
+
         # print('Social', social_links)
         return social_links
-        
-
 
 
 # explicit function to return the text from file
 def resume_result_wrapper(resume):
     # resume_path = os.path.join(os.path.dirname(__file__), resume)
-    
+
     # return resume
     parsed_result = resumeExtraction(resume).get_extracted_data()
     return parsed_result
-
-
 
 
 '''

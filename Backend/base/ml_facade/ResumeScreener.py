@@ -19,7 +19,7 @@ tf.compat.v1.logging.set_verbosity(
 # from tensorflow.keras.preprocessing.text import Tokenizer
 # from tensorflow.keras.preprocessing.sequence import pad_sequences
 
-
+# CRUCIAL:If nltk word tokenizer is not downloaded, download it using the following command
 # nltk.download('stopwords')
 # nltk.download('punkt')
 
