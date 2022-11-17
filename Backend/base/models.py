@@ -261,7 +261,7 @@ class Blog(models.Model):
         return self.title
 
 
-class Comment(models.Model):
+class BlogComment(models.Model):
     class Meta:
         verbose_name_plural = 'Comments'
 
