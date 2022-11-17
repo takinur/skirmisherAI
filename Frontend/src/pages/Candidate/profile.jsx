@@ -14,7 +14,7 @@ export const Profile = () => {
   //React query to fetch profile
   const { isLoading, isError, error, data, user } = useCandProfile()
 
-  console.log('Data from cand profile: ', user)
+  // console.log('Data from cand profile: ', user)
 
   if (isLoading) return <Loading />
   if (isError && error.request.status === 400) return <CandProfileForm user={user} />
