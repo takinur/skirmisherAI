@@ -47,26 +47,25 @@ export const SinglePost = () => {
           <h1 className="md:leading-14 text-center text-3xl font-extrabold leading-9 tracking-tight text-gray-800 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl">
             {post.title}
           </h1>
-          <div className="mt-8 grid grid-cols-4 gap-6 border-t-2 pt-8">
+          <div className="mt-8 grid-cols-4 gap-6 border-t-2 pt-8 md:grid">
             <div className="w-full">
               <span className=" font-sans ">Author</span>
               <h1 className="text-2xl font-semibold text-gray-700">{post.author_name}</h1>
-              <div className="mt-6 border-t-2 pt-6">
-                <span className="font-sans">Tags</span>
-                <div className="mt-4">
+              <div className="flex w-full flex-col md:mt-4 ">
+                <div className="mt-2 space-x-1 space-y-2 p-1 text-justify">
                   {post?.tags &&
                     post.tags.split(',').map((tag, index) => (
-                      <span
+                      <button
                         key={index}
-                        className="mr-2 rounded-full bg-gray-200 py-1 px-3 text-sm font-semibold text-gray-700"
+                        className="rounded-full bg-gray-300 px-3 py-1 text-sm font-medium tracking-wider text-gray-600 shadow-sm hover:bg-gray-400 hover:shadow-2xl"
                       >
                         {tag}
-                      </span>
+                      </button>
                     ))}
                 </div>
               </div>
             </div>
-            <div className="col-span-3">
+            <div className="col-span-3 mt-8 md:mt-0">
               <article className="prose prose-lg text-gray-600 dark:text-gray-300">
                 {post.description}
               </article>
