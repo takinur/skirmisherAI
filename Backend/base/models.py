@@ -261,6 +261,21 @@ class Blog(models.Model):
         return self.title
 
 
+class Comment(models.Model):
+    class Meta:
+        verbose_name_plural = 'Comments'
+
+    name = models.CharField(max_length=80)
+    body = models.TextField(null=True)
+    blog = models.ForeignKey(
+        Blog, on_delete=models.CASCADE, related_name='comments')
+    created_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=False, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Contact(models.Model):
     class Meta:
         verbose_name_plural = 'Contact Messages'
