@@ -20,11 +20,11 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 
 # Serializers from parent folder
 from .serializers import BlogSerializer, CandidateProfileSerializer, FileSerializer, InvitationSerializer, JobApplicationSerializer
-from .serializers import RetriveJobApplicationSerializer, UserCreateSerializer, NewsletterSerializer, PublicVacancySerializer
+from .serializers import RetriveJobApplicationSerializer, UserCreateSerializer, NewsletterSerializer, PublicVacancySerializer, BlogCommentSerializer
 from .serializers import MyTokenObtainPairSerializer, VacancySerializer, EmployerProfileSerializer, ContactSerializer, ChangePasswordSerializer
 
 # Models from parent folder
-from ..models import Blog, CandidateProfile, EmployerProfile, Invitation, JobApplication, Vacancy, Newsletter, Contact
+from ..models import Blog, CandidateProfile, EmployerProfile, Invitation, JobApplication, Vacancy, Newsletter, Contact, BlogComment
 
 # Machine Leaning Model from
 from ..ml_facade import resumeExtractor
@@ -334,6 +334,19 @@ class BlogView(viewsets.ModelViewSet):
             return Blog.objects.filter(author_id=user).order_by('-created_at')
 
         return Blog.objects.order_by('-created_at')
+
+
+class BlogCommentView(viewsets.ModelViewSet):
+    queryset = BlogComment.objects.order_by('-created_at')
+    serializer_class = BlogCommentSerializer
+
+    def get_queryset(self):
+        blog = self.request.query_params.get('blog_id', None)
+
+        if blog is not None:
+            return BlogComment.objects.filter(blog_id=blog).order_by('-created_at')
+
+        return BlogComment.objects.order_by('-created_at')
 
 
 # Dashboard Stats

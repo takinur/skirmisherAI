@@ -28,6 +28,9 @@ router.register('v1/invitation', views.InvitationView)
 # Blog Routes
 router.register('v1/blog', views.BlogView, basename='blog')
 router.register('v1/blog/:slug', views.BlogView, basename='blog')
+router.register('v1/blog-comments', views.BlogCommentView,
+                basename='blog-comments')
+
 
 # Newsletter
 router.register('v1/newsletter', views.NewsletterView, basename='newsletter')
