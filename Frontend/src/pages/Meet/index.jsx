@@ -23,6 +23,10 @@ export const VideoMeet = () => {
     if (param.code) {
       setJoinCode(param.code)
     }
+
+    if (import.meta.env.VITE_RTC_TOKEN === '') {
+      return alert('Please set your RTC token in .env file')
+    }
   }, [param])
 
   return (
