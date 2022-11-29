@@ -12,8 +12,10 @@ import Button from '../components/ButtonDefault'
 import Label from '../components/Label'
 import TextArea from '../components/TextArea'
 import Checkbox from '../components/Checkbox'
+import { useTitle } from '../hooks/useTitle'
 
 export const ContactPage = () => {
+  useTitle('Contact Us')
   const { register, handleSubmit, reset } = useForm()
 
   //Apply for Job

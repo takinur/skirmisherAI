@@ -10,8 +10,10 @@ import { SearchJobs } from '../components/Search/SearchJobs'
 import { useCandProfile } from '../hooks/useProfile'
 import { useEffect } from 'react'
 import { useMemo } from 'react'
+import { useTitle } from '../hooks/useTitle'
 
 export const Findwork = () => {
+  useTitle('Find Suitable Work')
   const [searchValue, SetSearchValue] = useState('')
   const [jobDetails, setJobDetails] = useState(null)
   const [canApplyState, setCanAppyState] = useState(null)
