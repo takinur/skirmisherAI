@@ -27,6 +27,9 @@ export default function Login() {
   const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
   //Redirect authenticated user to Dashboard
   useEffect(() => {
+    //Scroll to top of page on load
+    window.scrollTo(0, 0)
+
     if (isSuccess || user) {
       navigate('/dashboard')
     }
