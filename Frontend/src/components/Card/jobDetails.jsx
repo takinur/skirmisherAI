@@ -122,7 +122,9 @@ export const jobDetails = (props) => {
           ) : (
             <div className="flex h-16 w-16 items-center justify-center  bg-green-700">
               <span className="text-4xl font-semibold text-gray-50">
-                {company?.company_name !== undefined ? company.company_name.charAt(0) : 'T'}
+                {job?.employer.company_name !== undefined
+                  ? job.employer.company_name.charAt(0)
+                  : 'T'}
               </span>
             </div>
           )

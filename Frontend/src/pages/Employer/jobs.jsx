@@ -172,7 +172,6 @@ export const jobs = () => {
   }, [data])
 
   const deleteRow = async () => {
-    //TODO: IDK gotta figure out how to unpublish a job
     try {
       const response = await API.delete(`/jobs/${jobID}`)
       // console.log(response);
@@ -212,7 +211,7 @@ export const jobs = () => {
           to={`/employer/jobs/create`}
           state={{ employer: employer.id }}
           type="button"
-          className="mt-4 inline-flex items-center rounded-lg bg-green-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          className="mt-4 inline-flex items-center rounded-lg bg-green-700 px-5 py-2.5 text-center text-sm font-medium uppercase text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           Post a new Job
           <svg
