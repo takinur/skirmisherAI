@@ -17,7 +17,7 @@
 		<img src="https://img.shields.io/badge/GitHub-%2312100E.svg?&style=for-the-badge&logo=Github&logoColor=white" />
 	</a>
 	<!--
-        <a href="mailto:tm0457m@gre.ac.uk">
+        <a href="mailto:madePublic">
 		<img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" />
 	</a> -->
 </p>
