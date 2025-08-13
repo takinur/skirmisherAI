@@ -4,7 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    # path('', lambda r: redirect('base:api.getRoutes')), TODO: fix this
+    # path('', lambda r: redirect('base:api.getRoutes')), TODO: fix this //MadePUB
     path('admin/', admin.site.urls),
     path('api/', include('base.api.urls')),
     
